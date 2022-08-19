@@ -1,0 +1,16 @@
+technology_sharing_group = {
+	id = HUN_erasmus_programme_tech_group
+	name = HUN_erasmus_programme
+	desc = HUN_erasmus_programme_desc
+	picture = GFX_technology_sharing_default
+
+	is_faction_sharing = yes
+	research_sharing_per_country_bonus = 0.05
+
+    available = {
+    	capital_scope = {
+			is_on_continent = europe
+		}
+		is_in_faction_with = HUN
+    }
+}

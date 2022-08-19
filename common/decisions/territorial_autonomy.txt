@@ -1,0 +1,1242 @@
+territorial_autonomy = {
+	# Dummy decision for focus
+	autonomy_FROM = {
+		allowed = {
+			always = no
+		}
+
+		available = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		cost = 0
+	}
+
+	# Dummy decision for focus
+	nationhood_FROM = {
+		allowed = {
+			always = no
+		}
+
+		available = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		cost = 0
+	}
+
+	autonomy_banat = {
+		icon = generic_form_nation
+		priority = 10
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_hungaryshonour
+			controls_state = 82 # Timis
+			controls_state = 764 # West Banat
+		}
+
+		visible = {
+			has_completed_focus = HUN_preserve_greater_hungary
+			NOT = {
+				82 = {
+					owner = { is_subject_of = HUN }
+				}
+				764 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = BANAT
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				SER = {
+					set_cosmetic_tag = BANAT
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state = 82
+							state = 764
+						}
+					}
+					add_core_of = SER
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = SER
+					}
+				}
+				puppet = SER
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = SER
+					set_cosmetic_tag = BANAT
+					every_state = {
+						limit = {
+							OR = {
+								state = 82
+								state = 764
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_transylvania = {
+		icon = generic_form_nation
+		priority = 15
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_hungaryshonour
+			controls_state = 84 # Transylvania
+		}
+
+		visible = {
+			has_completed_focus = HUN_preserve_greater_hungary
+			NOT = {
+				84 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = TRA
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						state = 84
+					}
+					add_core_of = TRA
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = TRA
+					}
+				}
+				puppet = TRA
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = TRA
+					every_state = {
+						limit = {
+							OR = {
+								state = 84
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_carpathia = {
+		icon = generic_form_nation
+		priority = 16
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_hungaryshonour
+			controls_state = 73 # Carpathia
+		}
+
+		visible = {
+			has_completed_focus = HUN_preserve_greater_hungary
+			NOT = {
+				73 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = ZAK
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						state = 73
+					}
+					add_core_of = ZAK
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = ZAK
+					}
+				}
+				puppet = ZAK
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = ZAK
+					every_state = {
+						limit = {
+							OR = {
+								state = 73
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_slovakia = {
+		icon = generic_form_nation
+		priority = 12
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_hungaryshonour
+			controls_state = 70 # Slovakia
+			controls_state = 71 # Presov
+		}
+
+		visible = {
+			has_completed_focus = HUN_preserve_greater_hungary
+			NOT = {
+				70 = {
+					owner = { is_subject_of = HUN }
+				}
+				71 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = SLO
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 70
+							state = 71
+						}
+					}
+					add_core_of = SLO
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = SLO
+					}
+				}
+				puppet = SLO
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = SLO
+					every_state = {
+						limit = {
+							OR = {
+								state = 70
+								state = 71
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	
+	autonomy_croatia = {
+		icon = generic_nationalism
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 103 # Dalmatia
+			controls_state = 109 # Croatia
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				103 = {
+					owner = { is_subject_of = HUN }
+				}
+				109 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = CRO
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 103
+							state = 104 # Bosnia
+							state = 109
+							state = 163 # Zara
+							state = 736 # Istria
+							state = 804 # Herzegovina
+						}
+					}
+					add_core_of = CRO
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = CRO
+					}
+				}
+				puppet = CRO
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = CRO
+					every_state = {
+						limit = {
+							OR = {
+								state = 103
+								state = 104
+								state = 109
+								state = 163
+								state = 736
+								state = 804
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_bosnia = {
+		icon = generic_nationalism
+		priority = 1
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 104 # Bosnia
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				104 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = BOS
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 104
+							state = 804 # Herzegovina
+						}
+					}
+					add_core_of = BOS
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = BOS
+					}
+				}
+				puppet = BOS
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = BOS
+					every_state = {
+						limit = {
+							OR = {
+								state = 104
+								state = 804
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_serbia = {
+		icon = generic_nationalism
+		priority = 8
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 107 # Serbia
+			controls_state = 108 # Morava
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				107 = {
+					owner = { is_subject_of = HUN }
+				}
+				108 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+		cost = 50
+
+		cosmetic_tag = SER
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 105 # Montenegro
+							state = 106 # Vardar
+							state = 107
+							state = 108
+							state = 802 # Kosovo
+							state = 803 # Jablanica
+							state = 804 # Herzegovina
+						}
+					}
+					add_core_of = SER
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = SER
+					}
+				}
+				puppet = SER
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = SER
+					every_state = {
+						limit = {
+							OR = {
+								state = 105
+								state = 106
+								state = 107
+								state = 108
+								state = 802
+								state = 803
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_czechia = {
+		icon = generic_nationalism
+		priority = 7
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 9 # Bohemia
+			controls_state = 75 # Moravia
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				9 = {
+					owner = { is_subject_of = HUN }
+				}
+				75 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = CZE
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						state = 9
+						state = 66
+						state = 67
+						state = 69
+						state = 72 # Olza
+						state = 74 # Sudetes
+						state = 75
+						state = 762 # Katowice
+					}
+					add_core_of = CZE
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = CZE
+					}
+				}
+				puppet = CZE
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = CZE
+					every_state = {
+						limit = {
+							OR = {
+								state = 9
+								state = 66
+								state = 67
+								state = 69
+								state = 72
+								state = 74
+								state = 75
+								state = 762
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_silesia = {
+		icon = generic_nationalism
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 66 # Silesia
+			controls_state = 67 # Oppeln
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				66 = {
+					owner = { is_subject_of = HUN }
+				}
+				67 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = SIL
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 66
+							state = 67
+							state = 72 # Olza
+							state = 74 # Sudetes
+							state = 762 # Katowice
+						}
+					}
+					add_core_of = SIL
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = SIL
+					}
+				}
+				puppet = SIL
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = SIL
+					every_state = {
+						limit = {
+							OR = {
+								state = 66
+								state = 67
+								state = 72
+								state = 74
+								state = 762
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_wallachia = {
+		icon = generic_nationalism
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 46 # Muntenia
+			controls_state = 81 # Oltenia
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				46 = {
+					owner = { is_subject_of = HUN }
+				}
+				81 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = WALLACHIA
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				ROM = {
+					set_cosmetic_tag = WALLACHIA
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state = 46
+							state = 81
+							state = 77 # Cadrilater
+						}
+					}
+					add_core_of = ROM
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = ROM
+					}
+				}
+				puppet = ROM
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = ROM
+					set_cosmetic_tag = WALLACHIA
+					every_state = {
+						limit = {
+							OR = {
+								state = 46
+								state = 81
+								state = 77
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_moldavia = {
+		icon = generic_nationalism
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 78 # Bessarabia
+			controls_state = 79 # Moldavia
+			controls_state = 766 # Budjak
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				78 = {
+					owner = { is_subject_of = HUN }
+				}
+				79 = {
+					owner = { is_subject_of = HUN }
+				}
+				766 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = MOL
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 78
+							state = 79
+							state = 80 # Bucovina
+							state = 766
+							state = 834 # Nistria
+						}
+					}
+					add_core_of = MOL
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = MOL
+					}
+				}
+				puppet = MOL
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = MOL
+					every_state = {
+						limit = {
+							OR = {
+								state = 78
+								state = 79
+								state = 80 # Bucovina
+								state = 766
+								state = 834 # Nistria
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_poland = {
+		icon = generic_nationalism
+		priority = 8
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 10 # Masovia
+			controls_state = 87 # Lodz
+			controls_state = 88 # Poland
+			controls_state = 89 # Lodomeria
+			controls_state = 90 # Kielce
+			controls_state = 91 # Pokuttia
+			controls_state = 92 # Lublin
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				10 = {
+					owner = { is_subject_of = HUN }
+				}
+				87 = {
+					owner = { is_subject_of = HUN }
+				}
+				88 = {
+					owner = { is_subject_of = HUN }
+				}
+				89 = {
+					owner = { is_subject_of = HUN }
+				}
+				90 = {
+					owner = { is_subject_of = HUN }
+				}
+				91 = {
+					owner = { is_subject_of = HUN }
+				}
+				92 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = POL
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				POL = {
+					set_cosmetic_tag = PLC_UNIFIED
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state = 5 # Warmia-Masuria
+							state = 11 # Kaunas
+							state = 10
+							state = 85 # Gdansk
+							state = 86 # Poznan
+							state = 87
+							state = 88
+							state = 89
+							state = 90
+							state = 91
+							state = 92
+							state = 93 # Volhynia
+							state = 94 # Polesia
+							state = 95 # Nowogrodek
+							state = 96 # Wilejka
+							state = 97 # Bialystok
+							state = 98 # Plock
+							state = 188 # Scalovia
+							state = 189 # Samogitia
+							state = 763 # Prussia
+							state = 784 # Dainava
+							state = 807 # Pomerelia
+							state = 814 # Sudovia
+							state = 815 # Aukstatia
+						}
+					}
+					add_core_of = POL
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = POL
+					}
+					POL = {
+						set_capital = {
+							state = 88
+						}
+					}
+				}
+				puppet = POL
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = POL
+					set_cosmetic_tag = PLC_UNIFIED
+					every_state = {
+						limit = {
+							OR = {
+								state = 5
+								state = 11
+								state = 10
+								state = 85
+								state = 86
+								state = 87
+								state = 88
+								state = 89
+								state = 90
+								state = 91
+								state = 92
+								state = 93
+								state = 94
+								state = 95
+								state = 96
+								state = 97
+								state = 98
+								state = 188
+								state = 189
+								state = 763
+								state = 784
+								state = 807
+								state = 814
+								state = 815
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					set_capital = {
+						state = 88
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_austria = {
+		icon = generic_nationalism
+		priority = 7
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 4 # Lower Austria
+			controls_state = 152 # Upper Austria
+			controls_state = 153 # Tyrol
+			controls_state = 837 # Styria
+			controls_state = 838 # Carinthia
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				4 = {
+					owner = { is_subject_of = HUN }
+				}
+				152 = {
+					owner = { is_subject_of = HUN }
+				}
+				153 = {
+					owner = { is_subject_of = HUN }
+				}
+				837 = {
+					owner = { is_subject_of = HUN }
+				}
+				838 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = AUS
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 4
+							state = 39 # Adige
+							state = 102 # Slovenia
+							state = 152
+							state = 153
+							state = 736 # Istria
+							state = 837
+							state = 838
+						}
+					}
+					add_core_of = AUS
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = AUS
+					}
+				}
+				puppet = AUS
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = AUS
+					every_state = {
+						limit = {
+							OR = {
+								state = 4
+								state = 39
+								state = 102
+								state = 152
+								state = 153
+								state = 736
+								state = 837
+								state = 838
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+
+	autonomy_naples = {
+		icon = generic_nationalism
+		priority = 7
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_connationalism
+			controls_state = 117 # Campania
+			controls_state = 156 # Calabria
+		}
+
+		visible = {
+			has_completed_focus = HUN_restore_historic_hungary
+			NOT = {
+				117 = {
+					owner = { is_subject_of = HUN }
+				}
+				156 = {
+					owner = { is_subject_of = HUN }
+				}
+			}
+		}
+
+		cost = 50
+
+		cosmetic_tag = NAPLES
+		cosmetic_ideology = neutrality
+
+		complete_effect = {
+			effect_tooltip = {
+				ITA = {
+					set_cosmetic_tag = NAPLES
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state = 115 # Sicily
+							state = 116 # Malta
+							state = 117
+							state = 156
+							state = 157 # Abruzzi
+						}
+					}
+					add_core_of = ITA
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = ITA
+					}
+				}
+				puppet = ITA
+			}
+			hidden_effect = {
+				create_dynamic_country = {
+					original_tag = ITA
+					set_cosmetic_tag = NAPLES
+					every_state = {
+						limit = {
+							OR = {
+								state = 115
+								state = 116
+								state = 117
+								state = 156
+								state = 157
+							}
+						}
+						add_core_of = PREV
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							transfer_state_to = PREV
+						}
+					}
+					HUN = {
+						puppet = PREV
+					}
+				}
+			}
+		}
+	}
+}

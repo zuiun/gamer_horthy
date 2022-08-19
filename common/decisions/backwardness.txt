@@ -1,0 +1,143 @@
+backwardness = {
+	shortages_crisis = {
+		icon = generic_factory
+		priority = 10
+		is_good = no
+		days_mission_timeout = 70
+		fire_only_once = no
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_struggle_fascism_reaction
+			NOT = {
+				has_country_flag = HUN_not_backward
+			}
+		}
+
+		activation = {
+			has_completed_focus = HUN_rapid_industrialisation
+			NOT = {
+				has_country_flag = HUN_not_backward
+			}
+		}
+
+		available = {
+			num_of_civilian_factories > 30
+			all_owned_state = {
+				OR = {
+					NOT = {
+						is_core_of = HUN
+					}
+					infrastructure > 3
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_idea = HUN_shortages
+				}
+				remove_ideas = HUN_shortages
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages2
+				}
+				remove_ideas = HUN_shortages2
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages3
+				}
+				remove_ideas = HUN_shortages3
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages4
+				}
+				remove_ideas = HUN_shortages4
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages5
+				}
+				remove_ideas = HUN_shortages5
+			}
+			hidden_effect = {
+				set_country_flag = HUN_not_backward
+			}
+		}
+
+		timeout_effect = {
+			activate_mission = shortages_crisis
+			add_stability = -0.05
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+			if = {
+				limit = {
+					has_idea = HUN_shortages
+				}
+				swap_ideas = {
+					remove_idea = HUN_shortages
+					add_idea = HUN_shortages2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages2
+				}
+				swap_ideas = {
+					remove_idea = HUN_shortages2
+					add_idea = HUN_shortages3
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages3
+				}
+				swap_ideas = {
+					remove_idea = HUN_shortages3
+					add_idea = HUN_shortages4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages4
+				}
+				swap_ideas = {
+					remove_idea = HUN_shortages4
+					add_idea = HUN_shortages5
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = HUN_shortages5
+				}
+				add_political_power = -50
+				if = {
+					limit = {
+						has_stability < 0.4
+						has_civil_war = no
+					}
+					start_civil_war = {
+						ideology = democratic
+						size = 0.6
+						states = {
+							154
+							155
+						}
+					}
+				}
+			}
+			else = {
+				add_ideas = HUN_shortages
+			}
+		}
+	}
+}

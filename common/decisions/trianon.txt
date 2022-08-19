@@ -1,0 +1,908 @@
+trianon = {
+	request_FROM_support = {
+		icon = generic_break_treaty
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_the_trianon_trauma
+			OR = {
+				AND = {
+					focus_progress = {
+						focus = HUN_demand_southern_slovakia
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_demand_southern_slovakia
+					}
+					if = {
+						limit = {
+							focus_progress = {
+								focus = HUN_demand_southern_slovakia
+								progress > 0
+							}
+							NOT = {
+								has_completed_focus = HUN_demand_southern_slovakia
+							}
+						}
+						any_country = {
+							NOT = {
+								OR = {
+									tag = HUN
+									is_subject_of = HUN
+								}
+							}
+							owns_state = 664 # Kosice
+						}
+					}
+				}
+				AND = {
+					focus_progress = {
+						focus = HUN_demand_vojvodina
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_demand_vojvodina
+					}
+					if = {
+						limit = {
+							focus_progress = {
+								focus = HUN_demand_vojvodina
+								progress > 0
+							}
+							NOT = {
+								has_completed_focus = HUN_demand_vojvodina
+							}
+						}
+						OR = {
+							any_country = {
+								NOT = {
+									OR = {
+										tag = HUN
+										is_subject_of = HUN
+									}
+								}
+								owns_state = 45 # Backa
+							}
+							any_country = {
+								NOT = {
+									OR = {
+										tag = HUN
+										is_subject_of = HUN
+									}
+								}
+								owns_state = 764 # West Banat
+							}
+						}
+					}
+				}
+				AND = {
+					focus_progress = {
+						focus = HUN_protect_the_ruthenians
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_protect_the_ruthenians
+					}
+					if = {
+						limit = {
+							focus_progress = {
+								focus = HUN_protect_the_ruthenians
+								progress > 0
+							}
+							NOT = {
+								has_completed_focus = HUN_protect_the_ruthenians
+							}
+						}
+						any_country = {
+							NOT = {
+								OR = {
+									tag = HUN
+									is_subject_of = HUN
+								}
+							}
+							owns_state = 73 # Carpathia
+						}
+					}
+				}
+				AND = {
+					focus_progress = {
+						focus = HUN_demand_transylvania
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_demand_transylvania
+					}
+					if = {
+						limit = {
+							focus_progress = {
+								focus = HUN_demand_transylvania
+								progress > 0
+							}
+							NOT = {
+								has_completed_focus = HUN_demand_transylvania
+							}
+						}
+						OR = {
+							any_country = {
+								NOT = {
+									OR = {
+										tag = HUN
+										is_subject_of = HUN
+									}
+								}
+								owns_state = 76 # Szekelyland
+							}
+							any_country = {
+								NOT = {
+									OR = {
+										tag = HUN
+										is_subject_of = HUN
+									}
+								}
+								owns_state = 82 # Timis
+							}
+							any_country = {
+								NOT = {
+									OR = {
+										tag = HUN
+										is_subject_of = HUN
+									}
+								}
+								owns_state = 83 # Crisana
+							}
+							any_country = {
+								NOT = {
+									OR = {
+										tag = HUN
+										is_subject_of = HUN
+									}
+								}
+								owns_state = 84 # Transylvania
+							}
+						}
+					}
+				}
+			}
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_major = yes
+				capital_scope = { is_on_continent = europe }
+				NOT = {
+					tag = CZE
+					tag = ROM
+					tag = YUG
+					owns_state = 45 # Backa
+					owns_state = 73 # Carpathia
+					owns_state = 76 # Szekelyland
+					owns_state = 82 # Timis
+					owns_state = 83 # Crisana
+					owns_state = 84 # Transylvania
+					owns_state = 664 # Kosice
+					owns_state = 764 # West Banat
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_trianon_trauma
+			OR = {
+				NOT = { has_completed_focus = HUN_demand_southern_slovakia }
+				NOT = { has_completed_focus = HUN_demand_vojvodina }
+				NOT = { has_completed_focus = HUN_protect_the_ruthenians }
+				NOT = { has_completed_focus = HUN_demand_transylvania }
+			}
+			OR = {
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 45 # Backa
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 73 # Carpathia
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 76 # Szekelyland
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 82 # Timis
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 83 # Crisana
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 84 # Transylvania
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 664 # Kosice
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = HUN
+							is_subject_of = HUN
+						}
+					}
+					owns_state = 764 # West Banat
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 70
+		days_re_enable = 0
+
+		complete_effect = {
+			FROM = {
+				country_event = {
+					id = gamer_horthy.12
+					hours = 4
+				}
+			}
+		}
+	}
+
+	demand_kosice = {
+		icon = generic_nationalism
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_demand_southern_slovakia
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+			NOT = {
+				has_country_flag = HUN_demanding_land
+			}
+		}
+
+		visible = {
+#			has_completed_focus = HUN_the_trianon_trauma
+#			any_country = {
+#				NOT = {
+#					OR = {
+#						original_tag = HUN
+#						is_subject_of = HUN
+#					}
+#				}
+#				owns_state = 664 # Kosice
+#			}
+			always = no
+		}
+
+		target_trigger = {
+			FROM = {
+				NOT = {
+					original_tag = HUN
+					is_subject_of = HUN
+				}
+				owns_state = 664
+			}
+		}
+
+		cost = 50
+		days_remove = 5
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				664 = {
+					set_state_flag = trianon_target
+				}
+
+				set_country_flag = HUN_demanding_land
+			}
+
+			664 = {
+				owner = {
+					country_event = {
+						id = gamer_horthy.15
+						hours = 4
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = HUN_demanding_land
+
+				set_variable = {
+					var = global.foreign_support
+					value = 0
+				}
+
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+	
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+			}
+		}
+	}
+
+	demand_delvidek = {
+		icon = generic_nationalism
+		priority = 8
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_demand_vojvodina
+			OR = {
+				NOT = {
+					has_completed_focus = HUN_treaty_of_eternal_friendship
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = YUG
+							is_subject_of = YUG
+						}
+					}
+					owns_state = 45 # Backa
+				}
+				any_country = {
+					NOT = {
+						OR = {
+							original_tag = YUG
+							is_subject_of = YUG
+						}
+					}
+					owns_state = 764 # West Banat
+				}
+			}
+			
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+			NOT = {
+				has_country_flag = HUN_demanding_land
+			}
+		}
+
+		visible = {
+#			has_completed_focus = HUN_the_trianon_trauma
+#			OR = {
+#				any_country = {
+#					NOT = {
+#						OR = {
+#							original_tag = HUN
+#							is_subject_of = HUN
+#						}
+#					}
+#					owns_state = 45 # Backa
+#				}
+#				any_country = {
+#					NOT = {
+#						OR = {
+#							original_tag = HUN
+#							is_subject_of = HUN
+#						}
+#					}
+#					owns_state = 764 # West Banat
+#				}
+#			}
+			always = no
+		}
+
+		target_trigger = {
+			FROM = {
+				NOT = {
+					original_tag = HUN
+					is_subject_of = HUN
+				}
+				OR = {
+					owns_state = 45
+					owns_state = 764
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 5
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						FROM = {
+							owns_state = 45
+						}
+					}
+					45 = {
+						set_state_flag = trianon_target
+					}
+				}
+				if = {
+					limit = {
+						FROM = {
+							owns_state = 764
+						}
+					}
+					764 = {
+						set_state_flag = trianon_alternate
+					}
+				}
+
+				set_country_flag = HUN_demanding_land
+			}
+
+			if = {
+				limit = {
+					FROM = {
+						owns_state = 45
+					}
+				}
+				45 = {
+					owner = {
+						country_event = {
+							id = gamer_horthy.15
+							hours = 4
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						owns_state = 764
+					}
+				}
+				764 = {
+					owner = {
+						country_event = {
+							id = gamer_horthy.15
+							hours = 4
+						}
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = HUN_demanding_land
+
+				set_variable = {
+					var = global.foreign_support
+					value = 0
+				}
+
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+	
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+			}
+		}
+	}
+
+	demand_carpathia = {
+		icon = generic_nationalism
+		priority = 7
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_protect_the_ruthenians
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+			NOT = {
+				has_country_flag = HUN_demanding_land
+			}
+		}
+
+		visible = {
+#			has_completed_focus = HUN_the_trianon_trauma
+#			any_country = {
+#				NOT = {
+#					OR = {
+#						original_tag = HUN
+#						is_subject_of = HUN
+#					}
+#				}
+#				owns_state = 73 # Carpathia
+#			}
+			always = no
+		}
+
+		target_trigger = {
+			FROM = {
+				NOT = {
+					original_tag = HUN
+					is_subject_of = HUN
+				}
+				OR = {
+					owns_state = 73
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 5
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				73 = {
+					set_state_flag = trianon_target
+				}
+
+				set_country_flag = HUN_demanding_land
+			}
+
+			if = {
+				limit = {
+					ZAK = {
+						owns_state = 73
+					}
+				}
+				clr_country_flag = HUN_demanding_land
+				ZAK = {
+					division_template = {
+						name = "Carpathian Sich"
+						priority = 2
+						division_names_group = UKR_INF_01
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+						}
+					}
+
+					random_owned_controlled_state = {
+						prioritize = { 73 }
+						create_unit = {
+							division = "name = \"Carpathian Sich\" division_template = \"Carpathian Sich\" start_experience_factor = 0.3" 
+							owner = ZAK
+						}
+					}
+				}
+				declare_war_on = {
+					target = ZAK
+					type = take_claimed_state
+					generator = {
+						73
+					}
+				}
+			}
+			else = {
+				73 = {
+					owner = {
+						country_event = {
+							id = gamer_horthy.15
+							hours = 4
+						}
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = HUN_demanding_land
+
+				set_variable = {
+					var = global.foreign_support
+					value = 0
+				}
+
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+	
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+			}
+		}
+	}
+
+	demand_erdely = {
+		icon = generic_nationalism
+		priority = 10
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_demand_transylvania
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+			NOT = {
+				has_country_flag = HUN_demanding_land
+			}
+		}
+
+		visible = {
+#			has_completed_focus = HUN_the_trianon_trauma
+#			OR = {
+#				any_country = {
+#					NOT = {
+#						OR = {
+#							original_tag = HUN
+#							is_subject_of = HUN
+#						}
+#					}
+#					owns_state = 76 # Szekelyland
+#				}
+#				any_country = {
+#					NOT = {
+#						OR = {
+#							original_tag = HUN
+#							is_subject_of = HUN
+#						}
+#					}
+#					owns_state = 82 # Timis
+#				}
+#				any_country = {
+#					NOT = {
+#						OR = {
+#							original_tag = HUN
+#							is_subject_of = HUN
+#						}
+#					}
+#					owns_state = 83 # Crisana
+#				}
+#				any_country = {
+#					NOT = {
+#						OR = {
+#							original_tag = HUN
+#							is_subject_of = HUN
+#						}
+#					}
+#					owns_state = 84 # Transylvania
+#				}
+#			}
+			always = no
+		}
+
+		target_trigger = {
+			FROM = {
+				NOT = {
+					original_tag = HUN
+					is_subject_of = HUN
+				}
+				OR = {
+					owns_state = 76
+					owns_state = 82
+					owns_state = 83
+					owns_state = 84
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 5
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						FROM = {
+							owns_state = 76
+						}
+					}
+					76 = {
+						set_state_flag = trianon_target
+					}
+				}
+				if = {
+					limit = {
+						FROM = {
+							owns_state = 82
+						}
+					}
+					82 = {
+						set_state_flag = trianon_alternate
+					}
+				}
+				if = {
+					limit = {
+						FROM = {
+							owns_state = 83
+						}
+					}
+					83 = {
+						set_state_flag = trianon_alternate
+					}
+				}
+				if = {
+					limit = {
+						FROM = {
+							owns_state = 84
+						}
+					}
+					84 = {
+						set_state_flag = trianon_alternate
+					}
+				}
+
+				set_country_flag = HUN_demanding_land
+			}
+
+			if = {
+				limit = {
+					FROM = {
+						owns_state = 76
+					}
+				}
+				76 = {
+					owner = {
+						country_event = {
+							id = gamer_horthy.15
+							hours = 4
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						owns_state = 82
+					}
+				}
+				82 = {
+					owner = {
+						country_event = {
+							id = gamer_horthy.15
+							hours = 4
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						owns_state = 83
+					}
+				}
+				82 = {
+					owner = {
+						country_event = {
+							id = gamer_horthy.15
+							hours = 4
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						owns_state = 84
+					}
+				}
+				82 = {
+					owner = {
+						country_event = {
+							id = gamer_horthy.15
+							hours = 4
+						}
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = HUN_demanding_land
+
+				set_variable = {
+					var = global.foreign_support
+					value = 0
+				}
+
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+	
+				every_state = {
+					limit = {
+						has_state_flag = trianon_target
+					}
+	
+					clr_state_flag = trianon_target
+				}
+			}
+		}
+	}
+}

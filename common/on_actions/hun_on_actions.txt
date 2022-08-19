@@ -1,0 +1,50 @@
+on_actions = {
+	on_civil_war_end = {
+		effect = {
+			# Hungarian opposition successful
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = HUN
+						NOT = {
+							has_government = neutrality
+						}
+						has_completed_focus = HUN_overthrow_horthy
+					}
+					FROM = {
+						original_tag = HUN
+					}
+				}
+				random_country = {
+					limit = {
+						has_country_flag = HUN_supporting_opposition
+					}
+					country_event = {
+						id = gamer_horthy.25
+						hours = 4
+					}
+				}
+			}
+			# Second Austrian Civil War
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = AUS
+					}
+					FROM = {
+						original_tag = AUS
+					}
+				}
+				random_country = {
+					limit = {
+						has_completed_focus = HUN_restore_ottos_throne
+					}
+					country_event = {
+						id = gamer_horthy.39
+						hours = 4
+					}
+				}
+			}
+		}
+	}
+}

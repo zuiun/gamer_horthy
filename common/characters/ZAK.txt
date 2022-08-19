@@ -1,0 +1,49 @@
+characters={
+	ZAK_avgustyn_voloshyn = {
+		name = ZAK_avgustyn_voloshyn
+		portraits = {
+			civilian = {
+				large = "GFX_portrait_lat_fricis_menders"
+			}
+		}
+		country_leader={
+			ideology = conservatism
+			traits = { }
+			expire = "1965.1.1.1"
+			id = -1
+		}
+	}
+
+	ZAK_julian_revay = {
+		name = ZAK_julian_revay
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/KAZ/portrait_kaz_ilyas_zhansugurov.dds"
+			}
+		}
+		country_leader={
+			ideology = moderatism
+			traits = { }
+			expire = "1965.1.1.1"
+			id = -1
+		}
+	}
+
+	ZAK_dmytro_klempush = {
+		name = ZAK_dmytro_klempush
+		portraits = {
+			army = {
+				large = "gfx/leaders/FRA/portrait_france_philippe_leclerc.dds"
+				small = "GFX_idea_philippe_leclerc"
+			}
+		}
+		corps_commander = {
+			traits = { }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+		}
+	}
+}

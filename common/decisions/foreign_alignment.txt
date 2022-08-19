@@ -1,0 +1,1170 @@
+foreign_alignment = {
+	join_FROM = {
+		icon = hol_exchange_intelligence_data
+		priority = 10
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			OR = {
+				has_completed_focus = HUN_the_trianon_trauma
+				has_completed_focus	= HUN_rapproachement_with_little_entente
+			}
+			is_faction_leader = no # you shouldn't be able to betray your own faction
+			has_capitulated = no
+			NOT = {
+				has_war_with = FROM
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = democratic
+					}
+				}
+				democratic > 0.4
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = fascism
+					}
+				}
+				fascism > 0.4
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = communism
+					}
+				}
+				communism > 0.4
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = neutrality
+					}
+				}
+				neutrality > 0.4
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				NOT = {
+					is_in_faction_with = ROOT
+				}
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					original_tag = USA
+				}
+				if = {
+					limit = {
+						has_global_flag = HUN_germany_has_ideas
+					}
+					NOT = {
+						original_tag = GER
+					}
+				}
+				if = {
+					limit = {
+						ROOT = {
+							has_completed_focus = HUN_rapproachement_with_little_entente
+						}
+					}
+					OR = {
+						has_government = democratic
+						has_government = neutrality
+					}
+				}
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_continue_the_regency
+			OR = {
+				has_completed_focus = HUN_the_march_front
+				has_completed_focus = HUN_strengthen_the_aristocracy
+			}
+			is_in_faction = no
+		}
+
+		cost = 50
+
+		complete_effect = {
+			FROM = {
+				country_event = {
+					id = generic.2
+					hours = 4
+				}
+			}
+		}
+	}
+
+	defect_to_FROM = {
+		icon = generic_nationalism
+		priority = 12
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_seizecontrolofhungarysfuture
+			OR = {
+				has_completed_focus = HUN_the_march_front
+				has_completed_focus = HUN_strengthen_the_aristocracy
+			}
+			is_faction_leader = no # you shouldn't be able to betray your own faction
+			has_capitulated = no
+			if = {
+				limit = {
+					FROM = {
+						has_government = democratic
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { democratic > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = fascism
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { fascism > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = fascism
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { fascism > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = communism
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { communism > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = neutrality
+					}
+				}
+				ROOT = { neutrality > 0.3 }
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				NOT = { is_in_faction_with = ROOT }
+				has_war_with = ROOT
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					original_tag = USA
+				}
+				OR = {
+					NOT = {
+						original_tag = GER
+					}
+					NOT = {
+						has_global_flag = HUN_germany_has_ideas
+					}
+				}
+			}
+		}
+
+		visible = {
+			# original_tag = HUN
+			always = no
+			# complicated and ahistorical
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			FROM = {
+				country_event = {
+					id = gamer_horthy.5
+					hours = 4
+				}
+
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					every_country = {
+						limit = {
+							has_war_with = ROOT
+							NOT = {
+								has_war_with = FROM
+							}
+						}
+
+						white_peace = ROOT
+					}
+
+					ROOT = {
+						if = {
+							limit = {
+								is_in_faction = yes
+							}
+							faction_leader = {
+								country_event = {
+									id = gamer_horthy.8
+									hours = 4
+								}
+							}
+						}
+						if = {
+							limit ={
+								is_subject = yes
+							}
+							OVERLORD = {
+								set_autonomy = {
+									target = ROOT
+									autonomy_state = autonomy_free
+									end_wars = no
+									end_civil_wars = no
+								}
+							}
+						}
+
+						country_event = {
+							id = gamer_horthy.6
+							hours = 4
+						}
+					}
+
+					add_to_faction = ROOT
+				}
+			}
+		}
+	}
+
+	peace_with_FROM = {
+		icon = generic_nationalism
+		priority = 11
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_peace_overtures
+			is_faction_leader = no # you shouldn't be able to betray your own faction
+			has_capitulated = no
+			is_puppet = no
+			NOT = {
+				any_country = {
+					has_active_mission = occupy_hungary
+				}
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				NOT = { is_in_faction_with = ROOT }
+				has_war_with = ROOT
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					original_tag = USA
+				}
+				OR = {
+					NOT = {
+						original_tag = GER
+					}
+					NOT = {
+						has_global_flag = HUN_germany_has_ideas
+					}
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_preserve_greater_hungary
+			original_tag = HUN
+			has_war = yes
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			FROM = {
+				country_event = {
+					id = gamer_horthy.29
+					hours = 4
+				}
+
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					every_country = {
+						limit = {
+							is_in_faction_with = FROM
+						}
+
+						white_peace = HUN
+					}
+				}
+			}
+		}
+	}
+
+	formalise_the_pact_of_rome = {
+		icon = hol_exchange_intelligence_data
+		priority = 12
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_look_outwards
+			NOT = { has_war_with = FROM }
+			is_subject = no
+			FROM = {
+				is_subject = no
+				OR = {
+					is_in_faction = no
+					is_faction_leader = yes
+				}
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				tag = ITA
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			is_in_faction = no
+			has_completed_focus = HUN_continue_the_regency
+			OR = {
+				has_completed_focus = HUN_appointzoltantildy
+				has_completed_focus = HUN_restoreistvanbethlen
+				has_completed_focus = HUN_appointkalmandaranyi
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0.2
+				OR = {
+					has_completed_focus = HUN_appointzoltantildy
+					has_completed_focus = HUN_restoreistvanbethlen
+				}
+			}
+			modifier = {
+				factor = 5
+				has_completed_focus = HUN_appointkalmandaranyi
+			}
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			set_rule = {
+				can_create_factions = yes
+			}
+			every_country = {
+				limit = {
+					OR = {
+						tag = ITA
+						tag = AUS
+					}
+					NOT = { has_war_with = HUN }
+				}
+				add_opinion_modifier = { target = THIS modifier = HUN_renew_the_rome_protocols }
+				reverse_add_opinion_modifier = { target = THIS modifier = HUN_renew_the_rome_protocols }
+			}
+			if = {
+				limit = {
+					ITA = { is_in_faction = no }
+				}		
+				create_faction = HUN_PACT_OF_ROME_FACTION
+				every_country = {
+					limit = {
+						OR = {
+							tag = ITA
+							tag = AUS
+						}
+						is_in_faction = no
+						NOT = { has_war_with = HUN }
+					}
+					country_event = {
+						id = generic.5
+						hours = 4
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					ITA = { is_faction_leader = yes }
+				}
+				ITA = {
+					country_event = {
+						id = generic.2
+						hours = 4
+					}
+				}
+			}
+			hidden_effect = {
+				news_event = { id = news.312 }
+			}
+		}
+	}
+
+	expand_FROM_trade = {
+		icon = generic_factory
+		priority = 8
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			OR = {
+				has_completed_focus = HUN_appointzoltantildy
+				has_completed_focus = HUN_restoreistvanbethlen
+				has_completed_focus = HUN_appointkalmandaranyi
+			}
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+			NOT = {
+				has_country_flag = HUN_expanding_trade
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_major = yes
+				capital_scope = { is_on_continent = europe }
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_war = no
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0.5
+				FROM = {
+					tag = GER
+					has_government = fascism
+				}
+				has_idea = HUN_german_trade
+			}
+			modifier = {
+				factor = 0
+				FROM = {
+					tag = GER
+					has_government = fascism
+				}
+				has_idea = HUN_german_trade2
+			}
+			modifier = {
+				factor = 0
+				FROM = {
+					tag = GER
+					has_government = fascism
+				}
+				OR = {
+					has_completed_focus = HUN_appointzoltantildy
+					has_completed_focus = HUN_restoreistvanbethlen
+				}
+			}
+		}
+
+		cost = 10
+
+		modifier = {
+			political_power_gain = -0.2
+			country_resource_steel = -4
+		}
+
+		days_remove = 30
+		days_re_enable = 5
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HUN_expanding_trade
+			}
+
+			add_offsite_building = { type = industrial_complex level = 3 }
+
+			FROM = {
+				add_political_power = 10
+				capital_scope = {
+					add_resource = {
+						type = steel
+						amount = 4
+						state = THIS
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = HUN_expanding_trade
+			}
+
+			add_offsite_building = { type = industrial_complex level = -3 }
+
+			add_popularity = {
+				ideology = FROM
+				popularity = 0.03
+			}
+
+			if = {
+				limit = {
+					GER = {
+						has_government = fascism
+					}
+				}
+				if = {
+					limit = {
+						FROM = {
+							has_government = fascism
+						}
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_completed_focus = HUN_the_rise_of_germany
+								has_completed_focus = HUN_bulwark_against_radicalism
+							}
+						}
+						add_german_trade_HUN = yes
+					}
+				}
+				else = {
+					remove_german_trade_HUN = yes
+				}
+			}
+
+			FROM = {
+				capital_scope = {
+					add_resource = {
+						type = steel
+						amount = -4
+						state = THIS
+					}
+				}
+			}
+		}
+	}
+
+	expand_british_aid = {
+		icon = eng_trade_unions_support
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_british_industrial_aid
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					AND = {
+						tag = ENG
+						OR = {
+							has_government = democratic
+							has_government = HUN
+						}
+					}
+					AND = {
+						ENG = {
+							NOT = {
+								has_government = democratic
+							}
+						}
+						has_government = democratic
+						is_major = yes
+						capital_scope = {
+							is_on_continent = europe
+						}
+					}
+				}
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_restoreistvanbethlen
+		}
+
+		cost = 10
+
+		ai_will_do = {
+			base = 10
+		}
+
+		modifier = {
+			democratic_drift = 0.05
+			political_power_gain = -0.1
+		}
+
+		complete_effect = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+
+		remove_effect = {
+			add_offsite_building = { type = industrial_complex level = -2 }
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+		}
+
+		days_remove = 60
+		days_re_enable = 10
+	}
+
+	exchange_rakosi = {
+		icon = generic_political_discourse
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_look_outwards
+		}
+
+		target_trigger = {
+			FROM = {
+				tag = SOV
+				has_government = communism
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			NOT = {
+				has_country_flag = HUN_exchanged_rakosi
+			}
+			OR = {
+				has_completed_focus = HUN_appointzoltantildy
+				has_completed_focus = HUN_restoreistvanbethlen
+				has_completed_focus = HUN_appointkalmandaranyi
+			}
+		}
+
+		cost = 30
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HUN_exchanged_rakosi
+			}
+			
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			add_war_support = 0.05
+		}
+	}
+
+	send_istvan_to_russia = {
+		icon = generic_air
+		priority = 20
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_elect_deputy_regent
+			has_idea = HUN_istvan_horthy
+			has_war_with = SOV
+		}
+
+		target_trigger = {
+			FROM = {
+				tag = SOV
+				has_government = communism
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			NOT = {
+				has_country_flag = HUN_sent_istvan
+			}
+			has_completed_focus = HUN_the_addams_family
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			remove_advisor_role = {
+				character = HUN_istvan_horthy
+				slot = political_advisor
+			}
+
+			hidden_effect = {
+				add_advisor_role = {
+					character = HUN_istvan_horthy
+					# Dummy role, though I'm not sure why I did this in the first place
+					advisor = {
+						slot = political_advisor
+						idea_token = HUN_istvan_horthy
+						allowed = {
+							always = no
+						}
+						available = {
+							always = no
+						}
+						traits = {
+						}
+					}
+				}
+			}
+		}
+
+		modifier = {
+			war_support_weekly = 0.01
+			communism_drift = -0.03
+		}
+
+		days_remove = 180
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = HUN_sent_istvan
+			}
+
+			random_list = {
+				1 = {
+					add_war_support = 0.1
+					retire_character = HUN_istvan_horthy
+				}
+				9 = {
+					add_stability = 0.05
+					hidden_effect = {
+						set_country_flag = HUN_istvan_returned_alive
+						remove_advisor_role = {
+							character = HUN_istvan_horthy
+							slot = political_advisor
+						}
+					}
+					add_advisor_role = {
+						character = HUN_istvan_horthy
+						advisor = {
+							slot = political_advisor
+							idea_token = HUN_istvan_horthy
+							allowed = {
+								original_tag = HUN
+							}
+							cost = 50
+							available = {
+								is_country_leader = no
+								OR = {
+									has_government = neutrality
+									has_government = democratic
+								}
+								has_completed_focus = HUN_anglophile_policies
+							}
+							traits = {
+								deputy_regent4
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	secure_FROM_loans = {
+		icon = hol_attract_foreign_investors
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_limited_liberalisation
+			NOT = {
+				has_idea = HUN_loans5
+			}
+			has_war = no
+			FROM = {
+				has_war = no
+			}
+			NOT = {
+				has_country_flag = HUN_securing_loans
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_major = yes
+				capital_scope = { is_on_continent = europe }
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_goulash_communism
+		}
+
+		cost = 10
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		days_remove = 30
+		days_re_enable = 5
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 0.5
+				has_idea = HUN_loans3
+			}
+			modifier = {
+				factor = 0.5
+				has_idea = HUN_loans4
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HUN_securing_loans
+			}
+			add_offsite_building = { type = industrial_complex level = 4 }
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = HUN_securing_loans
+			}
+
+			add_offsite_building = { type = industrial_complex level = -4 }
+			add_political_power = 30
+
+			add_popularity = {
+				ideology = FROM
+				popularity = 0.03
+			}
+
+			FROM = {
+				if = {
+					limit = {
+						has_variable = HUN_has_loans_@FROM
+					}
+					add_to_variable = {
+						var = HUN_has_loans_@FROM
+						value = 1
+					}
+				}
+				else = {
+					set_variable = {
+						var = HUN_has_loans_@FROM
+						value = 1
+					}
+				}
+			}
+
+			add_loans_HUN = yes
+		}
+	}
+
+	repay_FROM_loans = {
+		icon = gre_paying_ifc_debt
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_limited_liberalisation
+			OR = {
+				has_idea = HUN_loans
+				has_idea = HUN_loans2
+				has_idea = HUN_loans3
+				has_idea = HUN_loans4
+				has_idea = HUN_loans5
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				has_variable = HUN_has_loans_@FROM
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_goulash_communism
+		}
+
+		cost = 30
+
+		ai_will_do = {
+			base = 15
+			modifier = {
+				factor = 2
+				has_idea = HUN_loans3
+			}
+			modifier = {
+				factor = 2
+				has_idea = HUN_loans4
+			}
+			modifier = {
+				factor = 2
+				has_idea = HUN_loans5
+			}
+		}
+
+		modifier = {
+			political_power_gain = -0.5
+			consumer_goods_factor = 0.1
+		}
+
+		days_remove = 60
+		days_re_enable = 10
+
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_variable = HUN_has_loans_@FROM
+					}
+				}
+				set_variable = {
+					var = HUN_has_loans_@FROM
+					value = 1
+				}
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				add_political_power = 50
+
+				if = {
+					limit = {
+						check_variable = {
+							var = HUN_has_loans_@FROM
+							value = 1
+							compare = equals
+						}
+					}
+					clear_variable = HUN_has_loans_@FROM
+				}
+				else = {
+					subtract_from_variable = {
+						var = HUN_has_loans_@FROM
+						value = 1
+					}
+				}
+			}
+
+			remove_loans_HUN = yes
+		}
+	}
+
+	expand_cooperatives = {
+		icon = generic_merge_plant_materiel
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_new_economic_mechanism
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_goulash_communism
+		}
+
+		cost = 20
+
+		modifier = {
+			political_power_gain = -0.3
+			consumer_goods_factor = 0.05
+			production_factory_max_efficiency_factor = 0.05
+			production_factory_efficiency_gain_factor = 0.1
+		}
+
+		days_remove = 60
+		days_re_enable = 10
+
+		ai_will_do = {
+			base = 30
+		}
+
+		complete_effect = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+
+		remove_effect = {
+			add_offsite_building = { type = industrial_complex level = -2 }
+			remove_loans_HUN = yes
+		}
+	}
+
+	do_charity = {
+		icon = generic_construction
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_the_addams_family
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_continue_the_regency
+		}
+
+		cost = HUN_charity_cost
+
+		modifier = {
+			consumer_goods_factor = 0.02
+			neutrality_drift = 0.02
+		}
+
+		days_remove = 60
+		days_re_enable = 10
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				check_variable = { HUN_charity_cost > 40 }
+				factor = 0.5
+			}
+			modifier = {
+				check_variable = { HUN_charity_cost > 60 }
+				factor = 0.5
+			}
+			modifier = {
+				check_variable = { HUN_charity_cost > 80 }
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { HUN_charity_cost = 20 }
+			}
+			custom_effect_tooltip = expensive_charity_tt
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.02
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					43 = { # Hungary
+						NOT = { has_state_flag = has_charity }
+						is_controlled_by = HUN
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+				}
+				43 = {
+					hidden_effect = {
+						set_state_flag = has_charity
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					664 = { # Kosice
+						NOT = { has_state_flag = has_charity }
+						is_controlled_by = HUN
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+				}
+				664 = {
+					hidden_effect = {
+						set_state_flag = has_charity
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			add_stability = 0.05
+		}
+	}
+}

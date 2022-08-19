@@ -1,0 +1,323 @@
+HUN_alternate_AH = {
+	name = "Hungarian Alternate plan to restore Austria-Hungary"
+	desc = ""
+
+	allowed = {
+		original_tag = HUN
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			has_country_flag = HUN_AI_RANDOM_AUSTRIA_HUNGARY
+			has_game_rule = {
+				rule = HUN_ai_behavior
+				option = AUSTRIA_HUNGARY
+			}
+		}
+	}
+	abort = {
+		
+	}
+
+	ai_national_focuses = {
+		HUN_strengthen_the_monarchists
+		HUN_thedeathofgyulagombos
+		HUN_restoreistvanbethlen
+		HUN_elect_a_king
+		HUN_invite_the_habsburg_prince
+		HUN_industrial_revitalization
+		HUN_reintegrate_the_railroads
+		HUN_restore_ottos_throne
+		HUN_proclaim_the_restoration_of_austria_hungary
+		HUN_bulwark_against_radicalism
+		HUN_support_domestic_industry
+		HUN_support_urbanization
+		HUN_institute_for_industrial_techniques
+		HUN_secret_rearmament
+		HUN_war_games
+		HUN_theoretical_air_efforts
+		HUN_bled_agreement
+		HUN_announce_the_gyor_program
+		HUN_domestic_arms_industry
+		HUN_army_maneuvers
+		HUN_mobile_focus
+		HUN_aeronautic_technology_institute
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+		armor = 15.0
+	}
+
+	ideas = {
+		
+	}
+	ai_strategy = {
+		type = befriend
+		id = "AUS"
+		value = 200
+	}
+	traits = {
+		captain_of_industry = 5
+		staunch_monarchist = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+		HUN_boost_hungarian_aviation_industry = 10
+	}
+
+}
+
+HUN_alternate_DEM = {
+	name = "Hungarian Alternate plan to become democratic"
+	desc = ""
+
+	allowed = {
+		original_tag = HUN
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			has_country_flag = HUN_AI_RANDOM_DEMOCRATIC
+			has_game_rule = {
+				rule = HUN_ai_behavior
+				option = DEMOCRATIC
+			}
+		}
+	}
+	abort = {
+		
+	}
+
+	ai_national_focuses = {
+		# 1936
+		HUN_strengthen_the_monarchists
+		HUN_industrial_revitalization
+		HUN_reintegrate_the_railroads
+		HUN_thedeathofgyulagombos
+		HUN_restoreistvanbethlen
+		HUN_elect_a_democratic_king
+		HUN_responsible_government
+		HUN_rapproachement_with_little_entente
+		HUN_the_balkan_pact
+		HUN_support_domestic_industry
+		HUN_support_urbanization
+		HUN_institute_for_industrial_techniques
+		HUN_announce_the_gyor_program
+		HUN_civilian_industry
+		HUN_british_industrial_aid
+		HUN_restore_the_free_market
+		HUN_revise_the_bethlenpeyer_pact
+		HUN_the_march_front
+		HUN_bled_agreement
+		HUN_secret_rearmament
+		HUN_war_games
+		HUN_theoretical_air_efforts
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+	}
+
+	ideas = {
+		
+	}
+	
+	traits = {
+		captain_of_industry = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+		HUN_army_maneuvers = 5
+		HUN_home_defense = 10
+		HUN_assault_gun_focus = 5
+		HUN_establish_the_air_force = 10
+		HUN_invite_foreign_investors = 8
+		HUN_expand_the_manfred_weiss_steel_works = 10
+	}
+
+}
+
+HUN_alternate_FAS = {
+	name = "Hungarian Alternate plan to become fascist and ally with Italy"
+	desc = ""
+
+	allowed = {
+		original_tag = HUN
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			has_country_flag = HUN_AI_RANDOM_FASCIST_ALTERNATE
+			has_game_rule = {
+				rule = HUN_ai_behavior
+				option = FASCIST_ALTERNATE
+			}
+		}
+	}
+	abort = {
+		
+	}
+
+	ai_national_focuses = {
+		HUN_continue_the_regency
+		HUN_industrial_revitalization
+		HUN_reintegrate_the_railroads
+		HUN_support_domestic_industry
+		HUN_support_urbanization
+		HUN_thedeathofgyulagombos
+		HUN_appointkalmandaranyi
+		HUN_institute_for_industrial_techniques
+		HUN_marginalise_the_fascists
+		HUN_support_italian_interests
+		HUN_strengthen_the_aristocracy
+		HUN_the_trianon_trauma
+		HUN_maintain_nonbelligerence
+#		HUN_allow_german_military_access # bypass
+		HUN_the_true_enemy
+		HUN_promote_hungarianism
+		HUN_oppose_the_regency
+		HUN_a_pure_hungary
+		HUN_expand_public_support
+		HUN_assassinate_horthy
+		HUN_demand_southern_slovakia
+		HUN_demand_transylvania
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+	}
+
+	ideas = {
+		
+	}
+	
+	traits = {
+		captain_of_industry = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+		HUN_army_maneuvers = 5
+		HUN_home_defense = 10
+		HUN_assault_gun_focus = 5
+		HUN_establish_the_air_force = 10
+		HUN_demand_southern_slovakia = 10
+		HUN_allow_german_military_access = 0
+	}
+
+}
+
+HUN_alternate_COM = {
+	name = "Hungarian Alternate plan to become communist"
+	desc = ""
+
+	allowed = {
+		original_tag = HUN
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			has_country_flag = HUN_AI_RANDOM_COMMUNIST
+			has_game_rule = {
+				rule = HUN_ai_behavior
+				option = COMMUNIST
+			}
+		}
+	}
+	abort = {
+		
+	}
+
+	ai_national_focuses = {
+		HUN_oppose_the_regency
+		HUN_industrial_revitalization
+		HUN_reintegrate_the_railroads
+		HUN_thedeathofgyulagombos
+		HUN_appointzoltantildy
+		HUN_support_domestic_industry
+		HUN_support_urbanization
+		HUN_institute_for_industrial_techniques
+		HUN_revise_the_bethlenpeyer_pact
+		HUN_protect_the_trade_unions
+		HUN_the_march_front
+		HUN_a_new_republic_of_councils
+		HUN_expand_public_support
+		HUN_the_peace_party
+		HUN_call_for_elections
+		HUN_begin_land_reform
+		HUN_control_ministry_interior
+		HUN_the_trianon_trauma
+		HUN_demand_southern_slovakia
+		HUN_demand_transylvania
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+	}
+
+	ideas = {
+		
+	}
+	
+	traits = {
+		captain_of_industry = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+		HUN_army_maneuvers = 5
+		HUN_home_defense = 10
+		HUN_assault_gun_focus = 5
+		HUN_establish_the_air_force = 10
+		HUN_demand_southern_slovakia = 8
+#		HUN_soviet_hungarian_military_academy = 10
+	}
+
+}

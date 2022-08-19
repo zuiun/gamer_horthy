@@ -1,0 +1,841 @@
+european_integration = {
+	europe_outpost_FROM = {
+		icon = eng_trade_unions_demand
+		priority = 1
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_support_paneuropean_union
+			is_faction_leader = yes
+			FROM = {
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+				}
+				is_subject = no
+				# has_war_support > 0.5
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					tag = POL
+					# Prominent Paneuropa strongholds
+					tag = FRA
+					tag = GER
+					tag = AUS
+					tag = NOR
+					AND = {
+						HUN = { has_completed_focus = HUN_let_europe_arise }
+						any_neighbor_country = { is_in_faction_with = HUN }
+						any_neighbor_country = {
+							OR = {
+								has_government = communism
+								has_government = fascism
+							}
+						}
+						capital_scope = { is_on_continent = europe }
+						is_major = no
+					}
+					AND = {
+						HUN = { has_completed_focus = HUN_european_union }
+						capital_scope = { is_on_continent = europe }
+						is_major = no
+					}
+					AND = {
+						HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
+						capital_scope = { is_in_gaulle_europe = yes }
+						is_major = no
+					}
+				}
+				NOT = {
+					has_country_flag = HUN_paneuropa_outpost
+					is_in_faction_with = HUN
+				}
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 20
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		days_remove = 30
+		days_re_enable = 10
+
+		remove_effect = {
+			hidden_effect = {
+				FROM = { set_country_flag = HUN_paneuropa_outpost }
+			}
+			if = {
+				limit = {
+					FROM = {
+						is_major = no
+						NOT = { is_guaranteed_by = HUN }
+					}
+				}
+				give_guarantee = FROM
+			}
+			FROM = {
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.05
+				}
+			}
+		}
+	}
+
+	europe_invite_FROM = {
+		icon = generic_political_discourse
+		priority = 2
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_let_europe_arise
+			is_faction_leader = yes
+			FROM = {
+				is_subject = no
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+				}
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					OR = {
+						is_on_continent = europe
+						AND = {
+							HUN = {
+								has_completed_focus = HUN_from_the_atlantic_to_the_urals
+							}
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				NOT = {
+					is_in_faction_with = HUN
+					has_country_flag = HUN_invited_paneuropa
+				}
+				has_country_flag = HUN_paneuropa_outpost
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 50
+
+		complete_effect = {
+			hidden_effect = {
+				FROM = { set_country_flag = HUN_invited_paneuropa }
+			}
+			FROM = {
+				country_event = {
+					id = generic.5
+					hours = 4
+				}
+			}
+		}
+	}
+
+	join_eec_FROM = {
+		icon = generic_merge_plant_materiel
+		priority = 3
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_the_briand_plan
+			is_faction_leader = yes
+		}
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					OR = {
+						is_on_continent = europe
+						AND = {
+							HUN = {
+								has_completed_focus = HUN_from_the_atlantic_to_the_urals
+							}
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				NOT = {
+					has_idea = HUN_eec
+					has_idea = HUN_eec2
+					has_idea = HUN_eec3
+				}
+				is_in_faction_with = HUN
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 40
+
+		modifier = {
+			political_power_gain = -0.1
+		}
+
+		days_remove = 30
+		days_re_enable = 10
+
+		remove_effect = {
+			FROM = {
+				add_ideas = HUN_eec
+			}
+		}
+	}
+
+	join_ec_FROM = {
+		icon = generic_political_discourse
+		priority = 4
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_the_erasmus_programme
+			is_faction_leader = yes
+		}
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					OR = {
+						is_on_continent = europe
+						AND = {
+							HUN = {
+								has_completed_focus = HUN_from_the_atlantic_to_the_urals
+							}
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				has_idea = HUN_eec
+				is_in_faction_with = HUN
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 40
+
+		modifier = {
+			political_power_gain = -0.15
+		}
+
+		days_remove = 30
+		days_re_enable = 10
+
+		remove_effect = {
+			FROM = {
+				swap_ideas = {
+					remove_idea = HUN_eec
+					add_idea = HUN_eec2
+				}
+			}
+		}
+	}
+
+	join_eu_FROM = {
+		icon = eng_trade_unions_support
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_european_union
+			is_faction_leader = yes
+		}
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					OR = {
+						is_on_continent = europe
+						AND = {
+							HUN = {
+								has_completed_focus = HUN_from_the_atlantic_to_the_urals
+							}
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+#				OR = {
+					has_idea = HUN_eec2
+#					AND = {
+#						has_idea = HUN_eec3
+#						NOT = {
+#							is_subject_of = HUN
+#						}
+#					}
+#				}
+				is_in_faction_with = HUN
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 40
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		days_remove = 30
+		days_re_enable = 10
+
+		remove_effect = {
+			FROM = {
+#				if = {
+#					limit = {
+#						has_idea = HUN_eec2
+#					}
+					swap_ideas = {
+						remove_idea = HUN_eec2
+						add_idea = HUN_eec3
+					}
+#				}
+#				if = {
+#					limit = {
+#						NOT = {
+#							is_subject_of = HUN
+#						}
+#					}
+#					country_event = {
+#						id = gamer_horthy.40
+#						hours = 4
+#					}
+#					custom_effect_tooltip = if_they_accept_tt
+#					effect_tooltip = {
+#						HUN = {
+#							puppet = FROM
+#						}
+#					}
+#					custom_effect_tooltip = if_they_refuse_tt
+#					effect_tooltip = {
+#						reverse_add_opinion_modifier = {
+#							target = HUN
+#							modifier = HUN_betrayed_europe
+#						}
+#					}
+#				}
+			}
+		}
+	}
+
+	european_values = {
+		icon = hol_exchange_intelligence_data
+		priority = 10
+		fire_only_once = yes
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_european_union
+			is_major = yes
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 100
+
+		complete_effect = {
+			every_other_country = {
+				limit = {
+					any_owned_state = {
+						OR = {
+							is_on_continent = europe
+							AND = {
+								HUN = {
+									has_completed_focus = HUN_from_the_atlantic_to_the_urals
+								}
+								is_in_gaulle_europe = yes
+							}
+						}
+					}
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.1
+				}
+				add_ideas = HUN_cfr
+			}
+		}
+	}
+
+	demand_compliance = {
+		icon = generic_speech
+		priority = 11
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			is_major = yes
+		}
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					OR = {
+						is_on_continent = europe
+						AND = {
+							HUN = {
+								has_completed_focus = HUN_from_the_atlantic_to_the_urals
+							}
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				has_idea = HUN_cfr
+				NOT = {
+					has_country_flag = HUN_demanded_compliance
+				}
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 100
+
+		complete_effect = {
+			FROM = {
+				hidden_effect = {
+					set_country_flag = HUN_demanded_compliance
+				}
+				country_event = {
+					id = gamer_horthy.41
+					hours = 4
+				}
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					set_politics = {
+						ruling_party = democratic
+						elections_allowed = yes
+					}
+				}
+				custom_effect_tooltip = if_they_refuse_tt
+				effect_tooltip = {
+					if = {
+						limit = {
+							is_in_faction_with = HUN
+						}
+						leave_faction = yes
+					}
+					HUN = {
+						create_wargoal = {
+							target = PREV
+							type = puppet_wargoal_focus
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# Dummy decision
+	join_use_FROM = {
+		allowed = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		cost = 0
+	}
+
+	join_use_FROM_1 = {
+		icon = generic_form_nation
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_european_union
+			is_faction_leader = yes
+			FROM = {
+				is_subject_of = HUN
+			}
+		}
+
+		target_trigger = {
+			always = no
+			FROM = {
+				can_join_use = yes
+				check_variable = { num_owned_states < 6 }
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 30
+		days_remove = 60
+		days_re_enable = 5
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FROM
+					OR = {
+						is_on_continent = europe
+						state = 351 # Vologda, which is not in Europe???
+						AND = {
+							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				add_core_of = HUN
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				every_unit_leader = {
+					set_nationality = HUN
+				}
+			}
+			annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}
+		}
+	}
+
+	join_use_FROM_2 = {
+		icon = generic_form_nation
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_european_union
+			is_faction_leader = yes
+			FROM = {
+				is_subject_of = HUN
+			}
+		}
+
+		target_trigger = {
+			always = no
+			FROM = {
+				can_join_use = yes
+				NOT = {
+					check_variable = { num_owned_states < 6 }
+				}
+				check_variable = { num_owned_states < 11 }
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 45
+		days_remove = 90
+		days_re_enable = 5
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FROM
+					OR = {
+						is_on_continent = europe
+						state = 351 # Vologda, which is not in Europe???
+						AND = {
+							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				add_core_of = HUN
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				every_unit_leader = {
+					set_nationality = HUN
+				}
+			}
+			annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}
+		}
+	}
+
+	join_use_FROM_3 = {
+		icon = generic_form_nation
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_european_union
+			is_faction_leader = yes
+			FROM = {
+				is_subject_of = HUN
+			}
+		}
+
+		target_trigger = {
+			always = no
+			FROM = {
+				can_join_use = yes
+				NOT = { check_variable = { num_owned_states < 11 } }
+				check_variable = { num_owned_states < 16 }
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 60
+		days_remove = 120
+		days_re_enable = 5
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FROM
+					OR = {
+						is_on_continent = europe
+						state = 351 # Vologda, which is not in Europe???
+						AND = {
+							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				add_core_of = HUN
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				every_unit_leader = {
+					set_nationality = HUN
+				}
+			}
+			annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}
+		}
+	}
+
+	join_use_FROM_4 = {
+		icon = generic_form_nation
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_european_union
+			is_faction_leader = yes
+			FROM = {
+				is_subject_of = HUN
+			}
+		}
+
+		target_trigger = {
+			always = no
+			FROM = {
+				can_join_use = yes
+				NOT = {
+					check_variable = { num_owned_states < 16 }
+				}
+				check_variable = { num_owned_states < 21 }
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 75
+		days_remove = 150
+		days_re_enable = 5
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FROM
+					OR = {
+						is_on_continent = europe
+						state = 351 # Vologda, which is not in Europe???
+						AND = {
+							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				add_core_of = HUN
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				every_unit_leader = {
+					set_nationality = HUN
+				}
+			}
+			annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}
+		}
+	}
+
+	join_use_FROM_5 = {
+		icon = generic_form_nation
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_european_union
+			is_faction_leader = yes
+			FROM = {
+				is_subject_of = HUN
+			}
+		}
+
+		target_trigger = {
+			always = no
+			FROM = {
+				can_join_use = yes
+				NOT = {
+					check_variable = { num_owned_states < 21 }
+				}
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_support_paneuropean_union
+		}
+
+		cost = 90
+		days_remove = 180
+		days_re_enable = 5
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FROM
+					OR = {
+						is_on_continent = europe
+						state = 351 # Vologda, which is not in Europe???
+						AND = {
+							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
+							is_in_gaulle_europe = yes
+						}
+					}
+				}
+				add_core_of = HUN
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				every_unit_leader = {
+					set_nationality = HUN
+				}
+			}
+			annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}
+		}
+	}
+}

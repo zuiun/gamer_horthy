@@ -1,0 +1,125 @@
+HUN_historical = {
+	name = "Hungarian historical plan"
+	desc = ""
+
+	allowed = {
+		original_tag = HUN
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = HUN_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = HUN_AI_RANDOM_FASCIST_HISTORICAL
+			has_game_rule = {
+				rule = HUN_ai_behavior
+				option = FASCIST_HISTORICAL
+			}
+		}
+	}
+	abort = {
+		
+	}
+
+	ai_national_focuses = {
+		# 1936
+		HUN_continue_the_regency
+		HUN_thedeathofgyulagombos
+		HUN_appointkalmandaranyi
+		HUN_secret_rearmament
+		HUN_war_games
+		HUN_industrial_revitalization
+		HUN_reintegrate_the_railroads
+		# 1937
+		HUN_support_domestic_industry
+		HUN_marginalise_the_fascists
+		HUN_support_italian_interests
+		HUN_support_urbanization
+		HUN_institute_for_industrial_techniques
+		HUN_suffrage_reform
+		# 1938
+		HUN_announce_the_gyor_program
+		HUN_strengthen_the_aristocracy
+		HUN_bled_agreement
+		HUN_establish_the_air_force
+		HUN_the_trianon_trauma
+		HUN_demand_southern_slovakia
+		# 1939
+		HUN_the_addams_family
+		HUN_protect_the_ruthenians
+		HUN_civilian_industry
+		HUN_anglophile_policies
+		HUN_invite_foreign_investors
+		HUN_maintain_nonbelligerence
+		# 1940
+		HUN_army_maneuvers
+		HUN_mobile_focus
+		HUN_allow_german_military_access
+		HUN_demand_transylvania
+		HUN_expand_the_manfred_weiss_steel_works
+		# 1941
+		HUN_speak_out_fascism
+		HUN_develop_tanks
+		HUN_the_true_enemy
+		HUN_demand_vojvodina
+		HUN_proclaim_greater_hungary
+		# 1942
+		HUN_elect_deputy_regent
+		HUN_expand_the_aluminum_industry
+		HUN_expand_the_technical_university_of_budapest
+		HUN_promote_hungarianism
+		HUN_preserve_greater_hungary
+		HUN_allow_political_opposition
+		# 1943
+		HUN_build_the_arpad_line
+		HUN_the_emergency_bureau
+		HUN_peace_overtures
+		HUN_mobilise_the_gendarmeries
+		HUN_maintain_hungarian_sovereignty
+		# 1944
+		HUN_request_foreign_support
+		HUN_recruit_the_poor
+		HUN_overthrow_horthy
+		HUN_impose_martial_law
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+	}
+
+	ideas = {
+		
+	}
+	ai_strategy = {
+		type = alliance
+		id = "ENG"
+		value = 200
+	}
+	traits = {
+		captain_of_industry = 5
+		war_industrialist = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+		
+	}
+
+}
+

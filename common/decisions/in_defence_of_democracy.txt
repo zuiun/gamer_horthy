@@ -1,0 +1,898 @@
+in_defence_of_democracy = {
+	prepare_german_revolutionaries = {
+		icon = generic_civil_support
+		priority = 1
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		ai_will_do = {
+			base = 20
+		}
+
+		available = {
+			has_completed_focus = HUN_confrontation_with_germany
+			command_power > 5
+			has_equipment = {
+				infantry_equipment > 100
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			NOT = {
+				has_country_flag = HUN_started_german_revolution
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_german_revolutionary = yes
+				has_active_resistance = yes
+				is_controlled_by = GER
+				NOT = {
+					state = 42 # Moselle - last stronghold of anti-fascists, will always join revolt
+					state = 51 # Rhine - last stronghold of anti-fascists, will always join revolt
+				}
+			}
+		}
+
+		cost = 20
+
+		state_target = yes
+		days_remove = 7
+		days_re_enable = 0
+
+		on_map_mode = map_only
+		highlight_states = {
+			highlight_states_trigger = { state = FROM }
+		}
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		complete_effect = {
+			add_command_power = -5
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				add_resistance = 20
+			}
+		}
+	}
+
+	stop_german_revolutionaries = {
+		icon = generic_arrest
+		priority = 1
+
+		allowed = {
+			original_tag = GER
+		}
+
+		ai_will_do = {
+			base = 100 # Please don't overthrow my government! Not before I can shoot you all!
+		}
+
+		available = {
+			command_power > 5
+			has_manpower > 500
+			FROM = { is_controlled_by = GER }
+		}
+
+		visible = {
+			HUN = {
+				has_completed_focus = HUN_confrontation_with_germany
+				NOT = {
+					has_country_flag = HUN_started_german_revolution
+				}
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_german_revolutionary = yes
+				has_active_resistance = yes
+				is_controlled_by = GER
+			}
+		}
+
+		cost = 20
+
+		state_target = yes
+		days_remove = 7
+		days_re_enable = 0
+
+		on_map_mode = map_only
+		highlight_states = {
+			highlight_states_trigger = { state = FROM }
+		}
+
+		modifier = {
+			political_power_gain = -0.05
+		}
+
+		complete_effect = {
+			add_command_power = -5
+			add_manpower = -500
+		}
+
+		remove_effect = {
+			FROM = {
+				if = {
+					limit = {
+						resistance < 15
+					}
+					force_disable_resistance = {
+						clear = yes
+						occupier = GER
+						occupied = GER
+					}
+					cancel_resistance = yes
+				} else = {
+					add_resistance = -15
+				}
+			}
+			if = {
+				limit = {
+					all_controlled_state = {
+						OR = {
+							is_german_revolutionary = no
+							has_active_resistance = no
+						}
+					}
+				}
+				set_country_flag = HUN_stopped_the_revolution
+			}
+		}
+	}
+
+	uprising_in_germany = {
+		icon = generic_ignite_civil_war
+		priority = 10
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_confrontation_with_germany
+			is_faction_leader = yes
+			any_state = {
+				is_german_revolutionary = yes
+				resistance > 70
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			NOT = {
+				has_country_flag = HUN_started_german_revolution
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				tag = GER
+				NOT = {
+					has_government = democratic
+				}
+			}
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = HUN_started_german_revolution
+			FROM = {
+				start_civil_war = {
+					ideology = democratic
+					size = 0.3
+					states = {
+						42 # Moselle - last stronghold of anti-fascists
+						51 # Rhine - last stronghold of anti-fascists
+					}
+				}
+			}
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_german_revolutionary = yes
+						resistance > 70
+					}
+					random_country = {
+						limit = {
+							has_government = democratic
+							has_civil_war = yes
+							has_war_with = GER
+							original_tag = GER
+						}
+						transfer_state = PREV
+					}
+				}
+			}
+			random_country = {
+				limit = {
+					has_government = democratic
+					has_civil_war = yes
+					has_war_with = GER
+					original_tag = GER
+				}
+				HUN = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = GER
+					}
+					add_to_faction = PREV
+				}
+			}
+		}
+	}
+
+	# Dummy decision
+	freedom_for_FROM = {
+		allowed = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		available = {
+			always = no
+		}
+
+		cost = 0
+	}
+
+	freedom_for_ukraine = {
+		icon = generic_nationalism
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = UKR
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			UKR = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = UKR
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = UKR
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				UKR = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = UKR
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				UKR = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = UKR
+			set_autonomy = {
+				target = UKR
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_byelorussia = {
+		icon = generic_nationalism
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = BLR
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			BLR = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = BLR
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = BLR
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				BLR = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = BLR
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				BLR = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = BLR
+			set_autonomy = {
+				target = BLR
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_poland = {
+		icon = generic_nationalism
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = POL
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			POL = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = POL
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = POL
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				POL = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = POL
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				POL = {
+					set_state_controller = PREV
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction = yes
+				}
+				add_to_faction = POL
+			}
+		}
+	}
+
+	freedom_for_estonia = {
+		icon = generic_nationalism
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = EST
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			EST = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = EST
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = EST
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				EST = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = EST
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				EST = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = EST
+			set_autonomy = {
+				target = EST
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_latvia = {
+		icon = generic_nationalism
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = LAT
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			LAT = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = LAT
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = LAT
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				LAT = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = LAT
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				LAT = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = LAT
+			set_autonomy = {
+				target = LAT
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_lithuania = {
+		icon = generic_nationalism
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = LIT
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			LIT = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = LIT
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = LIT
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				LIT = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = LIT
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				LIT = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = LIT
+			set_autonomy = {
+				target = LIT
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_finland = {
+		icon = generic_nationalism
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = FIN
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			FIN = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = FIN
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FIN
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				FIN = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = FIN
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				FIN = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = FIN
+			set_autonomy = {
+				target = FIN
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	for_our_freedom_and_yours = {
+		icon = generic_civil_support
+		priority = 8
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_in_defence_democracy
+		}
+
+		visible = {
+			always = no
+#			has_completed_focus = HUN_the_balkan_pact
+		}
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				any_controlled_state = {
+					is_core_of = FROM
+					is_on_continent = europe
+					is_capital = no
+				}
+				has_civil_war = no
+				NOT = {
+					has_country_flag = HUN_preparing_the_revolution
+					original_tag = GER
+					original_tag = SOV
+				}
+			}
+			NOT = {
+				has_country_flag = HUN_preparing_the_revolution_@FROM
+				has_country_flag = HUN_started_the_revolution_@FROM
+			}
+		}
+
+		cost = 20
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = HUN_preparing_the_revolution_@FROM
+			FROM = {
+				add_stability = -0.1
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.1
+				}
+			}
+			unlock_decision_tooltip = for_FROM_freedom
+		}
+	}
+
+	for_FROM_freedom = {
+		icon = generic_ignite_civil_war
+		priority = 1
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_in_defence_democracy
+			command_power > 10
+		}
+
+		visible = {
+			always = no
+#			has_completed_focus = HUN_the_balkan_pact
+		}
+
+		target_trigger = {
+			FROM = {
+				is_core_of = controller
+				is_on_continent = europe
+				is_capital = no
+			}
+			has_country_flag = HUN_preparing_the_revolution_@FROM
+			NOT = {
+				has_country_flag = HUN_started_the_revolution_@FROM
+			}
+		}
+
+		state_target = yes
+		fire_only_once = yes
+
+		on_map_mode = map_only
+		highlight_states = {
+			highlight_states_trigger = { state = FROM }
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HUN_started_the_revolution_@FROM
+			}
+			add_command_power = -10
+			FROM = {
+				controller = {
+					start_civil_war = {
+						ideology = democratic
+						size = 0.3
+						capital = FROM
+					}
+					hidden_effect = {
+						set_country_flag = HUN_revolution_target
+					}
+				}
+			}
+			random_country = {
+				limit = {
+					has_country_flag = HUN_revolution_target
+				}
+				random_other_country = {
+					limit = {
+						has_government = democratic
+						has_civil_war = yes
+						has_war_with = PREV
+						original_tag = PREV
+					}
+					HUN = {
+						add_to_war = {
+							targeted_alliance = PREV
+							enemy = PREV.PREV
+						}
+						puppet = PREV
+						set_autonomy = {
+							target = PREV
+							autonomy_state = autonomy_supervised_state
+						}
+					}
+				}
+				hidden_effect = {
+					clr_country_flag = HUN_revolution_target
+				}
+			}
+		}
+	}
+}

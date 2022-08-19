@@ -1,0 +1,36 @@
+state={
+	id=837
+	name="STATE_837"
+	manpower = 1129773
+	
+	state_category = city
+	
+	resources={
+		steel = 6
+	}
+
+	history={
+		owner = AUS
+		buildings = {
+			infrastructure = 3 #was: 6
+			industrial_complex = 2
+			arms_factory = 1
+		}
+		victory_points = {
+			9648 5 
+		}
+		add_core_of = AUS
+
+		1938.3.12 = {
+			owner = GER
+			controller = GER
+			add_core_of = GER
+		}
+	}
+
+	provinces={
+		653 6687 6690 6691 9646 9648 9650 9679
+	}
+
+	local_supplies=0.0 
+}

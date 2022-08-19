@@ -1,0 +1,402 @@
+leader_traits = {
+	white_terror = {
+		random = no
+
+		neutrality_drift = 0.05
+		drift_defence_factor = 0.1
+		fascism_acceptance = -100
+		communism_acceptance = -100
+		democratic_acceptance = 50
+	}
+
+	white_terror2 = {
+		random = no
+
+		neutrality_drift = 0.1
+		drift_defence_factor = 0.2
+		fascism_acceptance = -100
+		communism_acceptance = -100
+		democratic_acceptance = 100
+		army_core_defence_factor = 0.1
+		defensive_war_stability_factor = 0.6
+	}
+
+	vitez = {
+		random = no
+		sprite = 13
+
+		stability_factor = 0.1
+		political_power_factor = 0.1
+		drift_defence_factor = 0.1
+		fascism_acceptance = -100
+		communism_acceptance = -100
+		democratic_acceptance = 50
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	regent = {
+		random = no
+
+		stability_factor = 0.1
+		political_power_factor = 0.1
+	}
+
+	regent_president = {
+		random = no
+
+		stability_factor = 0.1
+		stability_weekly_factor = 0.01
+		political_power_factor = 0.15
+		political_advisor_cost_factor = -0.25
+		economy_cost_factor = -0.25
+		trade_laws_cost_factor = -0.25
+		mobilization_laws_cost_factor = -0.25
+	}
+
+	bald_murderer = {
+		random = no
+
+		drift_defence_factor = 0.1
+		communism_drift = 0.05
+		stability_factor = -0.1
+		political_power_factor = 0.05
+	}
+
+	leader_of_the_nation = {
+		random = no
+
+		autonomy_gain = -5
+		stability_weekly_factor = -0.01
+	}
+
+	leader_of_the_nation2 = {
+		random = no
+
+		fascism_drift = 0.03
+		political_power_factor = 0.1
+		autonomy_gain = 2.5
+	}
+
+	leader_of_the_nation3 = {
+		random = no
+
+		fascism_drift = 0.05
+		political_power_factor = 0.1
+		army_attack_factor = 0.05
+		autonomy_gain = 2.5
+	}
+
+	powerless_ignored_monarch = {
+		random = no
+
+		political_power_factor = -0.2
+		stability_factor = -0.2
+		war_support_factor = -0.2
+		democratic_drift = 0.05
+	}
+
+	communist_sympathiser = {
+		random = no
+
+		democratic_drift = -0.03
+		communism_drift = 0.05
+	}
+
+	gyula_gombos_pm = {
+		random = no
+		sprite = 13
+
+		stability_factor = 0.1
+		neutrality_drift = 0.03
+		fascism_drift = 0.02
+		custom_modifier_tooltip = gyula_gombos_tt
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	conservative_pm = {
+		random = no
+		sprite = 13
+
+		stability_factor = 0.1
+		neutrality_drift = 0.03
+		fascism_drift = 0.02
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	liberal_pm = {
+		random = no
+		sprite = 13
+
+		production_speed_industrial_complex_factor = 0.05
+		democratic_drift = 0.03
+		democratic_acceptance = 100
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	aristocrat_pm = {
+		random = no
+		sprite = 13
+
+		stability_factor = 0.05
+		consumer_goods_factor = -0.01
+		neutrality_drift = 0.03
+		democratic_drift = 0.02
+		democratic_acceptance = 50
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	coalition_pm = {
+		random = no
+		sprite = 13
+
+		recruitable_population_factor = 0.01
+		political_power_gain = -0.1
+		democratic_drift = 0.02
+		communism_drift = 0.03
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 50
+				OR = {
+					has_completed_focus = HUN_the_march_front
+					has_government = communism
+					has_government = democratic
+				}
+			}
+		}
+	}
+
+	apolitical_pm = {
+		random = no
+		sprite = 13
+
+		autonomy_gain = 7.5
+		stability_factor = 0.05
+		fascism_acceptance = -50
+		communism_acceptance = -50
+		ai_focus_defense_factor = 0.5
+		ai_badass_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 50
+				is_subject = yes
+			}
+		}
+	}
+
+	patriot_pm = {
+		random = no
+		sprite = 13
+
+		autonomy_gain = 1
+		stability_factor = 0.05
+		political_power_gain = 0.05
+		drift_defence_factor = 0.05
+		fascism_acceptance = -50
+		communism_acceptance = -50
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	ministry_interior = {
+		random = no
+		sprite = 13
+
+		communism_drift = 0.05
+		resistance_damage_to_garrison = -0.2
+		foreign_subversive_activites = -0.3
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	ministry_interior_keresztes = {
+		random = no
+		sprite = 13
+
+		neutrality_drift = 0.02
+		democratic_acceptance = 50
+		drift_defence_factor = 0.1
+		resistance_damage_to_garrison = -0.1
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	deputy_pm = {
+		random = no
+		sprite = 13
+
+		political_power_gain = 0.1
+		production_speed_synthetic_refinery_factor = 0.15
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	ministry_agriculture = {
+		random = no
+		sprite = 10
+
+		fascism_drift = 0.02
+		army_speed_factor = 0.1
+		supply_consumption_factor = -0.05
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	tabloid_chairman = {
+		random = no
+		sprite = 13
+
+		consumer_goods_factor = 0.02
+		political_power_factor = 0.05
+		fascism_drift = 0.05
+		production_speed_industrial_complex_factor = 0.05
+	}
+
+	deputy_regent = {
+		random = no
+		sprite = 10
+
+		industrial_capacity_factory = 0.05
+		research_speed_factor = 0.02
+		democratic_acceptance = 50
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	deputy_regent2 = {
+		random = no
+		sprite = 13
+
+		stability_factor = 0.05
+		fascism_drift = -0.1
+		industrial_capacity_factory = 0.05
+		research_speed_factor = 0.02
+		democratic_acceptance = 50
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	deputy_regent3 = {
+		random = no
+		sprite = 1
+
+		stability_factor = 0.05
+		air_agility_factor = 0.05
+		army_morale_factor = 0.1
+		democratic_acceptance = 50
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	deputy_regent4 = {
+		random = no
+		sprite = 13
+
+		stability_factor = 0.05
+		air_agility_factor = 0.1
+		army_morale_factor = 0.1
+		fascism_drift = -0.1
+		industrial_capacity_factory = 0.05
+		research_speed_factor = 0.02
+		democratic_acceptance = 50
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	royal_ambassador = {
+		random = no
+		sprite = 13
+
+		opinion_gain_monthly_factor = 0.1
+		trade_laws_cost_factor = -0.2
+		trade_opinion_factor = 0.5
+		democratic_acceptance = 50
+		min_export = -0.1
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+
+	counterrevolution_szeged = {
+		random = no
+		sprite = 13
+		
+		communism_drift = -0.03
+		consumer_goods_factor = -0.01
+		drift_defence_factor = 0.1
+		neutrality_acceptance = 100
+		
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	industrial_conglomerate = {
+		random = no
+
+		production_speed_industrial_complex_factor = 0.05
+		production_speed_arms_factory_factor = 0.1
+		industrial_capacity_factory = 0.1
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	industrial_enterprise = {
+		random = no
+
+		production_factory_efficiency_gain_factor = 0.05
+		production_factory_max_efficiency_factor = 0.05
+		production_speed_infrastructure_factor = 0.1
+		production_speed_rail_way_factor = 0.15
+		production_speed_supply_node_factor = 0.15
+		equipment_bonus = {
+			train_equipment = {
+				build_cost_ic = -0.25
+				reliability = 0.1
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}

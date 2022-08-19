@@ -1,0 +1,55 @@
+foreign_alignment = {
+	icon = generic_foreign_policy
+	picture = GFX_decision_cat_picture_government_in_exile
+	priority = 100
+}
+backwardness = {
+	icon = generic_industry
+	priority = 105
+}
+trianon = {
+	icon = saf_anti_colonialist_crusade
+	priority = 103
+}
+hungarian_sovereignty = {
+	icon = eng_move_to_secure_the_dominions
+	priority = 110
+}
+territorial_autonomy = {
+	icon = generic_political_actions
+	priority = 102
+}
+danubian_integration = {
+	icon = generic_formable_nations
+	picture = GFX_decision_cat_picture_concessions_to_the_trade_unions
+	priority = 103
+}
+european_integration = {
+	icon = generic_formable_nations
+	picture = GFX_decision_cat_picture_soviet_comecon
+	priority = 104
+}
+in_defence_of_democracy = {
+	icon = generic_democracy
+	picture = GFX_decision_cat_picture_soviet_comecon
+	priority = 102
+
+	visible_when_empty = yes
+	visible = {
+		has_completed_focus = HUN_the_balkan_pact
+	}
+
+	on_map_area = {
+		state = 43
+		name = in_defence_of_democracy_map_name
+		zoom = 250
+
+		target_root_trigger = {
+			has_completed_focus = HUN_confrontation_with_germany
+			NOT = {
+				GER = { has_government = democratic }
+				has_country_flag = HUN_started_german_revolution
+			}
+		}
+	}
+}

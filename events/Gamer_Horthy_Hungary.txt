@@ -1,0 +1,2004 @@
+﻿###########################
+# Hungarian Events
+###########################
+
+add_namespace = gamer_horthy
+
+# Gyula Gömbös Dies
+country_event = {
+	id = gamer_horthy.1
+	title = gamer_horthy.1.t
+	desc = gamer_horthy.1.desc
+	picture = report_event_generic_funeral
+
+	trigger = {
+		original_tag = HUN
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = { 
+		days = 300
+		modifier = {
+			factor = 0.5
+			date > 1936.6.1
+		}
+		modifier = {
+			factor = 0.5
+			date > 1936.8.1
+		}
+		modifier = {
+			factor = 0.1
+			date > 1936.10.1
+		}
+	}
+
+	option = {
+		name = gamer_horthy.1.a # Rest in peace
+		add_stability = -0.1
+		retire_character = HUN_gyula_gombos_de_jakfa
+	}
+}
+
+# Hungary Wants to Rearm
+country_event = {
+	id = gamer_horthy.2
+	title = gamer_horthy.2.t
+	desc = gamer_horthy.2.desc
+	picture = GFX_report_event_generic_conference
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.2.a # Hungary has been punished enough
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 5
+				is_historical_focus_on = yes
+			}
+		}
+
+		FROM = {
+			hidden_effect = {
+				add_to_variable = {
+					var = detente
+					value = 1
+				}
+			}
+
+			country_event = { id = gamer_horthy.3 hours = 4 }
+		}
+		custom_effect_tooltip = effects_tt
+		effect_tooltip = {
+			if = {
+				limit = {
+					FROM = {
+						AND = {
+							check_variable = {
+								var = detente
+								value = 1
+								compare = greater_than_or_equals
+							}
+							check_variable = {
+								var = detente
+								value = 3
+								compare = less_than
+							}
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = HUN_treaty_of_triannon
+					add_idea = HUN_treaty_of_triannon_2
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						check_variable = {
+							var = detente
+							value = 3
+							compare = greater_than_or_equals
+						}
+					}
+				}
+				remove_ideas = HUN_treaty_of_triannon_2
+			}
+		}
+	}
+	option = {
+		name = gamer_horthy.2.b # Hungary is still a threat
+
+		ai_chance = {
+			base = 5
+		}
+
+		FROM = {
+			country_event = { id = gamer_horthy.4 hours = 4 }
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.3
+	title = gamer_horthy.3.t
+	desc = gamer_horthy.3.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.3.a # FROM has made the right choice
+
+		if = {
+			limit = {
+				AND = {
+					check_variable = {
+						var = detente
+						value = 1
+						compare = greater_than_or_equals
+					}
+					check_variable = {
+						var = detente
+						value = 3
+						compare = less_than
+					}
+				}
+			}
+			swap_ideas = {
+				remove_idea = HUN_treaty_of_triannon
+				add_idea = HUN_treaty_of_triannon_2
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					var = detente
+					value = 3
+					compare = greater_than_or_equals
+				}
+			}
+			remove_ideas = HUN_treaty_of_triannon_2
+		}
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.4
+	title = gamer_horthy.4.t
+	desc = gamer_horthy.4.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.4.a # FROM has made a mistake
+		add_war_support = 0.1
+	}
+}
+
+# Hungary Wants to Switch Sides
+country_event = {
+	id = gamer_horthy.5
+	title = gamer_horthy.5.t
+	desc = gamer_horthy.5.desc
+	picture = GFX_report_event_german_reichstag_gathering
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.5.a # Hungary might be useful to us
+
+		ai_chance = {
+			base = 5
+		}
+
+		every_country = {
+			limit = {
+				has_war_with = FROM
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+
+			white_peace = FROM
+		}
+
+		FROM = {
+			if = {
+				limit = {
+					is_in_faction = yes
+				}
+				faction_leader = {
+					country_event = {
+						id = gamer_horthy.8
+						hours = 4
+					}
+					remove_from_faction = FROM
+				}
+			}
+			if = {
+				limit ={
+					is_subject = yes
+				}
+				OVERLORD = {
+					set_autonomy = {
+						target = FROM
+						autonomy_state = autonomy_free
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+			}
+
+			country_event = {
+				id = gamer_horthy.6
+				hours = 4
+			}
+		}
+
+		add_to_faction = FROM
+	}
+
+	option = {
+		name = gamer_horthy.5.b # Hungary is a nation of cowards
+
+		ai_chance = {
+			base = 1
+			modifier = {
+				ROOT = {
+					has_government = fascism
+				}
+				factor = 15
+			}
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.7
+				hours = 4
+			}
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.6
+	title = gamer_horthy.6.t
+	desc = gamer_horthy.6.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.6.a # We will redeem ourselves
+		add_war_support = 0.1
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.7
+	title = gamer_horthy.7.t
+	desc = gamer_horthy.7.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.7.a # There is no future left for Hungary
+		add_stability = -0.2
+		add_war_support = -0.2
+	}
+}
+
+# Hungary Has Betrayed Us
+country_event = {
+	id = gamer_horthy.8
+	title = gamer_horthy.8.t
+	desc = gamer_horthy.8.desc
+	picture = GFX_report_event_hungarian_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.8.a # They will pay for this
+		add_opinion_modifier = {
+			target = HUN
+			modifier = faction_traitor
+		}
+	}
+}
+
+# Hungary Offers Military Access
+country_event = {
+	id = gamer_horthy.9
+	title = gamer_horthy.9.t
+	desc = gamer_horthy.9.desc
+	picture = GFX_report_event_hungary_refused
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.9.a # Late is better than never
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 10
+				is_historical_focus_on = yes
+			}
+		}
+
+		FROM = {
+			give_military_access = ROOT
+		}
+
+		add_to_faction = FROM
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.10
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.9.b # We have a better idea
+
+		ai_chance = {
+			base = 1
+		}
+
+		hidden_effect = {
+			set_global_flag = HUN_germany_has_ideas
+		}
+
+		add_ai_strategy = {
+			type = prepare_for_war
+			id = FROM
+			value = 200
+		}
+
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = FROM
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.11
+				hours = 4
+			}
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.10
+	title = gamer_horthy.10.t
+	desc = gamer_horthy.10.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.10.a # A large price to pay for survival
+		retire_character = HUN_pal_teleki
+		add_stability = -0.2
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.11
+	title = gamer_horthy.11.t
+	desc = gamer_horthy.11.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.11.a # We must be prepared for whatever comes
+		add_war_support = 0.1
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.2
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.2
+		}
+	}
+}
+
+# Hungary Requests Our Support
+country_event = {
+	id = gamer_horthy.12
+	title = gamer_horthy.12.t
+	desc = gamer_horthy.12.desc
+	picture = GFX_report_event_vienna_award_negotiations
+	is_triggered_only = yes
+	timeout_days = 1
+
+	option = {
+		name = gamer_horthy.12.a # Trianon was an injustice
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				OR = {
+					tag = GER
+					tag = ITA
+					tag = POL
+				}
+				factor = 2
+			}
+			modifier = {
+				OR = {
+					AND = {
+						is_historical_focus_on = yes
+						tag = GER
+					}
+					has_government = FROM
+					tag = POL
+				}
+				factor = 10
+			}
+			modifier = {
+				is_in_faction_with = HUN
+				factor = 5
+			}
+			modifier = {
+				tag = ITA
+				FROM = { has_completed_focus = HUN_support_italian_interests }
+				factor = 4
+			}
+			modifier = {
+				has_government = democratic
+				factor = 0.5
+			}
+		}
+
+		hidden_effect = {
+			if = {
+				limit = {
+					tag = GER
+					NOT = {
+						has_completed_focus = GER_oppose_hitler
+					}
+				}
+
+				FROM = {
+					set_country_flag = HUN_german_support
+				}
+			}
+
+			add_to_variable = {
+				var = global.foreign_support
+				value = 1
+			}
+		}
+
+		if = {
+			limit = {
+				FROM = {
+					focus_progress = {
+						focus = HUN_demand_southern_slovakia
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_demand_southern_slovakia
+					}
+				}
+			}
+			every_state = {
+				limit = {
+					state = 664 # Kosice
+					owner = {
+						NOT = {
+							tag = HUN
+							is_subject_of = HUN
+						}
+					}
+				}
+				custom_effect_tooltip = target_tt
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						tag = HUN
+						is_subject_of = HUN
+					}
+					is_guaranteed_by = ROOT
+					any_owned_state = {
+						state = 664
+					}
+				}
+				ROOT = {
+					diplomatic_relation = {
+						country = PREV
+						relation = guarantee
+						active = no
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					focus_progress = {
+						focus = HUN_demand_vojvodina
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_demand_vojvodina
+					}
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 45 # Backa
+						state = 764 # West Banat
+					}
+					owner = {
+						NOT = {
+							tag = HUN
+							is_subject_of = HUN
+						}
+					}
+				}
+				custom_effect_tooltip = target_tt
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						tag = HUN
+						is_subject_of = HUN
+					}
+					is_guaranteed_by = ROOT
+					any_owned_state = {
+						OR = {
+							state = 45
+							state = 764
+						}
+					}
+				}
+				ROOT = {
+					diplomatic_relation = {
+						country = PREV
+						relation = guarantee
+						active = no
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					focus_progress = {
+						focus = HUN_protect_the_ruthenians
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_protect_the_ruthenians
+					}
+				}
+			}
+			every_state = {
+				limit = {
+					state = 73 # Carpathia
+					owner = {
+						NOT = {
+							tag = HUN
+							is_subject_of = HUN
+						}
+					}
+				}
+				custom_effect_tooltip = target_tt
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						tag = HUN
+						is_subject_of = HUN
+					}
+					is_guaranteed_by = ROOT
+					any_owned_state = {
+						state = 73
+					}
+				}
+				ROOT = {
+					diplomatic_relation = {
+						country = PREV
+						relation = guarantee
+						active = no
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					focus_progress = {
+						focus = HUN_demand_transylvania
+						progress > 0
+					}
+					NOT = {
+						has_completed_focus = HUN_demand_transylvania
+					}
+				}
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 76 # Bihor
+						state = 82 # Timis
+						state = 83 # Crisana
+						state = 84 # Transylvania
+						state = 840 # Somesana
+						state = 841 # Szekelyland
+					}
+					owner = {
+						NOT = {
+							tag = HUN
+							is_subject_of = HUN
+						}
+					}
+				}
+				custom_effect_tooltip = target_tt
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						tag = HUN
+						is_subject_of = HUN
+					}
+					is_guaranteed_by = ROOT
+					any_owned_state = {
+						OR = {
+							state = 76
+							state = 82
+							state = 83
+							state = 84
+							state = 840
+							state = 841
+						}
+					}
+				}
+				ROOT = {
+					diplomatic_relation = {
+						country = PREV
+						relation = guarantee
+						active = no
+					}
+				}
+			}
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.13
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.12.b # That land does not belong to Hungary
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				tag = ENG
+				has_government = fascism
+				FROM = {
+					has_completed_focus = HUN_elect_a_fascist_king
+				}
+			}
+			modifier = {
+				factor = 20
+				tag = FRA
+				has_completed_focus = FRA_strengthen_the_little_entente # bruh
+			}
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.14
+				hours = 4
+			}
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.13
+	title = gamer_horthy.13.t
+	desc = gamer_horthy.13.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.13.a # The correct choice
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.14
+	title = gamer_horthy.14.t
+	desc = gamer_horthy.14.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.14.a # We do not need FROM
+	}
+}
+
+# Hungary Demands Our Land
+country_event = {
+	id = gamer_horthy.15
+	title = gamer_horthy.15.t
+	desc = gamer_horthy.15.desc
+	picture = GFX_report_event_vienna_award_negotiations
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {
+				check_variable = {
+					var = global.foreign_support
+					value = 0
+					compare = greater_than
+				}
+			}
+
+			multiply_variable = {
+				var = global.foreign_support
+				value = 10
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.15.a # It took a war to be free
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 2
+				ic_ratio = { tag = FROM ratio > 1.0 }#we are stronger than them!
+			}
+			modifier = {
+				factor = 100
+				has_war_with = FROM
+			}
+		}
+
+		add_war_support = 0.1
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.17
+				hours = 4
+			}
+			custom_effect_tooltip = effects_tt
+			effect_tooltip = {
+				create_wargoal = {
+					type = annex_everything
+					target = ROOT
+				}
+			}
+		}
+
+		hidden_effect = {
+			set_variable = {
+				var = global.foreign_support
+				value = 0
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.15.b # We can compromise on this
+		trigger = {
+			any_owned_state = {
+				has_state_flag = trianon_alternate
+			}
+			any_owned_state = {
+				has_state_flag = trianon_target
+			}
+		}
+
+		ai_chance = {
+			base = 3
+			modifier = {
+				check_variable = {
+					var = global.foreign_support
+					value = 0
+					compare = greater_than
+				}
+
+				factor = global.foreign_support
+			}
+			modifier = {
+				factor = 10
+				has_war = yes
+				NOT = { has_war_with = HUN }
+			}
+		}
+
+		add_stability = -0.1
+
+		every_owned_state = {
+			limit = {
+				has_state_flag = trianon_target
+			}
+			
+			FROM = {
+				transfer_state = PREV
+			}
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.18
+				hours = 4
+			}
+		}
+
+		hidden_effect = {
+			set_variable = {
+				var = global.foreign_support
+				value = 0
+			}
+
+			if = {
+				limit = {
+					tag = ROM
+					76 = {
+						has_state_flag = trianon_target
+					}
+				}
+				set_country_flag = second_vienna_accepted_north
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.15.c # This is not worth a war
+
+		ai_chance = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = global.foreign_support
+					value = 0
+					compare = greater_than
+				}
+
+				factor = global.foreign_support
+			}
+		}
+
+		add_stability = -0.15
+
+		every_owned_state = {
+			limit = {
+				OR = {
+					has_state_flag = trianon_target
+					has_state_flag = trianon_alternate
+				}
+			}
+
+			FROM = {
+				transfer_state = PREV
+			}
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.16
+				hours = 4
+			}
+		}
+
+		hidden_effect = {
+			set_variable = {
+				var = global.foreign_support
+				value = 0
+			}
+
+			if = {
+				limit = {
+					tag = ROM
+					76 = {
+						has_state_flag = trianon_target
+					}
+				}
+				set_country_flag = second_vienna_accepted_all
+			}
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.16
+	title = gamer_horthy.16.t
+	desc = gamer_horthy.16.desc
+	picture = GFX_report_event_vienna_award_hungary
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.16.a # History has been corrected
+		add_stability = 0.05
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.17
+	title = gamer_horthy.17.t
+	desc = gamer_horthy.17.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.17.a # We were being courteous by asking
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+
+# FROM Offers a Compromise
+country_event = {
+	id = gamer_horthy.18
+	title = gamer_horthy.18.t
+	desc = gamer_horthy.18.desc
+	picture = GFX_report_event_hungary_gains_transylvania
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.18.a # Better than nothing
+	}
+}
+
+# Hungary Offers a Treaty of Eternal Friendship
+country_event = {
+	id = gamer_horthy.19
+	title = {
+		text = gamer_horthy.19.t1
+		trigger = {
+			tag = YUG
+		}
+	}
+	title = {
+		text = gamer_horthy.19.t2
+		trigger = {
+			tag = POL
+		}
+	}
+	title = {
+		text = gamer_horthy.19.t3
+		trigger = {
+			NOT = {
+				OR = {
+					tag = POL
+					tag = YUG
+				}
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.19.desc1
+		trigger = {
+			tag = YUG
+		}
+	}
+	desc = {
+		text = gamer_horthy.19.desc2
+		trigger = {
+			tag = POL
+		}
+	}
+	desc = {
+		text = gamer_horthy.19.desc3
+		trigger = {
+			NOT = {
+				OR = {
+					tag = POL
+					tag = YUG
+				}
+			}
+		}
+	}
+	picture = GFX_report_event_generic_sign_treaty3
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.19.a1 # An excellent idea
+
+		trigger = {
+			NOT = {
+				tag = POL
+			}
+		}
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 2
+				HUN = { has_completed_focus = HUN_anglophile_policies }
+			}
+		}
+
+		hidden_effect = {
+			add_ai_strategy = {
+				type = alliance
+				id = "HUN"
+				value = 200
+			}
+		}
+
+		if = {
+			limit = {
+				tag = YUG
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = FROM
+				}
+
+				remove_core_of = FROM
+			}
+			every_owned_state = {
+				limit = {
+					is_claimed_by = FROM
+				}
+
+				remove_claim_by = FROM
+			}
+		}
+
+		give_guarantee = FROM
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.20
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.19.a2 # Pole and Hungarian brothers be
+
+		trigger = {
+			tag = POL
+		}
+
+		ai_chance = {
+			base = 10
+		}
+
+		hidden_effect = {
+			add_ai_strategy = {
+				type = alliance
+				id = "HUN"
+				value = 200
+			}
+		}
+
+		give_guarantee = FROM
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.20
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.19.b1 # We will be fine
+
+		trigger = {
+			OR = {
+				tag = YUG
+				tag = POL
+			}
+		}
+
+		ai_chance = {
+			base = 1
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.21
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.19.b2 # That dream died with the Austro-Hungarian Empire
+
+		trigger = {
+			NOT = {
+				tag = YUG
+				tag = POL
+			}
+		}
+
+		ai_chance = {
+			base = 1
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.21
+				hours = 4
+			}
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.20
+	title = {
+		text = gamer_horthy.20.t1
+		trigger = {
+			FROM = {
+				NOT = {
+					tag = POL
+				}
+			}
+		}
+	}
+	title = {
+		text = gamer_horthy.20.t2
+		trigger = {
+			FROM = {
+				tag = POL
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.20.desc1
+		trigger = {
+			FROM = {
+				NOT = {
+					tag = POL
+				}
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.20.desc2
+		trigger = {
+			FROM = {
+				tag = POL
+			}
+		}
+	}
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.20.a1 # A step towards security
+		add_stability = -0.1
+
+		trigger = {
+			FROM = {
+				tag = YUG
+			}
+		}
+
+		give_guarantee = FROM
+		unlock_national_focus = HUN_demand_vojvodina
+	}
+
+	option = {
+		name = gamer_horthy.20.a2 # Together in dark times
+
+		trigger = {
+			FROM = {
+				tag = POL
+			}
+		}
+
+		give_guarantee = FROM
+	}
+
+	option = {
+		name = gamer_horthy.20.a3 # The dream survives
+
+		trigger = {
+			FROM = {
+				NOT = {
+					tag = YUG
+					tag = POL
+				}
+			}
+		}
+
+		every_country = {
+			limit = {
+				OR = {
+					tag = AUS
+					tag = BAY
+					tag = WUR
+				}
+				NOT = {
+					has_opinion_modifier = HUN_danubian_dream
+				}
+			}
+			add_opinion_modifier = {
+				target = HUN
+				modifier = HUN_danubian_dream
+			}
+			reverse_add_opinion_modifier = {
+				target = HUN
+				modifier = HUN_danubian_dream
+			}
+			hidden_effect = {
+				add_ai_strategy = {
+					type = alliance
+					id = "HUN"
+					value = 200
+				}
+			}
+		}
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.21
+	title = {
+		text = gamer_horthy.21.t1
+		trigger = {
+			FROM = {
+				NOT = {
+					tag = POL
+				}
+			}
+		}
+	}
+	title = {
+		text = gamer_horthy.21.t2
+		trigger = {
+			FROM = {
+				tag = POL
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.21.desc1
+		trigger = {
+			FROM = {
+				NOT = {
+					tag = POL
+				}
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.21.desc2
+		trigger = {
+			FROM = {
+				tag = POL
+			}
+		}
+	}
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.21.a1 # Unfortunate
+
+		trigger = {
+			NOT = {
+				FROM = {
+					tag = POL
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.21.a2 # If not Poland, then who else?
+
+		trigger = {
+			FROM = {
+				tag = POL
+			}
+		}
+	}
+}
+
+# Hungarian Opposition Requests Support
+country_event = {
+	id = gamer_horthy.22
+	title = gamer_horthy.22.t
+	desc = gamer_horthy.22.desc
+	picture = GFX_report_event_gathering_protest
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.22.a # A deal with the devil
+
+		ai_chance = {
+			base = 10
+		}
+
+		add_manpower = -2000
+		send_equipment = {
+			equipment = infantry_equipment
+			amount = 1000
+			target = FROM
+		}
+		custom_effect_tooltip = opposition_supporter_tt
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.23
+				hours = 4
+			}
+		}
+
+		hidden_effect = {
+			set_country_flag = HUN_supporting_opposition
+			FROM = {
+				set_country_flag = HUN_has_opposition_support
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.22.b # They do not understand our interests
+
+		ai_chance = {
+			base = 0
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.24
+				hours = 4
+			}
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.23
+	title = gamer_horthy.23.t
+	desc = gamer_horthy.23.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.23.a # We must succeed
+
+		add_manpower = 2000
+		effect_tooltip = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+				producer = FROM
+			}
+		}
+		custom_effect_tooltip = opposition_support_tt
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.24
+	title = gamer_horthy.24.t
+	desc = gamer_horthy.24.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.24.a # We are doomed
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.4
+		}
+	}
+}
+
+# Hungarian Opposition Victorious
+country_event = {
+	id = gamer_horthy.25
+	title = gamer_horthy.25.t
+	desc = gamer_horthy.25.desc
+	picture = GFX_report_event_generic_military_parade
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.25.a # Another country joins our sphere
+		puppet = HUN
+		hidden_effect = {
+			clr_country_flag = HUN_supporting_opposition
+		}
+	}
+}
+
+# Hungary Seeks a Separate Peace
+country_event = {
+	id = gamer_horthy.26
+	title = gamer_horthy.26.t
+	desc = gamer_horthy.26.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.26.a # FROM has gone too far
+		activate_mission_tooltip = occupy_hungary
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.27
+				hours = 4
+			}
+		}
+	}
+}
+
+# FROM Is Preparing to Occupy Hungary
+country_event = {
+	id = gamer_horthy.27
+	title = gamer_horthy.27.t
+	desc = gamer_horthy.27.desc
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.27.a # We must act
+		activate_mission_tooltip = defend_hungary
+		custom_effect_tooltip = puppet_occupation_tt
+	}
+}
+
+# Hungary Resists Occupation
+country_event = {
+	id = gamer_horthy.28
+	title = gamer_horthy.28.t
+	desc = gamer_horthy.28.desc
+	picture = GFX_report_event_hungarian_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.28.a # They will die for this
+
+		ai_chance = {
+			base = 2
+		}
+
+		remove_from_faction = FROM
+
+		declare_war_on = {
+			target = FROM
+			type = puppet_wargoal_focus
+		}
+	}
+
+	option = {
+		name = gamer_horthy.28.b # We can't afford a distraction right now
+
+		ai_chance = {
+			base = 1
+		}
+
+		remove_from_faction = FROM
+
+		every_country = {
+			limit = {
+				is_in_faction_with = ROOT
+			}
+			set_truce = {
+				target = HUN
+				days = 180
+			}
+		}
+	}
+}
+
+# Hungary Offers Peace
+country_event = {
+	id = gamer_horthy.29
+	title = gamer_horthy.29.t
+	desc = gamer_horthy.29.desc
+	picture = GFX_report_event_hungary_refused
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.29.a # This is not their war to fight
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				has_government = fascism
+			}
+		}
+
+		every_country = {
+			limit = {
+				is_in_faction_with = ROOT
+			}
+
+			white_peace = FROM
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.30
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.29.b # Hungary cannot go unpunished
+
+		ai_chance = {
+			base = 1
+		}
+
+		FROM = {
+			country_event = {
+				id = gamer_horthy.31
+				hours = 4
+			}
+		}
+	}
+}
+
+# FROM Accepts
+country_event = {
+	id = gamer_horthy.30
+	title = gamer_horthy.30.t
+	desc = gamer_horthy.30.desc
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.30.a # We are safe
+		add_stability = 0.1
+	}
+}
+
+# FROM Refuses
+country_event = {
+	id = gamer_horthy.31
+	title = gamer_horthy.31.t
+	desc = gamer_horthy.31.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.31.a # We don't stand a chance
+	}
+}
+
+# Autonomy for Carpathia
+country_event = {
+	id = gamer_horthy.32
+	title = gamer_horthy.32.t
+	desc = gamer_horthy.32.desc
+	picture = GFX_report_event_generic_conference
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.32.a # Hungarians always honour their promises
+
+		ai_chance = {
+			base = 5
+		}
+
+		release_puppet = ZAK
+	}
+
+	option = {
+		name = gamer_horthy.32.b # No, no, never
+
+		ai_chance = {
+			base = 1
+		}
+
+		add_stability = -0.05
+		73 = {
+			remove_core_of = HUN
+			remove_claim_by = HUN
+			add_resistance = 60
+		}
+	}
+}
+
+# A New Constitution
+country_event = {
+	id = gamer_horthy.33
+	title = gamer_horthy.33.t
+	desc = gamer_horthy.33.desc
+	picture = GFX_report_event_hungary_parliament
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.33.a # We remember the Twelve Points
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.3
+		}
+		country_event = {
+			id = gamer_horthy.34
+		}
+	}
+
+	option = {
+		name = gamer_horthy.33.b # We must protect our traditions
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.3
+		}
+		country_event = {
+			id = gamer_horthy.35
+		}
+	}
+}
+
+# Equality, liberty, brotherhood
+country_event = {
+	id = gamer_horthy.34
+	title = gamer_horthy.34.t
+	desc = gamer_horthy.34.desc
+	picture = GFX_report_event_hungary_parliament
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.34.a # Crown Horthy as a constitutional monarch
+		add_ideas = HUN_horthy
+	}
+
+	option = {
+		name = gamer_horthy.34.b # Establish a republic
+		add_stability = -0.1
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.2
+		}
+	}
+}
+
+# Our Traditions
+country_event = {
+	id = gamer_horthy.35
+	title = gamer_horthy.35.t
+	desc = gamer_horthy.35.desc
+	picture = GFX_report_event_hungary_parliament
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.35.a # Crown Horthy as our king
+		add_stability = 0.1
+		swap_ruler_traits = {
+			remove = regent
+			add = regent_president
+		}
+	}
+
+	option = {
+		name = gamer_horthy.35.b # Perhaps we should elect someone else
+		complete_national_focus = HUN_strengthen_the_monarchists
+	}
+}
+
+# The Habsburg Crisis (Austria)
+country_event = {
+	id = gamer_horthy.36
+	title = gamer_horthy.36.t
+	desc = gamer_horthy.36.desc
+	picture = GFX_report_event_generic_rally2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.36.a # Otto is the only one who can save Austria from Germany
+		start_civil_war = {
+			ideology = democratic
+			size = 0.4
+			states = {
+				4 # Lower Austria
+				152 # Upper Austria
+				837 # Styria
+				838 # Carinthia
+			}
+		}
+		custom_effect_tooltip = monarchist_victory_tt
+		effect_tooltip = {
+			FROM = {
+				puppet = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.36.b # How many times do we have to depose the Habsburgs
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		start_civil_war = {
+			ideology = neutrality
+			size = 0.6
+			states = {
+				153 # Tyrol
+				839 # Burgenland
+			}
+		}
+		custom_effect_tooltip = democrat_victory_tt
+		effect_tooltip = {
+			FROM = {
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = ROOT
+				}
+			}
+		}
+	}
+}
+
+# The Habsburg Crisis (Little Entente)
+country_event = {
+	id = gamer_horthy.37
+	title = gamer_horthy.37.t
+	desc = gamer_horthy.37.desc
+	picture = GFX_report_event_generic_rally2
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.37.a # If the situation develops unfavourably, then we will act
+		ai_chance = {
+			base = 5
+		}
+		add_war_support = 0.1
+		hidden_effect = {
+			set_country_flag = HUN_oppose_habsburgs
+		}
+	}
+
+	option = {
+		name = gamer_horthy.37.b # The cost of war outweighs the price of peace
+		ai_chance = {
+			base = 1
+		}
+		add_war_support = -0.1
+		add_stability = 0.1
+	}
+
+	option = {
+		name = gamer_horthy.37.b # The end of the Empire was a mistake anyway
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 3
+				strength_ratio = {
+					tag = HUN
+					ratio < 0.5
+				}
+			}
+		}
+		FROM = {
+			puppet = ROOT
+		}
+	}
+}
+
+# The Habsburg Disaster
+country_event = {
+	id = gamer_horthy.38
+	title = gamer_horthy.38.t
+	desc = gamer_horthy.38.desc
+	picture = GFX_report_event_hungarian_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.38.a # It is time to act
+		trigger = {
+			has_country_flag = HUN_oppose_habsburgs
+		}
+		ai_chance = {
+			base = 5
+		}
+		add_war_support = 0.1
+		create_wargoal = {
+			target = HUN
+			type = topple_government
+		}
+	}
+
+	option = {
+		name = gamer_horthy.38.b # Would the Hungarians really go that far
+		ai_chance = {
+			base = 1
+		}
+		add_threat = -1
+		add_stability = -0.1
+		add_war_support = -0.1
+	}
+}
+
+# The Second Austrian Civil War Is Over
+country_event = {
+	id = gamer_horthy.39
+	title = gamer_horthy.39.t
+	desc = {
+		text = gamer_horthy.39.desc1
+		trigger = {
+			AUS = {
+				has_government = neutrality
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.39.desc2
+		trigger = {
+			AUS = {
+				NOT = {
+					has_government = neutrality
+				}
+			}
+		}
+	}
+	picture = GFX_report_event_generic_rally
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.39.a # The hour of reunion between the Duke and the people has arrived
+
+		trigger = {
+			AUS = {
+				has_government = neutrality
+			}
+		}
+
+		puppet = AUS
+	}
+
+	option = {
+		name = gamer_horthy.39.b # The Austrian people have never cast a vote in favour of the republic
+
+		trigger = {
+			AUS = {
+				NOT = {
+					has_government = neutrality
+				}
+			}
+		}
+
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = AUS
+		}
+	}
+}
+
+# Join the European Union
+country_event = {
+	id = gamer_horthy.40
+	title = gamer_horthy.40.t
+	desc = gamer_horthy.40.desc
+	picture = GFX_report_event_gre_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.40.a # Let Europe arise
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 2
+				any_country = {
+					is_major = yes
+					has_war_with = ROOT
+				}
+			}
+		}
+		FROM = {
+			puppet = ROOT
+		}
+	}
+
+	option = {
+		name = gamer_horthy.40.b # Further integration would be dangerous
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				is_major = yes
+			}
+			modifier = {
+				factor = 5
+				has_country_flag = HUN_no_europeans_allowed
+			}
+		}
+		reverse_add_opinion_modifier = {
+			target = HUN
+			modifier = HUN_betrayed_europe
+		}
+		hidden_effect = {
+			set_country_flag = HUN_no_europeans_allowed
+		}
+	}
+}
+
+# FROM Demands Liberalisation
+country_event = {
+	id = gamer_horthy.41
+	title = gamer_horthy.41.t
+	desc = gamer_horthy.41.desc
+	picture = GFX_report_event_gre_diplomacy
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.41.a # Let Europe arise
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				is_major = no
+			}
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+	}
+
+	option = {
+		name = gamer_horthy.41.b # They dare infringe upon our sovereignty
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 2
+				is_major = yes
+			}
+			modifier = {
+				factor = 0.2
+				is_in_faction_with = FROM
+			}
+		}
+		add_war_support = 0.1
+		if = {
+			limit = {
+				is_in_faction_with = FROM
+			}
+			leave_faction = yes
+		}
+		FROM = {
+			create_wargoal = {
+				target = ROOT
+				type = puppet_wargoal_focus
+			}
+		}
+	}
+}
