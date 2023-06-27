@@ -1,6 +1,22 @@
 ﻿capital = 43
 
 oob = "HUN_1936"
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+		set_air_oob = "HUN_1936_air_bba"
+		set_technology = {
+			iw_small_airframe = 1
+			engines_1 = 1
+			early_bombs = 1
+		}
+	else = {
+		set_air_oob = "HUN_1936_air_legacy"
+		set_technology = {
+			early_fighter = 1
+			CAS1 = 1
+		}
+	}
+}
 
 set_research_slots = 3
 set_stability = 0.6
@@ -13,8 +29,6 @@ set_technology = {
 	tech_recon = 1
 	gw_artillery = 1
 
-	early_fighter = 1
-	CAS1 = 1
 	fuel_silos = 1
 	basic_train = 1
 }
@@ -31,9 +45,7 @@ if = {
 }
 if = {
 	limit = {
-		
 		has_dlc = "No Step Back"
-		
 	}
 	set_technology = {
 		gwtank_chassis = 1
@@ -47,6 +59,20 @@ if = {
 	add_ideas = {
 		disarmed_nation
 		HUN_treaty_of_triannon
+	}
+}
+if = {
+	limit = {
+		has_dlc = "By Blood Alone"
+	}
+	create_equipment_variant = {
+		name = "WM-16"
+		type = small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
 	}
 }
 
@@ -138,9 +164,6 @@ reverse_add_opinion_modifier = {
 	}
 	
 	set_technology = {
-		fighter1 = 1
-		early_bomber = 1
-		tactical_bomber1 = 1
 		interwar_artillery = 1
 		interwar_antitank = 1
 		interwar_antiair = 1
@@ -174,6 +197,18 @@ reverse_add_opinion_modifier = {
 		dispersed_industry = 1
 		dispersed_industry2 = 1
 		fuel_refining = 1
+	}
+	if = {
+		limit = { has_dlc = "By Blood Alone" }
+			set_air_oob = "HUN_1939_air_bba"
+		else = {
+			set_air_oob = "HUN_1939_air_legacy"
+			set_technology = {
+				fighter1 = 1
+				early_bomber = 1
+				tactical_bomber1 = 1
+			}
+		}
 	}
 	if = {
 		limit = {
@@ -213,7 +248,7 @@ reverse_add_opinion_modifier = {
 				tank_nsb_engine_upgrade = 3
 				tank_nsb_armor_upgrade = 2
 			}
-			icon = "gfx/interface/equipmentdesigner/tanks/designer/generic/generic_light_BAA_camo.dds"
+			icon = "GFX_generic_light_BAA_camo"
 		}
 		set_oob = "HUN_1939_nsb"
 	}
@@ -227,8 +262,9 @@ set_politics = {
 }
 set_popularities = {
 	democratic = 30
-	fascism = 5
-	neutrality = 65
+	fascism = 15
+	neutrality = 55
+	communism = 0
 }
 
 recruit_character = HUN_miklos_horthy
@@ -275,13 +311,13 @@ recruit_character = HUN_gabor_peter
 recruit_character = HUN_ferenc_kersztes_fischer
 recruit_character = HUN_jeno_szollosi
 recruit_character = HUN_bela_jurcsek
-recruit_character = HUN_esmond_harmsworth
 recruit_character = HUN_istvan_horthy
 recruit_character = HUN_miklos_horthy_jr
 recruit_character = HUN_janos_voros
 recruit_character = HUN_gyula_karolyi
 
 add_ideas = HUN_gyula_gombos_de_jakfa
+add_ideas = HUN_jeno_ratz
 
 1939.1.1 = {
 	set_politics = {
@@ -291,13 +327,15 @@ add_ideas = HUN_gyula_gombos_de_jakfa
 		elections_allowed = yes
 	}
 	set_popularities = {
-		democratic = 20
-		fascism = 20
-		neutrality = 55
+		democratic = 15
+		fascism = 35
+		neutrality = 45
 		communism = 5
 	}
 	remove_ideas = HUN_gyula_gombos_de_jakfa
+	remove_ideas = HUN_jeno_ratz
 	add_ideas = HUN_kalman_daranyi
+	add_ideas = HUN_henrik_werth
 	retire_character = HUN_gyula_gombos_de_jakfa
 }
 

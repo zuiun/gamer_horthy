@@ -2,3 +2,6 @@
  is_in_danubia_tt:0 "Is in the §YDanubia§! region."
  is_in_gaulle_europe_tt:0 "Is in §YAnatolia§!, §Ythe Caucasus§!, or §Ythe Urals§!.\n"
  is_russian_separatist_tt:0 "Is a core of a §YRussian splinter state§!.\n"
+ peace_favour_tt:0 "Has [?FROM.peace_favour|+0] §HFavour§!\n"
+ peace_suspicion_tt:0 "Has [?FROM.peace_suspicion|-0] §HSuspicion§!\n"
+ max_suspicion_tt:0 "Has §R10§! §HSuspicion§!\n"

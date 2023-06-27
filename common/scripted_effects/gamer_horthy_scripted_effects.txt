@@ -20,43 +20,51 @@
 add_german_trade_HUN = {
 	if = {
 		limit = {
-			has_idea = HUN_german_trade
-		}
-		swap_ideas = {
-			remove_idea = HUN_german_trade
-			add_idea = HUN_german_trade2
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HUN_german_trade2
-		}
-		swap_ideas = {
-			remove_idea = HUN_german_trade2
-			add_idea = HUN_german_trade3
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HUN_german_trade3
+			NOT = {
+				has_completed_focus = HUN_the_rise_of_germany
+				has_completed_focus = HUN_bulwark_against_radicalism
+			}
 		}
 		if = {
 			limit = {
-				is_subject = no
-				FROM = {
-					tag = GER
+				has_idea = HUN_german_trade
+			}
+			swap_ideas = {
+				remove_idea = HUN_german_trade
+				add_idea = HUN_german_trade2
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = HUN_german_trade2
+			}
+			swap_ideas = {
+				remove_idea = HUN_german_trade2
+				add_idea = HUN_german_trade3
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = HUN_german_trade3
+			}
+			if = {
+				limit = {
+					is_subject = no
+					FROM = {
+						tag = GER
+					}
+				}
+				GER = {
+					puppet = HUN
 				}
 			}
-			GER = {
-				puppet = HUN
+			else = {
+				add_political_power = -50
 			}
 		}
 		else = {
-			add_political_power = -50
+			add_ideas = HUN_german_trade
 		}
-	}
-	else = {
-		add_ideas = HUN_german_trade
 	}
 }
 
@@ -203,59 +211,65 @@ remove_loans_HUN = {
 add_shortages_HUN = {
 	if = {
 		limit = {
-			has_idea = HUN_shortages
+			NOT = { has_country_flag = HUN_not_backward }
 		}
-		swap_ideas = {
-			remove_idea = HUN_shortages
-			add_idea = HUN_shortages2
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HUN_shortages2
-		}
-		swap_ideas = {
-			remove_idea = HUN_shortages2
-			add_idea = HUN_shortages3
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HUN_shortages3
-		}
-		swap_ideas = {
-			remove_idea = HUN_shortages3
-			add_idea = HUN_shortages4
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HUN_shortages4
-		}
-		swap_ideas = {
-			remove_idea = HUN_shortages4
-			add_idea = HUN_shortages5
-		}
-	}
-	else_if = {
-		limit = {
-			has_idea = HUN_shortages5
-		}
-		add_political_power = -50
+
 		if = {
 			limit = {
-				has_civil_war = no
-				has_stability < 0.4
+				has_idea = HUN_shortages
 			}
-			start_civil_war = {
-				ideology = democratic
-				size = 0.7
-				states = { 43 }
+			swap_ideas = {
+				remove_idea = HUN_shortages
+				add_idea = HUN_shortages2
 			}
 		}
-	}
-	else = {
-		add_ideas = HUN_shortages
+		else_if = {
+			limit = {
+				has_idea = HUN_shortages2
+			}
+			swap_ideas = {
+				remove_idea = HUN_shortages2
+				add_idea = HUN_shortages3
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = HUN_shortages3
+			}
+			swap_ideas = {
+				remove_idea = HUN_shortages3
+				add_idea = HUN_shortages4
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = HUN_shortages4
+			}
+			swap_ideas = {
+				remove_idea = HUN_shortages4
+				add_idea = HUN_shortages5
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = HUN_shortages5
+			}
+			add_political_power = -50
+			if = {
+				limit = {
+					has_civil_war = no
+					has_stability < 0.4
+				}
+				start_civil_war = {
+					ideology = democratic
+					size = 0.7
+					states = { 43 }
+				}
+			}
+		}
+		else = {
+			add_ideas = HUN_shortages
+		}
 	}
 }
 
@@ -318,314 +332,30 @@ change_parties_1939 = {
 
 # Makes Tildy the leader of the Smallholders
 promote_tildy = {
-	add_country_leader_role = {
-		character = HUN_zoltan_tildy
-		promote_leader = yes
-		country_leader = {
-			ideology = socialism
-			expire = "1965.1.1.1"
-			traits = {
-				coalition_pm
-			}
+	if = {
+		limit = {
+			NOT = { can_be_country_leader = HUN_zoltan_tildy }
 		}
-	}
-}
-
-# Creates prime ministers for the 1936 situation in Hungary
-create_pms_1936 = {
-	hidden_effect = {
-		remove_advisor_role = {
-			character = HUN_tibor_eckhardt
-			slot = political_advisor
-		}
-		remove_advisor_role = {
-			character = HUN_istvan_bethlen
-			slot = political_advisor
-		}
-		remove_advisor_role = {
-			character = HUN_kalman_daranyi
-			slot = political_advisor
-		}
-	}
-	add_advisor_role = {
-		character = HUN_tibor_eckhardt
-		advisor = {
-			slot = political_advisor
-			idea_token = HUN_tibor_eckhardt
-			allowed = {
-				original_tag = HUN
-			}
-			available = {
-				is_country_leader = no
-				custom_trigger_tooltip = {
-					tooltip = TUR_can_only_have_one_prime_minister_tt
-					NOT = {
-						OR = {
-							has_idea = HUN_gyula_gombos_de_jakfa
-							has_idea = HUN_istvan_bethlen
-							has_idea = HUN_kalman_daranyi
-							has_idea = HUN_zoltan_tildy
-							has_idea = HUN_pal_teleki
-							has_idea = HUN_miklos_kallay
-							has_idea = HUN_geza_lakatos_pm
-						}
-					}
-				}
-				OR = {
-					has_completed_focus = HUN_appointzoltantildy
-					has_prime_minister_finished = yes
-				}
-				OR = {
-					has_government = neutrality
-					has_government = democratic
-				}
-			}
-			ai_will_do = {
-				base = 1
-				modifier = {
-					has_completed_focus = HUN_thedeathofgyulagombos
-					has_prime_minister_finished = no
-					factor = 50
-				}
-			}
-			traits = {
-				liberal_pm
-			}
-		}
-	}
-
-	add_advisor_role = {
-		character = HUN_istvan_bethlen
-		advisor = {
-			slot = political_advisor
-			idea_token = HUN_istvan_bethlen
-			allowed = {
-				original_tag = HUN
-			}
-			cost = 75
-			available = {
-				is_country_leader = no
-				custom_trigger_tooltip = {
-					tooltip = TUR_can_only_have_one_prime_minister_tt
-					NOT = {
-						OR = {
-							has_idea = HUN_gyula_gombos_de_jakfa
-							has_idea = HUN_tibor_eckhardt
-							has_idea = HUN_kalman_daranyi
-							has_idea = HUN_zoltan_tildy
-							has_idea = HUN_pal_teleki
-							has_idea = HUN_miklos_kallay
-							has_idea = HUN_geza_lakatos_pm
-						}
-					}
-				}
-				OR = {
-					has_completed_focus = HUN_restoreistvanbethlen
-					has_prime_minister_finished = yes
-				}
-				OR = {
-					has_government = neutrality
-					has_government = democratic
-				}
-			}
-			ai_will_do = {
-				base = 1
-				modifier = {
-					has_completed_focus = HUN_thedeathofgyulagombos
-					has_prime_minister_finished = no
-					factor = 50
-				}
-			}
-			traits = {
-				aristocrat_pm
-			}
-		}
-	}
-
-	add_advisor_role = {
-		character = HUN_kalman_daranyi
-		advisor = {
-			slot = political_advisor
-			idea_token = HUN_kalman_daranyi
-			allowed = {
-				original_tag = HUN
-			}
-			cost = 50
-			available = {
-				custom_trigger_tooltip = {
-					tooltip = TUR_can_only_have_one_prime_minister_tt
-					NOT = {
-						OR = {
-							has_idea = HUN_gyula_gombos_de_jakfa
-							has_idea = HUN_tibor_eckhardt
-							has_idea = HUN_istvan_bethlen
-							has_idea = HUN_zoltan_tildy
-							has_idea = HUN_pal_teleki
-							has_idea = HUN_miklos_kallay
-							has_idea = HUN_geza_lakatos_pm
-						}
-					}
-				}
-				OR = {
-					has_completed_focus = HUN_appointkalmandaranyi
-					has_prime_minister_finished = yes
-				}
-				NOT = {
-					has_government = communism
-				}
-			}
-			ai_will_do = {
-				base = 1
-				modifier = {
-					has_completed_focus = HUN_thedeathofgyulagombos
-					has_prime_minister_finished = no
-					factor = 50
-				}
-			}
-			traits = {
-				conservative_pm
-			}
-		}
-	}
-}
-
-# Creates prime ministers for the 1939 situation in Hungary
-create_pms_1939 = {
-	hidden_effect = {
-		remove_advisor_role = {
+		add_country_leader_role = {
 			character = HUN_zoltan_tildy
-			slot = political_advisor
-		}
-	}
-	add_advisor_role = {
-		character = HUN_zoltan_tildy
-		advisor = {
-			slot = political_advisor
-			idea_token = HUN_zoltan_tildy
-			allowed = {
-				original_tag = HUN
-			}
-			available = {
-				is_country_leader = no
-				custom_trigger_tooltip = {
-					tooltip = TUR_can_only_have_one_prime_minister_tt
-					NOT = {
-						OR = {
-							has_idea = HUN_gyula_gombos_de_jakfa
-							has_idea = HUN_tibor_eckhardt
-							has_idea = HUN_istvan_bethlen
-							has_idea = HUN_kalman_daranyi
-							has_idea = HUN_pal_teleki
-							has_idea = HUN_miklos_kallay
-							has_idea = HUN_geza_lakatos_pm
-						}
-					}
-				}
-				NOT = {
-					has_government = fascism
+			promote_leader = yes
+			country_leader = {
+				ideology = socialism
+				expire = "1965.1.1.1"
+				traits = {
+					coalition_pm
 				}
 			}
-			traits = {
-				coalition_pm
-			}
 		}
 	}
-
-	hidden_effect = {
-		remove_advisor_role = {
-			character = HUN_pal_teleki
-			slot = political_advisor
-		}
-	}
-	add_advisor_role = {
-		character = HUN_pal_teleki
-		advisor = {
-			slot = political_advisor
-			idea_token = HUN_pal_teleki
-			allowed = {
-				original_tag = HUN
-			}
-			available = {
-				custom_trigger_tooltip = {
-					tooltip = TUR_can_only_have_one_prime_minister_tt
-					NOT = {
-						OR = {
-							has_idea = HUN_gyula_gombos_de_jakfa
-							has_idea = HUN_tibor_eckhardt
-							has_idea = HUN_istvan_bethlen
-							has_idea = HUN_kalman_daranyi
-							has_idea = HUN_zoltan_tildy
-							has_idea = HUN_miklos_kallay
-							has_idea = HUN_geza_lakatos_pm
-						}
-					}
-				}
-				OR = {
-					has_government = neutrality
-					has_government = democratic
-				}
-			}
-			traits = {
-				patriot_pm
-			}
-		}
-	}
-
-	hidden_effect = {
-		remove_advisor_role = {
-			character = HUN_miklos_kallay
-			slot = political_advisor
-		}
-	}
-	add_advisor_role = {
-		character = HUN_miklos_kallay
-		advisor = {
-			slot = political_advisor
-			idea_token = HUN_miklos_kallay
-			allowed = {
-				original_tag = HUN
-			}
-			available = {
-				custom_trigger_tooltip = {
-					tooltip = TUR_can_only_have_one_prime_minister_tt
-					NOT = {
-						OR = {
-							has_idea = HUN_gyula_gombos_de_jakfa
-							has_idea = HUN_tibor_eckhardt
-							has_idea = HUN_istvan_bethlen
-							has_idea = HUN_kalman_daranyi
-							has_idea = HUN_zoltan_tildy
-							has_idea = HUN_pal_teleki
-							has_idea = HUN_geza_lakatos_pm
-						}
-					}
-				}
-			}
-			traits = {
-				apolitical_pm
-			}
-		}
-	}
-}
-
-# Combines political party and prime minister changes for the 1939 situation in Hungary
-change_parties_pms_1939 = {
-	change_parties_1939 = yes
-	create_pms_1939 = yes
-	unlock_decision_tooltip = formalise_the_pact_of_rome
-	unlock_decision_tooltip = exchange_rakosi
 }
 
 # Displays Trianon support decisions tooltips
 trianon_support = {
 	custom_effect_tooltip = when_selected_tt
-	effect_tooltip = {
-		unlock_decision_category_tooltip = trianon
-	}
-	custom_effect_tooltip = support_tt
+	unlock_decision_tooltip = request_FROM_support
 	custom_effect_tooltip = when_focus_tt
 	custom_effect_tooltip = remove_support_tt
-	add_threat = 1
 }
 
 # Clears Trianon demand state flags
@@ -634,15 +364,12 @@ clear_trianon_flags = {
 		limit = {
 			has_state_flag = trianon_target
 		}
-
 		clr_state_flag = trianon_target
 	}
-
 	every_state = {
 		limit = {
 			has_state_flag = trianon_alternate
 		}
-
 		clr_state_flag = trianon_alternate
 	}
 }
@@ -680,15 +407,16 @@ add_march_front_HUN = {
 		limit = {
 			has_idea = HUN_the_march_front4
 		}
-		# Shouldn't happen but okay
+		# Shouldn't happen
+		add_political_power = 50
 	}
 	else = {
 		add_ideas = HUN_idea_the_march_front
 	}
 }
 
-# Leaves current faction and becomes independent
-be_free = {
+# Leaves faction
+be_factionless = {
 	if = {
 		limit = {
 			is_in_faction = yes
@@ -696,6 +424,10 @@ be_free = {
 		}
 		leave_faction = yes
 	}
+}
+
+# Becomes independent
+be_free = {
 	if = {
 		limit = {
 			is_subject = yes
@@ -717,6 +449,16 @@ be_free = {
 
 # Replaces Horthy with new non-aligned leader
 replace_horthy = {
+	if = {
+		limit = {
+			has_completed_focus = HUN_look_outwards
+		}
+		set_party_name = {
+			ideology = neutrality
+			name = HUN_neutrality_party
+			long_name = HUN_neutrality_party_long
+		}
+	}
 	if = {
 		limit = {
 			has_completed_focus = HUN_strengthen_the_aristocracy
@@ -745,58 +487,478 @@ replace_horthy = {
 	}
 }
 
-# Starts an easy radical uprising
-start_easy_uprising = {
+### Adds balance of power ###
+# Adds small balance of power
+HUN_add_liberal_bop_small = {
 	if = {
 		limit = {
-			has_completed_focus = HUN_a_new_republic_of_councils
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_liberals_side
+			}
 		}
-		start_civil_war = {
-			ruling_party = communism
-			ideology = neutrality
-			size = 0.3
-			capital = 43
-			states = { 43 }
-		}
-	}
-	else_if = {
-		limit = {
-			has_completed_focus = HUN_a_pure_hungary
-		}
-		start_civil_war = {
-			ruling_party = fascism
-			ideology = neutrality
-			size = 0.2
-			capital = 43
-			states = { 43 }
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.05
 		}
 	}
 }
 
-# Starts a hard radical uprising
-start_hard_uprising = {
+HUN_add_conservative_bop_small = {
 	if = {
 		limit = {
-			has_completed_focus = HUN_a_new_republic_of_councils
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_conservatives_side
+			}
 		}
-		start_civil_war = {
-			ruling_party = communism
-			ideology = neutrality
-			size = 0.6
-			capital = 43
-			states = { 43 }
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.05
 		}
 	}
-	else_if = {
+}
+
+HUN_add_army_bop_small = {
+	if = {
 		limit = {
-			has_completed_focus = HUN_a_pure_hungary
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_army_side
+			}
 		}
-		start_civil_war = {
-			ruling_party = fascism
-			ideology = neutrality
-			size = 0.5
-			capital = 43
-			states = { 43 }
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.05
 		}
+	}
+}
+
+HUN_add_crown_bop_small = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_crown_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.05
+		}
+	}
+}
+
+HUN_add_liberal_bop_medium = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_liberals_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.1
+		}
+	}
+}
+
+HUN_add_conservative_bop_medium = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_conservatives_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.1
+		}
+	}
+}
+
+HUN_add_army_bop_medium = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_army_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.1
+		}
+	}
+}
+
+HUN_add_crown_bop_medium = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_crown_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.1
+		}
+	}
+}
+
+HUN_add_liberal_bop_large = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_liberals_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.15
+		}
+	}
+}
+
+HUN_add_conservative_bop_large = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_conservatives_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.15
+		}
+	}
+}
+
+HUN_add_army_bop_large = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_army_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.15
+		}
+	}
+}
+
+HUN_add_crown_bop_large = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_crown_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.15
+		}
+	}
+}
+
+# Adds small favour
+HUN_add_favour_small = {
+	if = {
+		limit = {
+			is_major = yes
+			has_war_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_favour = 1 }
+			clamp_variable = {
+				var = peace_favour
+				max = 20
+			}
+		}
+
+		custom_effect_tooltip = add_favour_small_tt
+	}
+}
+
+# Adds small suspicion
+HUN_add_suspicion_small = {
+	if = {
+		limit = {
+			is_faction_leader = yes
+			is_in_faction_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_suspicion = 1 }
+			clamp_variable = {
+				var = peace_suspicion
+				max = 10
+			}
+		}
+
+		custom_effect_tooltip = add_suspicion_small_tt
+	}
+}
+
+# Adds medium favour
+HUN_add_favour_medium = {
+	if = {
+		limit = {
+			is_major = yes
+			has_war_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_favour = 2 }
+			clamp_variable = {
+				var = peace_favour
+				max = 20
+			}
+		}
+
+		custom_effect_tooltip = add_favour_medium_tt
+	}
+}
+
+# Adds medium suspicion
+HUN_add_suspicion_medium = {
+	if = {
+		limit = {
+			is_faction_leader = yes
+			is_in_faction_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_suspicion = 2 }
+			clamp_variable = {
+				var = peace_suspicion
+				max = 10
+			}
+		}
+
+		custom_effect_tooltip = add_suspicion_medium_tt
+	}
+}
+
+# Adds large favour
+HUN_add_favour_large = {
+	if = {
+		limit = {
+			is_major = yes
+			has_war_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_favour = 3 }
+			clamp_variable = {
+				var = peace_favour
+				max = 20
+			}
+		}
+
+		custom_effect_tooltip = add_favour_large_tt
+	}
+}
+
+# Adds large suspicion
+HUN_add_suspicion_large = {
+	if = {
+		limit = {
+			is_faction_leader = yes
+			is_in_faction_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_suspicion = 3 }
+			clamp_variable = {
+				var = peace_suspicion
+				max = 10
+			}
+		}
+
+		custom_effect_tooltip = add_suspicion_large_tt
+	}
+}
+
+# Adds maximum favour
+HUN_add_favour_max = {
+	if = {
+		limit = {
+			is_major = yes
+			has_war_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_favour = 10 }
+			clamp_variable = {
+				var = peace_favour
+				max = 20
+			}
+		}
+
+		custom_effect_tooltip = add_favour_max_tt
+	}
+}
+
+# Adds maximum suspicion
+HUN_add_suspicion_max = {
+	if = {
+		limit = {
+			is_faction_leader = yes
+			is_in_faction_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			add_to_variable = { peace_suspicion = 10 }
+			clamp_variable = {
+				var = peace_suspicion
+				max = 10
+			}
+		}
+
+		custom_effect_tooltip = add_suspicion_max_tt
+	}
+}
+
+# Removes small favour
+HUN_remove_favour_small = {
+	if = {
+		limit = {
+			is_major = yes
+			has_war_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			subtract_from_variable = { peace_favour = 1 }
+			clamp_variable = {
+				var = peace_favour
+				min = 0
+			}
+		}
+
+		custom_effect_tooltip = remove_favour_small_tt
+	}
+}
+
+# Removes small suspicion
+HUN_remove_suspicion_small = {
+	if = {
+		limit = {
+			is_faction_leader = yes
+			is_in_faction_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			subtract_from_variable = { peace_suspicion = 1 }
+			clamp_variable = {
+				var = peace_suspicion
+				min = 0
+			}
+		}
+
+		custom_effect_tooltip = remove_suspicion_small_tt
+	}
+}
+
+# Removes medium favour
+HUN_remove_favour_medium = {
+	if = {
+		limit = {
+			is_major = yes
+			has_war_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			subtract_from_variable = { peace_favour = 2 }
+			clamp_variable = {
+				var = peace_favour
+				min = 0
+			}
+		}
+
+		custom_effect_tooltip = remove_favour_medium_tt
+	}
+}
+
+# Removes medium suspicion
+HUN_remove_suspicion_medium = {
+	if = {
+		limit = {
+			is_faction_leader = yes
+			is_in_faction_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			subtract_from_variable = { peace_suspicion = 2 }
+			clamp_variable = {
+				var = peace_suspicion
+				min = 0
+			}
+		}
+
+		custom_effect_tooltip = remove_suspicion_medium_tt
+	}
+}
+
+# Removes large favour
+HUN_remove_favour_large = {
+	if = {
+		limit = {
+			is_major = yes
+			has_war_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			subtract_from_variable = { peace_favour = 3 }
+			clamp_variable = {
+				var = peace_favour
+				min = 0
+			}
+		}
+
+		custom_effect_tooltip = remove_favour_large_tt
+	}
+}
+
+# Removes large suspicion
+HUN_remove_suspicion_large = {
+	if = {
+		limit = {
+			is_faction_leader = yes
+			is_in_faction_with = HUN
+			is_peace_target = yes
+		}
+
+		hidden_effect = {
+			subtract_from_variable = { peace_suspicion = 3 }
+			clamp_variable = {
+				var = peace_suspicion
+				min = 0
+			}
+		}
+
+		custom_effect_tooltip = remove_suspicion_large_tt
 	}
 }

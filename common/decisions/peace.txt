@@ -1,0 +1,970 @@
+peace_hun = {
+	defend_hungary = {
+		icon = generic_nationalism
+		priority = 190
+		is_good = no
+		days_mission_timeout = 60
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100 # ???
+		}
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+			is_in_faction = yes
+			is_faction_leader = no
+			faction_leader = { is_peace_target = yes }
+		}
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			divisions_in_state = {
+				type = infantry
+				size > 4
+				state = 43 # Budapest
+			}
+			divisions_in_state = {
+				type = infantry
+				size > 3
+				state = 154 # Alfold
+			}
+			divisions_in_state = {
+				type = infantry
+				size > 2
+				state = 155 # Transdanubia
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					is_in_faction = yes
+				}
+
+				faction_leader = {
+					remove_mission = occupy_hungary
+	
+					country_event = {
+						id = gamer_horthy.28
+						hours = 4
+					}
+				}
+			}
+		}
+
+		cancel_effect = {
+			effect_tooltip = {
+				if = {
+					limit = {
+						is_in_faction = yes
+					}
+	
+					faction_leader = {
+						remove_mission = occupy_hungary
+						puppet = ROOT
+					}
+		
+					uncomplete_national_focus = { focus = HUN_continue_the_regency }
+					if = {
+						limit = {
+							faction_leader = { has_government = fascism }
+						}
+						complete_national_focus = HUN_oppose_the_regency
+						complete_national_focus = HUN_a_pure_hungary
+					}
+					else_if = {
+						limit = {
+							faction_leader = { has_government = communism }
+						}
+						complete_national_focus = HUN_oppose_the_regency
+						complete_national_focus = HUN_a_new_republic_of_councils
+					}
+				}
+			}
+		}
+
+		timeout_effect = {
+			if = {
+				limit = {
+					is_in_faction = yes
+				}
+
+				faction_leader = {
+					remove_mission = occupy_hungary
+					remove_from_faction = ROOT
+
+					create_wargoal = {
+						type = puppet_wargoal_focus
+						target = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	suspicion_mission = {
+		icon = generic_disband_irregulars
+		priority = 105
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		available = {
+			if = {
+				limit = {
+					# has_completed_focus = some focus here
+					has_country_flag = can_remove_divisions
+				}
+				OR = {
+					divisions_in_state = {
+						size > 7
+						state = capital
+					}
+					any_allied_country = {
+						hidden_trigger = {
+							NOT = { has_country_flag = HUN_peace_quit }
+						}
+						OR = {
+							has_capitulated = yes
+							has_civil_war = yes
+						}
+					}
+				}
+			}
+			else = {
+				any_allied_country = {
+					hidden_trigger = {
+						NOT = { has_country_flag = HUN_peace_quit }
+					}
+					OR = {
+						has_capitulated = yes
+						has_civil_war = yes
+					}
+				}
+			}
+		}
+
+		days_mission_timeout = 60
+		is_good = no
+
+		timeout_effect = {
+			if = {
+				limit = {
+					faction_leader = {
+						check_variable = { peace_suspicion = 10 }
+					}
+#					faction_leader = { activate_mission = occupy_hungary }
+#					activate_mission = defend_hungary
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						any_enemy_country = {
+							is_peace_target = yes
+							check_variable = { peace_favour < 6 }
+						}
+					}
+					random_list = {
+						1 = {
+							faction_leader = { HUN_add_suspicion_small = yes }
+						}
+						8 = {
+							# Do nothing
+						}
+						1 = {
+							faction_leader = { HUN_remove_suspicion_small = yes }
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						any_enemy_country = {
+							is_peace_target = yes
+							check_variable = { peace_favour < 11 }
+						}
+					}
+					random_list = {
+						2 = {
+							faction_leader = { HUN_add_suspicion_small = yes }
+						}
+						5 = {
+							# Do nothing
+						}
+						1 = {
+							faction_leader = { HUN_remove_suspicion_small = yes }
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						any_enemy_country = {
+							is_peace_target = yes
+							check_variable = { peace_favour < 16 }
+						}
+					}
+					random_list = {
+						3 = {
+							faction_leader = { HUN_add_suspicion_small = yes }
+						}
+						2 = {
+							# Do nothing
+						}
+						1 = {
+							faction_leader = { HUN_remove_suspicion_small = yes }
+						}
+					}
+				}
+				else = {
+					random_list = {
+						4 = {
+							faction_leader = { HUN_add_suspicion_small = yes }
+						}
+						1 = {
+							# Do nothing
+						}
+					}
+				}
+				activate_mission = suspicion_mission
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						is_in_faction_with = HUN
+						NOT = { has_country_flag = HUN_peace_quit }
+						OR = {
+							has_capitulated = yes
+							has_civil_war = yes
+						}
+					}
+					set_country_flag = HUN_peace_quit
+				}
+
+				if = {
+					limit = {
+						divisions_in_state = {
+							size > 7
+							state = capital
+						}
+					}
+					clr_country_flag = can_remove_divisions
+				}
+				else = {
+					set_country_flag = can_remove_divisions
+				}
+			}
+
+			faction_leader = { HUN_add_suspicion_small = yes }
+			every_enemy_country = {
+				limit = {
+					is_peace_target = yes
+				}
+				HUN_add_favour_medium = yes
+			}
+			activate_mission = suspicion_mission
+		}
+	}
+
+	favour_suspicion_counter = {
+		priority = 101
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			if = {
+				limit = {
+					FROM = { is_in_faction_with = HUN }
+				}
+				custom_trigger_tooltip = {
+					tooltip = peace_suspicion_tt
+					always = no
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { has_war_with = HUN }
+				}
+				custom_trigger_tooltip = {
+					tooltip = peace_favour_tt
+					always = no
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		target_trigger = {
+			FROM = {
+				is_peace_target = yes
+				OR = {
+					is_in_faction_with = HUN
+					has_war_with = HUN
+				}
+			}
+		}
+
+		complete_effect = {
+
+		}
+	}
+
+	# Favour
+	FROM_radio = {
+		icon = hol_radio_oranje
+		priority = 99
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			OR = {
+				has_war_with = ENG
+				has_war_with = USA
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		target_trigger = {
+			FROM = {
+				has_war = no
+				OR = {
+					tag = POR
+					tag = BRA
+				}
+				NOT = { has_country_flag = HUN_radio_already }
+				NOT = { has_war_with = ENG }
+				NOT = { has_war_with = USA }
+			}
+		}
+
+		cost = 20
+
+		complete_effect = {
+			hidden_effect = {
+				FROM = { set_country_flag = HUN_radio_already }
+			}
+
+			faction_leader = { HUN_add_suspicion_small = yes }
+
+			if = {
+				limit = {
+					FROM = { tag = POR }
+				}
+				ENG = { HUN_add_favour_small = yes }
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = BRA }
+				}
+				USA = { HUN_add_favour_small = yes }
+			}
+		}
+	}
+
+	FROM_peace_feelers = {
+		icon = SWI_support_humanitarian_efforts
+		priority = 1
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			if = {
+				limit = {
+					FROM = { tag = SWI }
+				}
+				OR = {
+					has_war_with = ENG
+					has_war_with = GER
+					has_war_with = ITA
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = POR }
+				}
+				OR = {
+					has_war_with = ENG
+					has_war_with = USA
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = TUR }
+				}
+				OR = {
+					has_war_with = ENG
+					has_war_with = SOV
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		target_trigger = {
+			FROM = {
+				has_war = no
+				OR = {
+					tag = SWI
+					tag = POR
+					tag = TUR
+				}
+				NOT = { has_country_flag = HUN_feelers_already }
+			}
+		}
+
+		cost = 20
+
+		complete_effect = {
+			hidden_effect = {
+				FROM = { set_country_flag = HUN_feelers_already }
+			}
+
+			faction_leader = { HUN_add_suspicion_small = yes }
+
+			if = {
+				limit = {
+					FROM = { tag = SWI }
+				}
+				ENG = { HUN_add_favour_small = yes }
+				GER = { HUN_add_favour_small = yes }
+				ITA = { HUN_add_favour_small = yes }
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = POR }
+				}
+				ENG = { HUN_add_favour_small = yes }
+				USA = { HUN_add_favour_small = yes }
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = TUR }
+				}
+				ENG = { HUN_add_favour_small = yes }
+				SOV = { HUN_add_favour_small = yes }
+			}
+		}
+	}
+
+	dismantle_factories = {
+		icon = generic_merge_plant_materiel
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		target_trigger = {
+			FROM = {
+				is_core_of = HUN
+				is_controlled_by = HUN
+				arms_factory > 0
+			}
+		}
+
+		cost = 50
+		days_re_enable = 90
+		state_target = yes
+
+		complete_effect = {
+			faction_leader = { HUN_add_suspicion_large = yes }
+
+			every_enemy_country = {
+				limit = {
+					is_peace_target = yes
+				}
+				HUN_add_favour_medium = yes
+			}
+
+			FROM = {
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+			}
+		}
+	}
+
+	dismantle_anti_air = {
+		icon = generic_merge_plant_aircraft
+		priority = 4
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		target_trigger = {
+			FROM = {
+				is_core_of = HUN
+				is_controlled_by = HUN
+				anti_air_building > 0
+			}
+		}
+
+		cost = 30
+		days_re_enable = 30
+		state_target = yes
+
+		complete_effect = {
+			faction_leader = { HUN_add_suspicion_medium = yes }
+
+			every_enemy_country = {
+				limit = {
+					is_peace_target = yes
+				}
+				HUN_add_favour_small = yes
+			}
+
+			FROM = {
+				remove_building = {
+					type = anti_air_building
+					level = 1
+				}
+			}
+		}
+	}
+
+	provoke_invasion = {
+		icon = generic_ignite_civil_war
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				is_in_faction_with = HUN
+				is_peace_target = yes
+			}
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			faction_leader = { HUN_add_suspicion_max = yes }
+
+			every_enemy_country = {
+				limit = {
+					is_peace_target = yes
+				}
+				HUN_add_favour_max = yes
+			}
+		}
+	}
+
+	# Suspicion
+	HUN_build_factories = {
+		icon = generic_merge_plant_materiel
+		priority = 5
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+		}
+
+		target_trigger = {
+			HUN = {
+				faction_leader = {
+					FROM = {
+						is_capital = yes
+						is_controlled_by = PREV
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_re_enable = 90
+		state_target = yes
+
+		complete_effect = {
+			faction_leader = { HUN_remove_suspicion_small = yes }
+
+			every_enemy_country = {
+				limit = {
+					is_peace_target = yes
+				}
+				HUN_remove_favour_small = yes
+			}
+
+			FROM = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	temporary_trade = {
+		icon = generic_factory
+		priority = 8
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			NOT = { has_country_flag = HUN_temporary_trade }
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				is_in_faction_with = HUN
+				is_peace_target = yes
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			has_war = no
+		}
+
+		cost = 30
+
+		modifier = {
+			country_resource_steel = -4
+		}
+
+		days_remove = 30
+		days_re_enable = 5
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HUN_temporary_trade
+			}
+
+			add_offsite_building = { type = industrial_complex level = 3 }
+
+			FROM = {
+				capital_scope = {
+					add_resource = {
+						type = steel
+						amount = 4
+						state = THIS
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				clr_country_flag = HUN_temporary_trade
+			}
+
+			add_offsite_building = { type = industrial_complex level = -3 }
+
+			FROM = {
+				capital_scope = {
+					add_resource = {
+						type = steel
+						amount = -4
+						state = THIS
+					}
+				}
+			}
+		}
+	}
+
+	# Peace
+	immediate_armistice = {
+
+	}
+
+	transylvania_independence = {
+		# Make Bethlen leader
+	}
+
+	keep_carpathia = {
+		# Armistice
+	}
+
+	return_land = {
+		# Defect
+	}
+
+	defect_to_FROM = {
+		icon = generic_nationalism
+		priority = 12
+
+		allowed = {
+			always = no
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_seizecontrolofhungarysfuture
+			OR = {
+				has_completed_focus = HUN_the_march_front
+				has_completed_focus = HUN_strengthen_the_aristocracy
+			}
+			is_faction_leader = no # you shouldn't be able to betray your own faction
+			has_capitulated = no
+			if = {
+				limit = {
+					FROM = {
+						has_government = democratic
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { democratic > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = fascism
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { fascism > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = fascism
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { fascism > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = communism
+					}
+				}
+				OR = {
+					ROOT = { neutrality > 0.4 }
+					ROOT = { communism > 0.3 }
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						has_government = neutrality
+					}
+				}
+				ROOT = { neutrality > 0.3 }
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				NOT = { is_in_faction_with = ROOT }
+				has_war_with = ROOT
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					original_tag = USA
+				}
+				OR = {
+					NOT = {
+						original_tag = GER
+					}
+					NOT = {
+						has_global_flag = HUN_germany_has_ideas
+					}
+				}
+			}
+		}
+
+		visible = {
+			# original_tag = HUN
+			always = no
+			# complicated and ahistorical
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			FROM = {
+				country_event = {
+					id = gamer_horthy.5
+					hours = 4
+				}
+
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					every_country = {
+						limit = {
+							has_war_with = ROOT
+							NOT = {
+								has_war_with = FROM
+							}
+						}
+
+						white_peace = ROOT
+					}
+
+					ROOT = {
+						if = {
+							limit = {
+								is_in_faction = yes
+							}
+							faction_leader = {
+								country_event = {
+									id = gamer_horthy.8
+									hours = 4
+								}
+							}
+						}
+						if = {
+							limit ={
+								is_subject = yes
+							}
+							OVERLORD = {
+								set_autonomy = {
+									target = ROOT
+									autonomy_state = autonomy_free
+									end_wars = no
+									end_civil_wars = no
+								}
+							}
+						}
+
+						country_event = {
+							id = gamer_horthy.6
+							hours = 4
+						}
+					}
+
+					add_to_faction = ROOT
+				}
+			}
+		}
+	}
+
+	peace_with_FROM = {
+		icon = generic_nationalism
+		priority = 11
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_peace_overtures
+			is_faction_leader = no # you shouldn't be able to betray your own faction
+			has_capitulated = no
+			is_puppet = no
+			NOT = {
+				any_country = {
+					has_active_mission = occupy_hungary
+				}
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				NOT = { is_in_faction_with = ROOT }
+				has_war_with = ROOT
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					original_tag = USA
+				}
+				OR = {
+					NOT = {
+						original_tag = GER
+					}
+					NOT = {
+						has_global_flag = HUN_germany_has_ideas
+					}
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_preserve_greater_hungary
+			original_tag = HUN
+			has_war = yes
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			FROM = {
+				country_event = {
+					id = gamer_horthy.29
+					hours = 4
+				}
+
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					every_country = {
+						limit = {
+							is_in_faction_with = FROM
+						}
+
+						white_peace = HUN
+					}
+				}
+			}
+		}
+	}
+}

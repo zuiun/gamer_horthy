@@ -812,11 +812,7 @@ WALLACHIA = {
 	color = rgb { 252 209 22 }
 	color_ui = rgb { 204 166 18 }
 }
-NAPLES = {
-	color = rgb { 0 0 153 }
-	color_ui = rgb { 0 0 86 }
-}
-UNITED_EUROPE = {
-	color = rgb { 23 53 159 }
-	color_ui = rgb { 14 34 99 }
+CARPATHIA = {
+	color = rgb { 0 128 288 }
+	color_ui = rgb { 0 91 187 }
 }

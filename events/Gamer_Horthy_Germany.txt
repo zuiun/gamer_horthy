@@ -1,0 +1,290 @@
+﻿###########################
+# German Events
+###########################
+
+add_namespace = germany
+
+# Germany (Czechoslovakia Surrenders Sudetenland)
+country_event = {
+	id = germany.50
+	title = germany.40.t
+	desc = germany.50.d
+	picture = GFX_report_event_german_politician_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.50.a
+		69 = { add_core_of = GER }
+		GER = { transfer_state = 69 }
+		74 = { add_core_of = GER }
+		GER = { transfer_state = 74 }
+		set_country_flag = sudetenland_acquired
+		add_war_support = 0.1
+		add_stability = 0.05
+		play_peace_in_our_time_effect = yes
+		CZE = {
+			if = {
+				limit = {
+					owns_state = 73
+				}
+				effect_tooltip = {
+					release_puppet = UKR
+					UKR = {
+						set_cosmetic_tag = CARPATHIA
+					}
+				}
+				hidden_effect = {
+					create_dynamic_country = {
+						original_tag = UKR
+						set_cosmetic_tag = CARPATHIA
+						73 = {
+							add_core_of = PREV
+							transfer_state_to = PREV
+						}
+						CZE = {
+							puppet = PREV
+						}
+					}
+				}
+			}
+		}
+		USA = {
+			set_country_flag = { flag = USA_munich_window days = 60 value = 1 }
+		}
+		if = {
+			limit = {
+				88 = { is_owned_by = POL }
+			}
+			POL = {
+				country_event = { hours = 6 id = germany.52 }
+			}
+		}
+		hidden_effect = {
+			country_event = { hours = 6 id = news.56 }
+			if = {
+				limit = {
+					has_dlc = "Death or Dishonor"
+					country_exists = YUG
+					YUG = { has_war = no }
+					ENG = { NOT = { has_war_with = YUG } }
+					ENG = { has_government = democratic }
+				}
+				ENG = {
+					country_event = {
+						id = DOD_yugoslavia.42
+						days = 3
+					}
+				}
+			}
+		}
+	}
+}
+
+# Czechoslovakia (The Fate of Czechoslovakia)
+country_event = {
+	id = germany.53
+	title = germany.53.t
+	desc = germany.53.d
+	picture = GFX_report_event_german_politician_speech
+
+	is_triggered_only = yes
+
+	immediate = {
+		random_other_country = {
+			limit = {
+				original_tag = UKR
+				has_cosmetic_tag = CARPATHIA
+				is_subject_of = CZE
+			}
+			CZE = {
+				set_autonomy = {
+					target = PREV
+					autonomy_state = autonomy_free
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			add_ideas = ZAK_isolation
+			division_template = {
+				name = "Carpathian Sich"
+				priority = 2
+				division_names_group = UKR_INF_01
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+				}
+			}
+			random_owned_controlled_state = {
+				prioritize = { 73 }
+				create_unit = {
+					division = "name = \"Carpathian Sich\" division_template = \"Carpathian Sich\" start_experience_factor = 0.3" 
+					owner = PREV
+				}
+			}
+		}
+	}
+
+	option = { # Agree
+		name = germany.53.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				OR = {
+					is_in_faction_with = ENG
+					is_in_faction_with = FRA
+					is_puppet = yes
+					GER = {
+						AND = {
+							has_war_with = ENG
+							has_war_with = FRA
+						}
+					}
+					GER = {
+						AND = {
+							has_war_with = SOV
+							OR = {
+								has_war_with = ENG
+								has_war_with = FRA
+							}
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				GER = {
+					OR = {
+						AND = {
+							has_war_with = ENG
+							NOT = {
+								has_war_with = FRA
+							}
+						}
+						AND = {
+							has_war_with = FRA
+							NOT = {
+								has_war_with = ENG
+							}
+						}
+					}
+				}
+			}
+		}
+		GER = { country_event = germany.55 }
+		if = {
+			limit = {
+				ENG = {
+					NOT = {
+						is_in_faction_with = GER
+					}
+				}
+			}
+			ENG = {
+				add_war_support = 0.1
+			}
+		}
+		if = {
+			limit = {
+				FRA = {
+					NOT = {
+						is_in_faction_with = GER
+					}
+				}
+			}
+			FRA = {
+				add_war_support = 0.1
+			}
+		}
+		if = {
+			limit = {
+				has_DLC = "Death or Dishonor"
+				country_exists = YUG
+				YUG = { has_war = no }
+			}
+			GER = {
+				country_event = {
+					id = DOD_yugoslavia.32
+					hours = 6
+				}
+			}
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = { # Refuse
+		name = germany.53.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				NOT = { is_in_faction_with = ENG }
+				NOT = { is_in_faction_with = FRA }
+				is_puppet = no
+				NOT = {
+					GER = {
+						has_war_with = ENG
+						has_war_with = FRA
+					}
+				}
+				NOT = {
+					GER = {
+						has_war_with = SOV
+						OR = {
+							has_war_with = ENG
+							has_war_with = FRA
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				GER = {
+					OR = {
+						AND = {
+							has_war_with = ENG
+							NOT = {
+								has_war_with = FRA
+							}
+						}
+						AND = {
+							has_war_with = FRA
+							NOT = {
+								has_war_with = ENG
+							}
+						}
+					}
+				}
+			}
+		}
+		GER = {
+			country_event = { id = germany.54 days = 1 }
+		}
+		if = {
+			limit = {
+				ENG = {
+					NOT = {
+						is_in_faction_with = GER
+					}
+				}
+			}
+			ENG = {
+				add_war_support = 0.1
+			}
+		}
+		if = {
+			limit = {
+				FRA = {
+					NOT = {
+						is_in_faction_with = GER
+					}
+				}
+			}
+			FRA = {
+				add_war_support = 0.1
+			}
+		}
+	}
+}

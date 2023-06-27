@@ -1,7 +1,7 @@
 backwardness = {
 	shortages_crisis = {
 		icon = generic_factory
-		priority = 10
+		priority = 100
 		is_good = no
 		days_mission_timeout = 70
 		fire_only_once = no
@@ -19,18 +19,14 @@ backwardness = {
 
 		activation = {
 			has_completed_focus = HUN_rapid_industrialisation
-			NOT = {
-				has_country_flag = HUN_not_backward
-			}
+			NOT = { has_country_flag = HUN_not_backward }
 		}
 
 		available = {
 			num_of_civilian_factories > 30
 			all_owned_state = {
 				OR = {
-					NOT = {
-						is_core_of = HUN
-					}
+					NOT = { is_core_of = HUN }
 					infrastructure > 3
 				}
 			}

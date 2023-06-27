@@ -25,18 +25,26 @@ european_integration = {
 				OR = {
 					tag = POL
 					# Prominent Paneuropa strongholds
-					tag = FRA
-					tag = GER
 					tag = AUS
 					tag = NOR
 					AND = {
+						tag = FRA
+						has_opinion = {
+							target = HUN
+							value > 80
+						}
+					}
+					AND = {
+						tag = GER
+						has_opinion = {
+							target = HUN
+							value > 80
+						}
+					}
+					AND = {
 						HUN = { has_completed_focus = HUN_let_europe_arise }
-						any_neighbor_country = { is_in_faction_with = HUN }
 						any_neighbor_country = {
-							OR = {
-								has_government = communism
-								has_government = fascism
-							}
+							is_in_faction_with = HUN
 						}
 						capital_scope = { is_on_continent = europe }
 						is_major = no
@@ -55,6 +63,10 @@ european_integration = {
 				NOT = {
 					has_country_flag = HUN_paneuropa_outpost
 					is_in_faction_with = HUN
+				}
+				OR = {
+					has_government = democratic
+					has_government = neutrality
 				}
 			}
 		}
@@ -92,6 +104,7 @@ european_integration = {
 					popularity = 0.05
 				}
 			}
+			unlock_decision_tooltip = europe_invite_FROM
 		}
 	}
 
@@ -153,6 +166,7 @@ european_integration = {
 					hours = 4
 				}
 			}
+			unlock_decision_tooltip = join_eec_FROM
 		}
 	}
 
@@ -202,13 +216,14 @@ european_integration = {
 			political_power_gain = -0.1
 		}
 
-		days_remove = 30
+		days_remove = 60
 		days_re_enable = 10
 
 		remove_effect = {
 			FROM = {
 				add_ideas = HUN_eec
 			}
+			unlock_decision_tooltip = join_ec_FROM
 		}
 	}
 
@@ -254,7 +269,7 @@ european_integration = {
 			political_power_gain = -0.15
 		}
 
-		days_remove = 30
+		days_remove = 60
 		days_re_enable = 10
 
 		remove_effect = {
@@ -264,6 +279,7 @@ european_integration = {
 					add_idea = HUN_eec2
 				}
 			}
+			unlock_decision_tooltip = join_eu_FROM
 		}
 	}
 
@@ -293,15 +309,7 @@ european_integration = {
 						}
 					}
 				}
-#				OR = {
-					has_idea = HUN_eec2
-#					AND = {
-#						has_idea = HUN_eec3
-#						NOT = {
-#							is_subject_of = HUN
-#						}
-#					}
-#				}
+				has_idea = HUN_eec2
 				is_in_faction_with = HUN
 			}
 		}
@@ -317,44 +325,15 @@ european_integration = {
 			political_power_gain = -0.2
 		}
 
-		days_remove = 30
+		days_remove = 60
 		days_re_enable = 10
 
 		remove_effect = {
 			FROM = {
-#				if = {
-#					limit = {
-#						has_idea = HUN_eec2
-#					}
-					swap_ideas = {
-						remove_idea = HUN_eec2
-						add_idea = HUN_eec3
-					}
-#				}
-#				if = {
-#					limit = {
-#						NOT = {
-#							is_subject_of = HUN
-#						}
-#					}
-#					country_event = {
-#						id = gamer_horthy.40
-#						hours = 4
-#					}
-#					custom_effect_tooltip = if_they_accept_tt
-#					effect_tooltip = {
-#						HUN = {
-#							puppet = FROM
-#						}
-#					}
-#					custom_effect_tooltip = if_they_refuse_tt
-#					effect_tooltip = {
-#						reverse_add_opinion_modifier = {
-#							target = HUN
-#							modifier = HUN_betrayed_europe
-#						}
-#					}
-#				}
+				swap_ideas = {
+					remove_idea = HUN_eec2
+					add_idea = HUN_eec3
+				}
 			}
 		}
 	}
@@ -381,9 +360,9 @@ european_integration = {
 		cost = 100
 
 		complete_effect = {
-			every_other_country = {
+			every_country = {
 				limit = {
-					any_owned_state = {
+					capital_scope = {
 						OR = {
 							is_on_continent = europe
 							AND = {
@@ -397,9 +376,34 @@ european_integration = {
 				}
 				add_popularity = {
 					ideology = democratic
-					popularity = 0.1
+					popularity = 0.05
 				}
-				add_ideas = HUN_cfr
+			}
+			every_country = {
+				limit = {
+					capital_scope = {
+						OR = {
+							is_on_continent = europe
+							AND = {
+								HUN = {
+									has_completed_focus = HUN_from_the_atlantic_to_the_urals
+								}
+								is_in_gaulle_europe = yes
+							}
+						}
+					}
+					OR = {
+						has_government = communism
+						has_government = fascism
+					}
+				}
+
+				HUN = {
+					create_wargoal = {
+						target = PREV
+						type = puppet_wargoal_focus
+					}
+				}
 			}
 		}
 	}
@@ -410,10 +414,12 @@ european_integration = {
 
 		allowed = {
 			original_tag = HUN
+			always = no
 		}
 
 		available = {
 			is_major = yes
+			always = no
 		}
 
 		target_trigger = {
@@ -478,363 +484,6 @@ european_integration = {
 						}
 					}
 				}
-			}
-		}
-	}
-
-	# Dummy decision
-	join_use_FROM = {
-		allowed = {
-			always = no
-		}
-
-		visible = {
-			always = no
-		}
-
-		cost = 0
-	}
-
-	join_use_FROM_1 = {
-		icon = generic_form_nation
-		priority = 6
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_european_union
-			is_faction_leader = yes
-			FROM = {
-				is_subject_of = HUN
-			}
-		}
-
-		target_trigger = {
-			always = no
-			FROM = {
-				can_join_use = yes
-				check_variable = { num_owned_states < 6 }
-			}
-		}
-
-		visible = {
-			original_tag = HUN
-			has_completed_focus = HUN_support_paneuropean_union
-		}
-
-		cost = 30
-		days_remove = 60
-		days_re_enable = 5
-
-		modifier = {
-			political_power_gain = -0.2
-		}
-
-		complete_effect = {
-			every_state = {
-				limit = {
-					is_core_of = FROM
-					OR = {
-						is_on_continent = europe
-						state = 351 # Vologda, which is not in Europe???
-						AND = {
-							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
-							is_in_gaulle_europe = yes
-						}
-					}
-				}
-				add_core_of = HUN
-			}
-		}
-
-		remove_effect = {
-			FROM = {
-				every_unit_leader = {
-					set_nationality = HUN
-				}
-			}
-			annex_country = {
-				target = FROM
-				transfer_troops = yes
-			}
-		}
-	}
-
-	join_use_FROM_2 = {
-		icon = generic_form_nation
-		priority = 6
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_european_union
-			is_faction_leader = yes
-			FROM = {
-				is_subject_of = HUN
-			}
-		}
-
-		target_trigger = {
-			always = no
-			FROM = {
-				can_join_use = yes
-				NOT = {
-					check_variable = { num_owned_states < 6 }
-				}
-				check_variable = { num_owned_states < 11 }
-			}
-		}
-
-		visible = {
-			original_tag = HUN
-			has_completed_focus = HUN_support_paneuropean_union
-		}
-
-		cost = 45
-		days_remove = 90
-		days_re_enable = 5
-
-		modifier = {
-			political_power_gain = -0.2
-		}
-
-		complete_effect = {
-			every_state = {
-				limit = {
-					is_core_of = FROM
-					OR = {
-						is_on_continent = europe
-						state = 351 # Vologda, which is not in Europe???
-						AND = {
-							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
-							is_in_gaulle_europe = yes
-						}
-					}
-				}
-				add_core_of = HUN
-			}
-		}
-
-		remove_effect = {
-			FROM = {
-				every_unit_leader = {
-					set_nationality = HUN
-				}
-			}
-			annex_country = {
-				target = FROM
-				transfer_troops = yes
-			}
-		}
-	}
-
-	join_use_FROM_3 = {
-		icon = generic_form_nation
-		priority = 6
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_european_union
-			is_faction_leader = yes
-			FROM = {
-				is_subject_of = HUN
-			}
-		}
-
-		target_trigger = {
-			always = no
-			FROM = {
-				can_join_use = yes
-				NOT = { check_variable = { num_owned_states < 11 } }
-				check_variable = { num_owned_states < 16 }
-			}
-		}
-
-		visible = {
-			original_tag = HUN
-			has_completed_focus = HUN_support_paneuropean_union
-		}
-
-		cost = 60
-		days_remove = 120
-		days_re_enable = 5
-
-		modifier = {
-			political_power_gain = -0.2
-		}
-
-		complete_effect = {
-			every_state = {
-				limit = {
-					is_core_of = FROM
-					OR = {
-						is_on_continent = europe
-						state = 351 # Vologda, which is not in Europe???
-						AND = {
-							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
-							is_in_gaulle_europe = yes
-						}
-					}
-				}
-				add_core_of = HUN
-			}
-		}
-
-		remove_effect = {
-			FROM = {
-				every_unit_leader = {
-					set_nationality = HUN
-				}
-			}
-			annex_country = {
-				target = FROM
-				transfer_troops = yes
-			}
-		}
-	}
-
-	join_use_FROM_4 = {
-		icon = generic_form_nation
-		priority = 6
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_european_union
-			is_faction_leader = yes
-			FROM = {
-				is_subject_of = HUN
-			}
-		}
-
-		target_trigger = {
-			always = no
-			FROM = {
-				can_join_use = yes
-				NOT = {
-					check_variable = { num_owned_states < 16 }
-				}
-				check_variable = { num_owned_states < 21 }
-			}
-		}
-
-		visible = {
-			original_tag = HUN
-			has_completed_focus = HUN_support_paneuropean_union
-		}
-
-		cost = 75
-		days_remove = 150
-		days_re_enable = 5
-
-		modifier = {
-			political_power_gain = -0.2
-		}
-
-		complete_effect = {
-			every_state = {
-				limit = {
-					is_core_of = FROM
-					OR = {
-						is_on_continent = europe
-						state = 351 # Vologda, which is not in Europe???
-						AND = {
-							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
-							is_in_gaulle_europe = yes
-						}
-					}
-				}
-				add_core_of = HUN
-			}
-		}
-
-		remove_effect = {
-			FROM = {
-				every_unit_leader = {
-					set_nationality = HUN
-				}
-			}
-			annex_country = {
-				target = FROM
-				transfer_troops = yes
-			}
-		}
-	}
-
-	join_use_FROM_5 = {
-		icon = generic_form_nation
-		priority = 6
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_european_union
-			is_faction_leader = yes
-			FROM = {
-				is_subject_of = HUN
-			}
-		}
-
-		target_trigger = {
-			always = no
-			FROM = {
-				can_join_use = yes
-				NOT = {
-					check_variable = { num_owned_states < 21 }
-				}
-			}
-		}
-
-		visible = {
-			original_tag = HUN
-			has_completed_focus = HUN_support_paneuropean_union
-		}
-
-		cost = 90
-		days_remove = 180
-		days_re_enable = 5
-
-		modifier = {
-			political_power_gain = -0.2
-		}
-
-		complete_effect = {
-			every_state = {
-				limit = {
-					is_core_of = FROM
-					OR = {
-						is_on_continent = europe
-						state = 351 # Vologda, which is not in Europe???
-						AND = {
-							HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
-							is_in_gaulle_europe = yes
-						}
-					}
-				}
-				add_core_of = HUN
-			}
-		}
-
-		remove_effect = {
-			FROM = {
-				every_unit_leader = {
-					set_nationality = HUN
-				}
-			}
-			annex_country = {
-				target = FROM
-				transfer_troops = yes
 			}
 		}
 	}

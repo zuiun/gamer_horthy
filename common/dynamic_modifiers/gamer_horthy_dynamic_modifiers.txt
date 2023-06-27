@@ -31,12 +31,15 @@ arpad_line = {
 	attacker_modifier = yes
 
 	air_cas_present_factor = -0.25
-	ground_attack_factor = -0.2
+	ground_attack_factor = -0.4
 	local_org_regain = -0.2
 }
 
 gendarmeries = {
 	icon = GFX_modifiers_generic_military_plans
+	remove_trigger = {
+		NOT = { is_owned_by = HUN }
+	}
 
 	compliance_growth = -0.5
 	resistance_damage_to_garrison = 0.2

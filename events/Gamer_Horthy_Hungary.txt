@@ -331,7 +331,34 @@ country_event = {
 			give_military_access = ROOT
 		}
 
+		diplomatic_relation = {
+			country = FROM
+			relation = non_aggression_pact
+			active = yes
+		}
+
 		add_to_faction = FROM
+
+		if = {
+			limit = {
+				has_war_with = YUG
+				YUG = { controls_state = 45 } # Backa
+			}
+			FROM = {
+				declare_war_on = {
+					target = YUG
+					type = take_state_focus
+					generator = { 45 }
+				}
+				set_state_owner = 45
+			}
+		}
+		else_if = {
+			limit = {
+				controls_state = 45
+			}
+			FROM = { transfer_state = 45 }
+		}
 
 		FROM = {
 			country_event = {
@@ -348,20 +375,16 @@ country_event = {
 			base = 1
 		}
 
-		hidden_effect = {
-			set_global_flag = HUN_germany_has_ideas
-		}
+#		add_ai_strategy = {
+#			type = prepare_for_war
+#			id = FROM
+#			value = 200
+#		}
 
-		add_ai_strategy = {
-			type = prepare_for_war
-			id = FROM
-			value = 200
-		}
-
-		create_wargoal = {
-			type = puppet_wargoal_focus
-			target = FROM
-		}
+#		create_wargoal = {
+#			type = puppet_wargoal_focus
+#			target = FROM
+#		}
 
 		FROM = {
 			country_event = {
@@ -404,11 +427,11 @@ country_event = {
 		}
 		add_popularity = {
 			ideology = democratic
-			popularity = 0.1
+			popularity = 0.05
 		}
 		add_popularity = {
 			ideology = neutrality
-			popularity = 0.2
+			popularity = 0.1
 		}
 	}
 }
@@ -439,7 +462,10 @@ country_event = {
 				OR = {
 					AND = {
 						is_historical_focus_on = yes
-						tag = GER
+						OR = {
+							tag = GER
+							tag = ITA
+						}
 					}
 					has_government = FROM
 					tag = POL
@@ -458,6 +484,11 @@ country_event = {
 			modifier = {
 				has_government = democratic
 				factor = 0.5
+			}
+			modifier = {
+				factor = 0
+				tag = FRA
+				has_completed_focus = FRA_strengthen_the_little_entente # bruh
 			}
 		}
 
@@ -634,12 +665,10 @@ country_event = {
 			every_state = {
 				limit = {
 					OR = {
-						state = 76 # Bihor
+						state = 76 # Szekelyland
 						state = 82 # Timis
 						state = 83 # Crisana
 						state = 84 # Transylvania
-						state = 840 # Somesana
-						state = 841 # Szekelyland
 					}
 					owner = {
 						NOT = {
@@ -663,8 +692,6 @@ country_event = {
 							state = 82
 							state = 83
 							state = 84
-							state = 840
-							state = 841
 						}
 					}
 				}
@@ -695,14 +722,6 @@ country_event = {
 				factor = 0
 				tag = ENG
 				has_government = fascism
-				FROM = {
-					has_completed_focus = HUN_elect_a_fascist_king
-				}
-			}
-			modifier = {
-				factor = 20
-				tag = FRA
-				has_completed_focus = FRA_strengthen_the_little_entente # bruh
 			}
 		}
 
@@ -987,17 +1006,6 @@ country_event = {
 			tag = POL
 		}
 	}
-	title = {
-		text = gamer_horthy.19.t3
-		trigger = {
-			NOT = {
-				OR = {
-					tag = POL
-					tag = YUG
-				}
-			}
-		}
-	}
 	desc = {
 		text = gamer_horthy.19.desc1
 		trigger = {
@@ -1010,17 +1018,6 @@ country_event = {
 			tag = POL
 		}
 	}
-	desc = {
-		text = gamer_horthy.19.desc3
-		trigger = {
-			NOT = {
-				OR = {
-					tag = POL
-					tag = YUG
-				}
-			}
-		}
-	}
 	picture = GFX_report_event_generic_sign_treaty3
 	is_triggered_only = yes
 
@@ -1028,16 +1025,14 @@ country_event = {
 		name = gamer_horthy.19.a1 # An excellent idea
 
 		trigger = {
-			NOT = {
-				tag = POL
-			}
+			tag = YUG
 		}
 
 		ai_chance = {
-			base = 10
+			base = 2
 			modifier = {
 				factor = 2
-				HUN = { has_completed_focus = HUN_anglophile_policies }
+				FROM = { has_completed_focus = HUN_anglophile_policies }
 			}
 		}
 
@@ -1076,6 +1071,9 @@ country_event = {
 				id = gamer_horthy.20
 				hours = 4
 			}
+			effect_tooltip = {
+				give_guarantee = ROOT
+			}
 		}
 	}
 
@@ -1105,6 +1103,9 @@ country_event = {
 				id = gamer_horthy.20
 				hours = 4
 			}
+			effect_tooltip = {
+				give_guarantee = ROOT
+			}
 		}
 	}
 
@@ -1113,28 +1114,6 @@ country_event = {
 
 		trigger = {
 			OR = {
-				tag = YUG
-				tag = POL
-			}
-		}
-
-		ai_chance = {
-			base = 1
-		}
-
-		FROM = {
-			country_event = {
-				id = gamer_horthy.21
-				hours = 4
-			}
-		}
-	}
-
-	option = {
-		name = gamer_horthy.19.b2 # That dream died with the Austro-Hungarian Empire
-
-		trigger = {
-			NOT = {
 				tag = YUG
 				tag = POL
 			}
@@ -1160,9 +1139,7 @@ country_event = {
 		text = gamer_horthy.20.t1
 		trigger = {
 			FROM = {
-				NOT = {
-					tag = POL
-				}
+				tag = YUG
 			}
 		}
 	}
@@ -1178,9 +1155,7 @@ country_event = {
 		text = gamer_horthy.20.desc1
 		trigger = {
 			FROM = {
-				NOT = {
-					tag = POL
-				}
+				tag = YUG
 			}
 		}
 	}
@@ -1219,47 +1194,6 @@ country_event = {
 		}
 
 		give_guarantee = FROM
-	}
-
-	option = {
-		name = gamer_horthy.20.a3 # The dream survives
-
-		trigger = {
-			FROM = {
-				NOT = {
-					tag = YUG
-					tag = POL
-				}
-			}
-		}
-
-		every_country = {
-			limit = {
-				OR = {
-					tag = AUS
-					tag = BAY
-					tag = WUR
-				}
-				NOT = {
-					has_opinion_modifier = HUN_danubian_dream
-				}
-			}
-			add_opinion_modifier = {
-				target = HUN
-				modifier = HUN_danubian_dream
-			}
-			reverse_add_opinion_modifier = {
-				target = HUN
-				modifier = HUN_danubian_dream
-			}
-			hidden_effect = {
-				add_ai_strategy = {
-					type = alliance
-					id = "HUN"
-					value = 200
-				}
-			}
-		}
 	}
 }
 
@@ -1612,7 +1546,47 @@ country_event = {
 			base = 5
 		}
 
-		release_puppet = ZAK
+		effect_tooltip = {
+			UKR = {
+				set_cosmetic_tag = CARPATHIA
+			}
+			every_state = {
+				limit = {
+					state = 73
+				}
+				add_core_of = UKR
+				if = {
+					limit = {
+						is_controlled_by = HUN
+					}
+					transfer_state_to = UKR
+				}
+			}
+			puppet = UKR
+		}
+		hidden_effect = {
+			create_dynamic_country = {
+				original_tag = UKR
+				set_cosmetic_tag = CARPATHIA
+				every_state = {
+					limit = {
+						OR = {
+							state = 73
+						}
+					}
+					add_core_of = PREV
+					if = {
+						limit = {
+							is_controlled_by = HUN
+						}
+						transfer_state_to = PREV
+					}
+				}
+				HUN = {
+					puppet = PREV
+				}
+			}
+		}
 	}
 
 	option = {
@@ -1631,88 +1605,6 @@ country_event = {
 	}
 }
 
-# A New Constitution
-country_event = {
-	id = gamer_horthy.33
-	title = gamer_horthy.33.t
-	desc = gamer_horthy.33.desc
-	picture = GFX_report_event_hungary_parliament
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.33.a # We remember the Twelve Points
-		set_politics = {
-			ruling_party = democratic
-			elections_allowed = yes
-			election_frequency = 48
-		}
-		add_popularity = {
-			ideology = democratic
-			popularity = 0.3
-		}
-		country_event = {
-			id = gamer_horthy.34
-		}
-	}
-
-	option = {
-		name = gamer_horthy.33.b # We must protect our traditions
-		add_popularity = {
-			ideology = neutrality
-			popularity = 0.3
-		}
-		country_event = {
-			id = gamer_horthy.35
-		}
-	}
-}
-
-# Equality, liberty, brotherhood
-country_event = {
-	id = gamer_horthy.34
-	title = gamer_horthy.34.t
-	desc = gamer_horthy.34.desc
-	picture = GFX_report_event_hungary_parliament
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.34.a # Crown Horthy as a constitutional monarch
-		add_ideas = HUN_horthy
-	}
-
-	option = {
-		name = gamer_horthy.34.b # Establish a republic
-		add_stability = -0.1
-		add_popularity = {
-			ideology = democratic
-			popularity = 0.2
-		}
-	}
-}
-
-# Our Traditions
-country_event = {
-	id = gamer_horthy.35
-	title = gamer_horthy.35.t
-	desc = gamer_horthy.35.desc
-	picture = GFX_report_event_hungary_parliament
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.35.a # Crown Horthy as our king
-		add_stability = 0.1
-		swap_ruler_traits = {
-			remove = regent
-			add = regent_president
-		}
-	}
-
-	option = {
-		name = gamer_horthy.35.b # Perhaps we should elect someone else
-		complete_national_focus = HUN_strengthen_the_monarchists
-	}
-}
-
 # The Habsburg Crisis (Austria)
 country_event = {
 	id = gamer_horthy.36
@@ -1727,10 +1619,7 @@ country_event = {
 			ideology = democratic
 			size = 0.4
 			states = {
-				4 # Lower Austria
 				152 # Upper Austria
-				837 # Styria
-				838 # Carinthia
 			}
 		}
 		custom_effect_tooltip = monarchist_victory_tt
@@ -1752,8 +1641,8 @@ country_event = {
 			ideology = neutrality
 			size = 0.6
 			states = {
+				4 # Lower Austria
 				153 # Tyrol
-				839 # Burgenland
 			}
 		}
 		custom_effect_tooltip = democrat_victory_tt

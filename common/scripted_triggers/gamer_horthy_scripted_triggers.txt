@@ -1,45 +1,21 @@
-#	Example:
-# 
-#	example_trigger = {
-#		tag = GER
-#		is_ai = no
-#	}
-#
-#
-#	In a script file:
-#
-#	trigger = {
-#		exampel_trigger = yes
-#	}
-# 
-
 # State trigger for states in Danubia
 is_in_danubia = {
 	custom_trigger_tooltip = {
 		tooltip = is_in_danubia_tt
 
 		OR = {
-			AND = {
-				region = 7 # Alemannia
-				NOT = {
-					state = 42 # Moselle
-					state = 51 # Rhine
-					state = 55 # Hesse
-				}
-			}
-			AND = {
-				region = 21 # Alps
-				NOT = {
-					state = 3 # Romandy
-#					state = 39 # Adige
-					state = 151 # Thurgovia
-					state = 158 # Piedmont
-					state = 159 # Lombardy
-					state = 160 # Venetia
-				}
-			}
-#			region = 22 # Czechia-Slovakia
-			region = 27 # Carpathia
+			state = 4 # Lower Austria
+			state = 39 # Adige
+			state = 43 # Northern Hungary
+			state = 50 # Wurtemburg
+			state = 52 # Bavaria
+			state = 53 # Regen
+			state = 54 # Franconia
+			state = 152 # Upper Austria
+			state = 153 # Tyrol
+			state = 154 # Tiszantul
+			state = 155 # Transdanubia
+			state = 848 # Vorarlberg
 		}
 	}
 }
@@ -85,17 +61,13 @@ is_in_hungarian_turan = {
 # State trigger for states in Greater Hungary
 is_in_greater_hungary = {
 	OR = {
+		state = 43 # Northern Hungary
 		state = 45 # Backa
+		state = 73 # Carpathia
+		state = 76 # Szekelyland
+		state = 154 # Tiszantul
+		state = 155 # Transdanubia
 		state = 664 # Kosice
-		AND = {
-			region = 27 # Carpathia
-			NOT = {
-				state = 82 # Timis
-				state = 83 # Crisana
-				state = 84 # Transylvania
-			}
-		}
-		
 	}
 }
 
@@ -105,16 +77,19 @@ is_in_historic_hungary = {
 		is_in_greater_hungary = yes
 		state = 70 # Nitra
 		state = 71 # Presov
+		state = 82 # Timis
+		state = 83 # Crisana
+		state = 84 # Transylvania
 		state = 764 # West Banat
-		state = 839 # Burgenland
-		region = 27 # Carpathia
 	}
 }
 
 # State trigger for states in Cisleithania
 is_in_cisleithania = {
 	OR = {
+		state = 4 # Lower Austria
 		state = 9 # Bohemia
+		state = 39 # Adige
 		state = 69 # Rudohori-Sumava
 		state = 72 # Olza
 		state = 74 # Sudetes
@@ -124,90 +99,28 @@ is_in_cisleithania = {
 		state = 89 # Pokuttia
 		state = 91 # Lodomeria
 		state = 102 # Slovenia
-		state = 736 # Istria
-		AND = {
-			region = 21 # Alps
-			NOT = {
-				state = 3 # Romandy
-				state = 151 # Thurgovia
-				state = 158 # Piedmont
-				state = 159 # Lombardy
-				state = 160 # Venetia
-			}
-		}
-	}
-}
-
-# State trigger for German liberal states
-is_german_revolutionary = {
-	OR = {
-		state = 42 # Moselle - historically pro-Catholic
-		state = 51 # Rhine - historically pro-Catholic
-		state = 52 # Bavaria - historically anti-fascist
-		state = 53 # Regen - historically anti-fascist
-		state = 57 # Ruhr - historically pro-Catholic and pro-socialist
-		state = 58 # Schleswig-Holstein - Kiel mutiny, Hamburg historically pro-socialist
-		state = 61 # Mecklenburg - Lubeck historically anti-fascist
-		state = 65 # Saxony - historically pro-socialist
-		state = 67 # Oppeln - historically pro-Catholic and pro-Polish
+		state = 152 # Upper Austria
+		state = 153 # Tyrol
+		state = 736 # Julia
+		state = 848 # Vorarlberg
+		state = 850 # Trent
+		state = 852 # Istria
+		state = 853 # Carniola
 	}
 }
 
 # State trigger for Russian splinter states
 is_russian_separatist = {
-#	custom_trigger_tooltip = {
-#		tooltip = is_russian_separatist_tt
-
-		OR = {
-			# Actual separatists
-			is_core_of = POL
-			is_core_of = FIN
-			is_core_of = UKR
-			is_core_of = EST
-			is_core_of = LAT
-			is_core_of = LIT
-			is_core_of = BLR
-#			is_core_of = GEO
-#			is_core_of = ARM
-#			is_core_of = AZR
-#			is_core_of = DAG
-#			is_core_of = CIN
-#			is_core_of = KAZ
-#			is_core_of = UZB
-#			is_core_of = KYR
-#			is_core_of = TMS
-#			is_core_of = TAJ
-#			is_core_of = MOL
-#			is_core_of = CRI
-#			is_core_of = NOA
-#			is_core_of = KBK
-#			is_core_of = ABK
-#			is_core_of = VLA
-#			is_core_of = BYA
-#			is_core_of = YAK
-#			is_core_of = ALT
-#			is_core_of = KAR
-#			is_core_of = BUK
-#			is_core_of = KHI
-#			is_core_of = KKP
-#			is_core_of = FER
-#			is_core_of = TAN
-#			is_core_of = TAT
-#			is_core_of = BSK
-#			is_core_of = UDM
-#			is_core_of = MEL
-#			is_core_of = CHU
-#			is_core_of = KAL
-#			is_core_of = KOM
-			# Fake separatists
-#			is_core_of = VGE
-#			is_core_of = OVO
-#			is_core_of = YAM
-#			is_core_of = TAY
-#			is_core_of = CKK
-#			is_core_of = NEN
-		}
-#	}
+	OR = {
+		is_core_of = POL
+		is_core_of = FIN
+		is_core_of = UKR
+		is_core_of = EST
+		is_core_of = LAT
+		is_core_of = LIT
+		is_core_of = BLR
+#		is_core_of = MOL
+	}
 }
 
 # Trigger for any German trade spirit
@@ -219,7 +132,7 @@ has_german_trade = {
 	}
 }
 
-# Trigger for completing a Prime Minister focus branch
+# Trigger for completing a prime minister focus branch
 has_prime_minister_finished = {
 	OR = {
 		has_completed_focus = HUN_the_march_front
@@ -240,4 +153,24 @@ can_join_use = {
 	}
 	has_idea = HUN_eec3
 	is_in_faction_with = HUN
+}
+
+# Trigger for choosing any prime minister
+has_prime_minister_chosen = {
+	OR = {
+		has_completed_focus = HUN_appointzoltantildy
+		has_completed_focus = HUN_restoreistvanbethlen
+		has_completed_focus = HUN_appointkalmandaranyi
+	}
+}
+
+# Trigger for states that can gain favour or suspicion
+is_peace_target = {
+	OR = {
+		tag = ENG
+		tag = GER
+		tag = USA
+		tag = SOV
+		tag = ITA
+	}
 }

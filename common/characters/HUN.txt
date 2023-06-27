@@ -17,7 +17,7 @@ characters={
 			}
 		}
 		country_leader={
-			ideology=oligarchism
+			ideology=moderatism
 			traits={ white_terror regent }
 			expire="1965.1.1.1"
 			id=500
@@ -32,7 +32,7 @@ characters={
 			}
 		}
 		country_leader={
-			ideology=despotism
+			ideology=centrism
 			traits={  }
 			expire="1965.1.1.1"
 			id=-1
@@ -127,18 +127,31 @@ characters={
 			logistics_skill=2
 			legacy_id=-1
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_geza_lakatos_pm
-			allowed = {
-				always = no
-			}
+			cost = 150
 			available = {
-				always = no
+				has_completed_focus = HUN_peace_overtures
+				NOT = {
+					has_idea = HUN_tibor_eckhardt
+					has_idea = HUN_istvan_bethlen
+					has_idea = HUN_kalman_daranyi
+					has_idea = HUN_zoltan_tildy
+					has_idea = HUN_pal_teleki
+					has_idea = HUN_miklos_kallay
+				}
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_large = yes
+				HUN_add_crown_bop_large = yes
 			}
 			traits = {
-				
+				patriot_pm
 			}
 		}
 	}
@@ -240,24 +253,6 @@ characters={
 		}
 	}
 
-	HUN_janos_voros = {
-		name = HUN_janos_voros
-		portraits = {
-			army = {
-				large = "GFX_portrait_SOV_aleksandr_gorbatov"
-				small = "GFX_portrait_SOV_aleksandr_gorbatov_small"
-			}
-		}
-		corps_commander = {
-			traits = { career_officer }
-			skill = 1
-			attack_skill = 1
-			defense_skill = 2
-			planning_skill = 2
-			logistics_skill = 1
-		}
-	}
-
 	### THEORISTS ###
 
 	HUN_shvoy_kalman={
@@ -319,6 +314,18 @@ characters={
 			allowed = {
 				original_tag = HUN
 			}
+			available = {
+				is_high_command = no
+				has_prime_minister_finished = yes
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_medium = yes
+				HUN_add_crown_bop_medium = yes
+			}
 			traits = {
 				army_chief_defensive_2
 			}
@@ -326,6 +333,28 @@ characters={
 			ai_will_do = {
 				factor = 1.000
 			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = HUN_ferenc_szombathelyi_low
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_army_chief = no
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_small = yes
+				HUN_add_crown_bop_small = yes
+			}
+			traits = {
+				army_regrouping_2
+			}
+			cost = 100
 		}
 	}
 
@@ -342,6 +371,22 @@ characters={
 			allowed = {
 				original_tag = HUN
 			}
+			available = {
+				is_high_command = no
+				OR = {
+					has_completed_focus = HUN_appointzoltantildy
+					has_completed_focus = HUN_restoreistvanbethlen
+					has_prime_minister_finished = yes
+				}
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_medium = yes
+				HUN_add_crown_bop_medium = yes
+			}
 			traits = {
 				army_chief_offensive_2
 			}
@@ -350,8 +395,217 @@ characters={
 				factor = 1.000
 			}
 		}
+		advisor = {
+			slot = high_command
+			idea_token = HUN_hugo_sonyi_low
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_army_chief = no
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_small = yes
+				HUN_add_crown_bop_small = yes
+			}
+			traits = {
+				army_infantry_2
+			}
+			cost = 100
+		}
 	}
 
+	HUN_jeno_ratz={
+		name=HUN_jeno_ratz
+		portraits={
+			army={
+				small="GFX_idea_HUN_jeno_ratz"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = HUN_jeno_ratz
+			ledger = air
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_high_command = no
+				OR = {
+					AND = {
+						NOT = { has_completed_focus = HUN_appointzoltantildy }
+						NOT = { has_completed_focus = HUN_restoreistvanbethlen }
+					}
+					has_prime_minister_finished = yes
+				}
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_medium = yes
+				HUN_add_army_bop_medium = yes
+			}
+			traits = {
+				army_chief_planning_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = HUN_jeno_ratz_low
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_army_chief = no
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_small = yes
+				HUN_add_army_bop_small = yes
+			}
+			traits = {
+				air_air_combat_training_2
+			}
+			cost = 100
+		}
+	}
+
+	HUN_henrik_werth={
+		name=HUN_henrik_werth
+		portraits={
+			army={
+				small="GFX_idea_HUN_henrik_werth"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = HUN_henrik_werth
+			ledger = army
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_high_command = no
+				has_prime_minister_finished = yes
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_medium = yes
+				HUN_add_army_bop_medium = yes
+			}
+			traits = {
+				army_chief_maneuver_2
+			}
+			
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = HUN_henrik_werth_low
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_army_chief = no
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_small = yes
+				HUN_add_army_bop_small = yes
+			}
+			traits = {
+				army_cavalry_2
+			}
+			cost = 100
+		}
+	}
+
+	HUN_janos_voros = {
+		name = HUN_janos_voros
+		portraits = {
+			army = {
+				large = "GFX_portrait_SOV_aleksandr_gorbatov"
+				small = "GFX_portrait_SOV_aleksandr_gorbatov_small"
+			}
+		}
+		corps_commander = {
+			traits = { career_officer }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 1
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = HUN_janos_voros
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_high_command = no
+				has_prime_minister_finished = yes
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+					has_government = communism
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_medium = yes
+				HUN_add_crown_bop_medium = yes
+			}
+			traits = {
+				army_chief_entrenchment_1
+			}
+			cost = 50
+		}
+		advisor = {
+			slot = high_command
+			idea_token = HUN_janos_voros_low
+			allowed = {
+				original_tag = HUN
+			}
+			available = {
+				is_army_chief = no
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+					has_government = communism
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_small = yes
+				HUN_add_crown_bop_small = yes
+			}
+			traits = {
+				army_entrenchment_1
+			}
+			cost = 50
+		}
+	}
 
 	### NAVY CHIEFS ###
 
@@ -501,63 +755,6 @@ characters={
 		}
 	}
 
-	HUN_jeno_ratz={
-		name=HUN_jeno_ratz
-		portraits={
-			army={
-				small="GFX_idea_HUN_jeno_ratz"
-			}
-		}
-		advisor={
-			slot = high_command
-			idea_token = HUN_jeno_ratz
-			ledger = air
-			allowed = {
-				original_tag = HUN
-			}
-			traits = {
-				air_air_combat_training_2
-			}
-			cost = 100
-			ai_will_do = {
-				factor = 1.000
-			}
-		}
-	}
-
-	HUN_henrik_werth={
-		name=HUN_henrik_werth
-		portraits={
-			army={
-				small="GFX_idea_HUN_henrik_werth"
-			}
-		}
-		allowed_civil_war = {
-			has_government = fascism
-		}
-		advisor={
-			slot = high_command
-			idea_token = HUN_henrik_werth
-			ledger = army
-			allowed = {
-				original_tag = HUN
-			}
-			available = {
-				OR = {
-					has_government = neutrality
-					has_government = fascism
-				}
-			}
-			traits = {
-				army_cavalry_2
-			}
-			cost = 100
-			ai_will_do = {
-				factor = 1.000
-			}
-		}
-	}
-
 
 	### POLITICAL ADVISORS ###
 
@@ -577,7 +774,7 @@ characters={
 		advisor={
 			slot = political_advisor
 			idea_token = HUN_gyula_gombos_de_jakfa
-			removal_cost = -1
+			can_be_fired = no
 			allowed = {
 				original_tag = HUN
 			}
@@ -585,22 +782,16 @@ characters={
 				custom_trigger_tooltip = {
 					tooltip = TUR_can_only_have_one_prime_minister_tt
 					NOT = {
-						OR = {
-							has_idea = HUN_tibor_eckhardt
-							has_idea = HUN_istvan_bethlen
-							has_idea = HUN_kalman_daranyi
-							has_idea = HUN_zoltan_tildy
-							has_idea = HUN_pal_teleki
-							has_idea = HUN_miklos_kallay
-						}
+						has_idea = HUN_tibor_eckhardt
+						has_idea = HUN_istvan_bethlen
+						has_idea = HUN_kalman_daranyi
+						has_idea = HUN_zoltan_tildy
+						has_idea = HUN_pal_teleki
+						has_idea = HUN_miklos_kallay
+						has_idea = HUN_geza_lakatos_pm
 					}
 				}
-				NOT = {
-					has_government = communism
-				}
-				custom_trigger_tooltip = {
-					tooltip = no_replace_tt
-				}
+				NOT = { has_government = communism }
 			}
 			traits = {
 				conservative_pm
@@ -624,18 +815,45 @@ characters={
 				has_government = democratic
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_tibor_eckhardt
 			allowed = {
-				always = no
+				original_tag = HUN
 			}
+			cost = 150
 			available = {
-				always = no
+				is_country_leader = no
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						has_idea = HUN_gyula_gombos_de_jakfa
+						has_idea = HUN_istvan_bethlen
+						has_idea = HUN_kalman_daranyi
+						has_idea = HUN_zoltan_tildy
+						has_idea = HUN_pal_teleki
+						has_idea = HUN_miklos_kallay
+						has_idea = HUN_geza_lakatos_pm
+					}
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_large = yes
+				HUN_add_crown_bop_large = yes
+			}
+			ai_will_do = {
+				base = 1
+				modifier = {
+					factor = 10
+					has_completed_focus = HUN_appointzoltantildy
+				}
 			}
 			traits = {
-				
+				liberal_pm
 			}
 		}
 	}
@@ -656,18 +874,45 @@ characters={
 				has_government = democratic
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_istvan_bethlen
 			allowed = {
-				always = no
+				original_tag = HUN
 			}
+			cost = 75
 			available = {
-				always = no
+				is_country_leader = no
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						has_idea = HUN_gyula_gombos_de_jakfa
+						has_idea = HUN_tibor_eckhardt
+						has_idea = HUN_kalman_daranyi
+						has_idea = HUN_zoltan_tildy
+						has_idea = HUN_pal_teleki
+						has_idea = HUN_miklos_kallay
+						has_idea = HUN_geza_lakatos_pm
+					}
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_large = yes
+				HUN_add_crown_bop_large = yes
+			}
+			ai_will_do = {
+				base = 1
+				modifier = {
+					factor = 10
+					has_completed_focus = HUN_restoreistvanbethlen
+				}
 			}
 			traits = {
-				
+				aristocrat_pm
 			}
 		}
 	}
@@ -685,18 +930,44 @@ characters={
 				has_government = fascism
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_kalman_daranyi
 			allowed = {
-				always = no
+				original_tag = HUN
 			}
+			cost = 50
 			available = {
-				always = no
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						has_idea = HUN_gyula_gombos_de_jakfa
+						has_idea = HUN_tibor_eckhardt
+						has_idea = HUN_istvan_bethlen
+						has_idea = HUN_zoltan_tildy
+						has_idea = HUN_pal_teleki
+						has_idea = HUN_miklos_kallay
+						has_idea = HUN_geza_lakatos_pm
+					}
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_large = yes
+				HUN_add_army_bop_large = yes
+			}
+			ai_will_do = {
+				base = 1
+				modifier = {
+					factor = 10
+					has_completed_focus = HUN_appointkalmandaranyi
+				}
 			}
 			traits = {
-				
+				conservative_pm
 			}
 		}
 	}
@@ -716,18 +987,35 @@ characters={
 				has_government = fascism
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_zoltan_tildy
 			allowed = {
-				always = no
+				original_tag = HUN
 			}
+			cost = 150
 			available = {
-				always = no
+				is_country_leader = no
+				NOT = { has_government = fascism }
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						has_idea = HUN_gyula_gombos_de_jakfa
+						has_idea = HUN_tibor_eckhardt
+						has_idea = HUN_istvan_bethlen
+						has_idea = HUN_kalman_daranyi
+						has_idea = HUN_pal_teleki
+						has_idea = HUN_miklos_kallay
+						has_idea = HUN_geza_lakatos_pm
+					}
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_large = yes
+				HUN_add_army_bop_large = yes
 			}
 			traits = {
-				
+				coalition_pm
 			}
 		}
 	}
@@ -745,18 +1033,37 @@ characters={
 				has_government = democratic
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_pal_teleki
 			allowed = {
-				always = no
+				original_tag = HUN
 			}
+			cost = 150
 			available = {
-				always = no
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						has_idea = HUN_gyula_gombos_de_jakfa
+						has_idea = HUN_tibor_eckhardt
+						has_idea = HUN_istvan_bethlen
+						has_idea = HUN_kalman_daranyi
+						has_idea = HUN_zoltan_tildy
+						has_idea = HUN_miklos_kallay
+						has_idea = HUN_geza_lakatos_pm
+					}
+				}
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_large = yes
+				HUN_add_crown_bop_large = yes
 			}
 			traits = {
-				
+				patriot_pm
 			}
 		}
 	}
@@ -774,18 +1081,33 @@ characters={
 				has_government = democratic
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_miklos_kallay
 			allowed = {
-				always = no
+				original_tag = HUN
 			}
+			cost = 150
 			available = {
-				always = no
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						has_idea = HUN_gyula_gombos_de_jakfa
+						has_idea = HUN_tibor_eckhardt
+						has_idea = HUN_istvan_bethlen
+						has_idea = HUN_kalman_daranyi
+						has_idea = HUN_zoltan_tildy
+						has_idea = HUN_pal_teleki
+						has_idea = HUN_geza_lakatos_pm
+					}
+				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_large = yes
+				HUN_add_crown_bop_large = yes
 			}
 			traits = {
-				
+				apolitical_pm
 			}
 		}
 	}
@@ -806,18 +1128,25 @@ characters={
 				has_government = democratic
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_istvan_horthy
-			allowed = {
-				always = no
-			}
+			cost = 50
 			available = {
-				always = no
+				NOT = { has_country_flag = HUN_sent_istvan }
+				has_completed_focus = HUN_anglophile_policies
+				is_country_leader = no
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_large = yes
+				HUN_add_crown_bop_large = yes
 			}
 			traits = {
-				
+				deputy_regent
 			}
 		}
 	}
@@ -835,18 +1164,23 @@ characters={
 				has_government = democratic
 			}
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_miklos_horthy_jr
-			allowed = {
-				always = no
-			}
+			cost = 50
 			available = {
-				always = no
+				has_completed_focus = HUN_the_addams_family
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+			on_add = {
+				HUN_add_liberal_bop_large = yes
+				HUN_add_crown_bop_large = yes
 			}
 			traits = {
-				
+				royal_ambassador
 			}
 		}
 	}
@@ -861,17 +1195,15 @@ characters={
 		allowed_civil_war = {
 			has_government = fascism
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_jeno_szollosi
-			allowed = {
-				always = no
-			}
 			available = {
-				always = no
+				has_completed_focus = HUN_abolish_the_monarchy
+				has_government = fascism
 			}
 			traits = {
+				deputy_pm
 			}
 		}
 	}
@@ -886,44 +1218,47 @@ characters={
 		allowed_civil_war = {
 			has_government = communism
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
 			idea_token = HUN_laszlo_rajk
-			allowed = {
-				always = no
-			}
 			available = {
-				always = no
+				has_completed_focus = HUN_abolish_the_monarchy
+				OR = {
+					focus_progress = {
+						focus = HUN_control_ministry_interior
+						progress > 0
+					}
+					AND = {
+						has_completed_focus = HUN_control_ministry_interior
+						has_government = communism
+					}
+				}
 			}
 			traits = {
-				
+				ministry_interior
 			}
 		}
 	}
 
-	HUN_esmond_harmsworth = {
-		name = HUN_esmond_harmsworth
+	HUN_imre_nagy = {
+		name = HUN_imre_nagy
 		portraits = {
 			army = {
-				small = "GFX_portrait_USA_arleigh_burke_small"
+				small = "GFX_idea_pyotr_smirnov"
 			}
 		}
 		allowed_civil_war = {
-			has_government = fascism
+			has_government = communism
 		}
-		# Dummy idea slot
 		advisor = {
 			slot = political_advisor
-			idea_token = HUN_esmond_harmsworth
-			allowed = {
-				always = no
-			}
+			idea_token = HUN_imre_nagy
 			available = {
-				always = no
+				has_completed_focus = HUN_abolish_the_monarchy
+				has_government = communism
 			}
 			traits = {
-				
+				ministry_agriculture_nagy
 			}
 		}
 	}
@@ -947,9 +1282,7 @@ characters={
 				original_tag = HUN
 			}
 			available = {
-				NOT = {
-					has_government = communism
-				}
+				NOT = { has_government = communism }
 			}
 			traits = {
 				ministry_agriculture
@@ -982,6 +1315,10 @@ characters={
 					has_government = democratic
 				}
 			}
+			on_add = {
+				HUN_add_liberal_bop_small = yes
+				HUN_add_crown_bop_small = yes
+			}
 			traits = {
 				ministry_interior_keresztes
 			}
@@ -1013,6 +1350,10 @@ characters={
 					has_government = neutrality
 					has_government = democratic
 				}
+			}
+			on_add = {
+				HUN_add_conservative_bop_small = yes
+				HUN_add_crown_bop_small = yes
 			}
 			traits = {
 				counterrevolution_szeged
@@ -1150,7 +1491,7 @@ characters={
 				}
 			}
 			traits = {
-				communist_revolutionary 
+				communist_revolutionary
 			}
 			ai_will_do = {
 				base = 0
@@ -1228,7 +1569,6 @@ characters={
 		}
 	}
 
-	# István Ujszászy
 	HUN_istvan_ujszaszy = {
 		name = HUN_istvan_ujszaszy
 		portraits = {
@@ -1260,7 +1600,6 @@ characters={
 		}
 	}
 
-	# Gábor Péter
 	HUN_gabor_peter = {
 		name = HUN_gabor_peter
 		portraits = {

@@ -1,0 +1,18 @@
+﻿l_english:
+ add_favour_small_tt:0 "Gains §G1§! §YFavour§!."
+ add_favour_medium_tt:0 "Gains §G2§! §YFavour§!."
+ add_favour_large_tt:0 "Gains §G3§! §YFavour§!."
+ add_favour_max_tt:0 "Gains §G10§! §YFavour§!."
+
+ add_suspicion_small_tt:0 "Gains §R1§! §YSuspicion§!."
+ add_suspicion_medium_tt:0 "Gains §R2§! §YSuspicion§!."
+ add_suspicion_large_tt:0 "Gains §R3§! §YSuspicion§!."
+ add_suspicion_max_tt:0 "Gains §R10§! §YSuspicion§!."
+
+ remove_favour_small_tt:0 "Loses §R1§! §YFavour§!."
+ remove_favour_medium_tt:0 "Loses §R2§! §YFavour§!."
+ remove_favour_large_tt:0 "Loses §R3§! §YFavour§!."
+
+ remove_suspicion_small_tt:0 "Loses §G1§! §YSuspicion§!."
+ remove_suspicion_medium_tt:0 "Loses §G2§! §YSuspicion§!."
+ remove_suspicion_large_tt:0 "Loses §G3§! §YSuspicion§!."

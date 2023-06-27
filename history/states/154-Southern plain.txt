@@ -1,8 +1,7 @@
-
 state = {
 	id=154
 	name="STATE_154" # Tiszántúl
-	manpower = 2020463
+	manpower = 2735383
 
 	state_category = city
 
@@ -20,11 +19,14 @@ state = {
 		victory_points = {
 			679 1
 		}
+#		victory_points = {
+#			6670 1
+#		}
 		add_core_of = HUN
 	}
 
 	provinces={
-		679 699 730 3730 6735 9656 9706 11644 11646 11659 
+		679 699 730 3730 6670 6700 6735 9656 9706 11625 11644 11646 11659 
 	}
 
 	local_supplies=12.0 

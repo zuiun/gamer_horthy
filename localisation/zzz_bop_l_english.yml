@@ -1,0 +1,26 @@
+﻿l_english:
+ HUN_power_balance:0 "Politics of the Swing"
+ HUN_balance_range:0 "Political Equilibrium"
+
+ HUN_army_side:0 "General Staff"
+ HUN_crown_side:0 "Crown Council"
+ HUN_liberals_side:0 "House of Representatives"
+ HUN_conservatives_side:0 "House of Magnates"
+
+ HUN_army_low_control_range:0 "Military Influence"
+ HUN_army_medium_control_range:0 "Military Predominance"
+ HUN_army_high_control_range:0 "Military Dominance"
+ HUN_army_total_control_range:0 "Military Supremacy"
+ HUN_crown_low_control_range:0 "Governmental Influence"
+ HUN_crown_medium_control_range:0 "Governmental Predominance"
+ HUN_crown_high_control_range:0 "Governmental Dominance"
+ HUN_crown_total_control_range:0 "Governmental Supremacy"
+
+ HUN_liberals_low_control_range:0 "Popular Influence"
+ HUN_liberals_medium_control_range:0 "Popular Predominance"
+ HUN_liberals_high_control_range:0 "Popular Dominance"
+ HUN_liberals_total_control_range:0 "Popular Supremacy"
+ HUN_conservatives_low_control_range:0 "Aristocratic Influence"
+ HUN_conservatives_medium_control_range:0 "Aristocratic Predominance"
+ HUN_conservatives_high_control_range:0 "Aristocratic Dominance"
+ HUN_conservatives_total_control_range:0 "Aristocratic Supremacy"

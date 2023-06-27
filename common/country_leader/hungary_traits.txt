@@ -92,9 +92,9 @@ leader_traits = {
 	powerless_ignored_monarch = {
 		random = no
 
-		political_power_factor = -0.2
+		political_power_factor = -0.4
 		stability_factor = -0.2
-		war_support_factor = -0.2
+		war_support_factor = 0.1
 		democratic_drift = 0.05
 	}
 
@@ -109,10 +109,9 @@ leader_traits = {
 		random = no
 		sprite = 13
 
-		stability_factor = 0.1
+		stability_factor = 0.05
 		neutrality_drift = 0.03
 		fascism_drift = 0.02
-		custom_modifier_tooltip = gyula_gombos_tt
 
 		ai_will_do = {
 			factor = 1
@@ -123,7 +122,7 @@ leader_traits = {
 		random = no
 		sprite = 13
 
-		stability_factor = 0.1
+		stability_factor = 0.05
 		neutrality_drift = 0.03
 		fascism_drift = 0.02
 
@@ -149,8 +148,7 @@ leader_traits = {
 		random = no
 		sprite = 13
 
-		stability_factor = 0.05
-		consumer_goods_factor = -0.01
+		stability_factor = 0.1
 		neutrality_drift = 0.03
 		democratic_drift = 0.02
 		democratic_acceptance = 50
@@ -207,7 +205,6 @@ leader_traits = {
 		sprite = 13
 
 		autonomy_gain = 1
-		stability_factor = 0.05
 		political_power_gain = 0.05
 		drift_defence_factor = 0.05
 		fascism_acceptance = -50
@@ -225,6 +222,19 @@ leader_traits = {
 		communism_drift = 0.05
 		resistance_damage_to_garrison = -0.2
 		foreign_subversive_activites = -0.3
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	ministry_agriculture_nagy = {
+		random = no
+		sprite = 13
+
+		communism_drift = 0.03
+		stability_factor = 0.05
+		consumer_goods_factor = -0.01
 
 		ai_will_do = {
 			factor = 1
@@ -284,6 +294,7 @@ leader_traits = {
 		random = no
 		sprite = 10
 
+		fascism_drift = -0.05
 		industrial_capacity_factory = 0.05
 		research_speed_factor = 0.02
 		democratic_acceptance = 50
@@ -314,7 +325,6 @@ leader_traits = {
 
 		stability_factor = 0.05
 		air_agility_factor = 0.05
-		army_morale_factor = 0.1
 		democratic_acceptance = 50
 
 		ai_will_do = {
@@ -328,8 +338,7 @@ leader_traits = {
 
 		stability_factor = 0.05
 		air_agility_factor = 0.1
-		army_morale_factor = 0.1
-		fascism_drift = -0.1
+		fascism_drift = -0.05
 		industrial_capacity_factory = 0.05
 		research_speed_factor = 0.02
 		democratic_acceptance = 50
@@ -343,9 +352,9 @@ leader_traits = {
 		random = no
 		sprite = 13
 
-		opinion_gain_monthly_factor = 0.1
-		trade_laws_cost_factor = -0.2
-		trade_opinion_factor = 0.5
+		opinion_gain_monthly_factor = 0.05
+		trade_laws_cost_factor = -0.1
+		trade_opinion_factor = 0.2
 		democratic_acceptance = 50
 		min_export = -0.1
 
@@ -371,8 +380,7 @@ leader_traits = {
 	industrial_conglomerate = {
 		random = no
 
-		production_speed_industrial_complex_factor = 0.05
-		production_speed_arms_factory_factor = 0.1
+		production_speed_arms_factory_factor = 0.05
 		industrial_capacity_factory = 0.1
 
 		ai_will_do = {
@@ -385,7 +393,6 @@ leader_traits = {
 
 		production_factory_efficiency_gain_factor = 0.05
 		production_factory_max_efficiency_factor = 0.05
-		production_speed_infrastructure_factor = 0.1
 		production_speed_rail_way_factor = 0.15
 		production_speed_supply_node_factor = 0.15
 		equipment_bonus = {
