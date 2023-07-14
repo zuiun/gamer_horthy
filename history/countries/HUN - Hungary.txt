@@ -299,7 +299,6 @@ recruit_character = HUN_gusztav_gratz
 recruit_character = HUN_laszlo_bardossy
 recruit_character = HUN_gyula_gombos_de_jakfa
 recruit_character = HUN_otto_von_habsburg
-recruit_character = HUN_franz_friedrich
 recruit_character = HUN_tibor_eckhardt
 recruit_character = HUN_istvan_bethlen
 recruit_character = HUN_pal_teleki

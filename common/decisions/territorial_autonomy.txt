@@ -48,7 +48,7 @@ territorial_autonomy = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_preserve_greater_hungary
+			has_completed_focus = HUN_renounce_the_treaty_of_trianon
 			NOT = {
 				82 = {
 					owner = { is_subject_of = HUN }
@@ -124,20 +124,12 @@ territorial_autonomy = {
 		available = {
 			has_completed_focus = HUN_territorial_autonomy
 			# Make expanded Transylvanian autonomy a peace option
-#			controls_state = 76 # Szekelyland
-#			controls_state = 83 # Crisana
 			controls_state = 84 # Transylvania
 		}
 
 		visible = {
-			has_completed_focus = HUN_preserve_greater_hungary
+			has_completed_focus = HUN_renounce_the_treaty_of_trianon
 			NOT = {
-				76 = {
-					owner = { is_subject_of = HUN }
-				}
-				83 = {
-					owner = { is_subject_of = HUN }
-				}
 				84 = {
 					owner = { is_subject_of = HUN }
 				}
@@ -153,11 +145,7 @@ territorial_autonomy = {
 			effect_tooltip = {
 				every_state = {
 					limit = {
-						OR = {
-							state = 76
-							state = 83
-							state = 84
-						}
+						state = 84
 					}
 					add_core_of = TRA
 					if = {
@@ -174,11 +162,7 @@ territorial_autonomy = {
 					original_tag = TRA
 					every_state = {
 						limit = {
-							OR = {
-#								state = 76
-#								state = 83
-								state = 84
-							}
+							state = 84
 						}
 						add_core_of = PREV
 						if = {
@@ -210,7 +194,7 @@ territorial_autonomy = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_preserve_greater_hungary
+			has_completed_focus = HUN_renounce_the_treaty_of_trianon
 			NOT = {
 				73 = {
 					owner = { is_subject_of = HUN }
@@ -248,9 +232,7 @@ territorial_autonomy = {
 					set_cosmetic_tag = CARPATHIA
 					every_state = {
 						limit = {
-							OR = {
-								state = 73
-							}
+							state = 73
 						}
 						add_core_of = PREV
 						if = {
@@ -283,7 +265,7 @@ territorial_autonomy = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_preserve_greater_hungary
+			has_completed_focus = HUN_renounce_the_treaty_of_trianon
 			NOT = {
 				70 = {
 					owner = { is_subject_of = HUN }
@@ -409,80 +391,8 @@ territorial_autonomy = {
 								state = 104
 								state = 109
 								state = 163
-								state = 736
 								state = 804
-							}
-						}
-						add_core_of = PREV
-						if = {
-							limit = {
-								is_controlled_by = HUN
-							}
-							transfer_state_to = PREV
-						}
-					}
-					HUN = {
-						puppet = PREV
-					}
-				}
-			}
-		}
-	}
-
-	autonomy_bosnia = {
-		icon = generic_nationalism
-		priority = 1
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_connationalism
-			controls_state = 104 # Bosnia
-		}
-
-		visible = {
-			has_completed_focus = HUN_restore_historic_hungary
-			NOT = {
-				104 = {
-					owner = { is_subject_of = HUN }
-				}
-			}
-		}
-
-		cost = 50
-
-		cosmetic_tag = BOS
-		cosmetic_ideology = neutrality
-
-		complete_effect = {
-			effect_tooltip = {
-				every_state = {
-					limit = {
-						OR = {
-							state = 104
-							state = 804 # Herzegovina
-						}
-					}
-					add_core_of = BOS
-					if = {
-						limit = {
-							is_controlled_by = HUN
-						}
-						transfer_state_to = BOS
-					}
-				}
-				puppet = BOS
-			}
-			hidden_effect = {
-				create_dynamic_country = {
-					original_tag = BOS
-					every_state = {
-						limit = {
-							OR = {
-								state = 104
-								state = 804
+								state = 852
 							}
 						}
 						add_core_of = PREV
@@ -540,9 +450,9 @@ territorial_autonomy = {
 							state = 106 # Vardar
 							state = 107
 							state = 108
+							state = 764 # West Banat
 							state = 802 # Kosovo
 							state = 803 # Jablanica
-							state = 804 # Herzegovina
 						}
 					}
 					add_core_of = SER
@@ -565,6 +475,7 @@ territorial_autonomy = {
 								state = 106
 								state = 107
 								state = 108
+								state = 764
 								state = 802
 								state = 803
 							}
@@ -652,88 +563,6 @@ territorial_autonomy = {
 								state = 72
 								state = 74
 								state = 75
-								state = 762
-							}
-						}
-						add_core_of = PREV
-						if = {
-							limit = {
-								is_controlled_by = HUN
-							}
-							transfer_state_to = PREV
-						}
-					}
-					HUN = {
-						puppet = PREV
-					}
-				}
-			}
-		}
-	}
-
-	autonomy_silesia = {
-		icon = generic_nationalism
-		priority = 6
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_connationalism
-			controls_state = 66 # Silesia
-			controls_state = 67 # Oppeln
-		}
-
-		visible = {
-			has_completed_focus = HUN_restore_historic_hungary
-			NOT = {
-				66 = {
-					owner = { is_subject_of = HUN }
-				}
-				67 = {
-					owner = { is_subject_of = HUN }
-				}
-			}
-		}
-
-		cost = 50
-
-		cosmetic_tag = SIL
-		cosmetic_ideology = neutrality
-
-		complete_effect = {
-			effect_tooltip = {
-				every_state = {
-					limit = {
-						OR = {
-							state = 66
-							state = 67
-							state = 72 # Olza
-							state = 74 # Sudetes
-							state = 762 # Katowice
-						}
-					}
-					add_core_of = SIL
-					if = {
-						limit = {
-							is_controlled_by = HUN
-						}
-						transfer_state_to = SIL
-					}
-				}
-				puppet = SIL
-			}
-			hidden_effect = {
-				create_dynamic_country = {
-					original_tag = SIL
-					every_state = {
-						limit = {
-							OR = {
-								state = 66
-								state = 67
-								state = 72
-								state = 74
 								state = 762
 							}
 						}
@@ -847,7 +676,6 @@ territorial_autonomy = {
 			has_completed_focus = HUN_connationalism
 			controls_state = 78 # Bessarabia
 			controls_state = 79 # Moldavia
-			controls_state = 766 # Budjak
 		}
 
 		visible = {
@@ -878,7 +706,7 @@ territorial_autonomy = {
 							state = 78
 							state = 79
 							state = 80 # Bucovina
-							state = 766
+							state = 766 # Budjak
 							state = 834 # Nistria
 						}
 					}
@@ -934,8 +762,6 @@ territorial_autonomy = {
 			controls_state = 4 # Lower Austria
 			controls_state = 152 # Upper Austria
 			controls_state = 153 # Tyrol
-			controls_state = 911 # Styria
-			controls_state = 912 # Carinthia
 		}
 
 		visible = {
@@ -948,12 +774,6 @@ territorial_autonomy = {
 					owner = { is_subject_of = HUN }
 				}
 				153 = {
-					owner = { is_subject_of = HUN }
-				}
-				911 = {
-					owner = { is_subject_of = HUN }
-				}
-				912 = {
 					owner = { is_subject_of = HUN }
 				}
 			}
@@ -977,10 +797,7 @@ territorial_autonomy = {
 							state = 736 # Julia
 							state = 848 # Vorarlberg
 							state = 850 # Trent
-							state = 852 # Istria
 							state = 853 # Carniola
-							state = 911
-							state = 912
 						}
 					}
 					add_core_of = AUS
@@ -1008,8 +825,6 @@ territorial_autonomy = {
 								state = 848
 								state = 850
 								state = 853
-								state = 911
-								state = 912
 							}
 						}
 						add_core_of = PREV
@@ -1024,6 +839,521 @@ territorial_autonomy = {
 						puppet = PREV
 					}
 				}
+			}
+		}
+	}
+
+	# Dummy decision
+	freedom_for_FROM = {
+		allowed = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		available = {
+			always = no
+		}
+
+		cost = 0
+	}
+
+	freedom_for_ukraine = {
+		icon = generic_nationalism
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = UKR
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			UKR = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = UKR
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = UKR
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				UKR = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = UKR
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				UKR = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = UKR
+			set_autonomy = {
+				target = UKR
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_byelorussia = {
+		icon = generic_nationalism
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = BLR
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			BLR = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = BLR
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = BLR
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				BLR = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = BLR
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				BLR = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = BLR
+			set_autonomy = {
+				target = BLR
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_poland = {
+		icon = generic_nationalism
+		priority = 6
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = POL
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			POL = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = POL
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = POL
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				POL = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = POL
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				POL = {
+					set_state_controller = PREV
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction = yes
+				}
+				add_to_faction = POL
+			}
+		}
+	}
+
+	freedom_for_estonia = {
+		icon = generic_nationalism
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = EST
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			EST = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = EST
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = EST
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				EST = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = EST
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				EST = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = EST
+			set_autonomy = {
+				target = EST
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_latvia = {
+		icon = generic_nationalism
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = LAT
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			LAT = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = LAT
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = LAT
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				LAT = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = LAT
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				LAT = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = LAT
+			set_autonomy = {
+				target = LAT
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_lithuania = {
+		icon = generic_nationalism
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = LIT
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			LIT = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = LIT
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = LIT
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				LIT = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = LIT
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				LIT = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = LIT
+			set_autonomy = {
+				target = LIT
+				autonomy_state = autonomy_supervised_state
+			}
+		}
+	}
+
+	freedom_for_finland = {
+		icon = generic_nationalism
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_dismantle_the_soviet_union
+			any_state = {
+				is_core_of = FIN
+				is_controlled_by_ROOT_or_ally = yes
+				NOT = {
+					is_core_of = controller
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = HUN_the_balkan_pact
+			FIN = {
+				exists = no
+			}
+		}
+
+		cosmetic_tag = FIN
+		cosmetic_ideology = democratic
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FIN
+					controller = {
+						OR = {
+							tag = SOV
+							NOT = {
+								PREV = {
+									is_core_of = PREV
+								}
+							}
+						}
+					}
+				}
+				FIN = {
+					set_state_owner = PREV
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = FIN
+					is_controlled_by_ROOT_or_ally = yes
+					NOT = {
+						is_core_of = controller
+					}
+				}
+				FIN = {
+					set_state_controller = PREV
+				}
+			}
+			puppet = FIN
+			set_autonomy = {
+				target = FIN
+				autonomy_state = autonomy_supervised_state
 			}
 		}
 	}

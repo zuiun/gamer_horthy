@@ -13,11 +13,12 @@ country_event = {
 
 	trigger = {
 		original_tag = HUN
+		NOT = { has_country_flag = gyula_gombos_died }
 	}
 
 	fire_only_once = yes
 
-	mean_time_to_happen = { 
+	mean_time_to_happen = {
 		days = 300
 		modifier = {
 			factor = 0.5
@@ -37,274 +38,7 @@ country_event = {
 		name = gamer_horthy.1.a # Rest in peace
 		add_stability = -0.1
 		retire_character = HUN_gyula_gombos_de_jakfa
-	}
-}
-
-# Hungary Wants to Rearm
-country_event = {
-	id = gamer_horthy.2
-	title = gamer_horthy.2.t
-	desc = gamer_horthy.2.desc
-	picture = GFX_report_event_generic_conference
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.2.a # Hungary has been punished enough
-
-		ai_chance = {
-			base = 10
-			modifier = {
-				factor = 5
-				is_historical_focus_on = yes
-			}
-		}
-
-		FROM = {
-			hidden_effect = {
-				add_to_variable = {
-					var = detente
-					value = 1
-				}
-			}
-
-			country_event = { id = gamer_horthy.3 hours = 4 }
-		}
-		custom_effect_tooltip = effects_tt
-		effect_tooltip = {
-			if = {
-				limit = {
-					FROM = {
-						AND = {
-							check_variable = {
-								var = detente
-								value = 1
-								compare = greater_than_or_equals
-							}
-							check_variable = {
-								var = detente
-								value = 3
-								compare = less_than
-							}
-						}
-					}
-				}
-				swap_ideas = {
-					remove_idea = HUN_treaty_of_triannon
-					add_idea = HUN_treaty_of_triannon_2
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						check_variable = {
-							var = detente
-							value = 3
-							compare = greater_than_or_equals
-						}
-					}
-				}
-				remove_ideas = HUN_treaty_of_triannon_2
-			}
-		}
-	}
-	option = {
-		name = gamer_horthy.2.b # Hungary is still a threat
-
-		ai_chance = {
-			base = 5
-		}
-
-		FROM = {
-			country_event = { id = gamer_horthy.4 hours = 4 }
-		}
-	}
-}
-
-# FROM Accepts
-country_event = {
-	id = gamer_horthy.3
-	title = gamer_horthy.3.t
-	desc = gamer_horthy.3.desc
-	picture = GFX_report_event_generic_sign_treaty2
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.3.a # FROM has made the right choice
-
-		if = {
-			limit = {
-				AND = {
-					check_variable = {
-						var = detente
-						value = 1
-						compare = greater_than_or_equals
-					}
-					check_variable = {
-						var = detente
-						value = 3
-						compare = less_than
-					}
-				}
-			}
-			swap_ideas = {
-				remove_idea = HUN_treaty_of_triannon
-				add_idea = HUN_treaty_of_triannon_2
-			}
-		}
-		if = {
-			limit = {
-				check_variable = {
-					var = detente
-					value = 3
-					compare = greater_than_or_equals
-				}
-			}
-			remove_ideas = HUN_treaty_of_triannon_2
-		}
-	}
-}
-
-# FROM Refuses
-country_event = {
-	id = gamer_horthy.4
-	title = gamer_horthy.4.t
-	desc = gamer_horthy.4.desc
-	picture = GFX_report_event_generic_read_write
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.4.a # FROM has made a mistake
-		add_war_support = 0.1
-	}
-}
-
-# Hungary Wants to Switch Sides
-country_event = {
-	id = gamer_horthy.5
-	title = gamer_horthy.5.t
-	desc = gamer_horthy.5.desc
-	picture = GFX_report_event_german_reichstag_gathering
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.5.a # Hungary might be useful to us
-
-		ai_chance = {
-			base = 5
-		}
-
-		every_country = {
-			limit = {
-				has_war_with = FROM
-				NOT = {
-					has_war_with = ROOT
-				}
-			}
-
-			white_peace = FROM
-		}
-
-		FROM = {
-			if = {
-				limit = {
-					is_in_faction = yes
-				}
-				faction_leader = {
-					country_event = {
-						id = gamer_horthy.8
-						hours = 4
-					}
-					remove_from_faction = FROM
-				}
-			}
-			if = {
-				limit ={
-					is_subject = yes
-				}
-				OVERLORD = {
-					set_autonomy = {
-						target = FROM
-						autonomy_state = autonomy_free
-						end_wars = no
-						end_civil_wars = no
-					}
-				}
-			}
-
-			country_event = {
-				id = gamer_horthy.6
-				hours = 4
-			}
-		}
-
-		add_to_faction = FROM
-	}
-
-	option = {
-		name = gamer_horthy.5.b # Hungary is a nation of cowards
-
-		ai_chance = {
-			base = 1
-			modifier = {
-				ROOT = {
-					has_government = fascism
-				}
-				factor = 15
-			}
-		}
-
-		FROM = {
-			country_event = {
-				id = gamer_horthy.7
-				hours = 4
-			}
-		}
-	}
-}
-
-# FROM Accepts
-country_event = {
-	id = gamer_horthy.6
-	title = gamer_horthy.6.t
-	desc = gamer_horthy.6.desc
-	picture = GFX_report_event_generic_sign_treaty2
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.6.a # We will redeem ourselves
-		add_war_support = 0.1
-	}
-}
-
-# FROM Refuses
-country_event = {
-	id = gamer_horthy.7
-	title = gamer_horthy.7.t
-	desc = gamer_horthy.7.desc
-	picture = GFX_report_event_generic_read_write
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.7.a # There is no future left for Hungary
-		add_stability = -0.2
-		add_war_support = -0.2
-	}
-}
-
-# Hungary Has Betrayed Us
-country_event = {
-	id = gamer_horthy.8
-	title = gamer_horthy.8.t
-	desc = gamer_horthy.8.desc
-	picture = GFX_report_event_hungarian_soldiers
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.8.a # They will pay for this
-		add_opinion_modifier = {
-			target = HUN
-			modifier = faction_traitor
-		}
+		set_country_flag = gyula_gombos_died
 	}
 }
 
@@ -405,8 +139,8 @@ country_event = {
 
 	option = {
 		name = gamer_horthy.10.a # A large price to pay for survival
-		retire_character = HUN_pal_teleki
 		add_stability = -0.2
+		retire_character = HUN_pal_teleki
 	}
 }
 
@@ -744,6 +478,7 @@ country_event = {
 
 	option = {
 		name = gamer_horthy.13.a # The correct choice
+		add_war_support = 0.05
 	}
 }
 
@@ -769,19 +504,9 @@ country_event = {
 	is_triggered_only = yes
 
 	immediate = {
-		if = {
-			limit = {
-				check_variable = {
-					var = global.foreign_support
-					value = 0
-					compare = greater_than
-				}
-			}
-
-			multiply_variable = {
-				var = global.foreign_support
-				value = 10
-			}
+		multiply_variable = {
+			var = global.foreign_support
+			value = 10
 		}
 	}
 
@@ -994,39 +719,13 @@ country_event = {
 # Hungary Offers a Treaty of Eternal Friendship
 country_event = {
 	id = gamer_horthy.19
-	title = {
-		text = gamer_horthy.19.t1
-		trigger = {
-			tag = YUG
-		}
-	}
-	title = {
-		text = gamer_horthy.19.t2
-		trigger = {
-			tag = POL
-		}
-	}
-	desc = {
-		text = gamer_horthy.19.desc1
-		trigger = {
-			tag = YUG
-		}
-	}
-	desc = {
-		text = gamer_horthy.19.desc2
-		trigger = {
-			tag = POL
-		}
-	}
+	title = gamer_horthy.19.t
+	desc = gamer_horthy.19.desc
 	picture = GFX_report_event_generic_sign_treaty3
 	is_triggered_only = yes
 
 	option = {
-		name = gamer_horthy.19.a1 # An excellent idea
-
-		trigger = {
-			tag = YUG
-		}
+		name = gamer_horthy.19.a # An excellent idea
 
 		ai_chance = {
 			base = 2
@@ -1078,46 +777,7 @@ country_event = {
 	}
 
 	option = {
-		name = gamer_horthy.19.a2 # Pole and Hungarian brothers be
-
-		trigger = {
-			tag = POL
-		}
-
-		ai_chance = {
-			base = 10
-		}
-
-		hidden_effect = {
-			add_ai_strategy = {
-				type = alliance
-				id = "HUN"
-				value = 200
-			}
-		}
-
-		give_guarantee = FROM
-
-		FROM = {
-			country_event = {
-				id = gamer_horthy.20
-				hours = 4
-			}
-			effect_tooltip = {
-				give_guarantee = ROOT
-			}
-		}
-	}
-
-	option = {
-		name = gamer_horthy.19.b1 # We will be fine
-
-		trigger = {
-			OR = {
-				tag = YUG
-				tag = POL
-			}
-		}
+		name = gamer_horthy.19.b # We will be fine
 
 		ai_chance = {
 			base = 1
@@ -1135,130 +795,31 @@ country_event = {
 # FROM Accepts
 country_event = {
 	id = gamer_horthy.20
-	title = {
-		text = gamer_horthy.20.t1
-		trigger = {
-			FROM = {
-				tag = YUG
-			}
-		}
-	}
-	title = {
-		text = gamer_horthy.20.t2
-		trigger = {
-			FROM = {
-				tag = POL
-			}
-		}
-	}
-	desc = {
-		text = gamer_horthy.20.desc1
-		trigger = {
-			FROM = {
-				tag = YUG
-			}
-		}
-	}
-	desc = {
-		text = gamer_horthy.20.desc2
-		trigger = {
-			FROM = {
-				tag = POL
-			}
-		}
-	}
+	title = gamer_horthy.20.t
+	desc = gamer_horthy.20.desc
 	picture = GFX_report_event_generic_sign_treaty2
 	is_triggered_only = yes
 
 	option = {
-		name = gamer_horthy.20.a1 # A step towards security
+		name = gamer_horthy.20.a # A step towards security
 		add_stability = -0.1
-
-		trigger = {
-			FROM = {
-				tag = YUG
-			}
-		}
 
 		give_guarantee = FROM
 		unlock_national_focus = HUN_demand_vojvodina
-	}
-
-	option = {
-		name = gamer_horthy.20.a2 # Together in dark times
-
-		trigger = {
-			FROM = {
-				tag = POL
-			}
-		}
-
-		give_guarantee = FROM
 	}
 }
 
 # FROM Refuses
 country_event = {
 	id = gamer_horthy.21
-	title = {
-		text = gamer_horthy.21.t1
-		trigger = {
-			FROM = {
-				NOT = {
-					tag = POL
-				}
-			}
-		}
-	}
-	title = {
-		text = gamer_horthy.21.t2
-		trigger = {
-			FROM = {
-				tag = POL
-			}
-		}
-	}
-	desc = {
-		text = gamer_horthy.21.desc1
-		trigger = {
-			FROM = {
-				NOT = {
-					tag = POL
-				}
-			}
-		}
-	}
-	desc = {
-		text = gamer_horthy.21.desc2
-		trigger = {
-			FROM = {
-				tag = POL
-			}
-		}
-	}
+	title = gamer_horthy.21.t
+	desc = gamer_horthy.21.desc
+
 	picture = GFX_report_event_generic_read_write
 	is_triggered_only = yes
 
 	option = {
-		name = gamer_horthy.21.a1 # Unfortunate
-
-		trigger = {
-			NOT = {
-				FROM = {
-					tag = POL
-				}
-			}
-		}
-	}
-
-	option = {
-		name = gamer_horthy.21.a2 # If not Poland, then who else?
-
-		trigger = {
-			FROM = {
-				tag = POL
-			}
-		}
+		name = gamer_horthy.21.a # Unfortunate
 	}
 }
 
@@ -1349,10 +910,6 @@ country_event = {
 
 	option = {
 		name = gamer_horthy.24.a # We are doomed
-		add_popularity = {
-			ideology = neutrality
-			popularity = 0.4
-		}
 	}
 }
 
@@ -1598,14 +1155,12 @@ country_event = {
 
 		add_stability = -0.05
 		73 = {
-			remove_core_of = HUN
-			remove_claim_by = HUN
 			add_resistance = 60
 		}
 	}
 }
 
-# The Habsburg Crisis (Austria)
+# The Habsburg Crisis
 country_event = {
 	id = gamer_horthy.36
 	title = gamer_horthy.36.t
@@ -1654,86 +1209,6 @@ country_event = {
 				}
 			}
 		}
-	}
-}
-
-# The Habsburg Crisis (Little Entente)
-country_event = {
-	id = gamer_horthy.37
-	title = gamer_horthy.37.t
-	desc = gamer_horthy.37.desc
-	picture = GFX_report_event_generic_rally2
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.37.a # If the situation develops unfavourably, then we will act
-		ai_chance = {
-			base = 5
-		}
-		add_war_support = 0.1
-		hidden_effect = {
-			set_country_flag = HUN_oppose_habsburgs
-		}
-	}
-
-	option = {
-		name = gamer_horthy.37.b # The cost of war outweighs the price of peace
-		ai_chance = {
-			base = 1
-		}
-		add_war_support = -0.1
-		add_stability = 0.1
-	}
-
-	option = {
-		name = gamer_horthy.37.b # The end of the Empire was a mistake anyway
-		ai_chance = {
-			base = 1
-			modifier = {
-				factor = 3
-				strength_ratio = {
-					tag = HUN
-					ratio < 0.5
-				}
-			}
-		}
-		FROM = {
-			puppet = ROOT
-		}
-	}
-}
-
-# The Habsburg Disaster
-country_event = {
-	id = gamer_horthy.38
-	title = gamer_horthy.38.t
-	desc = gamer_horthy.38.desc
-	picture = GFX_report_event_hungarian_soldiers
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.38.a # It is time to act
-		trigger = {
-			has_country_flag = HUN_oppose_habsburgs
-		}
-		ai_chance = {
-			base = 5
-		}
-		add_war_support = 0.1
-		create_wargoal = {
-			target = HUN
-			type = topple_government
-		}
-	}
-
-	option = {
-		name = gamer_horthy.38.b # Would the Hungarians really go that far
-		ai_chance = {
-			base = 1
-		}
-		add_threat = -1
-		add_stability = -0.1
-		add_war_support = -0.1
 	}
 }
 
@@ -1887,6 +1362,47 @@ country_event = {
 			create_wargoal = {
 				target = ROOT
 				type = puppet_wargoal_focus
+			}
+		}
+	}
+}
+
+# Brothers No Longer
+country_event = {
+	id = gamer_horthy.42
+	title = gamer_horthy.42.t
+	desc = gamer_horthy.42.desc
+	picture = GFX_report_event_polish_army
+
+	trigger = {
+		OR = {
+			tag = HUN
+			tag = POL
+		}
+
+		HUN = {
+			has_war_with = POL
+			NOT = { has_completed_focus = HUN_promote_hungarianism }
+		}
+		NOT = { has_country_flag = not_brothers }
+	}
+
+	option = {
+		name = gamer_horthy.42.a # So be it
+		hidden_effect = { set_country_flag = not_brothers }
+		if = {
+			limit = {
+				tag = HUN
+			}
+			remove_opinion_modifier = {
+				target = POL
+				modifier = HUN_POL_friendship
+			}
+		}
+		else = {
+			remove_opinion_modifier = {
+				target = HUN
+				modifier = HUN_POL_friendship
 			}
 		}
 	}

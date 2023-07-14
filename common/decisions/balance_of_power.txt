@@ -159,8 +159,8 @@ HUN_balance_of_power_category = {
 				1 = {
 					add_war_support = 0.1
 					retire_character = HUN_istvan_horthy
-					HUN_add_conservative_bop_small = yes
-					HUN_add_army_bop_small = yes
+					HUN_add_conservative_bop_large = yes
+					HUN_add_army_bop_large = yes
 				}
 				9 = {
 					hidden_effect = {
@@ -171,6 +171,33 @@ HUN_balance_of_power_category = {
 					HUN_add_crown_bop_small = yes
 				}
 			}
+		}
+	}
+
+	retire_old_soldiers = {
+		icon = generic_military
+		priority = 11
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_pivot_towards_germany
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_movement_of_hungarian_life
+		}
+
+		cost = 20
+		fire_only_once = yes
+
+		complete_effect = {
+			retire_character = HUN_dezso_laszlo
+			HUN_add_conservative_bop_large = yes
+			HUN_add_army_bop_large = yes
 		}
 	}
 }

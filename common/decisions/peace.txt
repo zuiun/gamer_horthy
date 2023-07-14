@@ -18,7 +18,7 @@ peace_hun = {
 			has_completed_focus = HUN_peace_overtures
 			is_in_faction = yes
 			is_faction_leader = no
-			faction_leader = { is_peace_target = yes }
+			faction_leader = { is_suspicion_target = yes }
 		}
 
 		activation = {
@@ -178,7 +178,7 @@ peace_hun = {
 				if = {
 					limit = {
 						any_enemy_country = {
-							is_peace_target = yes
+							is_favour_target = yes
 							check_variable = { peace_favour < 6 }
 						}
 					}
@@ -197,7 +197,7 @@ peace_hun = {
 				else_if = {
 					limit = {
 						any_enemy_country = {
-							is_peace_target = yes
+							is_favour_target = yes
 							check_variable = { peace_favour < 11 }
 						}
 					}
@@ -216,7 +216,7 @@ peace_hun = {
 				else_if = {
 					limit = {
 						any_enemy_country = {
-							is_peace_target = yes
+							is_favour_target = yes
 							check_variable = { peace_favour < 16 }
 						}
 					}
@@ -262,10 +262,7 @@ peace_hun = {
 
 				if = {
 					limit = {
-						divisions_in_state = {
-							size > 7
-							state = capital
-						}
+						has_country_flag = can_remove_divisions
 					}
 					clr_country_flag = can_remove_divisions
 				}
@@ -277,7 +274,7 @@ peace_hun = {
 			faction_leader = { HUN_add_suspicion_small = yes }
 			every_enemy_country = {
 				limit = {
-					is_peace_target = yes
+					is_favour_target = yes
 				}
 				HUN_add_favour_medium = yes
 			}
@@ -320,10 +317,6 @@ peace_hun = {
 		target_trigger = {
 			FROM = {
 				is_peace_target = yes
-				OR = {
-					is_in_faction_with = HUN
-					has_war_with = HUN
-				}
 			}
 		}
 
@@ -501,13 +494,14 @@ peace_hun = {
 		cost = 50
 		days_re_enable = 90
 		state_target = yes
+		on_map_mode = map_only
 
 		complete_effect = {
 			faction_leader = { HUN_add_suspicion_large = yes }
 
 			every_enemy_country = {
 				limit = {
-					is_peace_target = yes
+					is_favour_target = yes
 				}
 				HUN_add_favour_medium = yes
 			}
@@ -544,13 +538,14 @@ peace_hun = {
 		cost = 30
 		days_re_enable = 30
 		state_target = yes
+		on_map_mode = map_only
 
 		complete_effect = {
 			faction_leader = { HUN_add_suspicion_medium = yes }
 
 			every_enemy_country = {
 				limit = {
-					is_peace_target = yes
+					is_favour_target = yes
 				}
 				HUN_add_favour_small = yes
 			}
@@ -578,9 +573,7 @@ peace_hun = {
 
 		target_trigger = {
 			FROM = {
-				is_faction_leader = yes
-				is_in_faction_with = HUN
-				is_peace_target = yes
+				is_suspicion_target = yes
 			}
 		}
 
@@ -592,7 +585,7 @@ peace_hun = {
 
 			every_enemy_country = {
 				limit = {
-					is_peace_target = yes
+					is_favour_target = yes
 				}
 				HUN_add_favour_max = yes
 			}
@@ -631,13 +624,14 @@ peace_hun = {
 		cost = 50
 		days_re_enable = 90
 		state_target = yes
+		on_map_mode = map_only
 
 		complete_effect = {
 			faction_leader = { HUN_remove_suspicion_small = yes }
 
 			every_enemy_country = {
 				limit = {
-					is_peace_target = yes
+					is_favour_target = yes
 				}
 				HUN_remove_favour_small = yes
 			}
@@ -666,9 +660,7 @@ peace_hun = {
 
 		target_trigger = {
 			FROM = {
-				is_faction_leader = yes
-				is_in_faction_with = HUN
-				is_peace_target = yes
+				is_suspicion_target = yes
 			}
 		}
 
@@ -737,165 +729,7 @@ peace_hun = {
 	}
 
 	return_land = {
-		# Defect
-	}
-
-	defect_to_FROM = {
-		icon = generic_nationalism
-		priority = 12
-
-		allowed = {
-			always = no
-			original_tag = HUN
-		}
-
-		available = {
-			has_completed_focus = HUN_seizecontrolofhungarysfuture
-			OR = {
-				has_completed_focus = HUN_the_march_front
-				has_completed_focus = HUN_strengthen_the_aristocracy
-			}
-			is_faction_leader = no # you shouldn't be able to betray your own faction
-			has_capitulated = no
-			if = {
-				limit = {
-					FROM = {
-						has_government = democratic
-					}
-				}
-				OR = {
-					ROOT = { neutrality > 0.4 }
-					ROOT = { democratic > 0.3 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = fascism
-					}
-				}
-				OR = {
-					ROOT = { neutrality > 0.4 }
-					ROOT = { fascism > 0.3 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = fascism
-					}
-				}
-				OR = {
-					ROOT = { neutrality > 0.4 }
-					ROOT = { fascism > 0.3 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = communism
-					}
-				}
-				OR = {
-					ROOT = { neutrality > 0.4 }
-					ROOT = { communism > 0.3 }
-				}
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = neutrality
-					}
-				}
-				ROOT = { neutrality > 0.3 }
-			}
-		}
-
-		target_trigger = {
-			FROM = {
-				is_faction_leader = yes
-				NOT = { is_in_faction_with = ROOT }
-				has_war_with = ROOT
-				OR = {
-					capital_scope = { is_on_continent = europe }
-					original_tag = USA
-				}
-				OR = {
-					NOT = {
-						original_tag = GER
-					}
-					NOT = {
-						has_global_flag = HUN_germany_has_ideas
-					}
-				}
-			}
-		}
-
-		visible = {
-			# original_tag = HUN
-			always = no
-			# complicated and ahistorical
-		}
-
-		cost = 100
-		fire_only_once = yes
-
-		complete_effect = {
-			FROM = {
-				country_event = {
-					id = gamer_horthy.5
-					hours = 4
-				}
-
-				custom_effect_tooltip = if_they_accept_tt
-				effect_tooltip = {
-					every_country = {
-						limit = {
-							has_war_with = ROOT
-							NOT = {
-								has_war_with = FROM
-							}
-						}
-
-						white_peace = ROOT
-					}
-
-					ROOT = {
-						if = {
-							limit = {
-								is_in_faction = yes
-							}
-							faction_leader = {
-								country_event = {
-									id = gamer_horthy.8
-									hours = 4
-								}
-							}
-						}
-						if = {
-							limit ={
-								is_subject = yes
-							}
-							OVERLORD = {
-								set_autonomy = {
-									target = ROOT
-									autonomy_state = autonomy_free
-									end_wars = no
-									end_civil_wars = no
-								}
-							}
-						}
-
-						country_event = {
-							id = gamer_horthy.6
-							hours = 4
-						}
-					}
-
-					add_to_faction = ROOT
-				}
-			}
-		}
+		# Armistice
 	}
 
 	peace_with_FROM = {

@@ -344,30 +344,6 @@ focus_tree = {
 				}
 			}
 
-#			every_country = {
-#				limit = {
-#					OR = {
-#						tag = CZE
-#						tag = ROM
-#						tag = YUG
-#					}
-#					NOT = {
-#						has_war_with = HUN
-#						is_subject_of = HUN
-#					}
-#				}
-#				country_event = {
-#					id = gamer_horthy.37
-#					hours = 4
-#				}
-#				custom_effect_tooltip = if_they_accept_tt
-#				effect_tooltip = {
-#					HUN = {
-#						puppet = PREV
-#					}
-#				}
-#			}
-
 			hidden_effect = {
 				news_event = { id = news.295 }
 				set_global_flag = form_austria_hungary_flag
@@ -376,15 +352,13 @@ focus_tree = {
 		}
 	}
 
-	##### Press Historic Claims #####
-
 	# Press Historic Claims
 	focus = {
 		id = HUN_press_historic_claims
 		icon = GFX_focus_generic_strike_at_democracy1
 		prerequisite = { focus = HUN_proclaim_the_restoration_of_austria_hungary }
 		mutually_exclusive = { focus = HUN_bulwark_against_radicalism }
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = HUN_proclaim_the_restoration_of_austria_hungary
 
@@ -420,18 +394,21 @@ focus_tree = {
 				add_claim_by = HUN
 			}
 
-			if = {
+			every_state = {
 				limit = {
-					NOT = { is_ally_with = POL }
+					OR = {
+						is_in_cisleithania = yes
+						is_in_greater_hungary = yes
+						is_in_historic_hungary = yes
+					}
+					is_controlled_by_ROOT_or_subject = no
 				}
-				remove_opinion_modifier = {
-					target = POL
-					modifier = HUN_POL_friendship
-				}
-				POL = {
-					remove_opinion_modifier = {
-						target = HUN
-						modifier = HUN_POL_friendship
+				owner = {
+					HUN = {
+						create_wargoal = {
+							type = annex_everything
+							target = PREV
+						}
 					}
 				}
 			}
@@ -501,532 +478,13 @@ focus_tree = {
 		}
 	}
 
-	##### Bulwark Against Radicalism #####
-
-	# Bulwark Against Radicalism
-	focus = {
-		id = HUN_bulwark_against_radicalism
-		icon = GFX_focus_rom_royal_dictatorship
-		prerequisite = { focus = HUN_proclaim_the_restoration_of_austria_hungary focus = HUN_rapproachement_with_little_entente focus = HUN_the_rise_of_germany }
-		mutually_exclusive = { focus = HUN_press_historic_claims } mutually_exclusive = { focus = HUN_the_small_regent } mutually_exclusive = { focus = HUN_preserve_greater_hungary }
-		x = 5
-		y = 1
-		relative_position_id = HUN_proclaim_the_restoration_of_austria_hungary
-
-		cost = 10
-
-		available = {
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			has_prime_minister_finished = yes
-			NOT = { has_completed_focus = HUN_renounce_the_treaty_of_trianon }
-			has_german_trade = no
-		}
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		completion_reward = {
-			set_rule = {
-				can_send_volunteers = yes
-				can_guarantee_other_ideologies = yes
-			}
-			add_threat = -1
-			add_ideas = HUN_bulwark_against_radicalism_idea
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HUN_the_rise_of_germany }
-				}
-				custom_effect_tooltip = german_trade_never_tt
-			}
-		}
-	}
-
-	# Support the Paneuropean Union
-	focus = {
-		id = HUN_support_paneuropean_union
-		icon = GFX_goal_generic_intelligence_exchange
-		prerequisite = { focus = HUN_bulwark_against_radicalism }
-		mutually_exclusive = { focus = HUN_the_balkan_pact } mutually_exclusive = { focus = HUN_danubian_federation }
-		x = -4
-		y = 1
-		relative_position_id = HUN_bulwark_against_radicalism
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-
-		available = {
-			has_completed_focus = HUN_invite_the_habsburg_prince
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-		}
-		bypass = {
-			is_faction_leader = yes
-		}
-		completion_reward = {
-			set_rule = { can_create_factions = yes }
-			create_faction = HUN_PANEUROPA_FACTION
-			unlock_decision_tooltip = europe_outpost_FROM
-		}
-	}
-
-	# Let Europe Arise
-	focus = {
-		id = HUN_let_europe_arise
-		icon = GFX_goal_generic_demand_territory
-		prerequisite = { focus = HUN_support_paneuropean_union }
-		x = 0
-		y = 1
-		relative_position_id = HUN_support_paneuropean_union
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-		}
-		completion_reward = {
-			every_other_country = {
-				limit = {
-					OR = {
-						tag = POL
-						AND = {
-							capital_scope = { is_on_continent = europe }
-							is_major = no
-							OR = {
-								any_neighbor_country = { tag = HUN }
-								any_neighbor_country = {
-									OR = {
-										has_government = communism
-										has_government = fascism
-									}
-								}
-							}
-						}
-					}
-					OR = {
-						has_government = neutrality
-						has_government = democratic
-					}
-					NOT = { is_guaranteed_by = HUN }
-				}
-#				add_ideas = HUN_battleground_against_radicalism
-				HUN = { give_guarantee = PREV }
-			}
-			every_country = {
-				limit = {
-					has_country_flag = HUN_paneuropa_outpost
-					OR = {
-						has_government = neutrality
-						has_government = democratic
-					}
-				}
-				country_event = {
-					id = generic.5
-					hours = 4
-				}
-			}
-			unlock_decision_tooltip = europe_invite_FROM
-		}
-	}
-
-	# The Briand Plan
-	focus = {
-		id = HUN_the_briand_plan
-		icon = GFX_focus_SOV_merge_plants
-		prerequisite = { focus = HUN_let_europe_arise }
-		x = -1
-		y = 1
-		relative_position_id = HUN_let_europe_arise
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_INDUSTRY
-		}
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			any_other_country = {
-				capital_scope = {
-					is_on_continent = europe
-				}
-				is_in_faction_with = HUN
-			}
-		}
-		completion_reward = {
-			every_country = {
-				limit = {
-					capital_scope = {
-						is_on_continent = europe
-					}
-					is_in_faction_with = HUN
-				}
-				add_ideas = HUN_eec
-			}
-			every_country = {
-				limit = {
-					capital_scope = {
-						is_on_continent = europe
-					}
-					is_in_faction_with = HUN
-				}
-				every_owned_state = {
-					limit = {
-						is_on_continent = europe
-						any_neighbor_state = {
-							owner = {
-								NOT = { tag = PREV.PREV.PREV }
-								is_in_faction_with = PREV.PREV.PREV
-							}
-						}
-					}
-					add_extra_state_shared_building_slots = 1
-				}
-				every_owned_state = {
-					limit = {
-						is_on_continent = europe
-						any_neighbor_state = {
-							owner = {
-								NOT = { tag = PREV.PREV.PREV }
-								is_in_faction_with = PREV.PREV.PREV
-							}
-						}
-						free_building_slots = {
-							building = infrastructure
-							size > 0
-						}
-					}
-					add_building_construction = {
-						type = infrastructure
-						level = 1
-						instant_build = yes
-					}
-				}
-			}
-			unlock_decision_tooltip = join_eec_FROM
-		}
-	}
-
-	# The Erasmus Programme
-	focus = {
-		id = HUN_the_erasmus_programme
-		icon = GFX_goal_generic_scientific_exchange
-		prerequisite = { focus = HUN_the_briand_plan }
-		x = 0
-		y = 1
-		relative_position_id = HUN_the_briand_plan
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_RESEARCH
-		}
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			any_other_country = {
-				capital_scope = {
-					is_on_continent = europe
-				}
-				is_in_faction_with = HUN
-			}
-		}
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = HUN_eec
-					capital_scope = {
-						is_on_continent = europe
-					}
-					is_in_faction_with = HUN
-				}
-				swap_ideas = {
-					remove_idea = HUN_eec
-					add_idea = HUN_eec2
-				}
-			}
-			every_country = {
-				limit = {
-					is_in_faction_with = HUN
-					capital_scope = {
-						is_on_continent = europe
-					}
-				}
-				add_to_tech_sharing_group = HUN_erasmus_programme_tech_group
-			}
-			unlock_decision_tooltip = join_ec_FROM
-		}
-	}
-
-	# The Salvation of the Common People
-	focus = {
-		id = HUN_the_salvation_of_the_common_people
-		icon = GFX_goal_support_democracy
-		prerequisite = { focus = HUN_let_europe_arise }
-		x = 1
-		y = 1
-		relative_position_id = HUN_let_europe_arise
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_INDUSTRY
-			FOCUS_FILTER_MANPOWER
-		}
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			any_other_country = {
-				capital_scope = {
-					is_on_continent = europe
-				}
-				is_in_faction_with = HUN
-			}
-		}
-		completion_reward = {
-#			swap_ideas = {
-#				remove_idea = HUN_bulwark_against_radicalism_idea
-#				add_idea = HUN_bulwark_against_radicalism2
-#			}
-			every_state = {
-				limit = {
-					is_on_continent = europe
-					is_capital = yes
-					owner = { is_in_faction_with = HUN }
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	# Every Race and Every Land
-	focus = {
-		id = HUN_every_race_and_every_land
-		icon = GFX_goal_generic_improve_relations
-		prerequisite = { focus = HUN_the_salvation_of_the_common_people }
-		x = 0
-		y = 1
-		relative_position_id = HUN_the_salvation_of_the_common_people
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_ANNEXATION
-		}
-		will_lead_to_war_with = GER
-		will_lead_to_war_with = SOV
-		will_lead_to_war_with = ITA
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			any_other_country = {
-				capital_scope = {
-					is_on_continent = europe
-				}
-				is_in_faction_with = HUN
-			}
-		}
-		completion_reward = {
-			every_country = {
-				limit = {
-					OR = {
-						has_government = neutrality
-						has_government = democratic
-					}
-					capital_scope = {
-						is_on_continent = europe
-					}
-					is_major = no
-					any_neighbor_country = {
-						OR = {
-							has_government = communism
-							has_government = fascism
-						}
-					}
-				}
-				add_ideas = HUN_battleground_against_radicalism
-			}
-#			every_country = {
-#				limit = {
-#					has_idea = HUN_battleground_against_radicalism
-#				}
-#				swap_ideas = {
-#					remove_idea = HUN_battleground_against_radicalism
-#					add_idea = HUN_battleground_against_radicalism2
-#				}
-#			}
-			every_country = {
-				limit = {
-					OR = {
-						has_government = fascism
-						has_government = communism
-					}
-					capital_scope = {
-						is_on_continent = europe
-					}
-				}
-				HUN = {
-					create_wargoal = {
-						type = topple_government
-						target = PREV
-					}
-				}
-			}
-		}
-	}
-
-	# European Union
-	focus = {
-		id = HUN_european_union
-		icon = GFX_goal_generic_national_unity
-		prerequisite = { focus = HUN_the_erasmus_programme } prerequisite = { focus = HUN_every_race_and_every_land }
-		x = 1
-		y = 1
-		relative_position_id = HUN_the_erasmus_programme
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_INDUSTRY
-			FOCUS_FILTER_RESEARCH
-#			FOCUS_FILTER_ANNEXATION
-		}
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			any_other_country = {
-				capital_scope = {
-					is_on_continent = europe
-				}
-				is_in_faction_with = HUN
-			}
-		}
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = HUN_eec2
-					capital_scope = {
-						is_on_continent = europe
-					}
-					is_in_faction_with = HUN
-				}
-				swap_ideas = {
-					remove_idea = HUN_eec2
-					add_idea = HUN_eec3
-				}
-			}
-			add_research_slot = 1
-			unlock_decision_tooltip = european_values
-#			unlock_decision_tooltip = demand_compliance
-			unlock_decision_tooltip = join_eu_FROM
-			custom_effect_tooltip = all_europe_tt
-		}
-	}
-
-	# From the Atlantic to the Urals
-	focus = {
-		id = HUN_from_the_atlantic_to_the_urals
-		icon = GFX_focus_generic_befriend_turkey
-		prerequisite = { focus = HUN_european_union }
-		x = 0
-		y = 1
-		relative_position_id = HUN_european_union
-
-		cost = 10
-
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_ANNEXATION
-		}
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			any_other_country = {
-				capital_scope = {
-					is_on_continent = europe
-				}
-				is_in_faction_with = HUN
-			}
-		}
-		completion_reward = {
-			every_other_country = {
-				limit = {
-					any_owned_state = {
-						is_in_gaulle_europe = yes
-					}
-					is_in_faction = no
-				}
-				country_event = {
-					id = generic.5
-					hours = 4
-				}
-			}
-			custom_effect_tooltip = europe_expand_tt
-		}
-	}
-
 	############################
 	##### DEMOCRATIC KING ######
 	############################
 
 	focus = {
 		id = HUN_elect_a_democratic_king
-		icon = GFX_focus_generic_home_defense
+		icon = GFX_goal_generic_major_alliance
 		prerequisite = { focus = HUN_elect_a_king }
 		mutually_exclusive = { focus =  HUN_invite_the_habsburg_prince }
 		x = 2
@@ -1070,8 +528,8 @@ focus_tree = {
 				}
 				add_ideas = HUN_dynastic_ties
 			}
-			unlock_decision_tooltip = HUN_call_in_sweden
 			add_ideas = HUN_charles_v
+			unlock_decision_tooltip = HUN_call_in_sweden
 			add_relation_modifier = {
 				target = SWE
 				modifier = HUN_dynastic_ties_license
@@ -1196,7 +654,6 @@ focus_tree = {
 				has_government = neutrality
 				has_government = democratic
 			}
-			NOT = { has_completed_focus = HUN_renounce_the_treaty_of_trianon }
 			has_german_trade = no
 		}
 
@@ -1239,14 +696,9 @@ focus_tree = {
 				}
 				FRA = { country_event = { id = DOD_hungary.30 } }
 			}
-			if = {
+			else_if = {
 				limit = {
 					country_exists = ROM
-					OR = {
-						FRA = { NOT = { has_completed_focus = FRA_strengthen_the_little_entente } }
-						FRA = { exists = no }
-						FRA = { is_subject = yes }
-					}
 				}
 				ROM = { country_event = { id = DOD_hungary.30 } }
 			}
@@ -1316,11 +768,54 @@ focus_tree = {
 		}
 	}
 
+	
+	##### Bulwark Against Radicalism #####
+
+	# Bulwark Against Radicalism
+	focus = {
+		id = HUN_bulwark_against_radicalism
+		icon = GFX_focus_rom_royal_dictatorship
+		prerequisite = { focus = HUN_proclaim_the_restoration_of_austria_hungary focus = HUN_rapproachement_with_little_entente focus = HUN_the_rise_of_germany }
+		mutually_exclusive = { focus = HUN_press_historic_claims }
+		x = 5
+		y = 1
+		relative_position_id = HUN_proclaim_the_restoration_of_austria_hungary
+
+		cost = 10
+
+		available = {
+			NOT = { has_completed_focus = HUN_renounce_the_treaty_of_trianon }
+			has_prime_minister_finished = yes
+			has_german_trade = no
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
+		}
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			set_rule = {
+				can_send_volunteers = yes
+				can_guarantee_other_ideologies = yes
+			}
+			add_threat = -1
+			add_ideas = HUN_bulwark_against_radicalism_idea
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_the_rise_of_germany }
+				}
+				custom_effect_tooltip = german_trade_never_tt
+			}
+		}
+	}
+
 	focus = {
 		id = HUN_the_balkan_pact
 		icon = GFX_goal_generic_national_unity
 		prerequisite = { focus = HUN_bulwark_against_radicalism }
-		mutually_exclusive = { focus = HUN_support_paneuropean_union } mutually_exclusive = { focus = HUN_danubian_federation }
+		mutually_exclusive = { focus = HUN_danubian_federation }
 		x = -1
 		y = 1
 		relative_position_id = HUN_bulwark_against_radicalism
@@ -1374,73 +869,12 @@ focus_tree = {
 		}
 	}
 
-	# Fortify Our Borders
-	focus = {
-		id = HUN_fortify_our_borders
-		icon = GFX_goal_generic_fortify_city
-		prerequisite = { focus = HUN_the_balkan_pact }
-		x = 1
-		y = 1
-		relative_position_id = HUN_the_balkan_pact
-
-		cost = 10
-
-		available = {
-			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-		}
-
-		search_filters = {
-			FOCUS_FILTER_INDUSTRY
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					is_in_faction_with = HUN
-					any_neighbor_country = {
-						OR = {
-							is_major = yes
-							has_government = fascism
-							has_government = communism
-						}
-					}
-				}
-				every_owned_state = {
-					limit = {
-						any_neighbor_state = {
-							owner = {
-								OR = {
-									is_major = yes
-									has_government = fascism
-									has_government = communism
-								}
-							}
-						}
-					}
-					set_building_level = {
-						type = bunker
-						level = 2
-						province = {
-							all_provinces = yes
-							limit_to_border = yes
-							level < 2
-						}
-					}
-				}
-			}
-		}
-	}
-
 	# Alliance With Poland
 	focus = {
 		id = HUN_alliance_with_poland
 		icon = GFX_focus_generic_polish_deal
 		prerequisite = { focus = HUN_the_balkan_pact }
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HUN_the_balkan_pact
 
@@ -1483,8 +917,8 @@ focus_tree = {
 	focus = {
 		id = HUN_in_defence_democracy
 		icon = GFX_focus_mex_restore_the_army_of_christ
-		prerequisite = { focus = HUN_fortify_our_borders } prerequisite = { focus = HUN_alliance_with_poland }
-		x = 1
+		prerequisite = { focus = HUN_alliance_with_poland }
+		x = 0
 		y = 1
 		relative_position_id = HUN_alliance_with_poland
 
@@ -1501,7 +935,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 100
+			add_political_power = 50
 			add_ideas = HUN_prince_wilhelm
 		}
 	}
@@ -1521,9 +955,6 @@ focus_tree = {
 			is_faction_leader = yes
 			has_government = democratic
 			GER = {
-				NOT = {
-					has_government = democratic
-				}
 				has_added_tension_amount > 5
 			}
 		}
@@ -1613,13 +1044,164 @@ focus_tree = {
 		}
 	}
 
+	# Support the Paneuropean Union
+	focus = {
+		id = HUN_support_paneuropean_union
+		icon = GFX_goal_generic_intelligence_exchange
+		prerequisite = { focus = HUN_the_balkan_pact }
+		x = -1
+		y = 1
+		relative_position_id = HUN_the_balkan_pact
+
+		cost = 10
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+
+		available = {
+			has_country_leader = {
+				character = HUN_otto_von_habsburg
+			}
+			is_faction_leader = yes
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
+		}
+		completion_reward = {
+			set_faction_name = HUN_PANEUROPA_FACTION
+			every_other_country = {
+				limit = {
+					OR = {
+						tag = POL
+						AND = {
+							capital_scope = { is_on_continent = europe }
+							is_major = no
+							OR = {
+								any_neighbor_country = { tag = HUN }
+								any_neighbor_country = {
+									OR = {
+										has_government = communism
+										has_government = fascism
+									}
+								}
+							}
+						}
+					}
+					OR = {
+						has_government = neutrality
+						has_government = democratic
+					}
+					NOT = { is_guaranteed_by = HUN }
+				}
+				add_ideas = HUN_battleground_against_radicalism
+				HUN = { give_guarantee = PREV }
+			}
+			unlock_decision_tooltip = europe_outpost_FROM
+		}
+	}
+
+	# Let Europe Arise
+	focus = {
+		id = HUN_let_europe_arise
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = HUN_support_paneuropean_union } prerequisite = { focus = HUN_alliance_with_poland }
+		x = 0
+		y = 1
+		relative_position_id = HUN_support_paneuropean_union
+
+		cost = 10
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_RESEARCH
+		}
+		available = {
+			is_faction_leader = yes
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
+			any_other_country = {
+				capital_scope = {
+					is_on_continent = europe
+				}
+				is_in_faction_with = HUN
+			}
+		}
+		completion_reward = {
+			add_research_slot = 1
+			every_other_country = {
+				limit = {
+					has_country_flag = HUN_paneuropa_outpost
+					OR = {
+						has_government = neutrality
+						has_government = democratic
+					}
+				}
+				country_event = {
+					id = generic.5
+					hours = 4
+				}
+			}
+			unlock_decision_tooltip = europe_invite_FROM
+			custom_effect_tooltip = all_europe_tt
+		}
+	}
+
+	# From the Atlantic to the Urals
+	focus = {
+		id = HUN_from_the_atlantic_to_the_urals
+		icon = GFX_focus_generic_befriend_turkey
+		prerequisite = { focus = HUN_let_europe_arise }
+		x = 0
+		y = 1
+		relative_position_id = HUN_let_europe_arise
+
+		cost = 5
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_ANNEXATION
+		}
+		available = {
+			is_faction_leader = yes
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
+			any_other_country = {
+				capital_scope = {
+					is_on_continent = europe
+				}
+				is_in_faction_with = HUN
+			}
+		}
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					any_owned_state = {
+						is_in_gaulle_europe = yes
+					}
+					is_in_faction = no
+				}
+				country_event = {
+					id = generic.5
+					hours = 4
+				}
+			}
+			custom_effect_tooltip = europe_expand_tt
+		}
+	}
+
 	##### CONTINUE THE REGENCY #####
 
 	#Continue the Regency
 	focus = {
 		id = HUN_continue_the_regency
 		icon = GFX_goal_generic_improve_relations
-		x = 8
+		x = 9
 		y = 0
 		relative_position_id = HUN_strengthen_the_monarchists
 		cost = 5
@@ -1653,11 +1235,11 @@ focus_tree = {
 	# The Horthy Family
 	focus = {
 		id = HUN_the_addams_family
-		icon = GFX_goal_generic_national_unity
-		x = -1
+		icon = GFX_goal_generic_intelligence_exchange
+		x = -2
 		y = 1
 		relative_position_id = HUN_continue_the_regency
-		cost = 10
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_RESEARCH
@@ -1686,7 +1268,6 @@ focus_tree = {
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_the_addams_family }
 		available = {
@@ -1710,7 +1291,7 @@ focus_tree = {
 					value = 0.5
 				}
 			}
-			every_country = {
+			every_other_country = {
 				limit = {
 					has_government = fascism
 					capital_scope = {
@@ -1719,16 +1300,20 @@ focus_tree = {
 				}
 				add_opinion_modifier = {
 					target = HUN
-					modifier = large_decrease
+					modifier = medium_decrease
 				}
 			}
 			swap_ideas = {
 				remove_idea = HUN_the_addams
 				add_idea = HUN_the_addams2
 			}
+			add_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_fascism_bop
+			}
 		}
 	}
-	
+
 	# Expand MAVAG's Operations
 	focus = {
 		id = HUN_support_mavag
@@ -1804,16 +1389,17 @@ focus_tree = {
 	focus = {
 		id = HUN_elect_deputy_regent
 		icon = GFX_focus_generic_military_dictatorship
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = HUN_support_mavag
-		cost = 10
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_STABILITY
 		}
 		available = {
 			has_idea = HUN_istvan_horthy
+			NOT = { has_idea = HUN_kalman_daranyi }
 			OR = {
 				has_stability < 0.8
 				threat > 0.2
@@ -1824,36 +1410,71 @@ focus_tree = {
 				has_government = democratic
 			}
 			neutrality > 0.4
-			democratic > 0.3
+			democratic > 0.2
 		}
-		prerequisite = { focus = HUN_support_mavag }
+		prerequisite = { focus = HUN_support_mavag } prerequisite = { focus = HUN_look_outwards_real }
 		completion_reward = {
 			add_stability = 0.05
+			HUN_add_crown_bop_small = yes
+			HUN_add_liberal_bop_small = yes
 			unlock_decision_tooltip = send_istvan_to_russia
 		}
 	}
 
 	##### MOVEMENT OF HUNGARIAN LIFE #####
 
-	# Movement of Hungarian Life
+	# Arrest Szalasi
 	focus = {
-		id = HUN_movement_of_hungarian_life
-		icon = GFX_goal_support_fascism
+		id = HUN_arrest_szalasi
+		icon = GFX_focus_generic_court
 		x = 2
 		y = 1
 		relative_position_id = HUN_continue_the_regency
-		cost = 10
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_STABILITY
 		}
 		available = {
 			OR = {
 				has_government = neutrality
 				has_government = fascism
 			}
-			has_prime_minister_finished = yes
 		}
 		prerequisite = { focus = HUN_continue_the_regency }
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.02
+			}
+			HUN_add_crown_bop_small = yes
+			HUN_add_conservative_bop_small = yes
+			unlock_decision_tooltip = release_szalasi
+		}
+	}
+
+	# Movement of Hungarian Life
+	focus = {
+		id = HUN_movement_of_hungarian_life
+		icon = GFX_goal_support_fascism
+		x = 1
+		y = 1
+		relative_position_id = HUN_arrest_szalasi
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			NOT = { has_completed_focus = HUN_lift_restrictions_on_minorities }
+			has_prime_minister_finished = yes
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
+		}
+		prerequisite = { focus = HUN_arrest_szalasi }
 		completion_reward = {
 			hidden_effect = {
 				set_character_name = {
@@ -1862,18 +1483,220 @@ focus_tree = {
 				}
 			}
 
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
 			custom_effect_tooltip = rename_daranyi_tt
+			add_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_life_bop
+			}
 		}
 	}
 
-	
+	#Vote of No Confidence
+	focus = {
+		id = HUN_the_true_enemy
+		icon = GFX_goal_generic_attack_allies
+		x = -1
+		y = 1
+		relative_position_id = HUN_movement_of_hungarian_life
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = HUN_movement_of_hungarian_life }
+		mutually_exclusive = { focus = HUN_impose_censorship }
+		available = {
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
+				}
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0.3
+				}
+			}
+			else_if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_liberals_side
+					}
+				}
+				power_balance_value = {
+					id = HUN_power_balance
+					value < -0.3
+				}
+			}
+		}
+		bypass = {
+			GER = { has_government = democratic }
+		}
+		continue_if_invalid = yes
+		completion_reward = {
+			hidden_effect = {
+				set_character_name = {
+					character = HUN_kalman_daranyi
+					name = HUN_kalman_daranyi_new2
+				}
+			}
+
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.05
+			}
+
+			if = {
+				limit = {
+					has_idea = HUN_kalman_daranyi
+				}
+				remove_ideas = HUN_kalman_daranyi
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_idea = HUN_gyula_gombos_de_jakfa
+						has_idea = HUN_tibor_eckhardt
+						has_idea = HUN_istvan_bethlen
+#						has_idea = HUN_kalman_daranyi
+						has_idea = HUN_zoltan_tildy
+						has_idea = HUN_pal_teleki
+						has_idea = HUN_miklos_kallay
+						has_idea = HUN_geza_lakatos_pm
+					}
+				}
+				add_ideas = HUN_pal_teleki
+			}
+
+			HUN_add_crown_bop_medium = yes
+			HUN_add_conservative_bop_medium = yes
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_life_bop
+			}
+			custom_effect_tooltip = rename_daranyi2_tt
+		}
+	}
+
+	# Impose Censorship
+	focus = {
+		id = HUN_impose_censorship
+		icon = GFX_goal_generic_propaganda
+		x = 1
+		y = 1
+		relative_position_id = HUN_movement_of_hungarian_life
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
+		}
+		prerequisite = { focus = HUN_movement_of_hungarian_life }
+		mutually_exclusive = { focus = HUN_the_true_enemy }
+		completion_reward = {
+			add_political_power = 50
+			add_popularity = {
+				ideology = HUN
+				popularity = 0.05
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = HUN_hungarian_renewal_long
+				name = HUN_hungarian_renewal
+			}
+			add_country_leader_role = {
+				character = HUN_kalman_daranyi
+				promote_leader = yes
+				country_leader = {
+					ideology = rexism
+					expire = "1965.1.1"
+					traits = {
+						conservative_pm
+					}
+				}
+				remove_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_life_bop
+				}
+				add_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_life_bop2
+				}
+			}
+		}
+	}
+
+	# Pivot Towards Germany
+	focus = {
+		id = HUN_pivot_towards_germany
+		icon = GFX_focus_chi_mission_to_germany
+		x = 1
+		y = 1
+		relative_position_id = HUN_impose_censorship
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			NOT = { has_idea = HUN_non_belligerent }
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
+		}
+		prerequisite = { focus = HUN_the_true_enemy focus = HUN_impose_censorship focus = HUN_overthrow_horthy focus = HUN_assassinate_horthy }
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+			add_ideas = HUN_the_sun
+			add_german_trade_HUN = yes
+			if = {
+				limit = {
+					GER = { has_government = fascism }
+				}
+				GER = {
+					add_opinion_modifier = {
+						target = HUN
+						modifier = medium_increase
+					}
+				}
+			}
+			HUN_add_army_bop_medium = yes
+			HUN_add_conservative_bop_medium = yes
+			unlock_decision_tooltip = retire_old_soldiers
+		}
+	}
+
 	# Offer Military Access to Germany
 	focus = {
 		id = HUN_allow_german_military_access
 		icon = GFX_focus_generic_concessions
-		x = 1
-		y = 2
-		relative_position_id = HUN_movement_of_hungarian_life
+		x = 0
+		y = 1
+		relative_position_id = HUN_pivot_towards_germany
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -1882,24 +1705,26 @@ focus_tree = {
 		available = {
 			any_neighbor_country = { tag = GER }
 			OR = {
+				has_government = neutrality
 				has_government = fascism
-				AND = {
+			}
+			if = {
+				limit = {
 					is_power_balance_side_active = {
 						id = HUN_power_balance
 						side = HUN_army_side
 					}
-					power_balance_value = {
-						id = HUN_power_balance
-						value < -0.2
-					}
+				}
+				power_balance_value = {
+					id = HUN_power_balance
+					value < -0.2
 				}
 			}
 		}
-		prerequisite = { focus = HUN_movement_of_hungarian_life }
+		prerequisite = { focus = HUN_pivot_towards_germany }
 		continue_if_invalid = yes
 		bypass = {
 			OR = {
-				has_completed_focus = HUN_invite_the_habsburg_prince
 				is_in_faction = yes
 				GER = { exists = no }
 				GER = { is_faction_leader = no }
@@ -1923,6 +1748,8 @@ focus_tree = {
 			}
 
 			add_german_trade_HUN = yes
+			HUN_add_army_bop_large = yes
+			HUN_add_conservative_bop_large = yes
 
 			GER = {
 				country_event = {
@@ -1933,6 +1760,8 @@ focus_tree = {
 
 			custom_effect_tooltip = if_they_accept_tt
 			effect_tooltip = {
+				add_stability = -0.2
+				retire_character = HUN_pal_teleki
 				give_military_access = GER
 				diplomatic_relation = {
 					country = GER
@@ -1958,8 +1787,6 @@ focus_tree = {
 					}
 					transfer_state = 45
 				}
-				retire_character = HUN_pal_teleki
-				add_stability = -0.2
 			}
 			custom_effect_tooltip = if_they_refuse_tt
 			effect_tooltip = {
@@ -1986,13 +1813,121 @@ focus_tree = {
 		}
 	}
 
+	# Commit to the War Effort
+	focus = {
+		id = HUN_commit_to_war
+		icon = GFX_focus_ITA_generic_fascist_workers
+		x = -1
+		y = 1
+		relative_position_id = HUN_allow_german_military_access
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			NOT = { has_idea = HUN_non_belligerent2 }
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
+		}
+		prerequisite = { focus = HUN_allow_german_military_access }
+		mutually_exclusive = { focus = HUN_demand_loyalty }
+		completion_reward = {
+			
+		}
+	}
+
+	# Claims on Galicia
+	focus = {
+		id = HUN_claims_on_galicia
+		icon = GFX_focus_POL_ukrainian_army
+		x = 0
+		y = 1
+		relative_position_id = HUN_commit_to_war
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
+		}
+		prerequisite = { focus = HUN_commit_to_war }
+		completion_reward = {
+			every_state = {
+				limit = {
+					NOT = { is_core_of = HUN }
+					NOT = { is_claimed_by = HUN }
+					OR = {
+						state = 88 # Krakow
+						state = 89 # Stanislawow
+						state = 90 # Bucovina
+						state = 91 # Lwow
+					}
+				}
+				add_claim_by = HUN
+			}
+		}
+	}
+
+	# Request Croatia
+	focus = {
+		id = HUN_request_croatia
+		icon = GFX_focus_YUG_banovina_of_croatia
+		x = -1
+		y = 1
+		relative_position_id = HUN_claims_on_galicia
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			has_completed_focus = HUN_restore_historic_hungary
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
+		}
+		prerequisite = { focus = HUN_claims_on_galicia }
+		completion_reward = {
+			
+		}
+	}
+
+	# Request Transylvania
+	focus = {
+		id = HUN_request_transylvania
+		icon = GFX_focus_YUG_autonomous_transylvania
+		x = 1
+		y = 1
+		relative_position_id = HUN_claims_on_galicia
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		available = {
+			has_completed_focus = HUN_restore_historic_hungary
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
+		}
+		prerequisite = { focus = HUN_claims_on_galicia }
+		completion_reward = {
+			
+		}
+	}
+
 	##### THE LITTLE REGENT #####
 
 	# The Little Regent
 	focus = {
 		id = HUN_the_small_regent
 		icon = GFX_goal_tripartite_pact
-		x = 2
+		x = 0
 		y = 1
 		relative_position_id = HUN_elect_deputy_regent
 		cost = 10
@@ -2007,7 +1942,7 @@ focus_tree = {
 			}
 		}
 		prerequisite = { focus = HUN_elect_deputy_regent } prerequisite = { focus = HUN_the_rise_of_germany } prerequisite = { focus = HUN_promote_hungarianism }
-		mutually_exclusive = { focus = HUN_bulwark_against_radicalism } mutually_exclusive = { focus = HUN_preserve_greater_hungary }
+		mutually_exclusive = { focus = HUN_preserve_greater_hungary }
 		completion_reward = {
 			add_popularity = {
 				ideology = democratic
@@ -2030,19 +1965,19 @@ focus_tree = {
 			}
 		}
 	}
-
-	# The Emergency Office
+	
+	# Limit the Suspensive Veto
 	focus = {
-		id = HUN_the_emergency_bureau
-		icon = GFX_goal_generic_intelligence_exchange
-		x = 1
+		id = HUN_limit_suspensive_veto
+		icon = GFX_focus_generic_improve_the_administration
+		x = 0
 		y = 1
 		relative_position_id = HUN_the_small_regent
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = HUN_the_small_regent focus = HUN_preserve_greater_hungary }
+		prerequisite = { focus = HUN_the_small_regent }
 		available = {
 			has_war = yes
 			OR = {
@@ -2052,12 +1987,16 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			add_popularity = {
 				ideology = fascism
-				popularity = -0.05
+				popularity = -0.02
 			}
 			add_popularity = {
 				ideology = communism
-				popularity = -0.05
+				popularity = -0.02
 			}
 			every_other_country = {
 				limit = {
@@ -2075,50 +2014,8 @@ focus_tree = {
 					modifier = medium_increase
 				}
 			}
-			if = {
-				limit = {
-					has_idea = HUN_the_addams3
-				}
-				swap_ideas = {
-					remove_idea = HUN_the_addams3
-					add_idea = HUN_the_addams4
-				}
-			}
-		}
-	}
-
-	# National Central Government
-	focus = {
-		id = HUN_national_central_government
-		icon = GFX_goal_generic_national_unity
-		x = -1
-		y = 1
-		relative_position_id = HUN_the_small_regent
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
-		}
-		prerequisite = { focus = HUN_bulwark_against_radicalism focus = HUN_the_small_regent }
-		available = {
-			has_government = democratic
-			has_war = yes
-			has_idea = HUN_miklos_horthy_jr
-		}
-		completion_reward = {
-			add_political_power = 50
-			add_popularity = {
-				ideology = neutrality
-				popularity = 0.05
-			}
-			add_popularity = {
-				ideology = communism
-				popularity = 0.05
-			}
-			add_popularity = {
-				ideology = fascism
-				popularity = -0.1
-			}
+			HUN_add_liberal_bop_small = yes
+			HUN_add_army_bop_small = yes
 		}
 	}
 
@@ -2128,26 +2025,13 @@ focus_tree = {
 		icon = GFX_focus_spr_torchbearers_of_tomorrow
 		x = 1
 		y = 1
-		relative_position_id = HUN_national_central_government
+		relative_position_id = HUN_limit_suspensive_veto
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_MANPOWER
 		}
-		bypass = {
-			all_country = {
-				OR = {
-					NOT = {
-						capital_scope = { is_on_continent = europe }
-					}
-					NOT = {
-						has_government = communism
-						has_government = fascism
-					}
-				}
-			}
-		}
-		prerequisite = { focus = HUN_national_central_government focus = HUN_the_emergency_bureau focus = HUN_allow_political_opposition }
+		prerequisite = { focus = HUN_limit_suspensive_veto focus = HUN_allow_political_opposition }
 		available = {
 			OR = {
 				has_government = neutrality
@@ -2165,14 +2049,15 @@ focus_tree = {
 			every_other_country = {
 				limit = {
 					OR = {
-						has_government = HUN
-						is_ally_with = HUN
+						has_government = neutrality
+						has_government = democratic
+						has_war_with = HUN
 					}
 					capital_scope = { is_on_continent = europe }
 				}
 				add_opinion_modifier = {
 					target = HUN
-					modifier = large_increase
+					modifier = medium_increase
 				}
 			}
 
@@ -2181,154 +2066,32 @@ focus_tree = {
 					OR = {
 						has_government = fascism
 						has_government = communism
-						has_war_with = HUN
 					}
 					capital_scope = { is_on_continent = europe }
 				}
 				add_opinion_modifier = {
 					target = HUN
-					modifier = large_decrease
+					modifier = medium_decrease
 				}
 			}
-		}
-	}
 
-	# Limit the Suspensive Veto
-	focus = {
-		id = HUN_limit_suspensive_veto
-		icon = GFX_focus_generic_improve_the_administration
-		x = 1
-		y = 1
-		relative_position_id = HUN_the_last_refuge
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
-		}
-		prerequisite = { focus = HUN_the_last_refuge }
-		available = {
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			has_war = yes
-			has_idea = HUN_miklos_horthy_jr
-		}
-		completion_reward = {
-
-		}
-	}
-
-	# Contact Exiles
-	focus = {
-		id = HUN_contact_exiles
-		icon = GFX_focus_focus_fra_maquis
-		x = -1
-		y = 1
-		relative_position_id = HUN_the_last_refuge
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = HUN_the_last_refuge }
-		available = {
-			has_completed_focus = HUN_prepare_shadow_government
-			has_war = yes
-		}
-		completion_reward = {
-			
-		}
-	}
-
-	# Committee of Liberation
-	focus = {
-		id = HUN_committee_liberation
-		icon = GFX_focus_spr_the_anti_fascist_workers_revolution
-		x = 0
-		y = 1
-		relative_position_id = HUN_contact_exiles
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = HUN_contact_exiles }
-		available = {
-			has_war = yes
-		}
-		completion_reward = {
-			
-		}
-	}
-
-	# Contact Yugoslav Partisans
-	focus = {
-		id = HUN_yugoslav_partisans
-		icon = GFX_focus_invite_yugoslavia
-		x = 0
-		y = 1
-		relative_position_id = HUN_committee_liberation
-		cost = 5
-		search_filters = {
-			FOCUS_FILTER_STABILITY
-		}
-		prerequisite = { focus = HUN_committee_liberation }
-		available = {
-			has_completed_focus = HUN_treaty_of_eternal_friendship
-			has_war = yes
-			YUG = { has_capitulated = yes }
-		}
-		completion_reward = {
-			add_stability = -0.1
-			every_state = {
-				limit = {
-					is_core_of = YUG
-					NOT = { is_core_of = CONTROLLER }
-					NOT = { is_controlled_by = HUN }
-					any_neighbor_state = { is_core_of = HUN }
-				}
-				add_resistance = 40
-			}
 			if = {
 				limit = {
-					has_war_with = YUG
+					has_idea = HUN_the_addams3
 				}
-				effect_tooltip = {
-					every_controlled_state = {
-						limit = {
-							is_core_of = YUG
-							NOT = { is_core_of = HUN }
-						}
-
-						transfer_state_to = YUG
-					}
-					puppet = YUG
-				}
-				hidden_effect = {
-					create_dynamic_country = {
-						original_tag = YUG
-						every_state = {
-							limit = {
-								is_core_of = YUG
-								NOT = { is_core_of = HUN }
-								is_controlled_by = HUN
-							}
-	
-							add_core_of = PREV
-							transfer_state_to = PREV
-						}
-						HUN = { puppet = PREV }
-					}
+				swap_ideas = {
+					remove_idea = HUN_the_addams3
+					add_idea = HUN_the_addams4
 				}
 			}
 			else = {
-				every_controlled_state = {
-					limit = {
-						is_core_of = YUG
-						NOT = { is_core_of = HUN }
-					}
-					YUG = { transfer_state = PREV }
+				swap_ideas = {
+					remove_idea = HUN_the_addams2
+					add_idea = HUN_the_addams3
 				}
 			}
+			HUN_add_liberal_bop_small = yes
+			HUN_add_crown_bop_small = yes
 		}
 	}
 
@@ -2338,13 +2101,12 @@ focus_tree = {
 		icon = GFX_goal_support_democracy
 		x = 0
 		y = 1
-		relative_position_id = HUN_limit_suspensive_veto
+		relative_position_id = HUN_the_last_refuge
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 		}
-		prerequisite = { focus = HUN_limit_suspensive_veto }
+		prerequisite = { focus = HUN_the_last_refuge }
 		available = {
 			has_completed_focus = HUN_the_small_regent
 			OR = {
@@ -2354,7 +2116,6 @@ focus_tree = {
 			is_subject = no
 		}
 		completion_reward = {
-			add_stability = -0.1
 			add_political_power = 100
 			be_free = yes
 			set_party_name = {
@@ -2379,6 +2140,15 @@ focus_tree = {
 				elections_allowed = yes
 				election_frequency = 48
 			}
+			if = {
+				limit = {
+					has_idea = HUN_liberal_opposition
+				}
+				swap_ideas = {
+					remove_idea = HUN_liberal_opposition
+					add_idea = HUN_liberal_compromise
+				}
+			}
 		}
 	}
 
@@ -2391,12 +2161,9 @@ focus_tree = {
 		x = -2
 		y = 1
 		relative_position_id = HUN_speak_out_fascism
-		cost = 10
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
-			FOCUS_FILTER_WAR_SUPPORT
-			FOCUS_FILTER_MANPOWER
 		}
 		prerequisite = { focus = HUN_elect_a_democratic_king focus = HUN_speak_out_fascism }
 		available = {
@@ -2405,9 +2172,18 @@ focus_tree = {
 				has_government = neutrality
 				has_government = democratic
 			}
-			is_power_balance_in_range = {
-				id = HUN_power_balance
-				range > HUN_crown_medium_control_range
+			NOT = { has_completed_focus = HUN_movement_of_hungarian_life }
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
+				}
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0.2
+				}
 			}
 		}
 		completion_reward = {
@@ -2418,11 +2194,39 @@ focus_tree = {
 
 			retire_character = HUN_ferenc_feketehalmyczeydner
 
-			set_power_balance = {
+			if = {
+				limit = {
+					has_any_power_balance = yes
+				}
+				set_power_balance = {
+					id = HUN_power_balance
+					left_side = HUN_liberals_side
+				}
+				add_power_balance_value = {
+					id = HUN_power_balance
+					value = -0.3
+					tooltip_side = HUN_liberals_side
+				}
+			}
+			else = {
+				set_power_balance = {
+					id = HUN_power_balance
+					left_side = HUN_liberals_side
+					right_side = HUN_crown_side
+					set_value = -0.1
+				}
+			}
+			add_power_balance_modifier = {
 				id = HUN_power_balance
-				left_side = HUN_liberals_side
-				right_side = HUN_conservatives_side
-				set_value = -0.1
+				modifier = HUN_minorities_bop
+			}
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_fascism_bop
+			}
+			add_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_fascism_bop2
 			}
 		}
 	}
@@ -2434,10 +2238,9 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = HUN_lift_restrictions_on_minorities
-		cost = 10
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_lift_restrictions_on_minorities }
 		available = {
@@ -2447,14 +2250,15 @@ focus_tree = {
 					has_war = yes
 				}
 			}
+			NOT = { has_idea = HUN_non_belligerent }
 			has_german_trade = no
+			power_balance_value = {
+				id = HUN_power_balance
+				value < -0.2
+			}
 			OR = {
 				has_government = neutrality
 				has_government = democratic
-			}
-			is_power_balance_in_range = {
-				id = HUN_power_balance
-				range < HUN_liberals_medium_control_range
 			}
 		}
 		completion_reward = {
@@ -2462,7 +2266,6 @@ focus_tree = {
 				can_send_volunteers = yes
 				can_guarantee_other_ideologies = yes
 			}
-			add_political_power = 100
 			if = {
 				limit = {
 					NOT = { has_completed_focus = HUN_bulwark_against_radicalism }
@@ -2474,103 +2277,136 @@ focus_tree = {
 
 	##### STRENGTHEN THE ARISTOCRACY #####
 
+	#Christian Socialism
+	focus = {
+		id = HUN_christian_socialism
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 0
+		y = 1
+		relative_position_id = HUN_continue_the_regency
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = HUN_continue_the_regency }
+		available = {
+			NOT = { has_government = communism }
+		}
+		bypass = {
+			
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.02
+			}
+			add_ideas = HUN_christian_socialism_idea
+		}
+	}
+
 	#Maintain Non-belligerence
 	focus = {
 		id = HUN_maintain_nonbelligerence
 		icon = GFX_goal_generic_defence
-		x = 1
+		x = 0
 		y = 1
-		relative_position_id = HUN_the_addams_family
-		cost = 10
+		relative_position_id = HUN_christian_socialism
+		cost = 5
 		search_filters = {
-			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_WAR_SUPPORT
 		}
-		prerequisite = { focus = HUN_the_addams_family }
+		prerequisite = { focus = HUN_christian_socialism } prerequisite = { focus = HUN_the_addams_family focus = HUN_arrest_szalasi }
 		available = {
 			threat > 0.15
 			has_prime_minister_finished = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
+			NOT = { has_government = communism }
 		}
 		bypass = {
 			has_war = yes
 		}
 		continue_if_invalid = yes
 		completion_reward = {
-			set_rule = { can_not_declare_war = yes }
+			set_rule = {
+				can_not_declare_war = yes
+			}
 			add_ideas = HUN_non_belligerent
 		}
 	}
 
-	#The True Enemy
+	# Look Outwards
 	focus = {
-		id = HUN_the_true_enemy
-		icon = GFX_goal_generic_attack_allies
+		id = HUN_look_outwards_real
+		icon = GFX_goal_anschluss
 		x = 0
 		y = 1
 		relative_position_id = HUN_maintain_nonbelligerence
-		cost = 10
+		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 			FOCUS_FILTER_WAR_SUPPORT
 		}
-		prerequisite = { focus = HUN_maintain_nonbelligerence }
+		prerequisite = { focus = HUN_maintain_nonbelligerence } prerequisite = { focus = HUN_speak_out_fascism focus = HUN_movement_of_hungarian_life }
 		available = {
-			threat > 0.2
+			NOT = { has_government = communism }
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = HUN_non_belligerent
+				add_idea = HUN_non_belligerent2
+			}
+		}
+	}
+
+	#Protect Polish Exiles
+	focus = {
+		id = HUN_promote_hungarianism
+		icon = GFX_focus_generic_polish_deal
+		x = 1
+		y = 1
+		relative_position_id = HUN_look_outwards_real
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_INDUSTRY
+			FOCUS_FILTER_WAR_SUPPORT
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = HUN_look_outwards_real focus = HUN_the_true_enemy }
+		available = {
+			POL = { has_war = yes }
 			OR = {
 				has_government = neutrality
 				has_government = democratic
+			}
+		}
+		bypass = {
+			POL = {
+				OR = {
+					exists = no
+					has_war_with = HUN
+					is_in_faction_with = HUN
+				}
 			}
 		}
 		continue_if_invalid = yes
 		completion_reward = {
 			add_war_support = 0.1
-			if = {
-				limit = {
-					has_idea = HUN_non_belligerent
-				}
-				swap_ideas = {
-					remove_idea = HUN_non_belligerent
-					add_idea = HUN_non_belligerent2
-				}
+			add_manpower = 10000
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
 			}
-			else = {
-				add_ideas = HUN_non_belligerent2
+			add_offsite_building = {
+				type = industrial_complex
+				level = 2
 			}
-
-			activate_decision = ban_communist_party
-		}
-	}
-
-	#Promote Hungarianism
-	focus = {
-		id = HUN_promote_hungarianism
-		icon = GFX_focus_focus_fra_national_resistance_council
-		x = 0
-		y = 1
-		relative_position_id = HUN_the_true_enemy
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
-		}
-		prerequisite = { focus = HUN_the_true_enemy }
-		available = {
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-		}
-		completion_reward = {
-			add_political_power = 100
-			swap_ideas = {
-				remove_idea = HUN_non_belligerent2
-				add_idea = HUN_non_belligerent3
-			}
+			give_military_access = POL
 		}
 	}
 
@@ -2590,20 +2426,13 @@ focus_tree = {
 		prerequisite = { focus = HUN_bulwark_against_radicalism focus = HUN_the_small_regent }
 		available = {
 			is_subject = no
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			OR = {
-				has_completed_focus = HUN_continue_the_regency
-				has_completed_focus = HUN_invite_the_habsburg_prince
-			}
+			has_government = democratic
 		}
-		mutually_exclusive = { focus = HUN_the_balkan_pact } mutually_exclusive = { focus = HUN_support_paneuropean_union }
+		mutually_exclusive = { focus = HUN_the_balkan_pact }
 		bypass = {
 			is_faction_leader = yes
 		}
-		available_if_capitulated = yes
+		available_if_capitulated = no
 		completion_reward = {
 			set_rule = {
 				can_create_factions = yes
@@ -2640,14 +2469,10 @@ focus_tree = {
 			}
 		}
 		available = {
-			is_subject = no
 			is_faction_leader = yes
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
+			has_government = democratic
 		}
-		available_if_capitulated = yes
+		available_if_capitulated = no
 		completion_reward = {
 			AUS = {
 				country_event = {
@@ -2673,12 +2498,9 @@ focus_tree = {
 		prerequisite = { focus = HUN_invite_austria }
 		available = {
 			is_subject = no
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
+			has_government = democratic
 		}
-		available_if_capitulated = yes
+		available_if_capitulated = no
 		completion_reward = {
 			if = {
 				limit = {
@@ -2729,6 +2551,7 @@ focus_tree = {
 				limit = {
 					WUR = {
 						exists = yes
+						is_subject = no
 					}
 				}
 				WUR = {
@@ -2775,18 +2598,8 @@ focus_tree = {
 		prerequisite = { focus = HUN_the_mouth_of_the_danube }
 		available = {
 			is_subject = no
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			any_country = {
-				capital_scope = {
-					is_in_danubia = yes
-				}
-				is_in_faction_with = HUN
-			}
+			has_government = democratic
 		}
-		available_if_capitulated = yes
 		completion_reward = {
 			every_other_country = {
 				limit = {
@@ -2842,15 +2655,11 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_ANNEXATION
-			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_protect_our_sovereignty }
 		available = {
 			is_subject = no
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
+			has_government = democratic
 		}
 		completion_reward = {
 			set_cosmetic_tag = DANUBIA
@@ -2861,7 +2670,6 @@ focus_tree = {
 						is_advisor = yes
 					}
 				}
-				add_stability = 0.1
 				add_political_power = 50
 			}
 
@@ -2914,8 +2722,8 @@ focus_tree = {
 	#Preserve Greater Hungary
 	focus = {
 		id = HUN_preserve_greater_hungary
-		icon = GFX_goal_generic_defence
-		x = 3
+		icon = GFX_focus_focus_fra_national_resistance_council
+		x = 0
 		y = 1
 		relative_position_id = HUN_promote_hungarianism
 		cost = 10
@@ -2923,31 +2731,28 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		prerequisite = { focus = HUN_promote_hungarianism } prerequisite = { focus = HUN_elect_deputy_regent }
+		mutually_exclusive = { focus = HUN_the_small_regent }
 		available = {
 			has_completed_focus = HUN_proclaim_greater_hungary
 			has_government = neutrality
 		}
-		mutually_exclusive = { focus = HUN_bulwark_against_radicalism } mutually_exclusive = { focus = HUN_the_small_regent }
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = HUN_non_belligerent3
-				add_idea = HUN_non_belligerent4
-			}
+			add_ideas = HUN_non_belligerent3
 		}
 	}
 
 	#Cooperate With the Hungarian Front
 	focus = {
 		id = HUN_allow_political_opposition
-		icon = GFX_goal_support_democracy
-		x = 0
+		icon = GFX_goal_generic_national_unity
+		x = 2
 		y = 1
-		relative_position_id = HUN_preserve_greater_hungary
+		relative_position_id = HUN_the_small_regent
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = HUN_the_small_regent focus = HUN_preserve_greater_hungary }
+		prerequisite = { focus = HUN_bulwark_against_radicalism focus = HUN_the_small_regent focus = HUN_preserve_greater_hungary }
 		available = {
 			is_in_faction = yes
 			OR = {
@@ -2958,6 +2763,19 @@ focus_tree = {
 		}
 		continue_if_invalid = yes
 		completion_reward = {
+			add_political_power = 50
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.1
+			}
 			if = {
 				limit = {
 					OR = {
@@ -2970,6 +2788,53 @@ focus_tree = {
 			else = {
 				add_ideas = HUN_liberal_opposition
 			}
+			HUN_add_liberal_bop_medium = yes
+			HUN_add_crown_bop_medium = yes
+		}
+	}
+
+	#Demand Oaths of Loyalty
+	focus = {
+		id = HUN_demand_loyalty
+		icon = GFX_focus_CZE_german_puppet
+		x = 1
+		y = 1
+		relative_position_id = HUN_preserve_greater_hungary
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = HUN_preserve_greater_hungary }
+		available = {
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
+				}
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0.2
+				}
+			}
+		}
+		mutually_exclusive = { focus = HUN_commit_to_war }
+		continue_if_invalid = yes
+		completion_reward = {
+			add_command_power = 25
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			retire_character = HUN_jeno_ratz
+			retire_character = HUN_henrik_werth
+			swap_ideas = {
+				remove_idea = HUN_non_belligerent3
+				add_idea = HUN_non_belligerent4
+			}
+			HUN_add_conservative_bop_medium = yes
+			HUN_add_crown_bop_medium = yes
 		}
 	}
 
@@ -2977,7 +2842,7 @@ focus_tree = {
 	focus = {
 		id = HUN_maintain_hungarian_sovereignty
 		icon = GFX_focus_generic_little_entente
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = HUN_allow_political_opposition
 		cost = 10
@@ -2986,48 +2851,30 @@ focus_tree = {
 			FOCUS_FILTER_MANPOWER
 		}
 		available = {
-			
-		}
-		prerequisite = { focus = HUN_allow_political_opposition }
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = HUN_non_belligerent4
-				add_idea = HUN_non_belligerent5
-			}
-
-			be_factionless = yes
-			be_free = yes
-
 			if = {
 				limit = {
-					has_completed_focus = HUN_the_small_regent
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
 				}
-				add_popularity = {
-					ideology = democratic
-					popularity = 0.1
-				}
-	
-				set_politics = {
-					ruling_party = democratic
-					elections_allowed = yes
-					election_frequency = 48
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0.3
 				}
 			}
-			else = {
-				add_popularity = {
-					ideology = neutrality
-					popularity = 0.1
-				}
-	
-				set_politics = {
-					ruling_party = neutrality
-					elections_allowed = yes
-					election_frequency = 48
-				}
-			}
-
+		}
+		prerequisite = { focus = HUN_allow_political_opposition } prerequisite = { focus = HUN_demand_loyalty }
+		completion_reward = {
+			be_factionless = yes
+			be_free = yes
 			add_manpower = 4000
-
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			HUN_add_conservative_bop_small = yes
+			HUN_add_crown_bop_small = yes
 			every_controlled_state = {
 				limit = {
 					is_core_of = HUN
@@ -3043,11 +2890,11 @@ focus_tree = {
 	#A Soldier of Miklós Horthy
 	focus = {
 		id = HUN_asoldierofmikloshorthy
-		icon = GFX_goal_support_democracy
+		icon = GFX_focus_generic_military_academy
 		x = 0
 		y = 1
 		relative_position_id = HUN_maintain_hungarian_sovereignty
-		cost = 5
+		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_MANPOWER
@@ -3060,91 +2907,48 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_maintain_hungarian_sovereignty }
 		completion_reward = {
-			if = {
-				limit = {
-					has_country_leader = {
-						character = HUN_miklos_horthy
-					}
-				}
-				swap_ruler_traits = {
-					remove = white_terror
-					add = white_terror2
-				}
-
-				add_field_marshal_role = {
-					character = HUN_miklos_horthy
-					traits = {
-						old_guard
-						trait_cautious
-						war_hero
-					}
-					skill = 3
-					attack_skill = 2
-					defense_skill = 5
-					planning_skill = 3
-					logistics_skill = 1
-				}
-			}
-		}
-	}
-
-	#Territorial Autonomy
-	focus = {
-		id = HUN_territorial_autonomy
-		icon = GFX_focus_generic_self_management
-		x = 0
-		y = 1
-		relative_position_id = HUN_asoldierofmikloshorthy
-		cost = 5
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = HUN_limit_suspensive_veto focus = HUN_asoldierofmikloshorthy }
-		available = {
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-		}
-		completion_reward = {
-			if = {
-				limit = {
-					controls_state = 73
-				}
-				country_event = {
-					id = gamer_horthy.32
-				}
-				custom_effect_tooltip = if_they_accept_tt
-				effect_tooltip = {
-					release_puppet = UKR
-					UKR = {
-						set_cosmetic_tag = CARPATHIA
-					}
-				}
+			swap_ruler_traits = {
+				remove = white_terror
+				add = white_terror2
 			}
 
-			unlock_decision_tooltip = autonomy_FROM
+			add_field_marshal_role = {
+				character = HUN_miklos_horthy
+				traits = {
+					old_guard
+					trait_cautious
+					war_hero
+				}
+				skill = 3
+				attack_skill = 2
+				defense_skill = 5
+				planning_skill = 3
+				logistics_skill = 1
+			}
+
+			HUN_janos_voros = { promote_leader = yes }
+			HUN_add_conservative_bop_small = yes
+			HUN_add_crown_bop_small = yes
 		}
 	}
 
 	#Seize Our Future
 	focus = {
 		id = HUN_seizecontrolofhungarysfuture
-		icon = GFX_focus_spr_masters_of_our_own_fate
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
 		x = 0
 		y = 1
-		relative_position_id = HUN_proclaim_the_second_republic
+		relative_position_id = HUN_peace_overtures
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_WAR_SUPPORT
 		}
-		prerequisite = { focus = HUN_committee_liberation focus = HUN_territorial_autonomy focus = HUN_proclaim_the_second_republic }
-		bypass = {
+		prerequisite = { focus = HUN_peace_overtures }
+		available = {
 			is_subject = no
 			OR = {
 				is_in_faction = no
-				is_faction_leader = yes
 				faction_leader = {
 					OR = {
 						has_government = democratic
@@ -3152,9 +2956,10 @@ focus_tree = {
 					}
 				}
 			}
-		}
-		available = {
-			has_government = neutrality
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
 		}
 		completion_reward = {
 			add_war_support = 0.1
@@ -3163,19 +2968,18 @@ focus_tree = {
 		}
 	}
 
-	
 	#Peace Overtures
 	focus = {
 		id = HUN_peace_overtures
 		icon = GFX_goal_generic_major_alliance
-		x = 0
+		x = 1
 		y = 1
-		relative_position_id = HUN_territorial_autonomy
+		relative_position_id = HUN_proclaim_the_second_republic
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = HUN_territorial_autonomy focus = HUN_proclaim_the_second_republic }
+		prerequisite = { focus = HUN_proclaim_the_second_republic focus = HUN_asoldierofmikloshorthy }
 		available = {
 			has_war = yes
 			threat > 0.99
@@ -3210,9 +3014,18 @@ focus_tree = {
 				ENG = { HUN_add_favour_small = yes }
 			}
 			if = {
+				limit = { has_completed_focus = HUN_support_italian_interests }
+				ITA = { HUN_add_favour_medium = yes }
+			}
+			if = {
+				limit = { has_completed_focus = HUN_pivot_towards_germany }
+				GER = { HUN_add_favour_medium = yes }
+			}
+			if = {
 				limit = { has_completed_focus = HUN_allow_political_opposition }
 				every_country = {
 					limit = {
+						is_favour_target = yes
 						OR = {
 							tag = ENG
 							tag = USA
@@ -3222,47 +3035,9 @@ focus_tree = {
 					HUN_add_favour_small = yes
 				}
 			}
-			if = {
-				limit = { has_completed_focus = HUN_national_central_government }
-				SOV = { HUN_add_favour_small = yes }
-			}
-			if = {
-				limit = { has_completed_focus = HUN_support_italian_interests }
-				ITA = { HUN_add_favour_medium = yes }
-			}
 
-			HUN_janos_voros = { promote_leader = yes }
 			unlock_decision_category_tooltip = peace_hun
 			activate_mission = suspicion_mission
-		}
-	}
-
-	#A New Age for Hungary
-	focus = {
-		id = HUN_a_new_age_for_hungary
-		icon = GFX_focus_generic_treaty
-		x = 0
-		y = 1
-		relative_position_id = HUN_seizecontrolofhungarysfuture
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
-		}
-		prerequisite = { focus = HUN_seizecontrolofhungarysfuture }
-		available = {
-			OR = {
-				has_government = neutrality
-				has_government = democratic
-			}
-			is_subject = no
-		}
-		completion_reward = {
-			add_stability = 0.1
-			add_popularity = {
-				ideology = HUN
-				popularity = 0.15
-			}
 		}
 	}
 
@@ -3271,7 +3046,7 @@ focus_tree = {
 	#Oppose the Regency
 	focus = {
 		id = HUN_oppose_the_regency
-		icon = GFX_focus_generic_strike_at_democracy1
+		icon = GFX_focus_generic_conspiracy
 		x = 10
 		y = 0
 		relative_position_id = HUN_continue_the_regency
@@ -3296,7 +3071,7 @@ focus_tree = {
 	focus = {
 		id = HUN_a_new_republic_of_councils
 		icon = GFX_goal_support_communism
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HUN_oppose_the_regency
 		cost = 5
@@ -3323,7 +3098,7 @@ focus_tree = {
 	focus = {
 		id = HUN_a_pure_hungary
 		icon = GFX_goal_support_fascism
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HUN_oppose_the_regency
 		cost = 5
@@ -3349,7 +3124,7 @@ focus_tree = {
 	focus = {
 		id = HUN_the_peace_party
 		icon = GFX_focus_generic_soviet_politics
-		x = -2
+		x = 2
 		y = 1
 		relative_position_id = HUN_a_new_republic_of_councils
 		cost = 10
@@ -3399,7 +3174,7 @@ focus_tree = {
 	focus = {
 		id = HUN_recruit_the_poor
 		icon = GFX_focus_generic_manpower
-		x = 2
+		x = -2
 		y = 1
 		relative_position_id = HUN_a_pure_hungary
 		cost = 10
@@ -3651,7 +3426,7 @@ focus_tree = {
 	focus = {
 		id = HUN_call_for_elections
 		icon = GFX_focus_por_workers_of_iberia
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HUN_expand_public_support
 		cost = 10
@@ -3674,7 +3449,7 @@ focus_tree = {
 		completion_reward = {
 			if = {
 				limit = {
-					communism < 0.3
+					communism > 0.4
 				}
 
 				set_politics = {
@@ -3703,16 +3478,8 @@ focus_tree = {
 				else = {
 					if = {
 						limit = {
-							has_completed_focus = HUN_the_peace_party
+							NOT = { has_completed_focus = HUN_the_peace_party }
 						}
-						start_civil_war = {
-							ideology = neutrality
-							size = 0.2
-							capital = 43
-							states = { 43 }
-						}
-					}
-					else = {
 						start_civil_war = {
 							ideology = neutrality
 							size = 0.4
@@ -3742,7 +3509,6 @@ focus_tree = {
 						popularity = 0.05
 					}
 				}
-				custom_effect_tooltip = seize_power_tt
 			}
 		}
 	}
@@ -3753,7 +3519,7 @@ focus_tree = {
 		icon = GFX_focus_hun_assassinate_horthy
 		x = 1
 		y = 1
-		relative_position_id = HUN_expand_public_support
+		relative_position_id = HUN_request_foreign_support
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
@@ -3783,14 +3549,24 @@ focus_tree = {
 		}
 		completion_reward = {
 			if = {
-				limit = { has_country_leader = { character = HUN_miklos_horthy } }
+				limit = {
+					has_country_flag = HUN_has_opposition_support
+				}
+				add_stability = -0.2
+			}
+			else = {
+				add_stability = -0.3
+			}
+			if = {
+				limit = {
+					has_country_leader = { character = HUN_miklos_horthy }
+				}
 				kill_country_leader = yes
 			}
 			else = {
 				retire_character = HUN_miklos_horthy
 			}
 			replace_horthy = yes
-			add_stability = -0.3
 
 			if = {
 				limit = {
@@ -3840,7 +3616,7 @@ focus_tree = {
 	focus = {
 		id = HUN_overthrow_horthy
 		icon = GFX_goal_generic_military_deal
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HUN_request_foreign_support
 		cost = 10
@@ -3939,6 +3715,9 @@ focus_tree = {
 			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_call_for_elections focus = HUN_assassinate_horthy focus = HUN_overthrow_horthy }
+		available = {
+			has_prime_minister_finished = yes
+		}
 		completion_reward = {
 			hidden_effect = {
 				set_character_name = {
@@ -3957,8 +3736,6 @@ focus_tree = {
 					long_name = HUN_communists_long
 				}
 			}
-
-			custom_effect_tooltip = rename_kadar_tt
 
 			if = {
 				limit = {
@@ -3996,6 +3773,8 @@ focus_tree = {
 					add_idea = HUN_unpopular_opposition3
 				}
 			}
+
+			custom_effect_tooltip = rename_kadar_tt
 		}
 	}
 
@@ -4005,7 +3784,7 @@ focus_tree = {
 	focus = {
 		id = HUN_begin_land_reform
 		icon = GFX_focus_generic_the_giant_wakes
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HUN_abolish_the_monarchy
 		cost = 10
@@ -4049,7 +3828,7 @@ focus_tree = {
 	focus = {
 		id = HUN_control_ministry_interior
 		icon = GFX_focus_generic_soviet_politics
-		x = -3
+		x = 3
 		y = 1
 		relative_position_id = HUN_abolish_the_monarchy
 		cost = 10
@@ -4060,6 +3839,7 @@ focus_tree = {
 		prerequisite = { focus = HUN_abolish_the_monarchy }
 		available = {
 			has_government = democratic
+			communism > 0.3
 		}
 		bypass = {
 			has_government = communism
@@ -4116,13 +3896,12 @@ focus_tree = {
 	focus = {
 		id = HUN_goulash_communism
 		icon = GFX_goal_generic_soviet_construction
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HUN_begin_land_reform
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_begin_land_reform }
 		mutually_exclusive = { focus = HUN_struggle_fascism_reaction }
@@ -4143,7 +3922,6 @@ focus_tree = {
 				name = HUN_kadar_party
 				long_name = HUN_kadar_party_long
 			}
-			add_stability = 0.1
 			add_ideas = HUN_goulash
 			if = {
 				limit = {
@@ -4173,7 +3951,7 @@ focus_tree = {
 	focus = {
 		id = HUN_struggle_fascism_reaction
 		icon = GFX_focus_SOV_the_last_purge
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HUN_control_ministry_interior
 		cost = 10
@@ -4322,7 +4100,7 @@ focus_tree = {
 	focus = {
 		id = HUN_collectivisation
 		icon = GFX_focus_SOV_merge_plants
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HUN_rapid_industrialisation
 		cost = 10
@@ -4369,7 +4147,7 @@ focus_tree = {
 	focus = {
 		id = HUN_arms_expansion
 		icon = GFX_goal_generic_construct_mil_factory
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HUN_rapid_industrialisation
 		cost = 10
@@ -4413,13 +4191,12 @@ focus_tree = {
 	focus = {
 		id = HUN_limited_liberalisation
 		icon = GFX_goal_generic_intelligence_exchange
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HUN_new_economic_mechanism
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 			FOCUS_FILTER_INDUSTRY
 		}
 		prerequisite = { focus = HUN_new_economic_mechanism }
@@ -4430,7 +4207,6 @@ focus_tree = {
 			hidden_effect = {
 				set_country_flag = HUN_limited_liberalisation_complete
 			}
-			add_stability = 0.1
 			every_owned_state = {
 				limit = {
 					is_core_of = HUN
@@ -4511,7 +4287,7 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			add_stability = 0.1
+			add_stability = 0.05
 			popular_opposition_HUN = yes
 			if = {
 				limit = {
@@ -4540,19 +4316,20 @@ focus_tree = {
 	focus = {
 		id = HUN_impose_martial_law
 		icon = GFX_focus_generic_strike_at_democracy2
-		x = 0
+		x = -2
 		y = 1
-		relative_position_id = HUN_overthrow_horthy
+		relative_position_id = HUN_abolish_the_monarchy
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_STABILITY
+			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_MANPOWER
 		}
-		prerequisite = { focus = HUN_assassinate_horthy focus = HUN_overthrow_horthy }
+		prerequisite = { focus = HUN_abolish_the_monarchy }
 		available = {
+			NOT = { has_idea = HUN_treaty_of_triannon }
 			has_government = fascism
-			has_war = yes
 		}
 		completion_reward = {
 			add_stability = -0.1
@@ -4572,13 +4349,22 @@ focus_tree = {
 			if = {
 				limit = {
 					NOT = {
+						has_idea = service_by_requirement
+						has_idea = all_adults_serve
 						has_idea = scraping_the_barrel
 					}
 				}
-				add_ideas = scraping_the_barrel
+				add_ideas = service_by_requirement
 			}
-			else = {
-				add_manpower = 6000
+
+			if = {
+				limit = {
+					NOT = {
+						has_idea = war_economy
+						has_idea = tot_economic_mobilisation
+					}
+				}
+				add_ideas = war_economy
 			}
 		}
 	}
@@ -4589,12 +4375,12 @@ focus_tree = {
 		icon = GFX_focus_hun_elect_a_king
 		x = 1
 		y = 1
-		relative_position_id = HUN_abolish_the_monarchy
+		relative_position_id = HUN_impose_martial_law
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_ANNEXATION
 		}
-		prerequisite = { focus = HUN_abolish_the_monarchy }
+		prerequisite = { focus = HUN_allow_german_military_access focus = HUN_impose_martial_law }
 		available = {
 			has_completed_focus = HUN_proclaim_greater_hungary
 			has_government = fascism
@@ -4621,7 +4407,6 @@ focus_tree = {
 				}
 				add_claim_by = HUN
 			}
-
 			every_state = {
 				limit = {
 					is_controlled_by_ROOT_or_subject = no
@@ -4643,14 +4428,14 @@ focus_tree = {
 	focus = {
 		id = HUN_movement_soul
 		icon = GFX_goal_support_fascism
-		x = 3
+		x = -1
 		y = 1
-		relative_position_id = HUN_abolish_the_monarchy
+		relative_position_id = HUN_impose_martial_law
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = HUN_abolish_the_monarchy }
+		prerequisite = { focus = HUN_allow_german_military_access focus = HUN_impose_martial_law }
 		available = {
 			has_government = fascism
 		}
@@ -4667,18 +4452,84 @@ focus_tree = {
 		}
 	}
 
-	# Turanism
+	# Subvert German Control
 	focus = {
-		id = HUN_hungarian_turanism
-		icon = GFX_focus_TUR_turanist_ambition
+		id = HUN_subvert_germany
+		icon = GFX_goal_generic_demand_territory
 		x = -1
+		y = 1
+		relative_position_id = HUN_restore_historic_hungary
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = HUN_restore_historic_hungary } prerequisite = { focus = HUN_movement_soul }
+		available = {
+			has_government = fascism
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				add_autonomy_ratio = {
+					value = 0.5
+				}
+			}
+			add_stability = 0.05
+			add_political_power = 50
+		}
+	}
+
+	# Connationalism
+	focus = {
+		id = HUN_connationalism
+		icon = GFX_goal_generic_national_unity
+		x = 1
 		y = 1
 		relative_position_id = HUN_restore_historic_hungary
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_ANNEXATION
 		}
-		prerequisite = { focus = HUN_restore_historic_hungary } prerequisite = { focus = HUN_movement_soul }
+		prerequisite = { focus = HUN_restore_historic_hungary }
+		available = {
+			has_country_leader = {
+				character = HUN_ferenc_szalasi
+			}
+			has_government = fascism
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					is_subject = yes
+				}
+				add_autonomy_ratio = {
+					value = 0.3
+				}
+			}
+			swap_ruler_traits = {
+				remove = leader_of_the_nation
+				add = leader_of_the_nation2
+			}
+			unlock_decision_tooltip = nationhood_FROM
+		}
+	}
+
+	
+	# Turanism
+	focus = {
+		id = HUN_hungarian_turanism
+		icon = GFX_focus_TUR_turanist_ambition
+		x = 1
+		y = 1
+		relative_position_id = HUN_subvert_germany
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = HUN_connationalism } prerequisite = { focus = HUN_subvert_germany }
 		available = {
 			has_government = fascism
 #			is_subject = no
@@ -4687,15 +4538,7 @@ focus_tree = {
 		completion_reward = {
 			set_rule = { can_create_factions = yes }
 			be_factionless = yes
-#			if = {
-#				limit = {
-#					has_completed_focus = HUN_connationalism
-#				}
-				create_faction = HUN_CONNATIONALIST_FACTION
-#			}
-#			else = {
-#				create_faction = HUN_TURANIST_FACTION
-#			}
+			create_faction = HUN_CONNATIONALIST_FACTION
 			every_other_country = {
 				limit = {
 					capital_scope = {
@@ -4740,56 +4583,16 @@ focus_tree = {
 		}
 	}
 
-	# Connationalism
-	focus = {
-		id = HUN_connationalism
-		icon = GFX_goal_generic_national_unity
-		x = 1
-		y = 1
-		relative_position_id = HUN_restore_historic_hungary
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_ANNEXATION
-		}
-		prerequisite = { focus = HUN_restore_historic_hungary }
-		available = {
-			has_government = fascism
-		}
-		completion_reward = {
-			if = {
-				limit = {
-					is_subject = yes
-				}
-				add_autonomy_ratio = {
-					value = 0.3
-				}
-			}
-			if = {
-				limit = {
-					has_country_leader = {
-						character = HUN_ferenc_szalasi
-					}
-				}
-				swap_ruler_traits = {
-					remove = leader_of_the_nation
-					add = leader_of_the_nation2
-				}
-			}
-			unlock_decision_tooltip = nationhood_FROM
-		}
-	}
-
 	# The Party is the Body
 	focus = {
 		id = HUN_party_body
 		icon = GFX_focus_generic_manpower
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HUN_movement_soul
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_MANPOWER
 		}
 		prerequisite = { focus = HUN_movement_soul }
@@ -4805,10 +4608,42 @@ focus_tree = {
 					value = 0.3
 				}
 			}
-			add_manpower = 10000
+			add_manpower = 6000
 			swap_ideas = {
 				remove_idea = HUN_hungarianism_idea
 				add_idea = HUN_hungarianism2
+			}
+		}
+	}
+
+	# Awaken, Hungarian!
+	focus = {
+		id = HUN_awaken_hungarian
+		icon = GFX_focus_generic_support_the_left_right
+		x = 1
+		y = 1
+		relative_position_id = HUN_party_body
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_MANPOWER
+		}
+		prerequisite = { focus = HUN_connationalism } prerequisite = { focus = HUN_party_body }
+		available = {
+			has_government = fascism
+		}
+		completion_reward = {
+			set_cosmetic_tag = HUN_ARPAD
+			swap_ruler_traits = {
+				remove = leader_of_the_nation2
+				add = leader_of_the_nation3
+			}
+			be_factionless = yes
+			be_free = yes
+			popular_opposition_HUN = yes
+			swap_ideas = {
+				remove_idea = HUN_hungarianism2
+				add_idea = HUN_hungarianism3
 			}
 		}
 	}
@@ -4817,14 +4652,14 @@ focus_tree = {
 	focus = {
 		id = HUN_four_cardinal_directions
 		icon = GFX_goal_generic_more_territorial_claims
-		x = -1
+		x = 1
 		y = 1
-		relative_position_id = HUN_connationalism
+		relative_position_id = HUN_awaken_hungarian
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_ANNEXATION
 		}
-		prerequisite = { focus = HUN_connationalism } prerequisite = { focus = HUN_hungarian_turanism }
+		prerequisite = { focus = HUN_awaken_hungarian } prerequisite = { focus = HUN_hungarian_turanism }
 		available = {
 			has_government = fascism
 			is_faction_leader = yes
@@ -4861,53 +4696,13 @@ focus_tree = {
 		}
 	}
 
-	# Awaken, Hungarian!
-	focus = {
-		id = HUN_awaken_hungarian
-		icon = GFX_focus_generic_support_the_left_right
-		x = 1
-		y = 1
-		relative_position_id = HUN_connationalism
-		cost = 10
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_INDUSTRY
-			FOCUS_FILTER_MANPOWER
-		}
-		prerequisite = { focus = HUN_connationalism } prerequisite = { focus = HUN_party_body }
-		available = {
-			has_government = fascism
-		}
-		completion_reward = {
-			set_cosmetic_tag = HUN_ARPAD
-			if = {
-				limit = {
-					has_country_leader = {
-						character = HUN_ferenc_szalasi
-					}
-				}
-				swap_ruler_traits = {
-					remove = leader_of_the_nation2
-					add = leader_of_the_nation3
-				}
-			}
-			be_factionless = yes
-			be_free = yes
-			popular_opposition_HUN = yes
-			swap_ideas = {
-				remove_idea = HUN_hungarianism2
-				add_idea = HUN_hungarianism3
-			}
-		}
-	}
-
 	##### PRIME MINISTERS #####
 
 	#The Death of Gyula Gömbös
 	focus = {
 		id = HUN_thedeathofgyulagombos
 		icon = GFX_goal_generic_secret_weapon
-		x = 11
+		x = 12
 		y = 0
 		relative_position_id = HUN_oppose_the_regency
 		cost = 5
@@ -4916,6 +4711,17 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 50
+			if = {
+				limit = {
+					NOT = { has_country_flag = gyula_gombos_died }
+				}
+				country_event = { id = gamer_horthy.1 }
+				custom_effect_tooltip = effects_tt
+				effect_tooltip = {
+					add_stability = -0.1
+					retire_character = HUN_gyula_gombos_de_jakfa
+				}
+			}
 		}
 	}
 
@@ -4941,7 +4747,6 @@ focus_tree = {
 				has_completed_focus = HUN_elect_a_democratic_king
 				has_completed_focus = HUN_a_new_republic_of_councils
 			}
-			has_german_trade = no
 		}
 		completion_reward = {
 			set_party_name = {
@@ -4983,7 +4788,6 @@ focus_tree = {
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 		}
 		available = {
 			has_idea = HUN_tibor_eckhardt
@@ -5022,7 +4826,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_secret_ballot }
 		completion_reward = {
-			add_stability = -0.1
+			add_stability = -0.05
 			add_political_power = 50
 			add_popularity = {
     			ideology = democratic
@@ -5037,7 +4841,7 @@ focus_tree = {
 	focus = {
 		id = HUN_anglophile_policies
 		icon = GFX_focus_chi_british_cooperation
-		x = -1
+		x = -2
 		y = 1
 		relative_position_id = HUN_restrict_feudal_privileges
 		cost = 5
@@ -5067,7 +4871,7 @@ focus_tree = {
 			}
 			reverse_add_opinion_modifier = {
 				target = ENG
-				modifier = large_increase
+				modifier = medium_increase
 			}
 			remove_german_trade_HUN = yes
 		}
@@ -5088,7 +4892,6 @@ focus_tree = {
 			FOCUS_FILTER_RESEARCH
 		}
 		available = {
-			has_idea = HUN_tibor_eckhardt
 			any_other_country = {
 				is_major = yes
 				has_government = democratic
@@ -5117,6 +4920,10 @@ focus_tree = {
 				uses = 1
 				category = construction_tech
 			}
+			reverse_add_opinion_modifier = {
+				target = USA
+				modifier = small_increase
+			}
 			custom_effect_tooltip = rename_eckhardt_tt
 		}
 	}
@@ -5138,7 +4945,7 @@ focus_tree = {
 				has_government = democratic
 			}
 		}
-		prerequisite = { focus = HUN_mission_to_the_us focus = HUN_treaty_of_eternal_friendship }
+		prerequisite = { focus = HUN_mission_to_the_us }
 		completion_reward = {
 			
 		}
@@ -5155,7 +4962,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = HUN_hungarian_independence_movement focus = HUN_hungarian_council }
+		prerequisite = { focus = HUN_hungarian_independence_movement }
 		available = {
 			OR = {
 				has_government = neutrality
@@ -5268,6 +5075,7 @@ focus_tree = {
 		prerequisite = { focus = HUN_hungarian_council }
 		available = {
 			has_completed_focus = HUN_the_rise_of_germany
+			has_german_trade = no
 			OR = {
 				has_government = neutrality
 				has_government = democratic
@@ -5299,6 +5107,123 @@ focus_tree = {
 		}
 		completion_reward = {
 			
+		}
+	}
+
+	
+	# Contact Exiles
+	focus = {
+		id = HUN_contact_exiles
+		icon = GFX_focus_generic_conspiracy
+		x = 0
+		y = 1
+		relative_position_id = HUN_prepare_shadow_government
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = HUN_prepare_shadow_government }
+		available = {
+			has_war = yes
+			has_capitulated = yes
+		}
+		completion_reward = {
+			
+		}
+	}
+
+	# Committee of Liberation
+	focus = {
+		id = HUN_committee_liberation
+		icon = GFX_focus_spr_the_anti_fascist_workers_revolution
+		x = 0
+		y = 1
+		relative_position_id = HUN_contact_exiles
+		cost = 10
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = HUN_contact_exiles }
+		available = {
+			has_war = yes
+			has_capitulated = yes
+			any_owned_state = {
+				is_controlled_by = HUN
+			}
+		}
+		completion_reward = {
+			end_exile = yes
+		}
+	}
+
+	# Contact Yugoslav Partisans
+	focus = {
+		id = HUN_yugoslav_partisans
+		icon = GFX_focus_focus_fra_maquis
+		x = 2
+		y = 1
+		relative_position_id = HUN_treaty_of_eternal_friendship
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_STABILITY
+			FOCUS_FILTER_ANNEXATION
+		}
+		prerequisite = { focus = HUN_treaty_of_eternal_friendship }
+		available = {
+			has_war = yes
+			YUG = { has_capitulated = yes }
+		}
+		completion_reward = {
+			add_stability = -0.05
+			every_state = {
+				limit = {
+					is_core_of = YUG
+					NOT = { is_core_of = CONTROLLER }
+					NOT = { is_controlled_by = HUN }
+				}
+				add_resistance = 40
+			}
+			if = {
+				limit = {
+					has_war_with = YUG
+				}
+				effect_tooltip = {
+					every_controlled_state = {
+						limit = {
+							is_core_of = YUG
+							NOT = { is_core_of = HUN }
+						}
+
+						transfer_state_to = YUG
+					}
+					puppet = YUG
+				}
+				hidden_effect = {
+					create_dynamic_country = {
+						original_tag = YUG
+						every_state = {
+							limit = {
+								is_core_of = YUG
+								NOT = { is_core_of = HUN }
+								is_controlled_by = HUN
+							}
+	
+							add_core_of = PREV
+							transfer_state_to = PREV
+						}
+						HUN = { puppet = PREV }
+					}
+				}
+			}
+			else = {
+				every_controlled_state = {
+					limit = {
+						is_core_of = YUG
+						NOT = { is_core_of = HUN }
+					}
+					YUG = { transfer_state = PREV }
+				}
+			}
 		}
 	}
 
@@ -5383,7 +5308,6 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_INDUSTRY
-			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_british_industrial_aid }
 		mutually_exclusive = { focus = HUN_protect_the_trade_unions }
@@ -5411,7 +5335,6 @@ focus_tree = {
 				}
 			}
 
-			add_stability = -0.05
 			add_popularity = {
 				ideology = neutrality
 				popularity = 0.02
@@ -5426,6 +5349,7 @@ focus_tree = {
 				}
 				add_ideas = free_trade
 			}
+			add_ideas = HUN_strengthened_aristocracy
 		}
 	}
 
@@ -5439,8 +5363,6 @@ focus_tree = {
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
-			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = HUN_restore_the_free_market focus = HUN_support_italian_interests }
 		available = {
@@ -5448,17 +5370,13 @@ focus_tree = {
 				has_idea = HUN_istvan_bethlen
 				has_idea = HUN_kalman_daranyi
 			}
-			OR = {
-				has_government = democratic
-				has_government = neutrality
-			}
+			has_government = neutrality
 		}
 		bypass = {
 			has_government = fascism
 		}
 		completion_reward = {
-			add_stability = -0.05
-			add_war_support = 0.1
+			add_political_power = 50
 			add_popularity = {
 				ideology = neutrality
 				popularity = 0.03
@@ -5487,6 +5405,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_INDUSTRY
+			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_appointzoltantildy  focus = HUN_restoreistvanbethlen }
 		available = {
@@ -5598,8 +5517,6 @@ focus_tree = {
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
-			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = HUN_appointkalmandaranyi }
 		bypass = {
@@ -5609,14 +5526,13 @@ focus_tree = {
 			has_idea = HUN_kalman_daranyi
 		}
 		completion_reward = {
-			add_stability = 0.1
 			add_popularity = {
     			ideology = neutrality
     			popularity = 0.05
 			}
 			add_popularity = {
     			ideology = fascism
-    			popularity = -0.1
+    			popularity = -0.05
 			}
 
 			add_ideas = HUN_strengthened_aristocracy
@@ -5637,12 +5553,6 @@ focus_tree = {
 		prerequisite = { focus = HUN_marginalise_the_fascists  }
 		available = {
 			has_idea = HUN_kalman_daranyi
-			ITA = {
-				exists = yes
-				NOT = {
-					has_war_with = HUN
-				}
-			}
 		}
 		bypass = {
 			ITA = {
@@ -5808,8 +5718,7 @@ focus_tree = {
 
 		cancel_if_invalid = yes
 		continue_if_invalid = no
-		available_if_capitulated = yes
-
+		available_if_capitulated = no
 
 		completion_reward = {
 			hidden_effect = {
@@ -5888,7 +5797,13 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_support_italian_interests }
 		available = {
-			has_idea = HUN_kalman_daranyi
+			OR = {
+				AND = {
+					has_government = neutrality
+					has_idea = HUN_kalman_daranyi
+				}
+				has_government = fascism
+			}
 		}
 		completion_reward = {
 			add_popularity = {
@@ -5939,7 +5854,10 @@ focus_tree = {
 
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
-			add_ideas = HUN_mining_industry
+			swap_ideas = {
+				remove_idea = HUN_corporatism
+				add_idea = HUN_corporatism2
+			}
 			if = {
 				limit = {
 					43 = {
@@ -5984,7 +5902,7 @@ focus_tree = {
 	# Glorious Hungary
 	focus = {
 		id = HUN_glorious_hungary
-		icon = GFX_goal_generic_demand_territory
+		icon = GFX_focus_hun_elect_a_king
 		prerequisite = { focus = HUN_intervene_in_mining } prerequisite = { focus = HUN_use_the_minorities }
 		x = 1
 		y = 1
@@ -5993,13 +5911,12 @@ focus_tree = {
 		cost = 10
 
 		available = {
-			has_government = fascism
 			has_completed_focus = HUN_proclaim_greater_hungary
+			has_government = fascism
 		}
 
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
 		completion_reward = {
-			remove_ideas = HUN_mining_industry
 			remove_ideas = HUN_minorities_factory
 			swap_ideas = {
 				remove_idea = HUN_corporatism2
@@ -6008,7 +5925,6 @@ focus_tree = {
 		}
 	}
 
-	
 	focus = {
 		id = HUN_joint_oil_exploitation_company
 		icon = GFX_goal_generic_oil_refinery
@@ -6065,10 +5981,10 @@ focus_tree = {
 		}
 	}
 
-	# Look Outwards
+	# Decline of the MSZDP
 	focus = {
 		id = HUN_look_outwards
-		icon = GFX_goal_anschluss
+		icon = GFX_goal_support_democracy
 		x = 1
 		y = 1
 		relative_position_id = HUN_protect_the_trade_unions
@@ -6098,7 +6014,6 @@ focus_tree = {
 		cost = 5
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
-			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_look_outwards }
 		mutually_exclusive = { focus = HUN_strengthen_the_aristocracy }
@@ -6136,6 +6051,7 @@ focus_tree = {
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_STABILITY
 		}
 		prerequisite = { focus = HUN_look_outwards } prerequisite = { focus = HUN_suffrage_reform }
@@ -6166,17 +6082,6 @@ focus_tree = {
 			}
 			HUN_add_conservative_bop_small = yes
 			HUN_add_crown_bop_small = yes
-			add_corps_commander_role = {
-				character = HUN_bela_miklos
-				traits = {
-					career_officer
-				}
-				skill = 1
-				attack_skill = 1
-				defense_skill = 2
-				logistics_skill = 1
-				planning_skill = 1
-			}
 		}
 	}
 
@@ -6237,6 +6142,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_WAR_SUPPORT
+			FOCUS_FILTER_ANNEXATION
 		}
 
 		ai_will_do = {
@@ -6252,16 +6158,12 @@ focus_tree = {
 		}
 
 		bypass = {
-			NOT = {
-				has_idea = HUN_treaty_of_triannon
-				has_idea = HUN_treaty_of_triannon_2
-				has_idea = HUN_treaty_of_triannon_3
-			}
+			
 		}
 
 		cancel_if_invalid = yes
 		continue_if_invalid = no
-		available_if_capitulated = yes
+		available_if_capitulated = no
 
 
 		completion_reward = {
@@ -6295,25 +6197,27 @@ focus_tree = {
 				add_claim_by = HUN
 			}
 			if = {
-				limit = { 
-					FRA = { 
-						has_completed_focus = FRA_strengthen_the_little_entente 
-						exists = yes
-						is_subject = no
-					} 
-
-				}
-				FRA = { country_event = { id = DOD_hungary.40 } }
-			}
-			if = {
-				limit = { 
+				limit = {
 					OR = {
-						NOT = { FRA = { has_completed_focus = FRA_strengthen_the_little_entente } } 
-						FRA = { exists = no }
-						FRA = { is_subject = yes }
+						has_idea = HUN_treaty_of_triannon
+						has_idea = HUN_treaty_of_triannon_2
+						has_idea = HUN_treaty_of_triannon_3
 					}
-				} #Romania gets the event if France not engaged in Balkans
-				ROM = { country_event = { id = DOD_hungary.40 } }	 
+				}
+				if = {
+					limit = { 
+						FRA = { 
+							has_completed_focus = FRA_strengthen_the_little_entente 
+							exists = yes
+							is_subject = no
+						} 
+					}
+					FRA = { country_event = { id = DOD_hungary.40 } }
+				}
+				else = {
+					#Romania gets the event if France not engaged in Balkans
+					ROM = { country_event = { id = DOD_hungary.40 } }	 
+				}
 			}
 		}
 	}
@@ -6501,6 +6405,9 @@ focus_tree = {
 				73 = {
 					set_state_flag = trianon_target
 				}
+				664 = {
+					set_state_flag = trianon_target
+				}
 			}
 
 			if = {
@@ -6518,37 +6425,49 @@ focus_tree = {
 					type = annex_everything
 				}
 			}
-			else_if = {
-				every_other_country = {
-					limit = {
-						NOT = {
-							is_subject_of = HUN
-						}
+			every_other_country = {
+				limit = {
+					NOT = {
+						original_tag = UKR
+						has_idea = ZAK_isolation
+						is_subject_of = HUN
+					}
+					OR = {
 						controls_state = 73
+						controls_state = 664
 					}
-					country_event = {
-						id = gamer_horthy.15
-						hours = 4
-					}
-					custom_effect_tooltip = if_they_accept_tt
-					effect_tooltip = {
-						every_state = {
-							limit = {
+				}
+				country_event = {
+					id = gamer_horthy.15
+					hours = 4
+				}
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					every_state = {
+						limit = {
+							owner = {
+								NOT = {
+									original_tag = UKR
+									has_idea = ZAK_isolation
+								}
+							}
+							OR = {
 								state = 73
-								is_controlled_by_ROOT_or_subject = no
+								state = 664
 							}
-							HUN = {
-								transfer_state = PREV
-							}
+							is_controlled_by_ROOT_or_subject = no
+						}
+						HUN = {
+							transfer_state = PREV
 						}
 					}
-					custom_effect_tooltip = if_they_refuse_tt
-					effect_tooltip = {
-						HUN = {
-							create_wargoal = {
-								target = PREV
-								type = annex_everything
-							}
+				}
+				custom_effect_tooltip = if_they_refuse_tt
+				effect_tooltip = {
+					HUN = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
 						}
 					}
 				}
@@ -6698,6 +6617,48 @@ focus_tree = {
 			hidden_effect = {
 				news_event = { id = news.299 }
 			}
+		}
+	}
+
+	#Territorial Autonomy
+	focus = {
+		id = HUN_territorial_autonomy
+		icon = GFX_focus_generic_self_management
+		x = 0
+		y = 1
+		relative_position_id = HUN_proclaim_greater_hungary
+		cost = 5
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = HUN_proclaim_greater_hungary }
+		available = {
+			
+		}
+		completion_reward = {
+			add_political_power = 50
+			if = {
+				limit = {
+					controls_state = 73
+				}
+				country_event = {
+					id = gamer_horthy.32
+				}
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					release_puppet = UKR
+					UKR = {
+						set_cosmetic_tag = CARPATHIA
+					}
+				}
+				custom_effect_tooltip = if_they_refuse_tt
+				effect_tooltip = {
+					add_stability = -0.05
+					73 = { add_resistance = 60 }
+				}
+			}
+
+			unlock_decision_tooltip = autonomy_FROM
 		}
 	}
 
@@ -6966,14 +6927,14 @@ focus_tree = {
 	focus = {
 		id = HUN_build_the_arpad_line
 		icon = GFX_goal_generic_fortify_city
-		x = 3
+		x = 0
 		y = 1
-		relative_position_id = HUN_the_trianon_trauma
+		relative_position_id = HUN_demand_transylvania
 		cost = 10
 		search_filters = {
 			FOCUS_FILTER_INDUSTRY
 		}
-		prerequisite = { focus = HUN_the_trianon_trauma focus = HUN_glorious_hungary }
+		prerequisite = { focus = HUN_protect_the_ruthenians } prerequisite = { focus = HUN_demand_transylvania }
 		available = {
 			controls_state = 73 # Carpathia
 			controls_state = 76 # Szekelyland
@@ -7029,10 +6990,10 @@ focus_tree = {
 				}
 				set_building_level = {
 					type = bunker
-					level = 2
+					level = 4
 					province = {
 						all_provinces = yes
-						level < 2
+						level < 4
 					}
 				}
 			}
@@ -7201,9 +7162,13 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			every_country = {
+			every_other_country = {
 				limit = {
 					OR = {
+						owns_state = 4
+						owns_state = 71
+						owns_state = 73
+						owns_state = 664
 						tag = AUS
 						tag = CZE
 					}

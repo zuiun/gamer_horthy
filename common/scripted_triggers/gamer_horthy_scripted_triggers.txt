@@ -164,13 +164,30 @@ has_prime_minister_chosen = {
 	}
 }
 
+# Trigger for states that can gain favour
+is_favour_target = {
+	has_war_with = HUN
+	OR = {
+		is_faction_leader = yes
+		AND = {
+			faction_leader = {
+				NOT = { has_war_with = HUN }
+			}
+			is_major = yes
+		}
+	}
+}
+
+# Trigger for states that can gain suspicion
+is_suspicion_target = {
+	is_faction_leader = yes
+	is_in_faction_with = HUN
+}
+
 # Trigger for states that can gain favour or suspicion
 is_peace_target = {
 	OR = {
-		tag = ENG
-		tag = GER
-		tag = USA
-		tag = SOV
-		tag = ITA
+		is_favour_target = yes
+		is_suspicion_target = yes
 	}
 }

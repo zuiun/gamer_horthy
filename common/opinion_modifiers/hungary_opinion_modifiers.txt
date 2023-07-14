@@ -24,8 +24,4 @@ opinion_modifiers = {
 	HUN_habsburg_threat = {
 		value = -40
 	}
-
-	HUN_betrayed_europe = {
-		value = -20
-	}
 }	

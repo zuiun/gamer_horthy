@@ -230,9 +230,8 @@ ideas = {
 			}
 			
 			modifier = {
-				democratic_drift = 0.05
-				trade_opinion_factor = 0.2
-				opinion_gain_monthly_same_ideology_factor = 0.2
+				opinion_gain_monthly_same_ideology_factor = 0.1
+				democratic_acceptance = 50
 			}
 		}
 
@@ -254,8 +253,7 @@ ideas = {
 				}
 			}
 			modifier = {
-				democratic_acceptance = 50
-				opinion_gain_monthly_same_ideology_factor = 0.2
+				trade_opinion_factor = 0.2
 			}
 		}
 
@@ -405,8 +403,7 @@ ideas = {
 				industrial_capacity_factory = -0.15
 				production_speed_buildings_factor = -0.1
 				democratic_drift = 0.02
-				neutrality_drift = 0.05
-				communism_drift = -0.1
+				communism_drift = -0.05
 			}
 		}
 
@@ -431,7 +428,6 @@ ideas = {
 				industrial_capacity_factory = -0.05
 				production_speed_buildings_factor = -0.1
 				democratic_drift = 0.05
-				neutrality_drift = 0.05
 				communism_drift = 0.02
 			}
 		}
@@ -452,12 +448,10 @@ ideas = {
 			}
 
 			modifier = {
-				stability_factor = 0.05
 				political_power_gain = 0.1
 				consumer_goods_factor = 0.05
 				industrial_capacity_factory = -0.05
 				democratic_drift = 0.05
-				neutrality_drift = 0.05
 				communism_drift = 0.05
 			}
 		}
@@ -502,7 +496,7 @@ ideas = {
 
 			modifier = {
 				neutrality_drift = 0.03
-				drift_defence_factor = 0.1
+				drift_defence_factor = 0.02
 			}
 		}
 
@@ -524,10 +518,9 @@ ideas = {
 			}
 
 			modifier = {
-				neutrality_drift = 0.05
+				neutrality_drift = 0.03
 				stability_factor = 0.05
-				drift_defence_factor = 0.25
-				war_support_factor = 0.1
+				drift_defence_factor = 0.05
 				consumer_goods_factor = -0.02
 			}
 		}
@@ -550,7 +543,7 @@ ideas = {
 				war_support_factor = -0.2
 				ai_badass_factor = 0.1
 				ai_join_ally_desire_factor = -200
-				production_speed_bunker_factor = 0.2
+				production_speed_bunker_factor = 0.1
 			}
 		}
 
@@ -569,16 +562,11 @@ ideas = {
 			}
 
 			modifier = {
-				neutrality_drift = 0.03
-				ai_badass_factor = 0.25
-			}
-
-			targeted_modifier = {
-				tag = SOV
-				defense_bonus_against = 0.1
+				war_support_factor = -0.1
+				production_speed_bunker_factor = 0.1
 			}
 		}
-
+	
 		HUN_non_belligerent3 = {
 			allowed = {
 				original_tag = HUN
@@ -594,19 +582,11 @@ ideas = {
 			}
 
 			modifier = {
-				stability_factor = 0.05
 				neutrality_drift = 0.05
 				surrender_limit = 0.05
-			}
-
-			targeted_modifier = {
-				tag = SOV
-				defense_bonus_against = 0.1
-			}
-
-			targeted_modifier = {
-				tag = GER
-				defense_bonus_against = 0.05
+				army_defence_against_major_factor = 0.05
+				army_core_defence_factor = 0.05
+				production_speed_bunker_factor = 0.1
 			}
 		}
 
@@ -625,56 +605,12 @@ ideas = {
 			}
 
 			modifier = {
-				stability_factor = 0.05
 				neutrality_drift = 0.05
+				surrender_limit = 0.05
+				army_defence_against_major_factor = 0.1
 				army_core_defence_factor = 0.05
-				surrender_limit = 0.05
 				production_speed_bunker_factor = 0.1
-			}
-
-			targeted_modifier = {
-				tag = SOV
-				defense_bonus_against = 0.1
-			}
-
-			targeted_modifier = {
-				tag = GER
-				defense_bonus_against = 0.1
-			}
-		}
-
-		HUN_non_belligerent5 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = tur_kemalist_neutrality
-
-			allowed_civil_war = {
-				OR = {
-					has_government = neutrality
-					has_government = democratic
-				}
-			}
-
-			modifier = {
-				stability_factor = 0.05
-				neutrality_drift = 0.05
-				autonomy_gain = 10
-				army_core_attack_factor = 0.1
-				army_core_defence_factor = 0.1
-				surrender_limit = 0.05
-				production_speed_bunker_factor = 0.1
-			}
-
-			targeted_modifier = {
-				tag = SOV
-				defense_bonus_against = 0.1
-			}
-
-			targeted_modifier = {
-				tag = GER
-				defense_bonus_against = 0.1
+				autonomy_gain = 5
 			}
 		}
 
@@ -726,7 +662,7 @@ ideas = {
 				line_change_production_efficiency_factor = 0.1
 				consumer_goods_factor = 0.05
 				production_speed_infrastructure_factor = 0.05
-				production_speed_rail_way_factor = 0.05
+				min_export = -0.1
 			}
 		}
 
@@ -750,113 +686,11 @@ ideas = {
 				line_change_production_efficiency_factor = 0.1
 				consumer_goods_factor = 0.05
 				production_speed_buildings_factor = 0.05
-				production_speed_rail_way_factor = 0.1
+				min_export = -0.1
 				stability_factor = -0.05
 				non_core_manpower = 0.03
 				resistance_target = 0.1
 				resistance_growth = 0.05
-				min_export = -0.1
-			}
-		}
-
-		HUN_idea_the_march_front = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = EST_democratic_opposition
-
-			allowed_civil_war = {
-				OR = {
-					has_government = communism
-					has_government = democratic
-				}
-			}
-
-			modifier = {
-				stability_factor = -0.15
-				democratic_drift = 0.02
-			}
-		}
-
-		HUN_the_march_front2 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = EST_democratic_opposition
-
-			allowed_civil_war = {
-				OR = {
-					has_government = communism
-					has_government = democratic
-				}
-			}
-
-			modifier = {
-				stability_factor = -0.1
-				fascism_drift = -0.05
-				democratic_drift = 0.03
-				communism_drift = 0.02
-			}
-		}
-
-		HUN_the_march_front3 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = EST_democratic_opposition
-
-			allowed_civil_war = {
-				OR = {
-					has_government = communism
-					has_government = democratic
-				}
-			}
-
-			modifier = {
-				stability_factor = -0.05
-				war_support_factor = 0.1
-				fascism_drift = -0.1
-				democratic_drift = 0.05
-				communism_drift = 0.03
-				non_core_manpower = 0.05
-			}
-		}
-
-		HUN_the_march_front4 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = EST_democratic_opposition
-
-			allowed_civil_war = {
-				OR = {
-					has_government = communism
-					has_government = democratic
-				}
-			}
-
-			modifier = {
-				war_support_factor = 0.1
-				fascism_drift = -0.1
-				democratic_drift = 0.05
-				communism_drift = 0.03
-				non_core_manpower = 0.05
-				join_faction_tension = -0.3
-				guarantee_tension = -0.2
-				guarantee_cost = -0.5
-				lend_lease_tension = -0.4
-				send_volunteers_tension = -0.4
-				send_volunteer_divisions_required = -0.4
-				send_volunteer_size = 3
-			}
-
-			targeted_modifier = {
-				tag = GER
-				defense_bonus_against = 0.1
 			}
 		}
 
@@ -865,10 +699,6 @@ ideas = {
 				OR = {
 					original_tag = HUN
 					original_tag = AUS
-					original_tag = BUL
-					original_tag = CZE
-					original_tag = ROM
-					original_tag = YUG
 					original_tag = BAY
 					original_tag = WUR
 				}
@@ -936,6 +766,7 @@ ideas = {
 				democratic_drift = 0.1
 				communism_drift = 0.05
 				fascism_drift = -0.05
+				political_power_gain = 0.05
 			}
 		}
 
@@ -944,7 +775,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = generic_purge
+			picture = prc_low_popular_support
 
 			allowed_civil_war = {
 				OR = {
@@ -960,7 +791,6 @@ ideas = {
 				fascism_drift = 0.03
 				cic_to_overlord_factor = 0.2
 				mic_to_overlord_factor = 0.2
-				power_balance_weekly = 0.005
 			}
 		}
 
@@ -969,7 +799,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = generic_purge
+			picture = prc_low_popular_support2
 
 			allowed_civil_war = {
 				OR = {
@@ -986,7 +816,6 @@ ideas = {
 				democratic_drift = -0.05
 				cic_to_overlord_factor = 0.2
 				mic_to_overlord_factor = 0.2
-				power_balance_weekly = 0.002
 			}
 		}
 
@@ -995,7 +824,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = generic_oppression
+			picture = prc_low_popular_support3
 
 			allowed_civil_war = {
 				OR = {
@@ -1010,44 +839,6 @@ ideas = {
 				democratic_drift = -0.1
 				cic_to_overlord_factor = 0.2
 				mic_to_overlord_factor = 0.2
-				power_balance_weekly = 0.001
-			}
-		}
-
-		HUN_horthy = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = HUN_miklos_horthy_admiral
-
-			allowed_civil_war = {
-				OR = {
-					has_government = neutrality
-					has_government = democratic
-				}
-			}
-
-			available = {
-				NOT = {
-					has_country_leader = {
-						character = HUN_miklos_horthy
-					}
-				}
-			}
-
-			modifier = {
-				neutrality_drift = 0.1
-				drift_defence_factor = 0.2
-				army_core_defence_factor = 0.1
-				defensive_war_stability_factor = 0.6
-				stability_factor = 0.1
-				stability_weekly_factor = 0.01
-				political_power_factor = 0.15
-				political_advisor_cost_factor = -0.25
-				economy_cost_factor = -0.25
-				trade_laws_cost_factor = -0.25
-				mobilization_laws_cost_factor = -0.25
 			}
 		}
 
@@ -1076,7 +867,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = gre_debt_to_the_ifc
+			picture = chi_hyper_inflation
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1094,7 +885,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = gre_debt_to_the_ifc
+			picture = chi_hyper_inflation2
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1112,7 +903,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = gre_debt_to_the_ifc
+			picture = chi_hyper_inflation3
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1131,7 +922,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = gre_debt_to_the_ifc
+			picture = chi_hyper_inflation4
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1150,7 +941,7 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = gre_debt_to_the_ifc
+			picture = chi_hyper_inflation5
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1169,7 +960,8 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = tur_etatism
+#			picture = tur_etatism
+			picture = chi_hyper_inflation
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1187,7 +979,8 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = tur_etatism
+#			picture = tur_etatism
+			picture = chi_hyper_inflation2
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1206,7 +999,8 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = tur_etatism
+#			picture = tur_etatism
+			picture = chi_hyper_inflation3
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1225,7 +1019,8 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = tur_etatism
+#			picture = tur_etatism
+			picture = chi_hyper_inflation4
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1244,7 +1039,8 @@ ideas = {
 				original_tag = HUN
 			}
 
-			picture = tur_etatism
+#			picture = tur_etatism
+			picture = chi_hyper_inflation5
 
 			allowed_civil_war = {
 				has_government = communism
@@ -1280,6 +1076,7 @@ ideas = {
 
 			modifier = {
 				political_power_gain = -0.05
+				political_power_factor = -0.05
 				fascism_drift = 0.03
 				production_speed_buildings_factor = 0.1
 				research_speed_factor = 0.01
@@ -1314,6 +1111,7 @@ ideas = {
 
 			modifier = {
 				political_power_gain = -0.1
+				political_power_factor = -0.1
 				fascism_drift = 0.05
 				production_speed_buildings_factor = 0.15
 				research_speed_factor = 0.02
@@ -1349,6 +1147,7 @@ ideas = {
 
 			modifier = {
 				political_power_gain = -0.2
+				political_power_factor = -0.2
 				fascism_drift = 0.1
 				production_speed_buildings_factor = 0.2
 				research_speed_factor = 0.02
@@ -1586,10 +1385,8 @@ ideas = {
 			}
 
 			modifier = {
-				fascism_drift = 0.05
-				drift_defence_factor = 0.05
-				army_core_attack_factor = 0.1
-				army_core_defence_factor = 0.1
+				fascism_drift = 0.03
+				army_attack_factor = 0.05
 			}
 		}
 
@@ -1610,12 +1407,8 @@ ideas = {
 
 			modifier = {
 				fascism_drift = 0.05
-				drift_defence_factor = 0.1
-				political_power_gain = 0.1
 				recruitable_population_factor = 0.03
-				consumer_goods_factor = -0.05
-				army_core_attack_factor = 0.1
-				army_core_defence_factor = 0.1
+				army_attack_factor = 0.05
 			}
 		}
 
@@ -1636,13 +1429,9 @@ ideas = {
 
 			modifier = {
 				fascism_drift = 0.05
-				drift_defence_factor = 0.1
-				stability_factor = 0.1
-				political_power_gain = 0.2
+				political_power_gain = 0.1
 				recruitable_population_factor = 0.05
-				consumer_goods_factor = -0.1
-				army_core_attack_factor = 0.1
-				army_core_defence_factor = 0.1
+				army_attack_factor = 0.1
 			}
 		}
 
@@ -1669,45 +1458,11 @@ ideas = {
 			}
 
 			modifier = {
-				join_faction_tension = -0.3
 				guarantee_tension = -0.3
-				army_core_defence_factor = 0.05
-				drift_defence_factor = 0.2
-			}
-		}
-
-		HUN_bulwark_against_radicalism2 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			available = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-				is_subject = no
-			}
-
-			picture = generic_fortify_the_borders
-
-			allowed_civil_war = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-
-			modifier = {
-				civil_war_involvement_tension = -0.4
-				join_faction_tension = -0.3
-				guarantee_tension = -0.3
-				send_volunteers_tension = -0.4
-				lend_lease_tension = -0.4
-				guarantee_cost = -0.8
-				army_core_defence_factor = 0.05
-				drift_defence_factor = 0.2
-				non_core_manpower = 0.05
+				guarantee_cost = -0.5
+				drift_defence_factor = 0.1
+				army_attack_against_major_factor = 0.1
+				army_defence_against_major_factor = 0.1
 			}
 		}
 
@@ -1733,250 +1488,9 @@ ideas = {
 			}
 
 			modifier = {
-				join_faction_tension = -0.7
 				drift_defence_factor = 0.1
 				army_core_defence_factor = 0.05
-			}
-		}
-
-		HUN_battleground_against_radicalism2 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			available = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-
-			picture = generic_democratic_drift_bonus
-
-			allowed_civil_war = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-
-			modifier = {
-				join_faction_tension = -0.7
-				drift_defence_factor = 0.2
-				fascism_drift = -0.05
-				communism_drift = -0.05
-				army_core_defence_factor = 0.05
-			}
-		}
-
-		HUN_eec = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			available = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-				any_country = {
-					is_in_faction_with = ROOT
-					OR = {
-						has_idea = HUN_bulwark_against_radicalism_idea
-						has_idea = HUN_bulwark_against_radicalism2
-					}
-				}
-			}
-
-			picture = generic_flexible_foreign_policy
-
-			allowed_civil_war = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-
-			modifier = {
-				production_speed_buildings_factor = 0.05
-				production_speed_infrastructure_factor = 0.1
-				production_speed_rail_way_factor = 0.1
-				army_speed_factor = 0.05
-			}
-		}
-
-		HUN_eec2 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			available = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-				any_country = {
-					is_in_faction_with = ROOT
-					OR = {
-						has_idea = HUN_bulwark_against_radicalism_idea
-						has_idea = HUN_bulwark_against_radicalism2
-					}
-				}
-			}
-
-			picture = generic_flexible_foreign_policy2
-
-			allowed_civil_war = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-
-			modifier = {
-				production_speed_buildings_factor = 0.05
-				production_speed_infrastructure_factor = 0.1
-				production_speed_rail_way_factor = 0.1
-				army_speed_factor = 0.05
-				democratic_drift = 0.05
-				opinion_gain_monthly_same_ideology_factor = 0.1
-				research_speed_factor = 0.02
-			}
-		}
-
-		HUN_eec3 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			available = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-				any_country = {
-					is_in_faction_with = ROOT
-					OR = {
-						has_idea = HUN_bulwark_against_radicalism_idea
-						has_idea = HUN_bulwark_against_radicalism2
-					}
-				}
-			}
-
-			picture = YUG_federal_defense_council
-
-			allowed_civil_war = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-
-			modifier = {
-				production_speed_buildings_factor = 0.05
-				production_speed_infrastructure_factor = 0.1
-				production_speed_rail_way_factor = 0.1
-				army_speed_factor = 0.05
-				democratic_drift = 0.05
-				political_power_gain = 0.1
-				opinion_gain_monthly_same_ideology_factor = 0.2
-				research_speed_factor = 0.02
-				non_core_manpower = 0.05
-				army_core_defence_factor = 0.05
-			}
-		}
-
-		HUN_cfr = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			available = {
-				any_owned_state = {
-					OR = {
-						is_on_continent = europe
-						AND = {
-							HUN = {
-								has_completed_focus = HUN_from_the_atlantic_to_the_urals
-							}
-							is_in_gaulle_europe = yes
-						}
-					}
-				}
-			}
-
-			picture = generic_constitutional_guarantees
-
-			modifier = {
-				democratic_drift = 0.15
-			}
-
-			targeted_modifier = {
-				tag = HUN
-				attack_bonus_against = -0.1
-				defense_bonus_against = -0.1
-			}
-		}
-
-		HUN_fascination_with_aviation = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = generic_aircraft_support
-
-			modifier = {
-				air_training_xp_gain_factor = 0.1
-				experience_gain_air = 0.05
-			}
-
-			equipment_bonus = {
-				fighter_equipment = {
-					build_cost_ic = -0.05 instant = yes
-				}
-				tac_bomber_equipment = {
-					build_cost_ic = -0.1 instant = yes
-				}
-				heavy_fighter_equipment = {
-					build_cost_ic = -0.1 instant = yes
-				}
-			}
-		}
-
-		HUN_rothermere_tabloids = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = generic_fascism_drift_bonus
-
-			available = {
-				has_country_leader = {
-					character = HUN_franz_friedrich
-				}
-			}
-
-			modifier = {
-				fascism_drift = 0.05
-				political_power_factor = 0.1
-				consumer_goods_factor = 0.03
-				send_volunteer_divisions_required = -0.2
-			}
-		}
-
-		HUN_mining_industry = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = ast_all_in
-
-			available = {
-				has_government = fascism
-			}
-
-			modifier = {
-				min_export = -0.1
+				army_core_attack_factor = 0.05
 			}
 		}
 
@@ -2033,7 +1547,6 @@ ideas = {
 			}
 
 			modifier = {
-				drift_defence_factor = 0.1
 				neutrality_drift = 0.01
 			}
 		}
@@ -2053,12 +1566,10 @@ ideas = {
 			}
 
 			modifier = {
-				drift_defence_factor = 0.1
 				neutrality_drift = 0.01
 				fascism_drift = -0.03
 				democratic_acceptance = 50
-				fascism_acceptance = -100
-				communism_acceptance = -100
+				fascism_acceptance = -25
 			}
 		}
 
@@ -2077,14 +1588,12 @@ ideas = {
 			}
 
 			modifier = {
-				drift_defence_factor = 0.15
 				political_power_factor = 0.05
 				neutrality_drift = 0.01
 				democratic_drift = 0.03
 				fascism_drift = -0.05
 				democratic_acceptance = 50
-				fascism_acceptance = -100
-				communism_acceptance = -100
+				fascism_acceptance = -50
 			}
 		}
 
@@ -2103,44 +1612,12 @@ ideas = {
 			}
 
 			modifier = {
-				drift_defence_factor = 0.15
 				political_power_factor = 0.05
 				neutrality_drift = 0.03
 				democratic_drift = 0.05
 				fascism_drift = -0.05
 				democratic_acceptance = 50
 				fascism_acceptance = -100
-				communism_acceptance = -100
-				opinion_gain_monthly_factor = 0.2
-				surrender_limit = 0.05
-			}
-		}
-
-		HUN_the_addams5 = {
-			allowed = {
-				original_tag = HUN
-			}
-
-			picture = generic_neutrality_drift_bonus
-
-			available = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
-			}
-
-			modifier = {
-				weekly_manpower = 500
-				drift_defence_factor = 0.15
-				political_power_factor = 0.05
-				neutrality_drift = 0.03
-				democratic_drift = 0.05
-				fascism_drift = -0.05
-				democratic_acceptance = 50
-				fascism_acceptance = -100
-				communism_acceptance = -100
-				opinion_gain_monthly_factor = 0.2
 				surrender_limit = 0.05
 			}
 		}
@@ -2160,7 +1637,7 @@ ideas = {
 			}
 
 			modifier = {
-				army_core_defence_factor = 0.05
+				political_power_gain = -0.05
 				recruitable_population_factor = 0.01
 			}
 		}
@@ -2181,10 +1658,8 @@ ideas = {
 
 			modifier = {
 				political_power_gain = -0.05
-				army_core_defence_factor = 0.05
+				army_attack_against_major_factor = 0.05
 				recruitable_population_factor = 0.03
-				experience_gain_navy_factor = 0.05
-				surrender_limit = 0.02
 			}
 		}
 
@@ -2204,13 +1679,34 @@ ideas = {
 
 			modifier = {
 				political_power_gain = -0.05
-				army_core_attack_factor = 0.05
-				army_core_defence_factor = 0.1
+				army_attack_against_major_factor = 0.1
 				recruitable_population_factor = 0.03
-				experience_gain_navy_factor = 0.05
-				surrender_limit = 0.05
 				resistance_target = -0.05
 				compliance_growth = 0.1
+			}
+		}
+
+		HUN_christian_socialism_idea = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = generic_central_management
+
+			available = {
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+				}
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.03
+				fascism_drift = -0.03
+				communism_drift = -0.03
+				political_power_gain = -0.05
+				production_speed_infrastructure_factor = 0.1
+				production_speed_industrial_complex_factor = 0.05
 			}
 		}
 	}

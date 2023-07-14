@@ -1,0 +1,19 @@
+HUN_fascism_bop = {
+	power_balance_daily = 0.001
+}
+
+HUN_fascism_bop2 = {
+	power_balance_daily = -0.001
+}
+
+HUN_minorities_bop = {
+	power_balance_daily = -0.001
+}
+
+HUN_life_bop = {
+	power_balance_daily = -0.001
+}
+
+HUN_life_bop2 = {
+	power_balance_daily = -0.002
+}

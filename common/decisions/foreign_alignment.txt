@@ -60,6 +60,10 @@ foreign_alignment = {
 		ai_will_do = {
 			base = 10
 			modifier = {
+				factor = 2
+				FROM = { tag = GER }
+			}
+			modifier = {
 				factor = 0.5
 				FROM = {
 					tag = GER
@@ -68,12 +72,20 @@ foreign_alignment = {
 				has_idea = HUN_german_trade
 			}
 			modifier = {
-				factor = 0
+				factor = 0.5
 				FROM = {
 					tag = GER
 					has_government = fascism
 				}
 				has_idea = HUN_german_trade2
+			}
+			modifier = {
+				factor = 0.5
+				FROM = {
+					tag = GER
+					has_government = fascism
+				}
+				has_idea = HUN_german_trade3
 			}
 			modifier = {
 				factor = 0
@@ -135,33 +147,16 @@ foreign_alignment = {
 
 			if = {
 				limit = {
-					FROM = { has_government = fascism }
+					GER = { has_government = fascism }
 				}
-
 				if = {
 					limit = {
-						GER = { has_government = fascism }
+						FROM = { tag = GER }
 					}
+	
 					add_german_trade_HUN = yes
 				}
-			}
-			else_if = {
-				limit = {
-					FROM = { has_government = communism }
-				}
-
-				if = {
-					limit = {
-						GER = { has_government = fascism }
-					}
-					remove_german_trade_HUN = yes
-				}
-			}
-			else = {
-				if = {
-					limit = {
-						GER = { has_government = fascism }
-					}
+				else = {
 					remove_german_trade_HUN = yes
 				}
 			}
@@ -252,7 +247,6 @@ foreign_alignment = {
 		}
 
 		available = {
-			has_completed_focus = HUN_the_trianon_trauma
 			OR = {
 				AND = {
 					focus_progress = {
@@ -438,7 +432,7 @@ foreign_alignment = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_the_trianon_trauma
+			has_completed_focus = HUN_renounce_the_treaty_of_trianon
 			OR = {
 				NOT = { has_completed_focus = HUN_demand_southern_slovakia }
 				NOT = { has_completed_focus = HUN_demand_vojvodina }
@@ -535,112 +529,6 @@ foreign_alignment = {
 		}
 	}
 
-	join_FROM = {
-		icon = hol_exchange_intelligence_data
-		priority = 10
-
-		allowed = {
-			original_tag = HUN
-		}
-
-		available = {
-			OR = {
-				has_completed_focus = HUN_the_trianon_trauma
-				has_completed_focus	= HUN_rapproachement_with_little_entente
-			}
-			is_faction_leader = no # you shouldn't be able to betray your own faction
-			has_capitulated = no
-			NOT = {
-				has_war_with = FROM
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = democratic
-					}
-				}
-				democratic > 0.4
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = fascism
-					}
-				}
-				fascism > 0.4
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = communism
-					}
-				}
-				communism > 0.4
-			}
-			if = {
-				limit = {
-					FROM = {
-						has_government = neutrality
-					}
-				}
-				neutrality > 0.4
-			}
-		}
-
-		target_trigger = {
-			FROM = {
-				is_faction_leader = yes
-				NOT = {
-					is_in_faction_with = ROOT
-				}
-				OR = {
-					capital_scope = { is_on_continent = europe }
-					original_tag = USA
-				}
-				if = {
-					limit = {
-						has_global_flag = HUN_germany_has_ideas
-					}
-					NOT = {
-						original_tag = GER
-					}
-				}
-				if = {
-					limit = {
-						ROOT = {
-							has_completed_focus = HUN_rapproachement_with_little_entente
-						}
-					}
-					OR = {
-						has_government = democratic
-						has_government = neutrality
-					}
-				}
-			}
-		}
-
-		visible = {
-			original_tag = HUN
-			has_completed_focus = HUN_continue_the_regency
-			OR = {
-				has_completed_focus = HUN_the_march_front
-				has_completed_focus = HUN_strengthen_the_aristocracy
-			}
-			is_in_faction = no
-		}
-
-		cost = 50
-
-		complete_effect = {
-			FROM = {
-				country_event = {
-					id = generic.2
-					hours = 4
-				}
-			}
-		}
-	}
-
 	HUN_call_in_sweden = {
 		available = {
 			has_war = yes
@@ -692,23 +580,99 @@ foreign_alignment = {
 
 		visible = {
 			original_tag = HUN
-			NOT = { has_country_flag = HUN_exchanged_rakosi }
+			NOT = {
+				has_government = communism
+				has_country_flag = HUN_exchanged_rakosi
+			}
 			has_prime_minister_chosen = yes
 		}
 
-		cost = 30
+		cost = 0
 		fire_only_once = yes
 
 		complete_effect = {
 			hidden_effect = {
 				set_country_flag = HUN_exchanged_rakosi
 			}
-			
+
+			add_war_support = 0.05
 			add_popularity = {
 				ideology = communism
 				popularity = 0.05
 			}
+			FROM = {
+				add_opinion_modifier = {
+					target = HUN
+					modifier = medium_increase
+				}
+			}
+		}
+	}
+
+	release_szalasi = {
+		icon = generic_political_discourse
+		priority = 9
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_arrest_szalasi
+		}
+
+		target_trigger = {
+			FROM = {
+				tag = GER
+				has_government = fascism
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			NOT = {
+				has_government = fascism
+				has_country_leader = { character = HUN_ferenc_szalasi }
+				has_country_flag = HUN_released_szalasi
+			}
+			has_completed_focus = HUN_continue_the_regency
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = HUN_released_szalasi
+			}
+
 			add_war_support = 0.05
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = HUN_arrow_cross_party_long
+				name = HUN_arrow_cross_party
+			}
+			add_country_leader_role = {
+				character = HUN_ferenc_szalasi
+				promote_leader = yes
+				country_leader = {
+					ideology = fascism_ideology
+					expire = "1965.1.1"
+					traits = {
+						leader_of_the_nation
+					}
+				}
+			}
+			FROM = {
+				add_opinion_modifier = {
+					target = HUN
+					modifier = small_increase
+				}
+			}
 		}
 	}
 
@@ -866,17 +830,7 @@ foreign_alignment = {
 		days_re_enable = 10
 
 		complete_effect = {
-			if = {
-				limit = {
-					NOT = {
-						has_variable = HUN_has_loans_@FROM
-					}
-				}
-				set_variable = {
-					var = HUN_has_loans_@FROM
-					value = 1
-				}
-			}
+			
 		}
 
 		remove_effect = {
@@ -902,7 +856,6 @@ foreign_alignment = {
 			}
 
 			remove_loans_HUN = yes
-			HUN_add_liberal_bop_medium = yes
 		}
 	}
 
@@ -946,7 +899,6 @@ foreign_alignment = {
 		remove_effect = {
 			add_offsite_building = { type = industrial_complex level = -2 }
 			remove_loans_HUN = yes
-			HUN_add_liberal_bop_small = yes
 		}
 	}
 }
