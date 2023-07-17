@@ -1152,7 +1152,6 @@ characters={
 			available = {
 				is_country_leader = no
 				has_completed_focus = HUN_the_addams_family
-				has_completed_focus = HUN_anglophile_policies
 				OR = {
 					has_government = neutrality
 					has_government = democratic

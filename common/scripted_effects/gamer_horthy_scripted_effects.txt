@@ -436,6 +436,23 @@ replace_horthy = {
 	}
 	if = {
 		limit = {
+			has_completed_focus = HUN_elect_deputy_regent
+			has_character = HUN_istvan_horthy
+		}
+		add_country_leader_role = {
+			character = HUN_istvan_horthy
+			promote_leader = yes
+			country_leader = {
+				ideology = centrism
+				expire = "1965.1.1"
+				traits = {
+					deputy_regent2
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
 			has_character = HUN_pal_teleki
 		}
 		add_country_leader_role = {

@@ -530,6 +530,7 @@ foreign_alignment = {
 	}
 
 	HUN_call_in_sweden = {
+		priority = 100
 		available = {
 			has_war = yes
 		}
@@ -561,7 +562,7 @@ foreign_alignment = {
 
 	exchange_rakosi = {
 		icon = generic_political_discourse
-		priority = 9
+		priority = 11
 
 		allowed = {
 			original_tag = HUN
@@ -611,7 +612,7 @@ foreign_alignment = {
 
 	release_szalasi = {
 		icon = generic_political_discourse
-		priority = 9
+		priority = 11
 
 		allowed = {
 			original_tag = HUN
@@ -651,19 +652,24 @@ foreign_alignment = {
 				ideology = fascism
 				popularity = 0.05
 			}
-			set_party_name = {
-				ideology = fascism
-				long_name = HUN_arrow_cross_party_long
-				name = HUN_arrow_cross_party
-			}
-			add_country_leader_role = {
-				character = HUN_ferenc_szalasi
-				promote_leader = yes
-				country_leader = {
-					ideology = fascism_ideology
-					expire = "1965.1.1"
-					traits = {
-						leader_of_the_nation
+			if = {
+				limit = {
+					has_completed_focus = HUN_impose_censorship
+				}
+				set_party_name = {
+					ideology = fascism
+					long_name = HUN_arrow_cross_party_long
+					name = HUN_arrow_cross_party
+				}
+				add_country_leader_role = {
+					character = HUN_ferenc_szalasi
+					promote_leader = yes
+					country_leader = {
+						ideology = fascism_ideology
+						expire = "1965.1.1"
+						traits = {
+							leader_of_the_nation
+						}
 					}
 				}
 			}
@@ -861,7 +867,7 @@ foreign_alignment = {
 
 	expand_cooperatives = {
 		icon = generic_merge_plant_materiel
-		priority = 9
+		priority = 10
 
 		allowed = {
 			original_tag = HUN

@@ -1,0 +1,33 @@
+# List of names and logos for intelligence agencies
+# available trigger will determine if the logo is in the list of available logos or not
+# names is a list of names. Can be a localization entry, or the name directly. A random name will be picked from them.
+
+intelligence_agency = {
+	picture = GFX_intelligence_agency_logo_HUN
+	names = { "VFK-2" }
+
+	default = {
+		NOT = {
+			has_government = communism
+		}
+	}
+	available = {
+		original_tag = HUN
+		NOT = {
+			has_government = communism
+		}
+	}
+}
+
+intelligence_agency = {
+	picture = GFX_intelligence_agency_logo_HUN2
+	names = { "ÁVH" }
+
+	default = {
+		has_government = communism
+	}
+	available = {
+		original_tag = HUN
+		has_government = communism
+	}
+}

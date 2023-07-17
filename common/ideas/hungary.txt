@@ -472,7 +472,7 @@ ideas = {
 			modifier = {
 				stability_weekly_factor = -0.01
 				political_power_gain = -0.3
-				democratic_drift = 0.2
+				democratic_drift = 0.1
 				communism_drift = 0.03
 			}
 		}
@@ -540,7 +540,7 @@ ideas = {
 			}
 
 			modifier = {
-				war_support_factor = -0.2
+				war_support_factor = -0.5
 				ai_badass_factor = 0.1
 				ai_join_ally_desire_factor = -200
 				production_speed_bunker_factor = 0.1
@@ -562,11 +562,11 @@ ideas = {
 			}
 
 			modifier = {
-				war_support_factor = -0.1
+				war_support_factor = -0.3
 				production_speed_bunker_factor = 0.1
 			}
 		}
-	
+
 		HUN_non_belligerent3 = {
 			allowed = {
 				original_tag = HUN
@@ -582,8 +582,7 @@ ideas = {
 			}
 
 			modifier = {
-				neutrality_drift = 0.05
-				surrender_limit = 0.05
+				neutrality_drift = 0.03
 				army_defence_against_major_factor = 0.05
 				army_core_defence_factor = 0.05
 				production_speed_bunker_factor = 0.1
@@ -738,8 +737,8 @@ ideas = {
 			modifier = {
 				stability_factor = -0.05
 				autonomy_gain = 7.5
-				democratic_drift = 0.1
-				communism_drift = 0.05
+				democratic_drift = 0.05
+				communism_drift = 0.03
 				fascism_drift = -0.05
 			}
 		}
@@ -763,8 +762,8 @@ ideas = {
 
 			modifier = {
 				autonomy_gain = 7.5
-				democratic_drift = 0.1
-				communism_drift = 0.05
+				democratic_drift = 0.05
+				communism_drift = 0.03
 				fascism_drift = -0.05
 				political_power_gain = 0.05
 			}
@@ -786,7 +785,7 @@ ideas = {
 
 			modifier = {
 				stability_factor = -0.3
-				neutrality_drift = -0.05
+				neutrality_drift = -0.02
 				communism_drift = 0.03
 				fascism_drift = 0.03
 				cic_to_overlord_factor = 0.2
@@ -835,8 +834,8 @@ ideas = {
 
 			modifier = {
 				stability_factor = -0.1
-				neutrality_drift = -0.1
-				democratic_drift = -0.1
+				neutrality_drift = -0.05
+				democratic_drift = -0.05
 				cic_to_overlord_factor = 0.2
 				mic_to_overlord_factor = 0.2
 			}
@@ -858,7 +857,6 @@ ideas = {
 				democratic_drift = -0.03
 				fascism_drift = -0.05
 				neutrality_drift = -0.03
-				power_balance_weekly = -0.02
 			}
 		}
 
@@ -1177,7 +1175,7 @@ ideas = {
 			}
 
 			modifier = {
-				democratic_drift = 0.03
+				democratic_drift = 0.01
 				production_factory_max_efficiency_factor = 0.05
 			}
 		}
@@ -1198,7 +1196,7 @@ ideas = {
 			}
 
 			modifier = {
-				democratic_drift = 0.05
+				democratic_drift = 0.03
 				consumer_goods_factor = -0.01
 				production_factory_max_efficiency_factor = 0.05
 				production_factory_efficiency_gain_factor = 0.05
@@ -1244,7 +1242,7 @@ ideas = {
 			}
 
 			modifier = {
-				communism_drift = 0.05
+				communism_drift = 0.03
 				drift_defence_factor = 0.1
 				production_speed_buildings_factor = 0.1
 			}
@@ -1290,7 +1288,7 @@ ideas = {
 			}
 
 			modifier = {
-				communism_drift = 0.05
+				communism_drift = 0.08
 				drift_defence_factor = 0.1
 				political_power_gain = 0.1
 				production_speed_buildings_factor = 0.1
@@ -1314,7 +1312,7 @@ ideas = {
 			}
 
 			modifier = {
-				recruitable_population_factor = 0.03
+				recruitable_population_factor = 0.02
 				consumer_goods_factor = 0.1
 			}
 		}
@@ -1521,7 +1519,10 @@ ideas = {
 			picture = MEX_politicised_army_2
 
 			available = {
-				has_government = fascism
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
 			}
 
 			modifier = {
@@ -1694,15 +1695,11 @@ ideas = {
 			picture = generic_central_management
 
 			available = {
-				OR = {
-					has_government = democratic
-					has_government = neutrality
-				}
+				NOT = { has_government = communism }
 			}
 
 			modifier = {
 				consumer_goods_factor = 0.03
-				fascism_drift = -0.03
 				communism_drift = -0.03
 				political_power_gain = -0.05
 				production_speed_infrastructure_factor = 0.1

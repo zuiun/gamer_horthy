@@ -1,16 +1,19 @@
 technology_sharing_group = {
-	id = HUN_erasmus_programme_tech_group
-	name = HUN_erasmus_programme
-	desc = HUN_erasmus_programme_desc
+	id = HUN_oil_group
+	name = HUN_joint_oil_exploitation_company
+	desc = HUN_joint_oil_exploitation_company_desc
 	picture = GFX_technology_sharing_default
 
-	is_faction_sharing = yes
-	research_sharing_per_country_bonus = 0.05
+	research_sharing_per_country_bonus = 0.1
+
+	categories = { industry }
 
     available = {
-    	capital_scope = {
-			is_on_continent = europe
+    	any_country = {
+			NOT = { tag = HUN }
+			is_in_faction_with = HUN
+			is_major = yes
+			num_of_civilian_factories > 30
 		}
-		is_in_faction_with = HUN
     }
 }
