@@ -4,7 +4,7 @@
  regent_president:0 "A Life for Hungary"
  bald_murderer:0 "Bald Murderer"
  gyula_gombos_pm:0 "Radical Prime Minister"
- conservative_pm:0 "Radical Prime Minister"
+ conservative_pm:0 "$gyula_gombos_pm$"
  liberal_pm:0 "Liberal Prime Minister"
  aristocrat_pm:0 "Conservative Prime Minister"
  coalition_pm:0 "Reformist Prime Minister"

@@ -402,7 +402,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				industrial_capacity_factory = -0.15
 				production_speed_buildings_factor = -0.1
-				democratic_drift = 0.02
+				democratic_drift = -0.02
 				communism_drift = -0.05
 			}
 		}
@@ -423,12 +423,11 @@ ideas = {
 			}
 
 			modifier = {
-				political_power_gain = 0.1
+				political_power_gain = 0.05
 				consumer_goods_factor = 0.05
 				industrial_capacity_factory = -0.05
 				production_speed_buildings_factor = -0.1
-				democratic_drift = 0.05
-				communism_drift = 0.02
+				democratic_drift = 0.02
 			}
 		}
 
@@ -448,11 +447,11 @@ ideas = {
 			}
 
 			modifier = {
-				political_power_gain = 0.1
+				political_power_gain = 0.05
 				consumer_goods_factor = 0.05
-				industrial_capacity_factory = -0.05
-				democratic_drift = 0.05
-				communism_drift = 0.05
+				industrial_capacity_factory = 0.05
+				democratic_drift = 0.02
+				communism_drift = 0.03
 			}
 		}
 

@@ -733,7 +733,7 @@ characters={
 				NOT = { has_government = communism }
 			}
 			traits = {
-				conservative_pm
+				gyula_gombos_pm
 			}
 		}
 	}

@@ -540,13 +540,6 @@ country_event = {
 				}
 			}
 		}
-
-		hidden_effect = {
-			set_variable = {
-				var = global.foreign_support
-				value = 0
-			}
-		}
 	}
 
 	option = {
@@ -574,7 +567,7 @@ country_event = {
 			modifier = {
 				factor = 10
 				has_war = yes
-				NOT = { has_war_with = HUN }
+				NOT = { has_war_with = FROM }
 			}
 		}
 
@@ -598,11 +591,6 @@ country_event = {
 		}
 
 		hidden_effect = {
-			set_variable = {
-				var = global.foreign_support
-				value = 0
-			}
-
 			if = {
 				limit = {
 					tag = ROM
@@ -629,6 +617,10 @@ country_event = {
 
 				factor = global.foreign_support
 			}
+			modifier = {
+				factor = 100
+				is_subject_of = FROM
+			}
 		}
 
 		add_stability = -0.15
@@ -654,11 +646,6 @@ country_event = {
 		}
 
 		hidden_effect = {
-			set_variable = {
-				var = global.foreign_support
-				value = 0
-			}
-
 			if = {
 				limit = {
 					tag = ROM
@@ -683,6 +670,9 @@ country_event = {
 	option = {
 		name = gamer_horthy.16.a # History has been corrected
 		add_stability = 0.05
+		hidden_effect = {
+			set_variable = { global.foreign_support = 0 }
+		}
 	}
 }
 
@@ -700,6 +690,9 @@ country_event = {
 			target = FROM
 			type = annex_everything
 		}
+		hidden_effect = {
+			set_variable = { global.foreign_support = 0 }
+		}
 	}
 }
 
@@ -713,6 +706,9 @@ country_event = {
 
 	option = {
 		name = gamer_horthy.18.a # Better than nothing
+		hidden_effect = {
+			set_variable = { global.foreign_support = 0 }
+		}
 	}
 }
 
@@ -737,30 +733,27 @@ country_event = {
 
 		hidden_effect = {
 			add_ai_strategy = {
-				type = alliance
+				type = befriend
 				id = "HUN"
 				value = 200
 			}
 		}
 
-		if = {
+		every_owned_state = {
 			limit = {
-				tag = YUG
+				is_core_of = ROOT
+				is_core_of = FROM
 			}
-			every_owned_state = {
-				limit = {
-					is_core_of = FROM
-				}
 
-				remove_core_of = FROM
+			remove_core_of = FROM
+		}
+		every_owned_state = {
+			limit = {
+				is_core_of = ROOT
+				is_claimed_by = FROM
 			}
-			every_owned_state = {
-				limit = {
-					is_claimed_by = FROM
-				}
 
-				remove_claim_by = FROM
-			}
+			remove_claim_by = FROM
 		}
 
 		give_guarantee = FROM
@@ -805,7 +798,6 @@ country_event = {
 		add_stability = -0.1
 
 		give_guarantee = FROM
-		unlock_national_focus = HUN_demand_vojvodina
 	}
 }
 
@@ -1003,7 +995,7 @@ country_event = {
 				is_in_faction_with = ROOT
 			}
 			set_truce = {
-				target = HUN
+				target = FROM
 				days = 180
 			}
 		}
@@ -1035,6 +1027,10 @@ country_event = {
 			}
 
 			white_peace = FROM
+			set_truce = {
+				target = FROM
+				days = 180
+			}
 		}
 
 		FROM = {
@@ -1104,9 +1100,6 @@ country_event = {
 		}
 
 		effect_tooltip = {
-			UKR = {
-				set_cosmetic_tag = CARPATHIA
-			}
 			every_state = {
 				limit = {
 					state = 73
@@ -1116,10 +1109,11 @@ country_event = {
 					limit = {
 						is_controlled_by = HUN
 					}
-					transfer_state_to = UKR
+					UKR = { transfer_state = PREV }
 				}
 			}
 			puppet = UKR
+			UKR = { set_cosmetic_tag = CARPATHIA }
 		}
 		hidden_effect = {
 			create_dynamic_country = {
@@ -1134,12 +1128,12 @@ country_event = {
 					add_core_of = PREV
 					if = {
 						limit = {
-							is_controlled_by = HUN
+							is_controlled_by = ROOT
 						}
 						transfer_state_to = PREV
 					}
 				}
-				HUN = {
+				ROOT = {
 					puppet = PREV
 				}
 			}
@@ -1267,106 +1261,6 @@ country_event = {
 	}
 }
 
-# Join the European Union
-country_event = {
-	id = gamer_horthy.40
-	title = gamer_horthy.40.t
-	desc = gamer_horthy.40.desc
-	picture = GFX_report_event_gre_diplomacy
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.40.a # Let Europe arise
-		ai_chance = {
-			base = 5
-			modifier = {
-				factor = 2
-				any_country = {
-					is_major = yes
-					has_war_with = ROOT
-				}
-			}
-		}
-		FROM = {
-			puppet = ROOT
-		}
-	}
-
-	option = {
-		name = gamer_horthy.40.b # Further integration would be dangerous
-		ai_chance = {
-			base = 1
-			modifier = {
-				factor = 5
-				is_major = yes
-			}
-			modifier = {
-				factor = 5
-				has_country_flag = HUN_no_europeans_allowed
-			}
-		}
-		reverse_add_opinion_modifier = {
-			target = HUN
-			modifier = HUN_betrayed_europe
-		}
-		hidden_effect = {
-			set_country_flag = HUN_no_europeans_allowed
-		}
-	}
-}
-
-# FROM Demands Liberalisation
-country_event = {
-	id = gamer_horthy.41
-	title = gamer_horthy.41.t
-	desc = gamer_horthy.41.desc
-	picture = GFX_report_event_gre_diplomacy
-	is_triggered_only = yes
-
-	option = {
-		name = gamer_horthy.41.a # Let Europe arise
-		ai_chance = {
-			base = 1
-			modifier = {
-				factor = 5
-				is_major = no
-			}
-		}
-		set_politics = {
-			ruling_party = democratic
-			elections_allowed = yes
-		}
-	}
-
-	option = {
-		name = gamer_horthy.41.b # They dare infringe upon our sovereignty
-		ai_chance = {
-			base = 10
-			modifier = {
-				factor = 2
-				is_major = yes
-			}
-			modifier = {
-				factor = 0.2
-				is_in_faction_with = FROM
-			}
-		}
-		add_war_support = 0.1
-		if = {
-			limit = {
-				is_in_faction_with = FROM
-			}
-			leave_faction = yes
-		}
-		FROM = {
-			create_wargoal = {
-				target = ROOT
-				type = puppet_wargoal_focus
-			}
-		}
-	}
-}
-
 # Brothers No Longer
 country_event = {
 	id = gamer_horthy.42
@@ -1399,7 +1293,10 @@ country_event = {
 				modifier = HUN_POL_friendship
 			}
 		}
-		else = {
+		else_if = {
+			limit = {
+				tag = POL
+			}
 			remove_opinion_modifier = {
 				target = HUN
 				modifier = HUN_POL_friendship

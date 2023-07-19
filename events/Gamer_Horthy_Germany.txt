@@ -101,8 +101,8 @@ country_event = {
 				set_autonomy = {
 					target = PREV
 					autonomy_state = autonomy_free
-					end_wars = no
-					end_civil_wars = no
+					end_wars = yes
+					end_civil_wars = yes
 				}
 			}
 			add_ideas = ZAK_isolation

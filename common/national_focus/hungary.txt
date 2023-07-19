@@ -573,8 +573,6 @@ focus_tree = {
 				}
 			}
 
-			hold_election = HUN
-
 			swap_ideas = {
 				add_idea = HUN_his_majestys_government
 				remove_idea = HUN_hungarian_monarchy_democratic
@@ -1037,9 +1035,7 @@ focus_tree = {
 		}
 
 		available = {
-			has_country_leader = {
-				character = HUN_otto_von_habsburg
-			}
+			has_country_leader = { character = HUN_otto_von_habsburg }
 			is_faction_leader = yes
 			OR = {
 				has_government = neutrality
@@ -1094,6 +1090,7 @@ focus_tree = {
 			FOCUS_FILTER_RESEARCH
 		}
 		available = {
+			has_country_leader = { character = HUN_otto_von_habsburg }
 			is_faction_leader = yes
 			OR = {
 				has_government = neutrality
@@ -1141,6 +1138,7 @@ focus_tree = {
 
 		}
 		available = {
+			has_country_leader = { character = HUN_otto_von_habsburg }
 			is_faction_leader = yes
 			OR = {
 				has_government = neutrality
@@ -1281,9 +1279,14 @@ focus_tree = {
 				remove_idea = HUN_the_addams
 				add_idea = HUN_the_addams2
 			}
-			add_power_balance_modifier = {
-				id = HUN_power_balance
-				modifier = HUN_fascism_bop
+			if = {
+				limit = {
+					has_any_power_balance = yes
+				}
+				add_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_fascism_bop
+				}
 			}
 		}
 	}
@@ -1488,9 +1491,14 @@ focus_tree = {
 				popularity = 0.05
 			}
 			custom_effect_tooltip = rename_daranyi_tt
-			add_power_balance_modifier = {
-				id = HUN_power_balance
-				modifier = HUN_life_bop
+			if = {
+				limit = {
+					has_any_power_balance = yes
+				}
+				add_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_life_bop
+				}
 			}
 		}
 	}
@@ -1631,13 +1639,18 @@ focus_tree = {
 						conservative_pm
 					}
 				}
-				remove_power_balance_modifier = {
-					id = HUN_power_balance
-					modifier = HUN_life_bop
-				}
-				add_power_balance_modifier = {
-					id = HUN_power_balance
-					modifier = HUN_life_bop2
+				if = {
+					limit = {
+						has_any_power_balance = yes
+					}
+					remove_power_balance_modifier = {
+						id = HUN_power_balance
+						modifier = HUN_life_bop
+					}
+					add_power_balance_modifier = {
+						id = HUN_power_balance
+						modifier = HUN_life_bop2
+					}
 				}
 			}
 		}
@@ -1939,21 +1952,76 @@ focus_tree = {
 				}
 				add_claim_by = HUN
 			}
+
+			hidden_effect = {
+				clear_trianon_flags = yes
+
+				103 = {
+					set_state_flag = trianon_target
+				}
+				109 = {
+					set_state_flag = trianon_target
+				}
+				163 = {
+					set_state_flag = trianon_target
+				}
+				852 = {
+					set_state_flag = trianon_target
+				}
+			}
+
 			every_state = {
 				limit = {
-					is_controlled_by_ROOT_or_subject = no
 					OR = {
 						state = 103
 						state = 109
 						state = 163
 						state = 852
 					}
+					is_controlled_by_ROOT_or_subject = yes
+					NOT = { is_owned_by = HUN }
 				}
-				owner = {
+				set_state_owner = HUN
+			}
+			every_other_country = {
+				limit = {
+					NOT = {
+						is_subject_of = HUN
+					}
+					OR = {
+						controls_state = 103
+						controls_state = 109
+						controls_state = 163
+						controls_state = 852
+					}
+				}
+				country_event = {
+					id = gamer_horthy.15
+					hours = 4
+				}
+				custom_effect_tooltip = if_they_accept_tt
+				effect_tooltip = {
+					every_state = {
+						limit = {
+							OR = {
+								state = 103
+								state = 109
+								state = 163
+								state = 852
+							}
+							is_controlled_by_ROOT_or_subject = no
+						}
+						HUN = {
+							transfer_state = PREV
+						}
+					}
+				}
+				custom_effect_tooltip = if_they_refuse_tt
+				effect_tooltip = {
 					HUN = {
 						create_wargoal = {
-							type = annex_everything
 							target = PREV
+							type = annex_everything
 						}
 					}
 				}
@@ -1984,17 +2052,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_claims_on_galicia }
 		bypass = {
-			every_state = {
-				OR = {
-					NOT = {
-						state = 76
-						state = 82
-						state = 83
-						state = 84
-						is_owned_by = HUN
-					}
-				}
-			}
+
 		}
 		completion_reward = {
 			hidden_effect = {
@@ -2185,6 +2243,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_limit_suspensive_veto focus = HUN_allow_political_opposition }
 		available = {
+			has_war = yes
 			OR = {
 				has_government = neutrality
 				has_government = democratic
@@ -2383,17 +2442,22 @@ focus_tree = {
 					set_value = -0.1
 				}
 			}
-			add_power_balance_modifier = {
-				id = HUN_power_balance
-				modifier = HUN_minorities_bop
-			}
-			remove_power_balance_modifier = {
-				id = HUN_power_balance
-				modifier = HUN_fascism_bop
-			}
-			add_power_balance_modifier = {
-				id = HUN_power_balance
-				modifier = HUN_fascism_bop2
+			if = {
+				limit = {
+					has_any_power_balance = yes
+				}
+				add_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_minorities_bop
+				}
+				remove_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_fascism_bop
+				}
+				add_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_fascism_bop2
+				}
 			}
 		}
 	}
@@ -2911,6 +2975,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_bulwark_against_radicalism focus = HUN_the_small_regent focus = HUN_preserve_greater_hungary }
 		available = {
+			has_war = yes
 			is_in_faction = yes
 			OR = {
 				has_government = neutrality
@@ -2963,6 +3028,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_preserve_greater_hungary }
 		available = {
+			has_war = yes
 			if = {
 				limit = {
 					is_power_balance_side_active = {
@@ -3008,6 +3074,7 @@ focus_tree = {
 			FOCUS_FILTER_MANPOWER
 		}
 		available = {
+			has_war = yes
 			if = {
 				limit = {
 					is_power_balance_side_active = {
@@ -3057,9 +3124,8 @@ focus_tree = {
 			FOCUS_FILTER_MANPOWER
 		}
 		available = {
-			has_country_leader = {
-				character = HUN_miklos_horthy
-			}
+			has_country_leader = { character = HUN_miklos_horthy }
+			has_war = yes
 			has_government = neutrality
 		}
 		prerequisite = { focus = HUN_maintain_hungarian_sovereignty }
@@ -3181,16 +3247,9 @@ focus_tree = {
 			}
 		}
 		bypass = {
+			has_war = no
 			is_subject = no
-			OR = {
-				is_in_faction = no
-				faction_leader = {
-					OR = {
-						has_government = democratic
-						has_government = neutrality
-					}
-				}
-			}
+			is_in_faction = no
 		}
 		completion_reward = {
 			be_factionless = yes
@@ -4501,7 +4560,6 @@ focus_tree = {
 		relative_position_id = HUN_abolish_the_monarchy
 		cost = 10
 		search_filters = {
-			FOCUS_FILTER_POLITICAL
 			FOCUS_FILTER_STABILITY
 			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_MANPOWER
@@ -4513,11 +4571,6 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_stability = -0.1
-
-			add_popularity = {
-				ideology = fascism
-				popularity = 0.05
-			}
 
 			every_controlled_state = {
 				limit = {
@@ -5056,9 +5109,11 @@ focus_tree = {
 					value = 0.5
 				}
 			}
-			reverse_add_opinion_modifier = {
-				target = ENG
-				modifier = medium_increase
+			ENG = {
+				add_opinion_modifier = {
+					target = HUN
+					modifier = medium_increase
+				}
 			}
 			remove_german_trade_HUN = yes
 		}
@@ -5104,9 +5159,11 @@ focus_tree = {
 				uses = 1
 				category = construction_tech
 			}
-			reverse_add_opinion_modifier = {
-				target = USA
-				modifier = small_increase
+			USA = {
+				add_opinion_modifier = {
+					target = HUN
+					modifier = small_increase
+				}
 			}
 			custom_effect_tooltip = rename_eckhardt_tt
 		}
@@ -5252,8 +5309,8 @@ focus_tree = {
 					remove_claim_by = HUN
 				}
 
-				give_guarantee = YUG
 				YUG = { give_guarantee = HUN }
+				give_guarantee = YUG
 			}
 		}
 	}
@@ -6069,9 +6126,11 @@ focus_tree = {
 					target = HUN
 					modifier = HUN_alpine_interests
 				}
-				reverse_add_opinion_modifier = {
-					target = HUN
-					modifier = HUN_alpine_interests
+				HUN = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = HUN_alpine_interests
+					}
 				}
 			}
 		}
@@ -6138,7 +6197,12 @@ focus_tree = {
 					NOT = { has_war_with = HUN }
 				}
 				add_opinion_modifier = { target = HUN modifier = HUN_renew_the_rome_protocols }
-				reverse_add_opinion_modifier = { target = HUN modifier = HUN_renew_the_rome_protocols }
+				HUN = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = HUN_renew_the_rome_protocols
+					}
+				}
 			}
 			if = {
 				limit = {
@@ -6200,27 +6264,6 @@ focus_tree = {
 
 			if = {
 				limit = {
-					ITA = { is_in_faction = no }
-				}
-				create_faction = HUN_PACT_OF_ROME_FACTION
-
-				every_country = {
-					limit = {
-						OR = {
-							tag = ITA
-							tag = AUS
-						}
-						is_in_faction = no
-						NOT = { has_war_with = HUN }
-					}
-					country_event = {
-						id = generic.5
-						hours = 4
-					}
-				}
-			}
-			else_if = {
-				limit = {
 					ITA = { is_faction_leader = yes }
 				}
 				ITA = {
@@ -6234,9 +6277,29 @@ focus_tree = {
 				limit = {
 					ITA = { is_in_faction_with = FRA }
 				}
-				FRA = {
+				ITA = {
+					faction_leader = {
+						country_event = {
+							id = generic.2
+							hours = 4
+						}
+					}
+				}
+			}
+			else = {
+				create_faction = HUN_PACT_OF_ROME_FACTION
+
+				every_country = {
+					limit = {
+						OR = {
+							tag = ITA
+							tag = AUS
+						}
+						is_in_faction = no
+						NOT = { has_war_with = HUN }
+					}
 					country_event = {
-						id = generic.2
+						id = generic.5
 						hours = 4
 					}
 				}
@@ -7123,10 +7186,20 @@ focus_tree = {
 				}
 				custom_effect_tooltip = if_they_accept_tt
 				effect_tooltip = {
-					release_puppet = UKR
-					UKR = {
-						set_cosmetic_tag = CARPATHIA
+					every_state = {
+						limit = {
+							state = 73
+						}
+						add_core_of = UKR
+						if = {
+							limit = {
+								is_controlled_by = HUN
+							}
+							UKR = { transfer_state = PREV }
+						}
 					}
+					puppet = UKR
+					UKR = { set_cosmetic_tag = CARPATHIA }
 				}
 				custom_effect_tooltip = if_they_refuse_tt
 				effect_tooltip = {
@@ -7481,11 +7554,11 @@ focus_tree = {
 				}
 				set_building_level = {
 					type = bunker
-					level = 2
+					level = 3
 					province = {
 						all_provinces = yes
 						limit_to_border = yes
-						level < 2
+						level < 3
 					}
 				}
 			}
