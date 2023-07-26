@@ -17,7 +17,7 @@ backwardness = {
 }
 hungarian_sovereignty = {
 	icon = eng_move_to_secure_the_dominions
-	priority = 110
+	priority = 140
 }
 territorial_autonomy = {
 	icon = generic_political_actions
@@ -52,7 +52,7 @@ HUN_balance_of_power_category = {
 peace_hun = {
 	icon = GFX_decision_category_generic_political_actions
 	picture = GFX_decision_cat_picture_SWI_federal_council
-	priority = 140
+	priority = 110
 	visible_when_empty = yes
 
 	allowed = {
@@ -61,11 +61,10 @@ peace_hun = {
 
 	visible = {
 		has_war = yes
-		is_in_faction = yes
 		is_faction_leader = no
-		faction_leader = { is_suspicion_target = yes }
 		any_enemy_country = { is_peace_target = yes }
 		has_completed_focus = HUN_peace_overtures
+		NOT = { has_country_flag = peace_in_our_time }
 	}
 
 	on_map_area = {

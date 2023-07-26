@@ -39,53 +39,51 @@ HUN_historical = {
 		HUN_support_domestic_industry
 		HUN_marginalise_the_fascists
 		HUN_support_italian_interests
-		HUN_support_urbanization
 		HUN_institute_for_industrial_techniques
+		HUN_look_outwards
 		HUN_suffrage_reform
 		# 1938
 		HUN_announce_the_gyor_program
 		HUN_strengthen_the_aristocracy
 		HUN_bled_agreement
-		HUN_establish_the_air_force
+		HUN_arrest_szalasi
 		HUN_the_trianon_trauma
-		HUN_demand_southern_slovakia
+		HUN_establish_the_air_force
+		HUN_renounce_the_treaty_of_trianon
+		HUN_movement_of_hungarian_life
 		# 1939
 		HUN_the_addams_family
 		HUN_protect_the_ruthenians
+		HUN_the_true_enemy
 		HUN_civilian_industry
-		HUN_anglophile_policies
-		HUN_invite_foreign_investors
+		HUN_promote_hungarianism
 		HUN_maintain_nonbelligerence
 		# 1940
+		HUN_look_outwards_real
 		HUN_army_maneuvers
-		HUN_mobile_focus
+		HUN_pivot_towards_germany
 		HUN_allow_german_military_access
-		HUN_demand_transylvania
+		HUN_invite_foreign_investors
 		HUN_expand_the_manfred_weiss_steel_works
 		# 1941
+		HUN_mobile_focus
 		HUN_speak_out_fascism
+		HUN_support_urbanization
 		HUN_develop_tanks
-		HUN_the_true_enemy
-		HUN_demand_vojvodina
+		HUN_support_mavag
 		HUN_proclaim_greater_hungary
 		# 1942
+		HUN_commit_to_war
 		HUN_elect_deputy_regent
 		HUN_expand_the_aluminum_industry
 		HUN_expand_the_technical_university_of_budapest
-		HUN_promote_hungarianism
 		HUN_preserve_greater_hungary
 		HUN_allow_political_opposition
 		# 1943
 		HUN_build_the_arpad_line
-		HUN_the_emergency_bureau
+		HUN_the_last_refuge
+		HUN_seizecontrolofhungarysfuture
 		HUN_peace_overtures
-		HUN_mobilise_the_gendarmeries
-		HUN_maintain_hungarian_sovereignty
-		# 1944
-		HUN_request_foreign_support
-		HUN_recruit_the_poor
-		HUN_overthrow_horthy
-		HUN_impose_martial_law
 	}
 
 	research = {

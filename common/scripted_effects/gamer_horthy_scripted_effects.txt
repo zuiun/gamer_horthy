@@ -302,9 +302,7 @@ change_parties_1939 = {
 
 	if = {
 		limit = {
-			NOT = {
-				has_completed_focus = HUN_appointzoltantildy
-			}
+			NOT = { has_completed_focus = HUN_appointzoltantildy }
 		}
 		set_party_name = {
 			ideology = democratic
@@ -323,17 +321,7 @@ change_parties_1939 = {
 					expire = "1965.1.1.1"
 					traits = {
 						coalition_pm
-		}
-		}
-		set_party_name = {
-			ideology = fascism
-			long_name = HUN_arrow_cross_party_long
-			name = HUN_arrow_cross_party
 					}
-		set_party_name = {
-			ideology = fascism
-			long_name = HUN_arrow_cross_party_long
-			name = HUN_arrow_cross_party
 				}
 			}
 		}
@@ -352,17 +340,10 @@ change_parties_1939 = {
 		}
 	}
 
-	if = {
-		limit = {
-			NOT = {
-				has_completed_focus = HUN_elect_a_fascist_king
-			}
-		}
-		set_party_name = {
-			ideology = fascism
-			long_name = HUN_arrow_cross_party_long
-			name = HUN_arrow_cross_party
-		}
+	set_party_name = {
+		ideology = fascism
+		long_name = HUN_arrow_cross_party_long
+		name = HUN_arrow_cross_party
 	}
 }
 
@@ -773,6 +754,7 @@ HUN_add_suspicion_small = {
 
 		custom_effect_tooltip = add_suspicion_small_tt
 	}
+	HUN_suspicion_war = yes
 }
 
 # Adds medium favour
@@ -811,6 +793,7 @@ HUN_add_suspicion_medium = {
 
 		custom_effect_tooltip = add_suspicion_medium_tt
 	}
+	HUN_suspicion_war = yes
 }
 
 # Adds large favour
@@ -849,6 +832,7 @@ HUN_add_suspicion_large = {
 
 		custom_effect_tooltip = add_suspicion_large_tt
 	}
+	HUN_suspicion_war = yes
 }
 
 # Adds maximum favour
@@ -887,6 +871,7 @@ HUN_add_suspicion_max = {
 
 		custom_effect_tooltip = add_suspicion_max_tt
 	}
+	HUN_suspicion_war = yes
 }
 
 # Removes small favour
@@ -1000,5 +985,240 @@ HUN_remove_suspicion_large = {
 		}
 
 		custom_effect_tooltip = remove_suspicion_large_tt
+	}
+}
+
+# Returns land in every territorial peace
+HUN_return_others_peace = {
+	every_state = {
+		limit = {
+			OR = {
+				state = 45
+				state = 764
+				state = 103
+				state = 109
+				state = 163
+				state = 852
+			}
+			is_controlled_by_ROOT_or_subject = yes
+		}
+		set_state_owner_to = YUG
+	}
+	every_state = {
+		limit = {
+			OR = {
+				state = 76
+				state = 82
+				state = 83
+				state = 84
+			}
+			is_controlled_by_ROOT_or_subject = yes
+		}
+		set_state_owner_to = ROM
+	}
+	every_state = {
+		limit = {
+			OR = {
+				state = 80
+				state = 89
+				state = 91
+			}
+			is_controlled_by_ROOT_or_subject = yes
+		}
+		set_state_owner_to = POL
+	}
+}
+
+# Returns all land for peace
+HUN_return_everything_peace = {
+	every_state = {
+		limit = {
+			OR = {
+				state = 70
+				state = 71
+				state = 73
+				state = 664
+			}
+			is_controlled_by_ROOT_or_subject = yes
+		}
+		set_state_owner_to = CZE
+	}
+	HUN_return_others_peace = yes
+}
+
+# Keeps only Carpathia and Kosice for peace
+HUN_keep_carpathia_peace = {
+	every_state = {
+		limit = {
+			OR = {
+				state = 70
+				state = 71
+			}
+			is_controlled_by_ROOT_or_subject = yes
+		}
+		set_state_owner_to = CZE
+	}
+	HUN_return_others_peace = yes
+	every_state = {
+		limit = {
+			OR = {
+				state = 73
+				state = 664
+			}
+			NOT = { is_owned_and_controlled_by = HUN }
+		}
+		ROOT = { transfer_state = PREV }
+	}
+	every_state = {
+		limit = {
+			OR = {
+				state = 73
+				state = 664
+			}
+			NOT = { is_core_of = HUN }
+		}
+		add_core_of = ROOT
+	}
+}
+
+# Maximises suspicion and sets peace flags
+HUN_angry_leader_peace = {
+	faction_leader = { HUN_add_suspicion_max = yes }
+	hidden_effect = {
+		clr_country_flag = HUN_carpathia
+		clr_country_flag = HUN_return_everything
+		if = {
+			limit = {
+				has_war = no
+			}
+			set_country_flag = peace_in_our_time
+		}
+	}
+}
+
+# Destroys hungary when maximum suspicion
+HUN_suspicion_war = {
+	if = {
+		limit = {
+			check_variable = { peace_suspicion = 10 }
+		}
+		HUN = {
+			remove_mission = suspicion_mission
+		}
+		faction_leader = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = HUN
+			}
+			remove_from_faction = HUN
+		}
+	}
+}
+
+# Effects for resisting occupation
+HUN_resist_occupation = {
+	be_free = yes
+
+	if = {
+		limit = {
+			is_in_faction = yes
+		}
+
+		faction_leader = {
+			remove_mission = occupy_hungary
+
+			country_event = {
+				id = gamer_horthy.28
+				hours = 4
+			}
+			effect_tooltip = {
+				custom_effect_tooltip = effects_tt
+				every_country = {
+					limit = {
+						is_in_faction_with = PREV
+						NOT = { tag = HUN }
+					}
+					set_truce = {
+						target = HUN
+						days = 180
+					}
+				}
+			}
+		}
+	}
+}
+
+# Puppets Hungary if occupied
+HUN_allow_occupation = {
+	if = {
+		limit = {
+			is_in_faction_with = HUN
+		}
+		country_event = {
+			id = gamer_horthy.28
+			hours = 4
+		}
+		effect_tooltip = {
+			custom_effect_tooltip = effects_tt
+			puppet = HUN
+
+			HUN = {
+				remove_mission = defend_hungary
+				if = {
+					limit = {
+						faction_leader = { has_government = fascism }
+					}
+					complete_national_focus = HUN_a_pure_hungary
+				}
+				else_if = {
+					limit = {
+						faction_leader = { has_government = communism }
+					}
+					complete_national_focus = HUN_a_new_republic_of_councils
+				}
+			}
+		}
+	}
+}
+
+# Starts occupation struggle
+HUN_operation_margrethe = {
+	if = {
+		limit = {
+			is_in_faction = yes
+		}
+		faction_leader = {
+			country_event = {
+				id = gamer_horthy.26
+				hours = 4
+			}
+		}
+		custom_effect_tooltip = effects_tt
+		faction_leader = { activate_mission = occupy_hungary }
+		activate_mission = defend_hungary
+		custom_effect_tooltip = puppet_occupation_tt
+	}
+}
+
+HUN_uncomplete_puppet_focuses = {
+	popular_opposition_HUN = yes
+
+	if = {
+		limit = {
+			has_completed_focus = HUN_a_pure_hungary
+		}
+		uncomplete_national_focus = {
+			focus = HUN_a_pure_hungary
+			uncomplete_children = yes
+		  }
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = HUN_a_new_republic_of_councils
+		}
+		uncomplete_national_focus = {
+			focus = HUN_a_new_republic_of_councils
+			uncomplete_children = yes
+		  }
 	}
 }

@@ -106,6 +106,23 @@ leader_traits = {
 		}
 	}
 
+	rebel_pm = {
+		random = no
+		sprite = 13
+
+		army_core_attack_factor = 0.05
+		army_core_defence_factor = 0.05
+		war_support_factor = 0.05
+		resistance_growth_on_our_occupied_states = 0.5
+		resistance_target_on_our_occupied_states = 0.2
+		democratic_drift = 0.03
+		democratic_acceptance = 100
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
 	aristocrat_pm = {
 		random = no
 		sprite = 13

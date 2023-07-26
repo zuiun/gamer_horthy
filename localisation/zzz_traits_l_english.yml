@@ -6,6 +6,7 @@
  gyula_gombos_pm:0 "Radical Prime Minister"
  conservative_pm:0 "$gyula_gombos_pm$"
  liberal_pm:0 "Liberal Prime Minister"
+ rebel_pm:0 "Rebellious Prime Minister"
  aristocrat_pm:0 "Conservative Prime Minister"
  coalition_pm:0 "Reformist Prime Minister"
  apolitical_pm:0 "Apolitical Prime Minister"

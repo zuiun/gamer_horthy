@@ -136,6 +136,8 @@ HUN_balance_of_power_category = {
 		visible = {
 			original_tag = HUN
 			has_completed_focus = HUN_the_addams_family
+			has_character = HUN_istvan_horthy
+			NOT = { has_country_flag = HUN_istvan_returned_alive }
 		}
 
 		cost = 50
@@ -148,8 +150,7 @@ HUN_balance_of_power_category = {
 		}
 
 		modifier = {
-			war_support_weekly = 0.01
-			neutrality_drift = 0.03
+			political_power_gain = -0.1
 		}
 
 		days_remove = 180
@@ -167,8 +168,8 @@ HUN_balance_of_power_category = {
 						set_country_flag = HUN_istvan_returned_alive
 					}
 					add_stability = 0.05
-					HUN_add_liberal_bop_small = yes
-					HUN_add_crown_bop_small = yes
+					HUN_add_liberal_bop_medium = yes
+					HUN_add_crown_bop_medium = yes
 				}
 			}
 		}
@@ -176,7 +177,7 @@ HUN_balance_of_power_category = {
 
 	retire_old_soldiers = {
 		icon = generic_military
-		priority = 11
+		priority = 12
 
 		allowed = {
 			original_tag = HUN
@@ -198,6 +199,168 @@ HUN_balance_of_power_category = {
 			retire_character = HUN_dezso_laszlo
 			HUN_add_conservative_bop_large = yes
 			HUN_add_army_bop_large = yes
+		}
+	}
+
+	mobilise_FROM = {
+		icon = eng_blackshirt_march
+		priority = 11
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_maintain_nonbelligerence
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_continue_the_regency
+		}
+
+		cost = 20
+		days_remove = 30
+		days_re_enable = 5
+
+		complete_effect = {
+			add_command_power = 5
+		}
+
+		modifier = {
+			war_support_weekly = 0.01
+			weekly_manpower = 80
+		}
+
+		remove_effect = {
+			HUN_add_conservative_bop_medium = yes
+			HUN_add_army_bop_medium = yes
+		}
+	}
+
+	end_non_belligerence = {
+		icon = generic_break_treaty
+		priority = 100
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_look_outwards_real
+			NOT = { has_idea = HUN_treaty_of_triannon }
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_continue_the_regency
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			set_rule = { can_not_declare_war = no }
+			add_war_support = 0.1
+			HUN_add_conservative_bop_large = yes
+			HUN_add_army_bop_large = yes
+		}
+	}
+
+	suppress_move = {
+		icon = oppression
+		priority = 13
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_support_move
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_continue_the_regency
+		}
+
+		cost = 20
+		fire_only_once = yes
+
+		complete_effect = {
+			remove_ideas = HUN_move
+			HUN_add_liberal_bop_small = yes
+			HUN_add_crown_bop_small = yes
+		}
+	}
+
+	suspend_elections = {
+		icon = SWI_no_elected_president
+		priority = 11
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_arrest_szalasi
+			has_war = yes
+			NOT = { has_government = democratic }
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_continue_the_regency
+			NOT = { has_country_flag = no_more_elections }
+		}
+
+		cost = 30
+
+		complete_effect = {
+			hidden_effect = { set_country_flag = no_more_elections }
+
+			set_politics = {
+				ruling_party = HUN
+				elections_allowed = no
+			}
+
+			HUN_add_conservative_bop_medium = yes
+			HUN_add_army_bop_medium = yes
+		}
+	}
+
+	hun_allow_elections = {
+		icon = SWI_swiss_democratic_tradition_campaign
+		priority = 11
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_arrest_szalasi
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_continue_the_regency
+			has_country_flag = no_more_elections
+		}
+
+		cost = 30
+
+		complete_effect = {
+			hidden_effect = { clr_country_flag = no_more_elections }
+
+			set_politics = {
+				ruling_party = HUN
+				elections_allowed = yes
+				election_frequency = 48
+			}
+
+			hold_election = HUN
+			HUN_add_liberal_bop_medium = yes
+			HUN_add_crown_bop_medium = yes
 		}
 	}
 }

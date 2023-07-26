@@ -161,7 +161,6 @@ european_integration = {
 					hours = 4
 				}
 			}
-			unlock_decision_tooltip = join_eec_FROM
 		}
 	}
 }

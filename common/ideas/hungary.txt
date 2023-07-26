@@ -957,7 +957,6 @@ ideas = {
 				original_tag = HUN
 			}
 
-#			picture = tur_etatism
 			picture = chi_hyper_inflation
 
 			allowed_civil_war = {
@@ -976,7 +975,6 @@ ideas = {
 				original_tag = HUN
 			}
 
-#			picture = tur_etatism
 			picture = chi_hyper_inflation2
 
 			allowed_civil_war = {
@@ -996,7 +994,6 @@ ideas = {
 				original_tag = HUN
 			}
 
-#			picture = tur_etatism
 			picture = chi_hyper_inflation3
 
 			allowed_civil_war = {
@@ -1016,7 +1013,6 @@ ideas = {
 				original_tag = HUN
 			}
 
-#			picture = tur_etatism
 			picture = chi_hyper_inflation4
 
 			allowed_civil_war = {
@@ -1036,7 +1032,6 @@ ideas = {
 				original_tag = HUN
 			}
 
-#			picture = tur_etatism
 			picture = chi_hyper_inflation5
 
 			allowed_civil_war = {
@@ -1486,8 +1481,8 @@ ideas = {
 
 			modifier = {
 				drift_defence_factor = 0.1
-				army_core_defence_factor = 0.05
 				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
 			}
 		}
 
@@ -1703,6 +1698,76 @@ ideas = {
 				political_power_gain = -0.05
 				production_speed_infrastructure_factor = 0.1
 				production_speed_industrial_complex_factor = 0.05
+			}
+		}
+
+		HUN_move = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = generic_fascist_workers
+
+			available = {
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+
+			modifier = {
+				stability_factor = -0.1
+				war_support_factor = 0.1
+				fascism_drift = 0.03
+				communism_drift = -0.05
+				recruitable_population_factor = 0.02
+				fascism_acceptance = 25
+			}
+		}
+
+		HUN_soviet_control = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = tur_etatism
+
+			available = {
+				has_government = communism
+			}
+
+			modifier = {
+				consumer_goods_factor = -0.02
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = -0.05
+				communism_drift = 0.02
+			}
+
+			targeted_modifier = {
+				tag = SOV
+				cic_to_target_factor = 0.05
+				mic_to_target_factor = 0.1
+			}
+		}
+
+		HUN_three_year_plan_idea = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = man_five_year_plan_industry
+
+			available = {
+				has_government = communism
+				has_war = no
+			}
+
+			modifier = {
+				political_power_gain = -0.2
+				political_power_factor = -0.1
+				production_speed_industrial_complex_factor = 0.05
+				production_speed_infrastructure_factor = 0.05
+				production_speed_arms_factory_factor = 0.1
 			}
 		}
 	}

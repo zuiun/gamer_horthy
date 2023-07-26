@@ -10,8 +10,28 @@ foreign_alignment = {
 		available = {
 			has_prime_minister_chosen = yes
 			has_war = no
-			FROM = { has_war = no }
-			NOT = { has_country_flag = HUN_expanding_trade }
+			if = {
+				limit = {
+					FROM = { tag = ITA }
+				}
+				FROM = {
+					OR = {
+						has_war = no
+						NOT = {
+							any_enemy_country = {
+								NOT = { tag = ETH }
+							}
+						}
+					}
+				}
+			}
+			else = {
+				FROM = { has_war = no }
+			}
+			NOT = {
+				is_embargoing = FROM
+				has_country_flag = HUN_expanding_trade
+			}
 		}
 
 		target_trigger = {
@@ -405,9 +425,23 @@ foreign_alignment = {
 					}
 				}
 			}
-			has_war = no
-			FROM = {
-				has_war = no
+			if = {
+				limit = {
+					FROM = { tag = ITA }
+				}
+				FROM = {
+					OR = {
+						has_war = no
+						NOT = {
+							any_enemy_country = {
+								NOT = { tag = ETH }
+							}
+						}
+					}
+				}
+			}
+			else = {
+				FROM = { has_war = no }
 			}
 		}
 
@@ -692,14 +726,11 @@ foreign_alignment = {
 
 		available = {
 			has_completed_focus = HUN_limited_liberalisation
-			NOT = {
-				has_idea = HUN_loans5
-			}
+			NOT = { has_idea = HUN_loans5 }
 			has_war = no
-			FROM = {
-				has_war = no
-			}
+			FROM = { has_war = no }
 			NOT = {
+				is_embargoing = FROM
 				has_country_flag = HUN_securing_loans
 			}
 		}

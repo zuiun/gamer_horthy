@@ -34,11 +34,14 @@ country_event = {
 		}
 	}
 
+	immediate = {
+		hidden_effect = { set_country_flag = gyula_gombos_died }
+	}
+
 	option = {
 		name = gamer_horthy.1.a # Rest in peace
 		add_stability = -0.1
 		retire_character = HUN_gyula_gombos_de_jakfa
-		set_country_flag = gyula_gombos_died
 	}
 }
 
@@ -61,40 +64,37 @@ country_event = {
 			}
 		}
 
-		FROM = {
-			give_military_access = ROOT
-		}
+		HUN = { give_military_access = ROOT }
 
 		diplomatic_relation = {
-			country = FROM
+			country = HUN
 			relation = non_aggression_pact
 			active = yes
 		}
 
-		add_to_faction = FROM
+		add_to_faction = HUN
 
 		if = {
 			limit = {
 				has_war_with = YUG
 				YUG = { controls_state = 45 } # Backa
 			}
-			FROM = {
+			HUN = {
 				declare_war_on = {
 					target = YUG
 					type = take_state_focus
 					generator = { 45 }
 				}
-				set_state_owner = 45
 			}
 		}
 		else_if = {
 			limit = {
 				controls_state = 45
 			}
-			FROM = { transfer_state = 45 }
+			HUN = { transfer_state = 45 }
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.10
 				hours = 4
@@ -109,18 +109,12 @@ country_event = {
 			base = 1
 		}
 
-#		add_ai_strategy = {
-#			type = prepare_for_war
-#			id = FROM
-#			value = 200
-#		}
-
 #		create_wargoal = {
 #			type = puppet_wargoal_focus
-#			target = FROM
+#			target = HUN
 #		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.11
 				hours = 4
@@ -201,7 +195,7 @@ country_event = {
 							tag = ITA
 						}
 					}
-					has_government = FROM
+					has_government = HUN
 					tag = POL
 				}
 				factor = 10
@@ -212,7 +206,7 @@ country_event = {
 			}
 			modifier = {
 				tag = ITA
-				FROM = { has_completed_focus = HUN_support_italian_interests }
+				HUN = { has_completed_focus = HUN_support_italian_interests }
 				factor = 4
 			}
 			modifier = {
@@ -235,20 +229,17 @@ country_event = {
 					}
 				}
 
-				FROM = {
+				HUN = {
 					set_country_flag = HUN_german_support
 				}
 			}
 
-			add_to_variable = {
-				var = global.foreign_support
-				value = 1
-			}
+			add_to_variable = { global.foreign_support = 1 }
 		}
 
 		if = {
 			limit = {
-				FROM = {
+				HUN = {
 					focus_progress = {
 						focus = HUN_demand_southern_slovakia
 						progress > 0
@@ -292,7 +283,7 @@ country_event = {
 		}
 		if = {
 			limit = {
-				FROM = {
+				HUN = {
 					focus_progress = {
 						focus = HUN_demand_vojvodina
 						progress > 0
@@ -342,7 +333,7 @@ country_event = {
 		}
 		if = {
 			limit = {
-				FROM = {
+				HUN = {
 					focus_progress = {
 						focus = HUN_protect_the_ruthenians
 						progress > 0
@@ -386,7 +377,7 @@ country_event = {
 		}
 		if = {
 			limit = {
-				FROM = {
+				HUN = {
 					focus_progress = {
 						focus = HUN_demand_transylvania
 						progress > 0
@@ -439,7 +430,7 @@ country_event = {
 			}
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.13
 				hours = 4
@@ -459,7 +450,7 @@ country_event = {
 			}
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.14
 				hours = 4
@@ -504,10 +495,7 @@ country_event = {
 	is_triggered_only = yes
 
 	immediate = {
-		multiply_variable = {
-			var = global.foreign_support
-			value = 10
-		}
+		multiply_variable = { global.foreign_support = 10 }
 	}
 
 	option = {
@@ -517,17 +505,27 @@ country_event = {
 			base = 5
 			modifier = {
 				factor = 2
-				ic_ratio = { tag = FROM ratio > 1.0 }#we are stronger than them!
+				ic_ratio = { tag = HUN ratio > 1.0 }#we are stronger than them!
 			}
 			modifier = {
 				factor = 100
-				has_war_with = FROM
+				has_war_with = HUN
+			}
+			modifier = {
+				factor = 0.1
+				any_owned_state = {
+					OR = {
+						has_state_flag = trianon_alternate
+						has_state_flag = trianon_target
+					}
+					NOT = { is_core_of = ROOT }
+				}
 			}
 		}
 
 		add_war_support = 0.1
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.17
 				hours = 4
@@ -556,18 +554,13 @@ country_event = {
 		ai_chance = {
 			base = 3
 			modifier = {
-				check_variable = {
-					var = global.foreign_support
-					value = 0
-					compare = greater_than
-				}
-
+				check_variable = { global.foreign_support > 0 }
 				factor = global.foreign_support
 			}
 			modifier = {
 				factor = 10
 				has_war = yes
-				NOT = { has_war_with = FROM }
+				NOT = { has_war_with = HUN }
 			}
 		}
 
@@ -578,12 +571,12 @@ country_event = {
 				has_state_flag = trianon_target
 			}
 			
-			FROM = {
+			HUN = {
 				transfer_state = PREV
 			}
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.18
 				hours = 4
@@ -609,17 +602,12 @@ country_event = {
 		ai_chance = {
 			base = 1
 			modifier = {
-				check_variable = {
-					var = global.foreign_support
-					value = 0
-					compare = greater_than
-				}
-
+				check_variable = { global.foreign_support > 0 }
 				factor = global.foreign_support
 			}
 			modifier = {
 				factor = 100
-				is_subject_of = FROM
+				is_subject_of = HUN
 			}
 		}
 
@@ -633,12 +621,12 @@ country_event = {
 				}
 			}
 
-			FROM = {
+			HUN = {
 				transfer_state = PREV
 			}
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.16
 				hours = 4
@@ -727,7 +715,7 @@ country_event = {
 			base = 2
 			modifier = {
 				factor = 2
-				FROM = { has_completed_focus = HUN_anglophile_policies }
+				HUN = { has_completed_focus = HUN_anglophile_policies }
 			}
 		}
 
@@ -742,23 +730,23 @@ country_event = {
 		every_owned_state = {
 			limit = {
 				is_core_of = ROOT
-				is_core_of = FROM
+				is_core_of = HUN
 			}
 
-			remove_core_of = FROM
+			remove_core_of = HUN
 		}
 		every_owned_state = {
 			limit = {
 				is_core_of = ROOT
-				is_claimed_by = FROM
+				is_claimed_by = HUN
 			}
 
-			remove_claim_by = FROM
+			remove_claim_by = HUN
 		}
 
-		give_guarantee = FROM
+		give_guarantee = HUN
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.20
 				hours = 4
@@ -776,7 +764,7 @@ country_event = {
 			base = 1
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.21
 				hours = 4
@@ -796,7 +784,6 @@ country_event = {
 	option = {
 		name = gamer_horthy.20.a # A step towards security
 		add_stability = -0.1
-
 		give_guarantee = FROM
 	}
 }
@@ -834,11 +821,11 @@ country_event = {
 		send_equipment = {
 			equipment = infantry_equipment
 			amount = 1000
-			target = FROM
+			target = HUN
 		}
 		custom_effect_tooltip = opposition_supporter_tt
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.23
 				hours = 4
@@ -847,7 +834,7 @@ country_event = {
 
 		hidden_effect = {
 			set_country_flag = HUN_supporting_opposition
-			FROM = {
+			HUN = {
 				set_country_flag = HUN_has_opposition_support
 			}
 		}
@@ -860,7 +847,7 @@ country_event = {
 			base = 0
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.24
 				hours = 4
@@ -919,6 +906,13 @@ country_event = {
 		hidden_effect = {
 			clr_country_flag = HUN_supporting_opposition
 		}
+
+		HUN = {
+			country_event = {
+				id = gamer_horthy.34
+				hours = 4
+			}
+		}
 	}
 }
 
@@ -931,10 +925,10 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
-		name = gamer_horthy.26.a # FROM has gone too far
+		name = gamer_horthy.26.a # Hungary has gone too far
 		activate_mission_tooltip = occupy_hungary
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.27
 				hours = 4
@@ -958,45 +952,95 @@ country_event = {
 	}
 }
 
-# Hungary Resists Occupation
+# The Occupation of Hungary
 country_event = {
 	id = gamer_horthy.28
 	title = gamer_horthy.28.t
-	desc = gamer_horthy.28.desc
+	desc = {
+		text = gamer_horthy.28.desc1
+		trigger = {
+			has_country_flag = failed_occupation
+		}
+	}
+	desc = {
+		text = gamer_horthy.28.desc2
+		trigger = {
+			has_country_flag = succeeded_occupation
+		}
+	}
 	picture = GFX_report_event_hungarian_soldiers
 	is_triggered_only = yes
 
 	option = {
 		name = gamer_horthy.28.a # They will die for this
 
+		trigger = {
+			has_country_flag = failed_occupation
+		}
 		ai_chance = {
-			base = 2
+			base = 1
 		}
 
-		remove_from_faction = FROM
-
-		declare_war_on = {
-			target = FROM
+		remove_mission = occupy_hungary
+		remove_from_faction = HUN
+		create_wargoal = {
+			target = HUN
 			type = puppet_wargoal_focus
+		}
+
+		HUN = {
+			set_country_flag = you_die
+			country_event = {
+				id = gamer_horthy.33
+				hours = 4
+			}
 		}
 	}
 
 	option = {
 		name = gamer_horthy.28.b # We can't afford a distraction right now
 
+		trigger = {
+			has_country_flag = failed_occupation
+		}
 		ai_chance = {
-			base = 1
+			base = 2
 		}
 
-		remove_from_faction = FROM
-
+		remove_mission = occupy_hungary
 		every_country = {
 			limit = {
 				is_in_faction_with = ROOT
 			}
 			set_truce = {
-				target = FROM
+				target = HUN
 				days = 180
+			}
+		}
+
+		HUN = {
+			set_country_flag = you_survive
+			country_event = {
+				id = gamer_horthy.33
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.28.c # Will they try this stunt again
+
+		trigger = {
+			has_country_flag = succeeded_occupation
+		}
+
+		puppet = HUN
+
+		HUN = {
+			set_country_flag = you_puppet
+			country_event = {
+				id = gamer_horthy.33
+				hours = 4
 			}
 		}
 	}
@@ -1010,11 +1054,40 @@ country_event = {
 	picture = GFX_report_event_hungary_refused
 	is_triggered_only = yes
 
+	immediate = {
+		set_temp_variable = { favour_effect = peace_favour }
+		divide_temp_variable = { favour_effect = 4 }
+	}
+
 	option = {
 		name = gamer_horthy.29.a # This is not their war to fight
 
 		ai_chance = {
-			base = 5
+			base = 1
+			modifier = {
+				add = 1
+				has_country_flag = HUN_carpathia
+			}
+			modifier = {
+				add = 2
+				has_country_flag = HUN_return_everything
+			}
+			modifier = {
+				add = favour_effect
+				has_country_flag = HUN_return_everything
+			}
+			modifier = {
+				add = 2
+				HUN = {
+					all_owned_state = {
+						OR = {
+							state = 43
+							state = 154
+							state = 155
+						}
+					}
+				}
+			}
 			modifier = {
 				factor = 0
 				has_government = fascism
@@ -1026,18 +1099,36 @@ country_event = {
 				is_in_faction_with = ROOT
 			}
 
-			white_peace = FROM
+			white_peace = HUN
 			set_truce = {
-				target = FROM
+				target = HUN
 				days = 180
 			}
 		}
 
-		FROM = {
+		HUN = {
+			if = {
+				limit = {
+					ROOT = { has_country_flag = HUN_carpathia }
+				}
+				hidden_effect = { set_country_flag = HUN_carpathia }
+				HUN_keep_carpathia_peace = yes
+			}
+			else_if = {
+				limit = {
+					ROOT = { has_country_flag = HUN_return_everything }
+				}
+				hidden_effect = { set_country_flag = HUN_return_everything }
+				HUN_return_everything_peace = yes
+			}
 			country_event = {
 				id = gamer_horthy.30
 				hours = 4
 			}
+		}
+		hidden_effect = {
+			clr_country_flag = HUN_carpathia
+			clr_country_flag = HUN_return_everything
 		}
 	}
 
@@ -1048,11 +1139,15 @@ country_event = {
 			base = 1
 		}
 
-		FROM = {
+		HUN = {
 			country_event = {
 				id = gamer_horthy.31
 				hours = 4
 			}
+		}
+		hidden_effect = {
+			clr_country_flag = HUN_carpathia
+			clr_country_flag = HUN_return_everything
 		}
 	}
 }
@@ -1061,13 +1156,78 @@ country_event = {
 country_event = {
 	id = gamer_horthy.30
 	title = gamer_horthy.30.t
-	desc = gamer_horthy.30.desc
+	desc = {
+		text = gamer_horthy.30.desc1
+		trigger = {
+			NOT = {
+				has_country_flag = HUN_carpathia
+				has_country_flag = HUN_return_everything
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.30.desc2
+		trigger = {
+			has_country_flag = HUN_carpathia
+		}
+	}
+	desc = {
+		text = gamer_horthy.30.desc3
+		trigger = {
+			has_country_flag = HUN_return_everything
+		}
+	}
 	picture = GFX_report_event_generic_sign_treaty2
 	is_triggered_only = yes
 
 	option = {
 		name = gamer_horthy.30.a # We are safe
+		trigger = {
+			NOT = {
+				has_country_flag = HUN_carpathia
+				has_country_flag = HUN_return_everything
+			}
+		}
 		add_stability = 0.1
+		HUN_angry_leader_peace = yes
+	}
+
+	option = {
+		name = gamer_horthy.30.b # We have not lost everything
+		trigger = {
+			has_country_flag = HUN_carpathia
+		}
+		effect_tooltip = {
+			every_state = {
+				limit = {
+					OR = {
+						state = 73
+						state = 664
+					}
+					NOT = { is_owned_and_controlled_by = HUN }
+				}
+				ROOT = { transfer_state = PREV }
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 73
+						state = 664
+					}
+					NOT = { is_core_of = HUN }
+				}
+				add_core_of = ROOT
+			}
+		}
+		HUN_angry_leader_peace = yes
+	}
+
+	option = {
+		name = gamer_horthy.30.c # A high cost for peace
+		trigger = {
+			has_country_flag = HUN_return_everything
+		}
+		HUN_angry_leader_peace = yes
 	}
 }
 
@@ -1081,6 +1241,8 @@ country_event = {
 
 	option = {
 		name = gamer_horthy.31.a # We don't stand a chance
+		faction_leader = { HUN_remove_suspicion_small = yes }
+		FROM = { HUN_remove_favour_medium = yes }
 	}
 }
 
@@ -1154,6 +1316,115 @@ country_event = {
 	}
 }
 
+# The Fate of Hungary
+country_event = {
+	id = gamer_horthy.33
+	title = gamer_horthy.33.t
+	desc = {
+		text = gamer_horthy.33.desc1
+		trigger = {
+			has_country_flag = you_die
+		}
+	}
+	desc = {
+		text = gamer_horthy.33.desc2
+		trigger = {
+			has_country_flag = you_survive
+		}
+	}
+	desc = {
+		text = gamer_horthy.33.desc3
+		trigger = {
+			has_country_flag = you_puppet
+		}
+	}
+	picture = GFX_report_event_hungarian_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.33.a # We will die for our future
+
+		trigger = {
+			has_country_flag = you_die
+		}
+
+		effect_tooltip = {
+			FROM = {
+				remove_mission = occupy_hungary
+				remove_from_faction = ROOT
+				create_wargoal = {
+					target = ROOT
+					type = puppet_wargoal_focus
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.33.b # Hungary survives
+
+		trigger = {
+			has_country_flag = you_survive
+		}
+
+		effect_tooltip = {
+			FROM = { remove_mission = occupy_hungary }
+
+			every_country = {
+				limit = {
+					is_in_faction_with = FROM
+				}
+				set_truce = {
+					target = ROOT
+					days = 180
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.33.c # This is a disaster
+
+		trigger = {
+			has_country_flag = you_puppet
+		}
+
+		effect_tooltip = {
+			FROM = { puppet = HUN }
+		}
+
+		remove_mission = defend_hungary
+		if = {
+			limit = {
+				FROM = { has_government = fascism }
+			}
+			complete_national_focus = HUN_a_pure_hungary
+		}
+		else_if = {
+			limit = {
+				FROM = { has_government = communism }
+			}
+			complete_national_focus = HUN_a_new_republic_of_councils
+		}
+	}
+}
+
+# The Price of Victory
+country_event = {
+	id = gamer_horthy.34
+	title = gamer_horthy.34.t
+	desc = gamer_horthy.34.desc
+	picture = GFX_report_event_hungary_parliament
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.34.a # We have no choice
+		effect_tooltip = {
+			FROM = { puppet = HUN }
+		}
+	}
+}
+
 # The Habsburg Crisis
 country_event = {
 	id = gamer_horthy.36
@@ -1173,7 +1444,7 @@ country_event = {
 		}
 		custom_effect_tooltip = monarchist_victory_tt
 		effect_tooltip = {
-			FROM = {
+			HUN = {
 				puppet = ROOT
 			}
 		}
@@ -1196,7 +1467,7 @@ country_event = {
 		}
 		custom_effect_tooltip = democrat_victory_tt
 		effect_tooltip = {
-			FROM = {
+			HUN = {
 				create_wargoal = {
 					type = puppet_wargoal_focus
 					target = ROOT
@@ -1279,6 +1550,10 @@ country_event = {
 			NOT = { has_completed_focus = HUN_promote_hungarianism }
 		}
 		NOT = { has_country_flag = not_brothers }
+	}
+
+	mean_time_to_happen = {
+		days = 10
 	}
 
 	option = {

@@ -1,9 +1,71 @@
 hungarian_sovereignty = {
+	defend_hungary = {
+		icon = generic_nationalism
+		priority = 190
+		is_good = no
+		days_mission_timeout = 70
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100 # ???
+		}
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_peace_overtures
+			is_in_faction = yes
+			is_faction_leader = no
+			faction_leader = { is_suspicion_target = yes }
+		}
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			divisions_in_state = {
+				size > 4
+				state = 43 # Budapest
+			}
+			divisions_in_state = {
+				size > 3
+				state = 154 # Alfold
+			}
+			divisions_in_state = {
+				size > 2
+				state = 155 # Transdanubia
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				faction_leader = { set_country_flag = failed_occupation }
+			}
+			HUN_resist_occupation = yes
+		}
+
+		cancel_effect = {
+			effect_tooltip = {
+				faction_leader = { HUN_allow_occupation = yes }
+			}
+		}
+
+		timeout_effect = {
+			hidden_effect = {
+				faction_leader = { set_country_flag = failed_occupation }
+			}
+			HUN_resist_occupation = yes
+		}
+	}
+
 	occupy_hungary = {
 		icon = generic_prepare_civil_war
 		priority = 10
 		is_good = no
-		days_mission_timeout = 60
+		days_mission_timeout = 70
 		fire_only_once = yes
 
 		ai_will_do = {
@@ -18,14 +80,13 @@ hungarian_sovereignty = {
 
 		visible = {
 			HUN = {
-				has_completed_focus = HUN_preserve_greater_hungary
+				OR = {
+					has_completed_focus = HUN_the_small_regent
+					has_completed_focus = HUN_preserve_greater_hungary
+				}
 			}
 			is_faction_leader = yes
 			is_in_faction_with = HUN
-			OR = {
-				has_government = fascism
-				has_government = communism
-			}
 		}
 
 		activation = {
@@ -34,88 +95,42 @@ hungarian_sovereignty = {
 					focus = HUN_peace_overtures
 					progress > 0
 				}
-
-				NOT = {
-					has_completed_focus = HUN_peace_overtures
-				}
+				NOT = { has_completed_focus = HUN_peace_overtures }
 			}
-			is_faction_leader = yes
-			is_in_faction_with = HUN
 		}
 
 		available = {
 			divisions_in_state = {
-				type = infantry
 				size > 3
 				state = 43 # Budapest
 			}
 			divisions_in_state = {
-				type = infantry
 				size > 2
 				state = 154 # Alfold
 			}
 			divisions_in_state = {
-				type = infantry
 				size > 1
 				state = 155 # Transdanubia
 			}
 		}
 
 		complete_effect = {
-			HUN = {
-				remove_mission = defend_hungary
+			hidden_effect = {
+				faction_leader = { set_country_flag = succeeded_occupation }
 			}
-
-			puppet = HUN
-			HUN = {
-				uncomplete_national_focus = { focus = HUN_continue_the_regency }
-				complete_national_focus = HUN_oppose_the_regency
-					if = {
-						limit = {
-							faction_leader = {
-								has_government = fascism
-							}
-						}
-						complete_national_focus = HUN_a_pure_hungary
-					}
-					else_if = {
-						limit = {
-							faction_leader = {
-								has_government = communism
-							}
-						}
-						complete_national_focus = HUN_a_new_republic_of_councils
-					}
-			}
+			HUN_allow_occupation = yes
 		}
 
 		cancel_effect = {
 			effect_tooltip = {
-				HUN = {
-					remove_mission = defend_hungary
-				}
-
-				country_event = {
-					id = gamer_horthy.28
-					hours = 4
-				}
+				HUN = { HUN_resist_occupation = yes }
 			}
-			
 		}
 
 		timeout_effect = {
 			effect_tooltip = {
-				HUN = {
-					remove_mission = defend_hungary
-				}
-
-				remove_from_faction = HUN
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = HUN
-				}
+				HUN = { HUN_resist_occupation = yes }
 			}
-			
 		}
 	}
 }
