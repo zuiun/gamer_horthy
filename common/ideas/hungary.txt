@@ -257,12 +257,16 @@ ideas = {
 			}
 		}
 
-		HUN_the_hungarian_red_army = {
+		HUN_the_hungarian_red_army_idea = {
 			allowed = {
 				original_tag = HUN
 				always = no
 			}
 			picture = generic_communist_army
+
+			available = {
+				has_government = communism
+			}
 
 			modifier = {
 				conscription = 0.05
@@ -1698,6 +1702,25 @@ ideas = {
 				political_power_gain = -0.05
 				production_speed_infrastructure_factor = 0.1
 				production_speed_industrial_complex_factor = 0.05
+			}
+		}
+
+		HUN_christian_socialism_weak = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = generic_central_management
+
+			available = {
+				NOT = { has_government = communism }
+			}
+
+			modifier = {
+				communism_drift = -0.01
+				political_power_gain = -0.1
+				production_speed_infrastructure_factor = 0.05
+				production_speed_arms_factory_factor = 0.05
 			}
 		}
 

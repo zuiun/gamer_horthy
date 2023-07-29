@@ -3,7 +3,7 @@ backwardness = {
 		icon = generic_factory
 		priority = 100
 		is_good = no
-		days_mission_timeout = 70
+		days_mission_timeout = 60
 		fire_only_once = no
 
 		allowed = {
@@ -12,18 +12,15 @@ backwardness = {
 
 		visible = {
 			has_completed_focus = HUN_struggle_fascism_reaction
-			NOT = {
-				has_country_flag = HUN_not_backward
-			}
-		}
-
-		activation = {
-			has_completed_focus = HUN_rapid_industrialisation
 			NOT = { has_country_flag = HUN_not_backward }
 		}
 
+		activation = {
+			always = no
+		}
+
 		available = {
-			num_of_civilian_factories > 30
+			num_of_civilian_factories > 20
 			all_owned_state = {
 				OR = {
 					NOT = { is_core_of = HUN }
@@ -63,76 +60,78 @@ backwardness = {
 				}
 				remove_ideas = HUN_shortages5
 			}
-			hidden_effect = {
-				set_country_flag = HUN_not_backward
-			}
+			hidden_effect = { set_country_flag = HUN_not_backward }
 		}
 
 		timeout_effect = {
-			activate_mission = shortages_crisis
 			add_stability = -0.05
 			add_popularity = {
 				ideology = democratic
 				popularity = 0.1
 			}
-			if = {
-				limit = {
-					has_idea = HUN_shortages
-				}
-				swap_ideas = {
-					remove_idea = HUN_shortages
-					add_idea = HUN_shortages2
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = HUN_shortages2
-				}
-				swap_ideas = {
-					remove_idea = HUN_shortages2
-					add_idea = HUN_shortages3
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = HUN_shortages3
-				}
-				swap_ideas = {
-					remove_idea = HUN_shortages3
-					add_idea = HUN_shortages4
-				}
-			}
-			else_if = {
-				limit = {
-					has_idea = HUN_shortages4
-				}
-				swap_ideas = {
-					remove_idea = HUN_shortages4
-					add_idea = HUN_shortages5
+			add_shortages_HUN = yes
+			activate_mission = shortages_crisis
+		}
+	}
+
+	raise_quotas = {
+		icon = generic_factory
+		priority = 10
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		visible = {
+			has_completed_focus = HUN_struggle_fascism_reaction
+			NOT = { has_country_flag = HUN_not_backward }
+		}
+
+		available = {
+			has_completed_focus = HUN_rapid_industrialisation
+			FROM = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
 				}
 			}
-			else_if = {
-				limit = {
-					has_idea = HUN_shortages5
-				}
-				add_political_power = -50
-				if = {
-					limit = {
-						has_stability < 0.4
-						has_civil_war = no
-					}
-					start_civil_war = {
-						ideology = democratic
-						size = 0.6
-						states = {
-							154
-							155
-						}
-					}
-				}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = HUN
+				is_core_of = HUN
 			}
-			else = {
-				add_ideas = HUN_shortages
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 30
+		state_target = yes
+		on_map_mode = map_only
+
+		modifier = {
+			consumer_goods_factor = -0.2
+			production_factory_max_efficiency_factor = 0.1
+			production_factory_efficiency_gain_factor = 0.1
+		}
+
+		complete_effect = {
+			add_stability = -0.05
+			add_days_mission_timeout = {
+				mission = shortages_crisis
+				days = 30
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 	}

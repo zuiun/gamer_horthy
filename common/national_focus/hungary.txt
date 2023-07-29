@@ -2359,7 +2359,21 @@ focus_tree = {
 				ideology = democratic
 				popularity = 0.02
 			}
-			add_ideas = HUN_christian_socialism_idea
+			if = {
+				limit = {
+					OR = {
+						has_completed_focus = HUN_revise_the_bethlenpeyer_pact
+						has_completed_focus = HUN_protect_the_trade_unions
+					}
+				}
+				add_ideas = HUN_christian_socialism_weak
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = HUN_bethlen_peyer_pact
+					add_idea = HUN_christian_socialism_idea
+				}
+			}
 		}
 	}
 
@@ -4058,13 +4072,31 @@ focus_tree = {
 				add_stability = -0.1
 			}
 
-			add_popularity = {
-				ideology = democratic
-				popularity = -0.1
+			if = {
+				limit = {
+					has_completed_focus = HUN_a_new_republic_of_councils
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = 0.05
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = -0.05
+				}
 			}
-			add_popularity = {
-				ideology = neutrality
-				popularity = -0.1
+			else_if = {
+				limit = {
+					has_completed_focus = HUN_a_pure_hungary
+				}
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.05
+				}
+				add_popularity = {
+					ideology = neutrality
+					popularity = -0.05
+				}
 			}
 
 			if = {
@@ -4256,6 +4288,63 @@ focus_tree = {
 				idea = HUN_three_year_plan_idea
 				days = 1095
 			}
+		}
+	}
+
+	focus = {
+		id = HUN_soviet_hungarian_military_academy
+		icon = GFX_focus_generic_military_academy
+		prerequisite = { focus = HUN_control_ministry_interior }
+		x = 1
+		y = 1
+		relative_position_id = HUN_control_ministry_interior
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 70
+		}
+
+		available = {
+			SOV = { 
+				exists = yes
+				has_government = communism
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			army_experience = 10
+			add_doctrine_cost_reduction = {
+				name = HUN_army_maneuvers
+				cost_reduction = 0.25
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = HUN_the_hungarian_red_army
+		icon = GFX_focus_SOV_mobilization_plan
+		prerequisite = { focus = HUN_soviet_hungarian_military_academy }
+		x = 0
+		y = 1
+		relative_position_id = HUN_soviet_hungarian_military_academy
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 70
+		}
+
+		available = {
+			NOT = { has_idea = HUN_treaty_of_triannon }
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = HUN_the_hungarian_red_army_idea
 		}
 	}
 
@@ -4461,7 +4550,8 @@ focus_tree = {
 			}
 
 			add_shortages_HUN = yes
-			activate_mission_tooltip = shortages_crisis
+			activate_mission = shortages_crisis
+			unlock_decision_tooltip = raise_quotas
 		}
 	}
 
@@ -5151,8 +5241,11 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 		available = {
-			has_idea = HUN_tibor_eckhardt
-			has_german_trade = no
+			OR = {
+				has_idea = HUN_tibor_eckhardt
+				has_country_leader = { character = HUN_tibor_eckhardt }
+			}
+			NOT = { has_idea = HUN_german_trade3 }
 		}
 		bypass = {
 			has_government = communism
@@ -5172,6 +5265,7 @@ focus_tree = {
     			ideology = fascism
     			popularity = -0.03
 			}
+			remove_german_trade_HUN = yes
 		}
 	}
 
@@ -5188,8 +5282,11 @@ focus_tree = {
 			FOCUS_FILTER_STABILITY
 		}
 		available = {
-			has_idea = HUN_tibor_eckhardt
-			has_german_trade = no
+			OR = {
+				has_idea = HUN_tibor_eckhardt
+				has_country_leader = { character = HUN_tibor_eckhardt }
+			}
+			NOT = { has_idea = HUN_german_trade3 }
 		}
 		bypass = {
 			has_government = communism
@@ -5210,6 +5307,7 @@ focus_tree = {
     			ideology = neutrality
     			popularity = -0.03
 			}
+			remove_german_trade_HUN = yes
 		}
 	}
 
@@ -5238,6 +5336,11 @@ focus_tree = {
 			hidden_effect = {
 				set_variable = { shadow_government_support = 0 }
 			}
+
+			add_popularity = {
+    			ideology = democratic
+    			popularity = 0.03
+			}
 			add_offsite_building = {
 				type = industrial_complex
 				level = 1
@@ -5260,7 +5363,6 @@ focus_tree = {
 		}
 	}
 
-	
 	#Mission to the US
 	focus = {
 		id = HUN_mission_to_the_us
@@ -5288,7 +5390,7 @@ focus_tree = {
 
 			add_popularity = {
     			ideology = democratic
-    			popularity = 0.05
+    			popularity = 0.02
 			}
 			add_offsite_building = {
 				type = industrial_complex
@@ -5970,7 +6072,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_restoreistvanbethlen }
 		available = {
-			has_idea = HUN_istvan_bethlen
+			OR = {
+				has_idea = HUN_istvan_bethlen
+				has_country_leader = { character = HUN_istvan_bethlen }
+			}
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6005,7 +6110,10 @@ focus_tree = {
 		prerequisite = { focus = HUN_british_industrial_aid }
 		mutually_exclusive = { focus = HUN_protect_the_trade_unions }
 		available = {
-			has_idea = HUN_istvan_bethlen
+			OR = {
+				has_idea = HUN_istvan_bethlen
+				has_country_leader = { character = HUN_istvan_bethlen }
+			}
 		}
 		completion_reward = {
 			if = {
@@ -6061,7 +6169,9 @@ focus_tree = {
 		available = {
 			OR = {
 				has_idea = HUN_istvan_bethlen
+				has_country_leader = { character = HUN_istvan_bethlen }
 				has_idea = HUN_kalman_daranyi
+				has_country_leader = { character = HUN_kalman_daranyi }
 			}
 			has_government = neutrality
 		}
@@ -6104,7 +6214,9 @@ focus_tree = {
 		available = {
 			OR = {
 				has_idea = HUN_tibor_eckhardt
+				has_country_leader = { character = HUN_tibor_eckhardt }
 				has_idea = HUN_istvan_bethlen
+				has_country_leader = { character = HUN_istvan_bethlen }
 			}
 		}
 		bypass = {
@@ -6143,7 +6255,9 @@ focus_tree = {
 		available = {
 			OR = {
 				has_idea = HUN_tibor_eckhardt
+				has_country_leader = { character = HUN_tibor_eckhardt }
 				has_idea = HUN_istvan_bethlen
+				has_country_leader = { character = HUN_istvan_bethlen }
 			}
 		}
 		bypass = {
@@ -6216,7 +6330,10 @@ focus_tree = {
 			has_government = fascism
 		}
 		available = {
-			has_idea = HUN_kalman_daranyi
+			OR = {
+				has_idea = HUN_kalman_daranyi
+				has_country_leader = { character = HUN_kalman_daranyi }
+			}
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6245,7 +6362,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_marginalise_the_fascists  }
 		available = {
-			has_idea = HUN_kalman_daranyi
+			OR = {
+				has_idea = HUN_kalman_daranyi
+				has_country_leader = { character = HUN_kalman_daranyi }
+			}
 		}
 		bypass = {
 			ITA = {
@@ -6696,7 +6816,9 @@ focus_tree = {
 		available = {
 			OR = {
 				has_idea = HUN_tibor_eckhardt
+				has_country_leader = { character = HUN_tibor_eckhardt }
 				has_idea = HUN_istvan_bethlen
+				has_country_leader = { character = HUN_istvan_bethlen }
 			}
 		}
 		bypass = {
@@ -6734,7 +6856,9 @@ focus_tree = {
 		available = {
 			OR = {
 				has_idea = HUN_istvan_bethlen
+				has_country_leader = { character = HUN_istvan_bethlen }
 				has_idea = HUN_kalman_daranyi
+				has_country_leader = { character = HUN_kalman_daranyi }
 			}
 		}
 		bypass = {
@@ -7592,19 +7716,9 @@ focus_tree = {
 						state = 154
 						state = 155
 					}
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
 				}
 				add_manpower = migrants
-				add_extra_state_shared_building_slots = 4
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
+				add_extra_state_shared_building_slots = 3
 			}
 
 			hidden_effect = {
@@ -9274,7 +9388,6 @@ focus_tree = {
 				}
 				add_to_tech_sharing_group = HUN_joint_tank_development_group
 			}
-			
 		}
 	}
 
@@ -9771,7 +9884,7 @@ focus_tree = {
 				}
 			}
 		}
-		
+
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
 			navy_experience = 50

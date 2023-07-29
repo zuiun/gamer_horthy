@@ -94,13 +94,23 @@ peace_hun = {
 				}
 				random_list = {
 					1 = {
-						faction_leader = { HUN_add_suspicion_small = yes }
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
+							HUN_add_suspicion_small = yes
+						}
 					}
 					2 = {
 						# Do nothing
 					}
 					3 = {
-						faction_leader = { HUN_remove_suspicion_small = yes }
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
+							HUN_remove_suspicion_small = yes
+						}
 					}
 				}
 			}
@@ -113,13 +123,23 @@ peace_hun = {
 				}
 				random_list = {
 					1 = {
-						faction_leader = { HUN_add_suspicion_small = yes }
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
+							HUN_add_suspicion_small = yes
+						}
 					}
 					5 = {
 						# Do nothing
 					}
 					2 = {
-						faction_leader = { HUN_remove_suspicion_small = yes }
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
+							HUN_remove_suspicion_small = yes
+						}
 					}
 				}
 			}
@@ -132,20 +152,35 @@ peace_hun = {
 				}
 				random_list = {
 					1 = {
-						faction_leader = { HUN_add_suspicion_small = yes }
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
+							HUN_add_suspicion_small = yes
+						}
 					}
 					8 = {
 						# Do nothing
 					}
 					1 = {
-						faction_leader = { HUN_remove_suspicion_small = yes }
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
+							HUN_remove_suspicion_small = yes
+						}
 					}
 				}
 			}
 			else = {
 				random_list = {
 					1 = {
-						faction_leader = { HUN_add_suspicion_small = yes }
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
+							HUN_add_suspicion_small = yes
+						}
 					}
 					4 = {
 						# Do nothing
@@ -193,7 +228,12 @@ peace_hun = {
 				}
 			}
 
-			faction_leader = { HUN_add_suspicion_small = yes }
+			every_country = {
+				limit = {
+					is_suspicion_target = yes
+				}
+				HUN_add_suspicion_small = yes
+			}
 			every_enemy_country = {
 				limit = {
 					is_favour_target = yes
@@ -260,6 +300,7 @@ peace_hun = {
 		}
 
 		available = {
+			has_completed_focus = HUN_peace_overtures
 			has_idea = HUN_miklos_horthy_jr
 			if = {
 				limit = {
@@ -276,19 +317,23 @@ peace_hun = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_peace_overtures
+			has_begun_peace_branch = yes
 		}
 
 		target_trigger = {
 			FROM = {
 				has_war = no
 				OR = {
-					tag = POR
-					tag = BRA
+					AND = {
+						tag = POR
+						NOT = { has_war_with = ENG }
+					}
+					AND = {
+						tag = BRA
+						NOT = { has_war_with = USA }
+					}
 				}
 				NOT = { has_country_flag = HUN_radio_already }
-				NOT = { has_war_with = ENG }
-				NOT = { has_war_with = USA }
 			}
 		}
 
@@ -299,7 +344,12 @@ peace_hun = {
 				FROM = { set_country_flag = HUN_radio_already }
 			}
 
-			faction_leader = { HUN_add_suspicion_small = yes }
+			every_country = {
+				limit = {
+					is_suspicion_target = yes
+				}
+				HUN_add_suspicion_small = yes
+			}
 
 			if = {
 				limit = {
@@ -325,6 +375,7 @@ peace_hun = {
 		}
 
 		available = {
+			has_completed_focus = HUN_peace_overtures
 			if = {
 				limit = {
 					FROM = { tag = SWI }
@@ -356,7 +407,7 @@ peace_hun = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_peace_overtures
+			has_begun_peace_branch = yes
 			has_war = yes
 		}
 
@@ -379,7 +430,12 @@ peace_hun = {
 				FROM = { set_country_flag = HUN_feelers_already }
 			}
 
-			faction_leader = { HUN_add_suspicion_small = yes }
+			every_country = {
+				limit = {
+					is_suspicion_target = yes
+				}
+				HUN_add_suspicion_small = yes
+			}
 
 			if = {
 				limit = {
@@ -438,8 +494,13 @@ peace_hun = {
 			original_tag = HUN
 		}
 
-		visible = {
+		available = {
 			has_completed_focus = HUN_peace_overtures
+			FROM = { arms_factory > 0 }
+		}
+
+		visible = {
+			has_begun_peace_branch = yes
 			has_war = yes
 			any_country = { is_favour_target = yes }
 		}
@@ -448,7 +509,6 @@ peace_hun = {
 			FROM = {
 				is_core_of = HUN
 				is_owned_and_controlled_by = HUN
-				arms_factory > 0
 			}
 		}
 
@@ -458,7 +518,12 @@ peace_hun = {
 		on_map_mode = map_only
 
 		complete_effect = {
-			faction_leader = { HUN_add_suspicion_large = yes }
+			every_country = {
+				limit = {
+					is_suspicion_target = yes
+				}
+				HUN_add_suspicion_large = yes
+			}
 
 			every_enemy_country = {
 				limit = {
@@ -484,8 +549,13 @@ peace_hun = {
 			original_tag = HUN
 		}
 
-		visible = {
+		available = {
 			has_completed_focus = HUN_peace_overtures
+			FROM = { anti_air_building > 0 }
+		}
+
+		visible = {
+			has_begun_peace_branch = yes
 			has_war = yes
 			any_country = { is_favour_target = yes }
 		}
@@ -494,7 +564,6 @@ peace_hun = {
 			FROM = {
 				is_core_of = HUN
 				is_owned_and_controlled_by = HUN
-				anti_air_building > 0
 			}
 		}
 
@@ -504,7 +573,12 @@ peace_hun = {
 		on_map_mode = map_only
 
 		complete_effect = {
-			faction_leader = { HUN_add_suspicion_medium = yes }
+			every_country = {
+				limit = {
+					is_suspicion_target = yes
+				}
+				HUN_add_suspicion_medium = yes
+			}
 
 			every_enemy_country = {
 				limit = {
@@ -530,8 +604,12 @@ peace_hun = {
 			original_tag = HUN
 		}
 
-		visible = {
+		available = {
 			has_completed_focus = HUN_peace_overtures
+		}
+
+		visible = {
+			has_begun_peace_branch = yes
 			has_war = yes
 			any_country = { is_favour_target = yes }
 		}
@@ -544,7 +622,12 @@ peace_hun = {
 		fire_only_once = yes
 
 		complete_effect = {
-			faction_leader = { HUN_add_suspicion_max = yes }
+			every_country = {
+				limit = {
+					is_suspicion_target = yes
+				}
+				HUN_add_suspicion_max = yes
+			}
 
 			every_enemy_country = {
 				limit = {
@@ -565,19 +648,25 @@ peace_hun = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_peace_overtures
+			has_begun_peace_branch = yes
 			has_war = yes
+		}
+
+		available = {
+			has_completed_focus = HUN_peace_overtures
+			FROM = {
+				free_building_slots = {
+					building = arms_factory
+					size > 0
+					include_locked = no
+				}
+			}
 		}
 
 		target_trigger = {
 			FROM = {
 				owner = { is_suspicion_target = yes }
 				is_capital = yes
-				free_building_slots = {
-					building = arms_factory
-					size > 0
-					include_locked = yes
-				}
 			}
 		}
 
@@ -587,7 +676,12 @@ peace_hun = {
 		on_map_mode = map_only
 
 		complete_effect = {
-			faction_leader = { HUN_remove_suspicion_medium = yes }
+			every_country = {
+				limit = {
+					is_suspicion_target = yes
+				}
+				HUN_remove_suspicion_medium = yes
+			}
 
 			every_enemy_country = {
 				limit = {
@@ -615,6 +709,7 @@ peace_hun = {
 		}
 
 		available = {
+			has_completed_focus = HUN_peace_overtures
 			NOT = { has_country_flag = temporary_trading }
 		}
 
@@ -623,7 +718,7 @@ peace_hun = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_peace_overtures
+			has_begun_peace_branch = yes
 			has_war = yes
 		}
 
@@ -680,10 +775,7 @@ peace_hun = {
 		}
 
 		visible = {
-			OR = {
-				has_completed_focus = HUN_preserve_greater_hungary
-				has_completed_focus = HUN_the_small_regent
-			}
+			has_begun_peace_branch = yes
 			original_tag = HUN
 			has_war = yes
 			is_faction_leader = no # you shouldn't be able to betray your own faction
@@ -714,10 +806,20 @@ peace_hun = {
 						}
 					}
 					add_stability = 0.1
-					faction_leader = { HUN_add_suspicion_max = yes }
+					every_country = {
+						limit = {
+							is_suspicion_target = yes
+						}
+						HUN_add_suspicion_max = yes
+					}
 
 					custom_effect_tooltip = if_they_refuse_tt
-					faction_leader = { HUN_remove_suspicion_small = yes }
+					every_country = {
+						limit = {
+							is_suspicion_target = yes
+						}
+						HUN_remove_suspicion_small = yes
+					}
 					FROM = { HUN_remove_favour_medium = yes }
 				}
 			}
@@ -748,10 +850,7 @@ peace_hun = {
 		}
 
 		visible = {
-			OR = {
-				has_completed_focus = HUN_preserve_greater_hungary
-				has_completed_focus = HUN_the_small_regent
-			}
+			has_begun_peace_branch = yes
 			original_tag = HUN
 			has_war = yes
 			is_faction_leader = no # you shouldn't be able to betray your own faction
@@ -783,10 +882,20 @@ peace_hun = {
 						}
 					}
 					HUN_keep_carpathia_peace = yes
-					faction_leader = { HUN_add_suspicion_max = yes }
+					every_country = {
+						limit = {
+							is_suspicion_target = yes
+						}
+						HUN_add_suspicion_max = yes
+					}
 
 					custom_effect_tooltip = if_they_refuse_tt
-					faction_leader = { HUN_remove_suspicion_small = yes }
+					every_country = {
+						limit = {
+							is_suspicion_target = yes
+						}
+						HUN_remove_suspicion_small = yes
+					}
 					FROM = { HUN_remove_favour_medium = yes }
 				}
 			}
@@ -824,10 +933,7 @@ peace_hun = {
 		}
 
 		visible = {
-			OR = {
-				has_completed_focus = HUN_preserve_greater_hungary
-				has_completed_focus = HUN_the_small_regent
-			}
+			has_begun_peace_branch = yes
 			original_tag = HUN
 			has_war = yes
 			is_faction_leader = no # you shouldn't be able to betray your own faction
@@ -859,10 +965,20 @@ peace_hun = {
 						}
 					}
 					HUN_return_everything_peace = yes
-					faction_leader = { HUN_add_suspicion_max = yes }
+					every_country = {
+						limit = {
+							is_suspicion_target = yes
+						}
+						HUN_add_suspicion_max = yes
+					}
 
 					custom_effect_tooltip = if_they_refuse_tt
-					faction_leader = { HUN_remove_suspicion_small = yes }
+					every_country = {
+						limit = {
+							is_suspicion_target = yes
+						}
+						HUN_remove_suspicion_small = yes
+					}
 					FROM = { HUN_remove_favour_medium = yes }
 				}
 			}

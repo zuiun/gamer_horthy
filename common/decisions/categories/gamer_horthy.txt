@@ -14,6 +14,11 @@ backwardness = {
 	allowed = {
 		original_tag = HUN
 	}
+
+	on_map_area = {
+		state = 43
+		name = dismantle_build_tt
+	}
 }
 hungarian_sovereignty = {
 	icon = eng_move_to_secure_the_dominions
@@ -62,7 +67,7 @@ peace_hun = {
 	visible = {
 		has_war = yes
 		is_faction_leader = no
-		any_enemy_country = { is_peace_target = yes }
+		any_country = { is_peace_target = yes }
 		has_completed_focus = HUN_peace_overtures
 		NOT = { has_country_flag = peace_in_our_time }
 	}

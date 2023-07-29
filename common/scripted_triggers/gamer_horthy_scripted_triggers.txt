@@ -194,3 +194,11 @@ is_peace_target = {
 		is_suspicion_target = yes
 	}
 }
+
+# Trigger for having begun the peace overtures branch
+has_begun_peace_branch = {
+	OR = {
+		has_completed_focus = HUN_the_small_regent
+		has_completed_focus = HUN_preserve_greater_hungary
+	}
+}

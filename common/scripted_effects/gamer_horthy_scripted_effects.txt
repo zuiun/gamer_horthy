@@ -251,17 +251,21 @@ add_shortages_HUN = {
 			limit = {
 				has_idea = HUN_shortages5
 			}
-			add_political_power = -50
 			if = {
 				limit = {
 					has_civil_war = no
 					has_stability < 0.4
+					NOT = { has_country_flag = HUN_hungarian_revolution }
 				}
 				start_civil_war = {
 					ideology = democratic
 					size = 0.7
 					states = { 43 }
 				}
+				hidden_effect = { set_country_flag = HUN_hungarian_revolution }
+			}
+			else = {
+				add_political_power = -50
 			}
 		}
 		else = {

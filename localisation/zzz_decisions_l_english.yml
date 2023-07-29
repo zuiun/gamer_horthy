@@ -22,6 +22,7 @@
  backwardness:0 "Industrial Backwardness"
  backwardness_desc:0 "Hungary has never been an industrial power, and the current attempt at rapid industrialisation is leading to many of the same problems which plagued [SOV.GetNameDef] in previous years. If we do not change course, then our entire economy will collapse from mismanagement and the people may even revolt against us."
  shortages_crisis:0 "Industrial Shortage Crisis"
+ raise_quotas:0 "Raise Quotas"
  request_FROM_support:0 "Request [From.GetAdjective] Support"
  request_FROM_support_desc:0 "We will have to request [From.GetAdjective] support again for every claim we make."
  hungarian_sovereignty:0 "Hungarian Sovereignty"

@@ -118,7 +118,7 @@
  gamer_horthy.39.a:0 "The hour of reunion between the Duke and the people has arrived."
  gamer_horthy.39.b:0 "The Austrian people have never cast a vote in favour of the republic."
  gamer_horthy.42.t:0 "Brothers No Longer"
- gamer_horthy.42.desc:0 "A state of war currently exists between [HUN.GetName] and [POL.GetName]. As a result, the brotherly ties that once existed between the two nations no longer play a meaningful role in diplomatic relations between the two states."
+ gamer_horthy.42.desc:0 "A state of war currently exists between [HUN.GetNameDef] and [POL.GetNameDef]. As a result, the brotherly ties that once existed between our two states no longer play a meaningful role in diplomatic relations."
  gamer_horthy.42.a:0 "So be it."
  news.314.t:0 "Horthy Assassinated"
  news.314.desc:0 "Reports have emerged from Hungary that $HUN_miklos_horthy$ was shot by a lone gunman today after leaving the Parliament building in Budapest. Thought he was immediately rushed to the hospital, doctors announced that he was already deceased by the time he arrived. The gunman, shot by police as he tried to escape the scene, has been identified as a [HUN.GetRulingParty] member.\n\nThe assassination has caused an uproar in domestic Hungarian politics, as Horthy's anti-[HUN.GetRulingIdeologyNoun] leanings were paramount in keeping subversive elements at bay. Without the old admiral at the helm of the political scene, it is likely that [HUN.GetRulingIdeologyNoun]s will be able to seize control of the country."
