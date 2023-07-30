@@ -7,15 +7,11 @@ intelligence_agency = {
 	names = { "VFK-2" }
 
 	default = {
-		NOT = {
-			has_government = communism
-		}
+		NOT = { has_government = communism }
 	}
 	available = {
 		original_tag = HUN
-		NOT = {
-			has_government = communism
-		}
+		NOT = { has_government = communism }
 	}
 }
 

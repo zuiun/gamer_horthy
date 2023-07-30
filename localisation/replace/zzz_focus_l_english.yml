@@ -308,6 +308,7 @@
  HUN_the_hungarian_red_army_desc:0 "All motherland-loving patriots must do their duty in defence of their homeland. We will form the $HUN_the_hungarian_red_army_idea$, following the example of the [SOV.GetAdjective]s in the East, which will protect our fledgling revolution."
  HUN_soviet_hungarian_military_academy:0 "[SOV.GetAdjective] Military Expertise"
  HUN_soviet_hungarian_military_academy_desc:0 "Our army is nothing without its leadership. The [SOV.GetAdjective]s have far more experience in military matters, so it may be beneficial to cooperate with them in the training of our finest military minds. To this end, we will send our officers to [SOV.GetAdjective] military academies to be trained by skilled instructors."
+ HUN_invite_foreign_investors_desc:0 "Hungary lies at the heart of Central Europe, and we could well use our central location to attract foreign investors with an interest in improving our infrastructure and industry."
  one_agrees_tt:0 "§YEffects if any of them accepts:§!"
  all_agree_tt:0 "§YEffects if they all accept:§!"
  remove_support_tt:0 "Locks Decision: §Y$request_FROM_support$§!"

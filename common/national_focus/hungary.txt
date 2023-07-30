@@ -634,13 +634,13 @@ focus_tree = {
 					ROM = {
 						OR = {
 							exists = no
-							is_puppet = yes
+							is_subject = yes
 						}
 					}
 					FRA = {
 						OR = {
 							exists = no
-							is_puppet = yes
+							is_subject = yes
 							NOT = { has_completed_focus = FRA_strengthen_the_little_entente }
 						}
 					}
@@ -945,12 +945,8 @@ focus_tree = {
 
 		bypass = {
 			OR = {
-				GER = {
-					has_government = democratic
-				}
-				GER = {
-					exists = no
-				}
+				GER = { has_government = democratic }
+				GER = { exists = no }
 				has_war_with = GER
 			}
 		}
@@ -999,9 +995,7 @@ focus_tree = {
 						is_russian_separatist = no
 					}
 				}
-				SOV = {
-					exists = no
-				}
+				SOV = { exists = no }
 				has_war_with = SOV
 			}
 		}
@@ -4150,13 +4144,11 @@ focus_tree = {
 			add_ideas = HUN_land_reforming
 		}
 		completion_reward = {
-			custom_effect_tooltip = when_selected_tt
-
 			effect_tooltip = {
+				custom_effect_tooltip = when_selected_tt
 				add_ideas = HUN_land_reforming
+				custom_effect_tooltip = when_focus_tt
 			}
-
-			custom_effect_tooltip = when_focus_tt
 
 			remove_ideas = HUN_land_reforming
 
@@ -4195,13 +4187,11 @@ focus_tree = {
 			add_ideas = HUN_purges
 		}
 		completion_reward = {
-			custom_effect_tooltip = when_selected_tt
-
 			effect_tooltip = {
+				custom_effect_tooltip = when_selected_tt
 				add_ideas = HUN_purges
+				custom_effect_tooltip = when_focus_tt
 			}
-
-			custom_effect_tooltip = when_focus_tt
 
 			remove_ideas = HUN_purges
 
@@ -4306,15 +4296,13 @@ focus_tree = {
 		}
 
 		available = {
-			SOV = { 
-				exists = yes
-				has_government = communism
-			}
+			SOV = { has_government = communism }
 		}
 
 		search_filters = { FOCUS_FILTER_RESEARCH }
 		completion_reward = {
 			army_experience = 10
+			add_command_power = 10
 			add_doctrine_cost_reduction = {
 				name = HUN_army_maneuvers
 				cost_reduction = 0.25
@@ -4379,6 +4367,7 @@ focus_tree = {
 				long_name = HUN_kadar_party_long
 			}
 			add_ideas = HUN_goulash
+			remove_ideas = HUN_soviet_control
 			if = {
 				limit = {
 					SOV = {
@@ -4386,7 +4375,6 @@ focus_tree = {
 						has_country_leader = { character = SOV_iosif_stalin }
 					}
 				}
-				remove_ideas = HUN_soviet_control
 				be_factionless = yes
 				hidden_effect = {
 					SOV = {
@@ -4422,13 +4410,11 @@ focus_tree = {
 			add_ideas = HUN_purges
 		}
 		completion_reward = {
-			custom_effect_tooltip = when_selected_tt
-
 			effect_tooltip = {
+				custom_effect_tooltip = when_selected_tt
 				add_ideas = HUN_purges
+				custom_effect_tooltip = when_focus_tt
 			}
-
-			custom_effect_tooltip = when_focus_tt
 
 			remove_ideas = HUN_purges
 
@@ -4744,7 +4730,7 @@ focus_tree = {
 			has_government = communism
 		}
 		completion_reward = {
-			add_stability = 0.05
+			add_stability = 0.1
 			popular_opposition_HUN = yes
 			if = {
 				limit = {
@@ -5377,7 +5363,10 @@ focus_tree = {
 			FOCUS_FILTER_RESEARCH
 		}
 		available = {
-
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
 		}
 		prerequisite = { focus = HUN_anglophile_policies }
 		completion_reward = {
@@ -5503,12 +5492,12 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_anglophile_policies }
 		available = {
+			NOT = { has_completed_focus = HUN_allow_german_military_access }
 			has_german_trade = no
 			OR = {
 				has_government = neutrality
 				has_government = democratic
 			}
-			NOT = { has_completed_focus = HUN_allow_german_military_access }
 		}
 		bypass = {
 			OR = {
@@ -8730,13 +8719,13 @@ focus_tree = {
 					ROM = {
 						OR = {
 							exists = no
-							is_puppet = yes
+							is_subject = yes
 						}
 					}
 					FRA = {
 						OR = {
 							exists = no
-							is_puppet = yes
+							is_subject = yes
 							NOT = { has_completed_focus = FRA_strengthen_the_little_entente }
 						}
 					}
