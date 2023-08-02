@@ -107,6 +107,7 @@ HUN_balance_of_power_category = {
 				}
 			}
 			add_stability = 0.05
+			remove_german_trade_HUN = yes
 			HUN_add_crown_bop_small = yes
 			HUN_add_conservative_bop_small = yes
 		}
@@ -130,6 +131,12 @@ HUN_balance_of_power_category = {
 			FROM = {
 				has_war_with = HUN
 				is_major = yes
+				OR = {
+					has_country_flag = HUN_sent_istvan
+					NOT = {
+						HUN = { has_country_flag = HUN_sent_istvan }
+					}
+				}
 			}
 		}
 
@@ -145,6 +152,7 @@ HUN_balance_of_power_category = {
 
 		complete_effect = {
 			hidden_effect = {
+				FROM = { set_country_flag = HUN_sent_istvan }
 				set_country_flag = HUN_sent_istvan
 			}
 		}
@@ -219,12 +227,12 @@ HUN_balance_of_power_category = {
 			has_completed_focus = HUN_continue_the_regency
 		}
 
-		cost = 20
+		cost = 40
 		days_remove = 30
 		days_re_enable = 5
 
 		complete_effect = {
-			add_command_power = 5
+			army_experience = 5
 		}
 
 		modifier = {

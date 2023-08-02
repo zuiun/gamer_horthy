@@ -4,9 +4,10 @@
 
 intelligence_agency = {
 	picture = GFX_intelligence_agency_logo_HUN
-	names = { "VFK-2" }
+	names = { "VKF-2" }
 
 	default = {
+		tag = HUN
 		NOT = { has_government = communism }
 	}
 	available = {
@@ -20,6 +21,7 @@ intelligence_agency = {
 	names = { "ÁVH" }
 
 	default = {
+		tag = HUN
 		has_government = communism
 	}
 	available = {

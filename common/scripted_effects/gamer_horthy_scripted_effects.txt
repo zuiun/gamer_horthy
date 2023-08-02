@@ -20,10 +20,7 @@
 add_german_trade_HUN = {
 	if = {
 		limit = {
-			NOT = {
-				has_completed_focus = HUN_the_rise_of_germany
-				has_completed_focus = HUN_bulwark_against_radicalism
-			}
+			NOT = { has_completed_focus = HUN_the_rise_of_germany }
 		}
 		if = {
 			limit = {
@@ -483,37 +480,15 @@ replace_horthy = {
 	}
 }
 
-# Make Bethlen ruler of Transylvania
-bethlen_ruler = {
+# Replaces Teleki with new non-aligned leader
+replace_teleki = {
 	if = {
 		limit = {
-			has_country_leader = { character = HUN_istvan_bethlen }
+			has_country_leader = { character = HUN_pal_teleki }
 		}
-		add_country_leader_role = {
-			character = HUN_geza_lakatos
-			promote_leader = yes
-			country_leader = {
-				ideology = moderatism
-				expire = "1965.1.1"
-				traits = {
-					patriot_pm
-				}
-			}
-		}
+		replace_horthy = yes
 	}
-	TRA = {
-		add_country_leader_role = {
-			character = HUN_istvan_bethlen
-			promote_leader = yes
-			country_leader = {
-				ideology = moderatism
-				expire = "1965.1.1"
-				traits = {
-					aristocrat_pm
-				}
-			}
-		}
-	}
+	retire_character = HUN_pal_teleki
 }
 
 ### Adds balance of power ###
@@ -1136,7 +1111,7 @@ HUN_resist_occupation = {
 				hours = 4
 			}
 			effect_tooltip = {
-				custom_effect_tooltip = effects_tt
+				custom_effect_tooltip = if_they_accept_tt
 				every_country = {
 					limit = {
 						is_in_faction_with = PREV
@@ -1146,6 +1121,12 @@ HUN_resist_occupation = {
 						target = HUN
 						days = 180
 					}
+				}
+				custom_effect_tooltip = if_they_refuse_tt
+				remove_from_faction = HUN
+				create_wargoal = {
+					target = ROOT
+					type = puppet_wargoal_focus
 				}
 			}
 		}

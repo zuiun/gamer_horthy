@@ -1058,7 +1058,9 @@ ideas = {
 			}
 
 			available = {
-				GER = {
+				any_other_country = {
+					is_major = yes
+					capital_scope = { is_on_continent = europe }
 					has_government = fascism
 				}
 			}
@@ -1093,7 +1095,9 @@ ideas = {
 			}
 
 			available = {
-				GER = {
+				any_other_country = {
+					is_major = yes
+					capital_scope = { is_on_continent = europe }
 					has_government = fascism
 				}
 			}
@@ -1129,7 +1133,9 @@ ideas = {
 			}
 
 			available = {
-				GER = {
+				any_other_country = {
+					is_major = yes
+					capital_scope = { is_on_continent = europe }
 					has_government = fascism
 				}
 			}
@@ -1406,7 +1412,7 @@ ideas = {
 
 			modifier = {
 				fascism_drift = 0.05
-				recruitable_population_factor = 0.03
+				conscription = 0.01
 				army_attack_factor = 0.05
 			}
 		}
@@ -1429,7 +1435,7 @@ ideas = {
 			modifier = {
 				fascism_drift = 0.05
 				political_power_gain = 0.1
-				recruitable_population_factor = 0.05
+				conscription = 0.02
 				army_attack_factor = 0.1
 			}
 		}
@@ -1569,8 +1575,8 @@ ideas = {
 			}
 
 			modifier = {
-				neutrality_drift = 0.01
-				fascism_drift = -0.03
+				neutrality_drift = 0.02
+				fascism_drift = -0.01
 				democratic_acceptance = 50
 				fascism_acceptance = -25
 			}
@@ -1592,9 +1598,9 @@ ideas = {
 
 			modifier = {
 				political_power_factor = 0.05
-				neutrality_drift = 0.01
+				neutrality_drift = 0.03
 				democratic_drift = 0.03
-				fascism_drift = -0.05
+				fascism_drift = -0.03
 				democratic_acceptance = 50
 				fascism_acceptance = -50
 			}
@@ -1787,7 +1793,6 @@ ideas = {
 
 			available = {
 				has_government = communism
-				has_war = no
 			}
 
 			modifier = {
@@ -1795,6 +1800,53 @@ ideas = {
 				production_speed_industrial_complex_factor = 0.05
 				production_speed_infrastructure_factor = 0.05
 				production_speed_arms_factory_factor = 0.1
+			}
+		}
+
+		HUN_march_front = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = EST_democratic_opposition
+
+			available = {
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+
+			modifier = {
+				stability_factor = -0.1
+				democratic_drift = 0.03
+				fascism_drift = 0.02
+				communism_drift = 0.02
+				production_speed_buildings_factor = -0.05
+				industrial_capacity_factory = -0.03
+			}
+		}
+
+		HUN_march_front2 = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = EST_democratic_opposition
+
+			available = {
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+			}
+
+			modifier = {
+				stability_factor = -0.05
+				democratic_drift = 0.03
+				communism_drift = 0.02
+				industrial_capacity_factory = 0.02
+				conscription = 0.01
 			}
 		}
 	}

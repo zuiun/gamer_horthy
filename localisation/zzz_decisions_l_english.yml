@@ -71,6 +71,7 @@
  mobilise_FROM:0 "Promote Youth Militarism"
  end_non_belligerence:0 "Renounce Neutrality"
  suppress_move:0 "Ban the $HUN_move$"
+ suppress_move_desc:0 "The $HUN_move$ is a paramilitary organisation established by the late $HUN_gyula_gombos_de_jakfa$, which has previously served us well. However, their members are not loyal only to their own ideology and not to our government, which makes the organisation too dangerous to allow in our society."
  suspend_elections:0 "Suspend Elections"
  hun_allow_elections:0 "Hold Elections"
  temporary_trading:0 "Currently offering resources"

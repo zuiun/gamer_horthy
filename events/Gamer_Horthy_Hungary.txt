@@ -109,11 +109,6 @@ country_event = {
 			base = 1
 		}
 
-#		create_wargoal = {
-#			type = puppet_wargoal_focus
-#			target = HUN
-#		}
-
 		HUN = {
 			country_event = {
 				id = gamer_horthy.11
@@ -134,7 +129,7 @@ country_event = {
 	option = {
 		name = gamer_horthy.10.a # A large price to pay for survival
 		add_stability = -0.2
-		retire_character = HUN_pal_teleki
+		replace_teleki = yes
 	}
 }
 
@@ -152,14 +147,6 @@ country_event = {
 		add_popularity = {
 			ideology = fascism
 			popularity = -0.2
-		}
-		add_popularity = {
-			ideology = democratic
-			popularity = 0.05
-		}
-		add_popularity = {
-			ideology = neutrality
-			popularity = 0.1
 		}
 	}
 }
@@ -972,32 +959,6 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
-		name = gamer_horthy.28.a # They will die for this
-
-		trigger = {
-			has_country_flag = failed_occupation
-		}
-		ai_chance = {
-			base = 1
-		}
-
-		remove_mission = occupy_hungary
-		remove_from_faction = HUN
-		create_wargoal = {
-			target = HUN
-			type = puppet_wargoal_focus
-		}
-
-		HUN = {
-			set_country_flag = you_die
-			country_event = {
-				id = gamer_horthy.33
-				hours = 4
-			}
-		}
-	}
-
-	option = {
 		name = gamer_horthy.28.b # We can't afford a distraction right now
 
 		trigger = {
@@ -1020,6 +981,32 @@ country_event = {
 
 		HUN = {
 			set_country_flag = you_survive
+			country_event = {
+				id = gamer_horthy.33
+				hours = 4
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.28.a # They will die for this
+
+		trigger = {
+			has_country_flag = failed_occupation
+		}
+		ai_chance = {
+			base = 1
+		}
+
+		remove_mission = occupy_hungary
+		remove_from_faction = HUN
+		create_wargoal = {
+			target = HUN
+			type = puppet_wargoal_focus
+		}
+
+		HUN = {
+			set_country_flag = you_die
 			country_event = {
 				id = gamer_horthy.33
 				hours = 4

@@ -140,21 +140,6 @@ has_prime_minister_finished = {
 	}
 }
 
-# Trigger for if a nation can join the USE
-can_join_use = {
-	capital_scope = {
-		OR = {
-			is_on_continent = europe
-			AND = {
-				HUN = { has_completed_focus = HUN_from_the_atlantic_to_the_urals }
-				is_in_gaulle_europe = yes
-			}
-		}
-	}
-	has_idea = HUN_eec3
-	is_in_faction_with = HUN
-}
-
 # Trigger for choosing any prime minister
 has_prime_minister_chosen = {
 	OR = {

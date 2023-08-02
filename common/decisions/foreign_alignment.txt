@@ -85,26 +85,17 @@ foreign_alignment = {
 			}
 			modifier = {
 				factor = 0.5
-				FROM = {
-					tag = GER
-					has_government = fascism
-				}
+				FROM = { has_government = fascism }
 				has_idea = HUN_german_trade
 			}
 			modifier = {
 				factor = 0.5
-				FROM = {
-					tag = GER
-					has_government = fascism
-				}
+				FROM = { has_government = fascism }
 				has_idea = HUN_german_trade2
 			}
 			modifier = {
 				factor = 0.5
-				FROM = {
-					tag = GER
-					has_government = fascism
-				}
+				FROM = { has_government = fascism }
 				has_idea = HUN_german_trade3
 			}
 			modifier = {
@@ -167,18 +158,12 @@ foreign_alignment = {
 
 			if = {
 				limit = {
-					GER = { has_government = fascism }
+					FROM = { has_government = fascism }
 				}
-				if = {
-					limit = {
-						FROM = { tag = GER }
-					}
-	
-					add_german_trade_HUN = yes
-				}
-				else = {
-					remove_german_trade_HUN = yes
-				}
+				add_german_trade_HUN = yes
+			}
+			else = {
+				remove_german_trade_HUN = yes
 			}
 		}
 	}
