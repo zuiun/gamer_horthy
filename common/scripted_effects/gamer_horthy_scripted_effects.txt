@@ -420,6 +420,7 @@ replace_horthy = {
 		limit = {
 			has_completed_focus = HUN_elect_deputy_regent
 			has_character = HUN_istvan_horthy
+			NOT = { can_be_country_leader = HUN_istvan_horthy }
 		}
 		add_country_leader_role = {
 			character = HUN_istvan_horthy
@@ -436,6 +437,7 @@ replace_horthy = {
 	else_if = {
 		limit = {
 			has_character = HUN_pal_teleki
+			NOT = { can_be_country_leader = HUN_pal_teleki }
 		}
 		add_country_leader_role = {
 			character = HUN_pal_teleki
@@ -452,6 +454,7 @@ replace_horthy = {
 	else_if = {
 		limit = {
 			has_completed_focus = HUN_asoldierofmikloshorthy
+			NOT = { can_be_country_leader = HUN_geza_lakatos }
 		}
 		add_country_leader_role = {
 			character = HUN_geza_lakatos
@@ -465,7 +468,10 @@ replace_horthy = {
 			}
 		}
 	}
-	else = {
+	else_if = {
+		limit = {
+			NOT = { can_be_country_leader = HUN_istvan_bethlen }
+		}
 		add_country_leader_role = {
 			character = HUN_istvan_bethlen
 			promote_leader = yes
@@ -484,11 +490,52 @@ replace_horthy = {
 replace_teleki = {
 	if = {
 		limit = {
-			has_country_leader = { character = HUN_pal_teleki }
+			can_be_country_leader = HUN_pal_teleki
 		}
 		replace_horthy = yes
 	}
 	retire_character = HUN_pal_teleki
+}
+
+# Puppets Hungary if it has opposition support
+puppet_by_supporter = {
+	if = {
+		limit = {
+			has_country_flag = HUN_has_opposition_support
+			any_country = {
+				has_country_flag = HUN_supporting_opposition
+				NOT = {
+					HUN = { is_subject_of = PREV }
+				}
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = HUN_supporting_opposition
+			}
+			if = {
+				limit = {
+					NOT = { has_guaranteed = HUN }
+				}
+				give_guarantee = HUN
+			}
+			if = {
+				limit = {
+					is_faction_leader = yes
+					NOT = { is_in_faction_with = HUN }
+				}
+				add_to_faction = HUN
+			}
+			country_event = {
+				id = gamer_horthy.25
+				hours = 4
+			}
+			custom_effect_tooltip = effects_tt
+			effect_tooltip = {
+				puppet = HUN
+			}
+		}
+	}
 }
 
 ### Adds balance of power ###

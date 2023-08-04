@@ -831,7 +831,7 @@ country_event = {
 		name = gamer_horthy.22.b # They do not understand our interests
 
 		ai_chance = {
-			base = 0
+			base = 1
 		}
 
 		HUN = {

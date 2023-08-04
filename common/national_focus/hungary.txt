@@ -1954,6 +1954,7 @@ focus_tree = {
 			}
 		}
 		prerequisite = { focus = HUN_commit_to_war }
+		will_lead_to_war_with = POL
 		completion_reward = {
 			every_state = {
 				limit = {
@@ -2014,9 +2015,8 @@ focus_tree = {
 			}
 		}
 		prerequisite = { focus = HUN_claims_on_galicia }
-		bypass = {
-
-		}
+		will_lead_to_war_with = YUG
+		will_lead_to_war_with = CRO
 		completion_reward = {
 			every_state = {
 				limit = {
@@ -2132,6 +2132,8 @@ focus_tree = {
 				}
 			}
 		}
+		will_lead_to_war_with = CZE
+		will_lead_to_war_with = SLO
 		completion_reward = {
 			hidden_effect = {
 				clear_trianon_flags = yes
@@ -2233,6 +2235,8 @@ focus_tree = {
 				}
 			}
 		}
+		will_lead_to_war_with = ROM
+		will_lead_to_war_with = YUG
 		completion_reward = {
 			hidden_effect = {
 				clear_trianon_flags = yes
@@ -3915,31 +3919,17 @@ focus_tree = {
 					limit = {
 						has_country_flag = HUN_has_opposition_support
 					}
-					random_country = {
-						limit = {
-							has_country_flag = HUN_supporting_opposition
-						}
-						country_event = {
-							id = gamer_horthy.25
-							hours = 4
-						}
-						custom_effect_tooltip = effects_tt
-						effect_tooltip = {
-							puppet = HUN
-						}
-					}
+					puppet_by_supporter = yes
 				}
-				else = {
-					if = {
-						limit = {
-							NOT = { has_completed_focus = HUN_the_peace_party }
-						}
-						start_civil_war = {
-							ideology = neutrality
-							size = 0.4
-							capital = 43
-							states = { 43 }
-						}
+				else_if = {
+					limit = {
+						NOT = { has_completed_focus = HUN_the_peace_party }
+					}
+					start_civil_war = {
+						ideology = neutrality
+						size = 0.4
+						capital = 43
+						states = { 43 }
 					}
 				}
 			}
@@ -4041,24 +4031,7 @@ focus_tree = {
 				}
 			}
 
-			if = {
-				limit = {
-					has_country_flag = HUN_has_opposition_support
-				}
-				random_country = {
-					limit = {
-						has_country_flag = HUN_supporting_opposition
-					}
-					country_event = {
-						id = gamer_horthy.25
-						hours = 4
-					}
-					custom_effect_tooltip = effects_tt
-					effect_tooltip = {
-						puppet = HUN
-					}
-				}
-			}
+			puppet_by_supporter = yes
 
 			hidden_effect = {
 				news_event = { id = news.314 }
@@ -4141,34 +4114,7 @@ focus_tree = {
 				}
 			}
 
-			if = {
-				limit = {
-					has_country_flag = HUN_has_opposition_support
-				}
-				random_country = {
-					limit = {
-						has_country_flag = HUN_supporting_opposition
-					}
-					if = {
-						limit = {
-							NOT = {
-								is_in_faction_with = HUN
-							}
-						}
-						give_guarantee = HUN
-						add_to_faction = HUN
-					}
-					custom_effect_tooltip = opposition_civil_war_tt
-					effect_tooltip = {
-						country_event = {
-							id = gamer_horthy.25
-							hours = 4
-						}
-						custom_effect_tooltip = effects_tt
-						puppet = HUN
-					}
-				}
-			}
+			puppet_by_supporter = yes
 		}
 	}
 
@@ -4328,6 +4274,10 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_abolish_the_monarchy }
 		available = {
+			OR = {
+				has_government = democratic
+				has_government = communism
+			}
 			communism > 0.3
 		}
 		select_effect = {
@@ -4369,32 +4319,7 @@ focus_tree = {
 				}
 			}
 
-			if = {
-				limit = {
-					has_country_flag = HUN_has_opposition_support
-					NOT = {
-						any_country = {
-							has_country_flag = HUN_supporting_opposition
-							HUN = {
-								is_subject_of = PREV
-							}
-						}
-					}
-				}
-				random_country = {
-					limit = {
-						has_country_flag = HUN_supporting_opposition
-					}
-					country_event = {
-						id = gamer_horthy.25
-						hours = 4
-					}
-					custom_effect_tooltip = effects_tt
-					effect_tooltip = {
-						puppet = HUN
-					}
-				}
-			}
+			puppet_by_supporter = yes
 		}
 	}
 
@@ -5291,9 +5216,7 @@ focus_tree = {
 							is_on_continent = middle_east
 						}
 					}
-					NOT = {
-						has_war_with = HUN
-					}
+					NOT = { has_war_with = HUN }
 				}
 				HUN = {
 					create_wargoal = {
@@ -7038,18 +6961,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 30
-			if = {
-				limit = {
-					has_idea = HUN_strengthened_aristocracy
-				}
-
-				swap_ideas = {
-					remove_idea = HUN_strengthened_aristocracy
-					add_idea = HUN_strengthened_aristocracy2
-				}
-			}
-			else = {
-				add_ideas = HUN_strengthened_aristocracy
+			swap_ideas = {
+				remove_idea = HUN_strengthened_aristocracy
+				add_idea = HUN_strengthened_aristocracy2
 			}
 			HUN_add_conservative_bop_medium = yes
 			HUN_add_crown_bop_medium = yes
@@ -7070,7 +6984,7 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_WAR_SUPPORT
 		}
-		prerequisite = { focus = HUN_the_march_front  focus = HUN_strengthen_the_aristocracy }
+		prerequisite = { focus = HUN_the_march_front focus = HUN_strengthen_the_aristocracy }
 		available = {
 
 		}

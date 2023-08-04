@@ -323,9 +323,9 @@ ideas = {
 			picture = generic_air_research
 
 			allowed_civil_war = {
-				
+
 			}
-			
+
 			research_bonus = {
 				air_equipment = 0.15
 			}
@@ -339,9 +339,9 @@ ideas = {
 			picture = generic_license_production
 
 			allowed_civil_war = {
-				
+
 			}
-			
+
 			modifier = {
 				license_air_purchase_cost = -0.5
 			}
@@ -469,9 +469,7 @@ ideas = {
 			picture = generic_agrarian_reform
 
 			allowed_civil_war = {
-				NOT = {
-					has_government = fascism
-				}
+				NOT = { has_government = fascism }
 			}
 
 			modifier = {
@@ -488,9 +486,7 @@ ideas = {
 			}
 
 			available = {
-				NOT = {
-					has_government = communism
-				}
+				NOT = { has_government = communism }
 			}
 
 			picture = generic_monarchist_uprising
@@ -511,9 +507,7 @@ ideas = {
 			}
 
 			available = {
-				NOT = {
-					has_government = communism
-				}
+				NOT = { has_government = communism }
 			}
 
 			picture = generic_monarchist_uprising
