@@ -7301,17 +7301,24 @@ focus_tree = {
 
 			if = {
 				limit = {
-					73 = {
-						owner = {
-							original_tag = UKR
-							is_subject = no
-							has_idea = ZAK_isolation
-						}
+					any_other_country = {
+						owns_state = 73
+						is_subject = no
+						has_idea = ZAK_isolation
 					}
 				}
-				declare_war_on = {
-					target = UKR
-					type = annex_everything
+				random_country = {
+					limit = {
+						owns_state = 73
+						is_subject = no
+						has_idea = ZAK_isolation
+					}
+					HUN = {
+						declare_war_on = {
+							target = PREV
+							type = annex_everything
+						}
+					}
 				}
 			}
 			every_state = {
