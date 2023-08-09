@@ -1636,9 +1636,12 @@ focus_tree = {
 				limit = {
 					has_idea = HUN_kalman_daranyi
 				}
-				remove_ideas = HUN_kalman_daranyi
+				swap_ideas = {
+					remove_idea = HUN_kalman_daranyi
+					add_idea = HUN_pal_teleki
+				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					NOT = {
 						has_idea = HUN_gyula_gombos_de_jakfa
@@ -5243,17 +5246,6 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 50
-			if = {
-				limit = {
-					NOT = { has_country_flag = gyula_gombos_died }
-				}
-				country_event = { id = gamer_horthy.1 }
-				custom_effect_tooltip = effects_tt
-				effect_tooltip = {
-					add_stability = -0.1
-					retire_character = HUN_gyula_gombos_de_jakfa
-				}
-			}
 		}
 	}
 
@@ -5305,7 +5297,18 @@ focus_tree = {
     			ideology = democratic
     			popularity = 0.05
 			}
-
+			if = {
+				limit = {
+					has_idea = HUN_gyula_gombos_de_jakfa
+				}
+				swap_ideas = {
+					remove_idea = HUN_gyula_gombos_de_jakfa
+					add_idea = HUN_tibor_eckhardt
+				}
+			}
+			else = {
+				add_ideas = HUN_tibor_eckhardt
+			}
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -6148,7 +6151,18 @@ focus_tree = {
     			ideology = democratic
     			popularity = 0.02
 			}
-
+			if = {
+				limit = {
+					has_idea = HUN_gyula_gombos_de_jakfa
+				}
+				swap_ideas = {
+					remove_idea = HUN_gyula_gombos_de_jakfa
+					add_idea = HUN_istvan_bethlen
+				}
+			}
+			else = {
+				add_ideas = HUN_istvan_bethlen
+			}
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -6167,10 +6181,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_restoreistvanbethlen }
 		available = {
-			OR = {
-				has_idea = HUN_istvan_bethlen
-				has_country_leader = { character = HUN_istvan_bethlen }
-			}
+			has_idea = HUN_istvan_bethlen
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6205,10 +6216,7 @@ focus_tree = {
 		prerequisite = { focus = HUN_british_industrial_aid }
 		mutually_exclusive = { focus = HUN_protect_the_trade_unions }
 		available = {
-			OR = {
-				has_idea = HUN_istvan_bethlen
-				has_country_leader = { character = HUN_istvan_bethlen }
-			}
+			has_idea = HUN_istvan_bethlen
 		}
 		completion_reward = {
 			if = {
@@ -6264,9 +6272,7 @@ focus_tree = {
 		available = {
 			OR = {
 				has_idea = HUN_istvan_bethlen
-				has_country_leader = { character = HUN_istvan_bethlen }
 				has_idea = HUN_kalman_daranyi
-				has_country_leader = { character = HUN_kalman_daranyi }
 			}
 			has_government = neutrality
 		}
@@ -6311,7 +6317,6 @@ focus_tree = {
 				has_idea = HUN_tibor_eckhardt
 				has_country_leader = { character = HUN_tibor_eckhardt }
 				has_idea = HUN_istvan_bethlen
-				has_country_leader = { character = HUN_istvan_bethlen }
 			}
 		}
 		bypass = {
@@ -6352,7 +6357,6 @@ focus_tree = {
 				has_idea = HUN_tibor_eckhardt
 				has_country_leader = { character = HUN_tibor_eckhardt }
 				has_idea = HUN_istvan_bethlen
-				has_country_leader = { character = HUN_istvan_bethlen }
 			}
 		}
 		bypass = {
@@ -6404,7 +6408,18 @@ focus_tree = {
     			ideology = fascism
     			popularity = 0.05
 			}
-
+			if = {
+				limit = {
+					has_idea = HUN_gyula_gombos_de_jakfa
+				}
+				swap_ideas = {
+					remove_idea = HUN_gyula_gombos_de_jakfa
+					add_idea = HUN_kalman_daranyi
+				}
+			}
+			else = {
+				add_ideas = HUN_kalman_daranyi
+			}
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -6425,10 +6440,7 @@ focus_tree = {
 			has_government = fascism
 		}
 		available = {
-			OR = {
-				has_idea = HUN_kalman_daranyi
-				has_country_leader = { character = HUN_kalman_daranyi }
-			}
+			has_idea = HUN_kalman_daranyi
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6457,10 +6469,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_marginalise_the_fascists  }
 		available = {
-			OR = {
-				has_idea = HUN_kalman_daranyi
-				has_country_leader = { character = HUN_kalman_daranyi }
-			}
+			has_idea = HUN_kalman_daranyi
 		}
 		bypass = {
 			ITA = {
@@ -6533,8 +6542,10 @@ focus_tree = {
 		}
 
 		available = {
-			NOT = { has_war_with = ITA }
-			NOT = { has_war_with = AUS }
+			NOT = {
+				has_war_with = ITA
+				has_war_with = AUS
+			}
 			ITA = {
 				NOT = { has_war_with = AUS }
 				OR = {
@@ -6568,7 +6579,6 @@ focus_tree = {
 						tag = ITA
 						tag = AUS
 					}
-					NOT = { has_war_with = HUN }
 				}
 				add_opinion_modifier = { target = HUN modifier = HUN_renew_the_rome_protocols }
 				HUN = {
@@ -6913,7 +6923,6 @@ focus_tree = {
 				has_idea = HUN_tibor_eckhardt
 				has_country_leader = { character = HUN_tibor_eckhardt }
 				has_idea = HUN_istvan_bethlen
-				has_country_leader = { character = HUN_istvan_bethlen }
 			}
 		}
 		bypass = {
@@ -6951,9 +6960,7 @@ focus_tree = {
 		available = {
 			OR = {
 				has_idea = HUN_istvan_bethlen
-				has_country_leader = { character = HUN_istvan_bethlen }
 				has_idea = HUN_kalman_daranyi
-				has_country_leader = { character = HUN_kalman_daranyi }
 			}
 		}
 		bypass = {
@@ -7033,11 +7040,7 @@ focus_tree = {
 		}
 
 		available = {
-			OR = {
-				has_completed_focus = HUN_continue_the_regency
-				has_completed_focus = HUN_oppose_the_regency
-				has_completed_focus = HUN_protect_czechoslovakia
-			}
+			NOT = { has_completed_focus = HUN_bulwark_against_radicalism }
 		}
 
 		completion_reward = {
