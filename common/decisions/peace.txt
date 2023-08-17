@@ -12,7 +12,7 @@ peace_hun = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_peace_overtures
+			has_begun_peace_branch = yes
 			has_war = yes
 			any_country = { is_suspicion_target = yes }
 		}
@@ -277,7 +277,7 @@ peace_hun = {
 		}
 
 		visible = {
-			has_completed_focus = HUN_peace_overtures
+			has_begun_peace_branch = yes
 			has_war = yes
 		}
 

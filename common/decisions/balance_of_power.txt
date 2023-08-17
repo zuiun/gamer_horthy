@@ -165,19 +165,40 @@ HUN_balance_of_power_category = {
 
 		remove_effect = {
 			random_list = {
-				1 = {
-					add_war_support = 0.1
-					retire_character = HUN_istvan_horthy
-					HUN_add_conservative_bop_large = yes
-					HUN_add_army_bop_large = yes
-				}
-				9 = {
-					hidden_effect = {
-						set_country_flag = HUN_istvan_returned_alive
+				4 = {
+					hidden_effect = { set_country_flag = HUN_istvan_returned_alive }
+					country_event = { id = gamer_horthy.40 }
+					custom_effect_tooltip = effects_tt
+					effect_tooltip = {
+						add_stability = 0.05
+						add_popularity = {
+							ideology = neutrality
+							popularity = 0.02
+						}
+						add_popularity = {
+							ideology = democratic
+							popularity = 0.05
+						}
+						HUN_add_liberal_bop_medium = yes
+						HUN_add_crown_bop_medium = yes
 					}
-					add_stability = 0.05
-					HUN_add_liberal_bop_medium = yes
-					HUN_add_crown_bop_medium = yes
+				}
+				1 = {
+					country_event = { id = gamer_horthy.41 }
+					custom_effect_tooltip = effects_tt
+					effect_tooltip = {
+						add_popularity = {
+							ideology = neutrality
+							popularity = -0.05
+						}
+						add_popularity = {
+							ideology = democratic
+							popularity = -0.05
+						}
+						retire_character = HUN_istvan_horthy
+						HUN_add_conservative_bop_large = yes
+						HUN_add_army_bop_large = yes
+					}
 				}
 			}
 		}
@@ -237,7 +258,7 @@ HUN_balance_of_power_category = {
 
 		modifier = {
 			war_support_weekly = 0.01
-			weekly_manpower = 80
+			weekly_manpower = 120
 		}
 
 		remove_effect = {

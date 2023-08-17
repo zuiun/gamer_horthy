@@ -1246,7 +1246,7 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			add_political_power = 50
+			add_political_power = 20
 			add_ideas = HUN_the_addams
 			unlock_decision_tooltip = do_charity
 		}
@@ -1636,10 +1636,8 @@ focus_tree = {
 				limit = {
 					has_idea = HUN_kalman_daranyi
 				}
-				swap_ideas = {
-					remove_idea = HUN_kalman_daranyi
-					add_idea = HUN_pal_teleki
-				}
+				remove_ideas = HUN_kalman_daranyi
+				add_ideas = HUN_pal_teleki
 			}
 			else_if = {
 				limit = {
@@ -2762,6 +2760,7 @@ focus_tree = {
 			}
 			HUN_add_liberal_bop_medium = yes
 			HUN_add_crown_bop_medium = yes
+			activate_mission = suspicion_mission
 		}
 	}
 
@@ -2940,7 +2939,6 @@ focus_tree = {
 
 			faction_leader = { HUN_add_suspicion_small = yes }
 			unlock_decision_category_tooltip = peace_hun
-			activate_mission = suspicion_mission
 		}
 	}
 
@@ -4071,10 +4069,10 @@ focus_tree = {
 			else_if = {
 				limit = {
 					has_completed_focus = HUN_support_move
-					is_power_balance_side_active = {
-						id = HUN_power_balance
-						side = HUN_army_side
-					}
+				}
+				is_power_balance_side_active = {
+					id = HUN_power_balance
+					side = HUN_army_side
 				}
 				power_balance_value = {
 					id = HUN_power_balance
@@ -4881,6 +4879,7 @@ focus_tree = {
 					NOT = { is_core_of = HUN }
 				}
 				add_resistance = 20
+				add_compliance = -10
 			}
 
 			if = {
@@ -5301,14 +5300,9 @@ focus_tree = {
 				limit = {
 					has_idea = HUN_gyula_gombos_de_jakfa
 				}
-				swap_ideas = {
-					remove_idea = HUN_gyula_gombos_de_jakfa
-					add_idea = HUN_tibor_eckhardt
-				}
+				remove_ideas = HUN_gyula_gombos_de_jakfa
 			}
-			else = {
-				add_ideas = HUN_tibor_eckhardt
-			}
+			add_ideas = HUN_tibor_eckhardt
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -5756,6 +5750,7 @@ focus_tree = {
 				has_government = democratic
 			}
 		}
+		available_if_capitulated = yes
 		completion_reward = {
 			hidden_effect = {
 				set_temp_variable = { shadow_government_pp = shadow_government_support }
@@ -5986,11 +5981,11 @@ focus_tree = {
 				}
 				add_offsite_building = {
 					type = industrial_complex
-					level = 4
+					level = 3
 				}
 				add_offsite_building = {
 					type = arms_factory
-					level = 3
+					level = 4
 				}
 			}
 			else_if = {
@@ -6031,6 +6026,7 @@ focus_tree = {
 		completion_reward = {
 			end_exile = yes
 			add_stability = 0.1
+			add_legitimacy = 20
 			add_country_leader_role = {
 				character = HUN_tibor_eckhardt
 				promote_leader = yes
@@ -6041,6 +6037,14 @@ focus_tree = {
 						rebel_pm
 					}
 				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = HUN
+					NOT = { is_controlled_by = HUN }
+				}
+				add_resistance = 40
+				add_compliance = -20
 			}
 		}
 	}
@@ -6071,6 +6075,7 @@ focus_tree = {
 					NOT = { is_controlled_by = HUN }
 				}
 				add_resistance = 40
+				add_compliance = 20
 			}
 			if = {
 				limit = {
@@ -6155,14 +6160,9 @@ focus_tree = {
 				limit = {
 					has_idea = HUN_gyula_gombos_de_jakfa
 				}
-				swap_ideas = {
-					remove_idea = HUN_gyula_gombos_de_jakfa
-					add_idea = HUN_istvan_bethlen
-				}
+				remove_ideas = HUN_gyula_gombos_de_jakfa
 			}
-			else = {
-				add_ideas = HUN_istvan_bethlen
-			}
+			add_ideas = HUN_istvan_bethlen
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -6412,14 +6412,9 @@ focus_tree = {
 				limit = {
 					has_idea = HUN_gyula_gombos_de_jakfa
 				}
-				swap_ideas = {
-					remove_idea = HUN_gyula_gombos_de_jakfa
-					add_idea = HUN_kalman_daranyi
-				}
+				remove_ideas = HUN_gyula_gombos_de_jakfa
 			}
-			else = {
-				add_ideas = HUN_kalman_daranyi
-			}
+			add_ideas = HUN_kalman_daranyi
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -6967,7 +6962,7 @@ focus_tree = {
 			has_government = fascism
 		}
 		completion_reward = {
-			add_political_power = 30
+			add_political_power = 50
 			swap_ideas = {
 				remove_idea = HUN_strengthened_aristocracy
 				add_idea = HUN_strengthened_aristocracy2
@@ -7579,7 +7574,10 @@ focus_tree = {
 				custom_effect_tooltip = if_they_refuse_tt
 				effect_tooltip = {
 					add_stability = -0.05
-					73 = { add_resistance = 60 }
+					73 = {
+						add_resistance = 60
+						add_compliance = -40
+					}
 				}
 			}
 
@@ -7851,17 +7849,26 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_protect_the_ruthenians } prerequisite = { focus = HUN_demand_transylvania }
 		available = {
-			controls_state = 73 # Carpathia
-			controls_state = 76 # Szekelyland
+			all_state = {
+				OR = {
+					NOT = {
+						state = 73 # Carpathia
+						state = 76 # Szekelyland
+					}
+					is_controlled_by = HUN
+					controller = { is_subject_of = HUN }
+				}
+			}
 		}
 		continue_if_invalid = yes
 		completion_reward = {
-			every_controlled_state = {
+			every_state = {
 				limit = {
 					OR = {
 						state = 73
 						state = 76
 					}
+					is_controlled_by_ROOT_or_subject = yes
 				}
 				add_dynamic_modifier = { modifier = arpad_line }
 				set_building_level = {
@@ -7890,18 +7897,27 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_build_the_arpad_line }
 		available = {
-			controls_state = 73 # Carpathia
 			controls_state = 154 # Tiszantul
-			controls_state = 76 # Szekelyland
+			all_state = {
+				OR = {
+					NOT = {
+						state = 73 # Carpathia
+						state = 76 # Szekelyland
+					}
+					is_controlled_by = HUN
+					controller = { is_subject_of = HUN }
+				}
+			}
 		}
 		continue_if_invalid = yes
 		completion_reward = {
-			every_controlled_state = {
+			every_state = {
 				limit = {
 					OR = {
 						state = 73
 						state = 76
 					}
+					is_controlled_by_ROOT_or_subject = yes
 				}
 				set_building_level = {
 					type = bunker

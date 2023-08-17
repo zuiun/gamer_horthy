@@ -1299,6 +1299,7 @@ country_event = {
 		add_stability = -0.05
 		73 = {
 			add_resistance = 60
+			add_compliance = -40
 		}
 	}
 }
@@ -1516,6 +1517,56 @@ country_event = {
 			type = puppet_wargoal_focus
 			target = AUS
 		}
+	}
+}
+
+# Istvan Horthy Returns
+country_event = {
+	id = gamer_horthy.40
+	title = gamer_horthy.40.t
+	desc = gamer_horthy.40.desc
+	picture = GFX_report_event_ace_promoted
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.40.a # He is a hero
+
+		add_stability = 0.05
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		HUN_add_liberal_bop_medium = yes
+		HUN_add_crown_bop_medium = yes
+	}
+}
+
+# Istvan Horthy Dies
+country_event = {
+	id = gamer_horthy.41
+	title = gamer_horthy.41.t
+	desc = gamer_horthy.41.desc
+	picture = GFX_report_event_airplane_crash
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.41.a # This is a tragedy
+
+		add_popularity = {
+			ideology = neutrality
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = -0.05
+		}
+		retire_character = HUN_istvan_horthy
+		HUN_add_conservative_bop_large = yes
+		HUN_add_army_bop_large = yes
 	}
 }
 

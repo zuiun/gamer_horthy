@@ -68,7 +68,7 @@ peace_hun = {
 		has_war = yes
 		is_faction_leader = no
 		any_country = { is_peace_target = yes }
-		has_completed_focus = HUN_peace_overtures
+		has_completed_focus = HUN_allow_political_opposition
 		NOT = { has_country_flag = peace_in_our_time }
 	}
 
