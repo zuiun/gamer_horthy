@@ -120,7 +120,7 @@
  HUN_christian_socialism_idea:0 "Christian Socialism"
  HUN_christian_socialism_idea_desc:0 "By expanding welfare programmes, we can not only improve the economy, but also limit the influence of radical groups. This will be expensive, but it is a much more subtle method of fighting radicalism than outright confrontation."
  HUN_christian_socialism_weak:0 "$HUN_christian_socialism_idea$"
- HUN_christian_socialism_weak_desc:0 "Although we are constrained by the $HUN_bethlen_peyer_pact2$, we can still improve the economy and limit the influence of radical groups by expanding critical industries. This will be expensive, but it is a much more subtle method of fighting radicalism than outright confrontation."
+ HUN_christian_socialism_weak_desc:0 "Although we are constrained by the $HUN_bethlen_peyer_pact$, we can still improve the economy and limit the influence of radical groups by expanding critical industries. This will be expensive, but it is a much more subtle method of fighting radicalism than outright confrontation."
  HUN_move:0 "[HUN.GetAdjective] National Defence Association"
  HUN_move_desc:0 "The [HUN.GetAdjective] National Defence Association is a paramilitary organisation established by the late $HUN_gyula_gombos_de_jakfa$ which grants us a steady supply of anti-communist soldiers, although their loyalty to us is suspect."
  HUN_soviet_control:0 "State Planning Office"

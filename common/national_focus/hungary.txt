@@ -1273,10 +1273,6 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			add_popularity = {
-    			ideology = fascism
-    			popularity = -0.1
-			}
 			if = {
 				limit = {
 					is_subject = yes
@@ -1284,6 +1280,10 @@ focus_tree = {
 				add_autonomy_ratio = {
 					value = 0.5
 				}
+			}
+			add_popularity = {
+    			ideology = fascism
+    			popularity = -0.1
 			}
 			every_other_country = {
 				limit = {
@@ -2381,9 +2381,17 @@ focus_tree = {
 				else = {
 					add_power_balance_value = {
 						id = HUN_power_balance
-						value = -0.3
+						value = -0.4
 						tooltip_side = HUN_liberals_side
 					}
+				}
+				remove_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_fascism_bop
+				}
+				add_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_minorities_bop
 				}
 			}
 			else = {
@@ -2392,15 +2400,6 @@ focus_tree = {
 					left_side = HUN_liberals_side
 					right_side = HUN_crown_side
 					set_value = -0.1
-				}
-			}
-			if = {
-				limit = {
-					has_any_power_balance = yes
-				}
-				remove_power_balance_modifier = {
-					id = HUN_power_balance
-					modifier = HUN_fascism_bop
 				}
 				add_power_balance_modifier = {
 					id = HUN_power_balance
@@ -2504,10 +2503,8 @@ focus_tree = {
 		prerequisite = { focus = HUN_christian_socialism } prerequisite = { focus = HUN_the_addams_family focus = HUN_arrest_szalasi }
 		available = {
 			threat > 0.15
+			has_war = no
 			NOT = { has_government = communism }
-		}
-		bypass = {
-			has_war = yes
 		}
 		continue_if_invalid = yes
 		completion_reward = {
@@ -4391,7 +4388,7 @@ focus_tree = {
 		}
 
 		available = {
-			SOV = { has_government = communism }
+			has_government = communism
 		}
 
 		search_filters = { FOCUS_FILTER_RESEARCH }
@@ -4423,6 +4420,7 @@ focus_tree = {
 
 		available = {
 			NOT = { has_idea = HUN_treaty_of_triannon }
+			has_government = communism
 		}
 
 		search_filters = { FOCUS_FILTER_MANPOWER }
@@ -5245,6 +5243,12 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 50
+			if = {
+				limit = {
+					has_idea = HUN_gyula_gombos_de_jakfa
+				}
+				remove_ideas = HUN_gyula_gombos_de_jakfa
+			}
 		}
 	}
 
@@ -5295,12 +5299,6 @@ focus_tree = {
 			add_popularity = {
     			ideology = democratic
     			popularity = 0.05
-			}
-			if = {
-				limit = {
-					has_idea = HUN_gyula_gombos_de_jakfa
-				}
-				remove_ideas = HUN_gyula_gombos_de_jakfa
 			}
 			add_ideas = HUN_tibor_eckhardt
 			unlock_decision_tooltip = expand_FROM_trade
@@ -6156,12 +6154,6 @@ focus_tree = {
     			ideology = democratic
     			popularity = 0.02
 			}
-			if = {
-				limit = {
-					has_idea = HUN_gyula_gombos_de_jakfa
-				}
-				remove_ideas = HUN_gyula_gombos_de_jakfa
-			}
 			add_ideas = HUN_istvan_bethlen
 			unlock_decision_tooltip = expand_FROM_trade
 		}
@@ -6408,12 +6400,6 @@ focus_tree = {
     			ideology = fascism
     			popularity = 0.05
 			}
-			if = {
-				limit = {
-					has_idea = HUN_gyula_gombos_de_jakfa
-				}
-				remove_ideas = HUN_gyula_gombos_de_jakfa
-			}
 			add_ideas = HUN_kalman_daranyi
 			unlock_decision_tooltip = expand_FROM_trade
 		}
@@ -6554,6 +6540,10 @@ focus_tree = {
 					has_government = fascism
 				}
 			}
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+			}
 		}
 
 		historical_ai = {
@@ -6624,6 +6614,10 @@ focus_tree = {
 				}
 				is_subject = no
 				ITA_is_kinda_fascist = yes
+			}
+			OR = {
+				has_government = neutrality
+				has_government = fascism
 			}
 		}
 
