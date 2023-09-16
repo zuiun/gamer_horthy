@@ -1917,7 +1917,7 @@ focus_tree = {
 				remove_ideas = HUN_non_belligerent2
 			}
 			add_german_trade_HUN = yes
-			every_country = {
+			every_other_country = {
 				limit = {
 					OR = {
 						has_government = HUN
@@ -2612,7 +2612,7 @@ focus_tree = {
 				has_government = democratic
 			}
 		}
-		prerequisite = { focus = HUN_elect_deputy_regent } prerequisite = { focus = HUN_the_rise_of_germany } prerequisite = { focus = HUN_promote_hungarianism }
+		prerequisite = { focus = HUN_elect_deputy_regent } prerequisite = { focus = HUN_promote_hungarianism }
 		mutually_exclusive = { focus = HUN_preserve_greater_hungary }
 		completion_reward = {
 			add_popularity = {

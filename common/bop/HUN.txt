@@ -77,20 +77,9 @@ HUN_power_balance = {
 					limit = {
 						NOT = { has_government = fascism }
 					}
-					if = {
-						limit = {
-							fascism > 0.4
-						}
-						start_civil_war = {
-							ideology = fascism
-							size = 0.5
-						}
-					}
-					else = {
-						add_popularity = {
-							ideology = fascism
-							popularity = 0.1
-						}
+					add_popularity = {
+						ideology = fascism
+						popularity = 0.1
 					}
 				}
 			}
@@ -186,25 +175,9 @@ HUN_power_balance = {
 							has_government = fascism
 						}
 					}
-					if = {
-						limit = {
-							neutrality > 0.4
-						}
-						start_civil_war = {
-							ideology = HUN
-							size = 0.7
-						}
-						set_politics = {
-							ruling_party = neutrality
-							elections_allowed = yes
-							election_frequency = 48
-						}
-					}
-					else = {
-						add_popularity = {
-							ideology = neutrality
-							popularity = 0.1
-						}
+					add_popularity = {
+						ideology = neutrality
+						popularity = 0.1
 					}
 				}
 			}
@@ -313,25 +286,9 @@ HUN_power_balance = {
 							has_government = fascism
 						}
 					}
-					if = {
-						limit = {
-							democratic > 0.4
-						}
-						start_civil_war = {
-							ideology = HUN
-							size = 0.6
-						}
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-							election_frequency = 48
-						}
-					}
-					else = {
-						add_popularity = {
-							ideology = democratic
-							popularity = 0.1
-						}
+					add_popularity = {
+						ideology = democratic
+						popularity = 0.1
 					}
 				}
 			}

@@ -246,7 +246,7 @@
  HUN_offer_land_desc:0 "We lack the industry necessary to attract migrants with the promise of employment alone. Instead, we will buy lands from large landholders and sell them to migrants at a cheap cost. This would increase the flow of migrants greatly and could also lay the groundwork for further industrialisation."
  HUN_expand_the_arpad_line:0 "Expand the Árpád Line"
  HUN_expand_the_arpad_line_desc:0 "Our initial fortifications are useful, but they will not stop the [SOV.GetAdjective] hordes indefinitely. We will build bunkers, traps, and depots anywhere they can realistically be hidden, creating a truly unbreachable defensive line that will prevent any foreign power from successfully invading Hungary again."
- HUN_movement_of_hungarian_life:0 "The Movement of [HUN.GetAdjective] Life"
+ HUN_movement_of_hungarian_life:0 "The $HUN_life_bop$"
  HUN_movement_of_hungarian_life_desc:0 "The rise of fascism in Hungary is concerning, so we must pre-empt the fascists by creating our own right-wing movement. Afterwards, we can suppress all subversive elements that are still openly operating, ensuring that we can maintain complete control over Hungary and any potential drift towards the right..."
  HUN_subvert_germany:0 "Subvert Foreign Control"
  HUN_subvert_germany_desc:0 "Unfortunately, we had to resort to desperate measures in order to take control of the government. For a proud state, this is unacceptable. We will assert our sovereignty wherever possible, eventually taking total control of our domestic and foreign affairs."

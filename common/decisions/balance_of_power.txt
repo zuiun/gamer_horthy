@@ -335,6 +335,7 @@ HUN_balance_of_power_category = {
 			has_completed_focus = HUN_arrest_szalasi
 			has_war = yes
 			NOT = { has_government = democratic }
+			has_elections = yes
 		}
 
 		visible = {

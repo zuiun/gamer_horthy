@@ -1,0 +1,4 @@
+Use event_option_tooltip for events
+Use array generators for annexation wargoals
+Use variables for targeted modifiers
+Use random_select_amount for every_ effects
