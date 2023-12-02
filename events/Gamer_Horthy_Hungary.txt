@@ -520,7 +520,7 @@ country_event = {
 			custom_effect_tooltip = effects_tt
 			effect_tooltip = {
 				create_wargoal = {
-					type = annex_everything
+					type = take_state_focus
 					target = ROOT
 				}
 			}
@@ -663,7 +663,8 @@ country_event = {
 		name = gamer_horthy.17.a # We were being courteous by asking
 		create_wargoal = {
 			target = FROM
-			type = annex_everything
+			type = take_state_focus
+			generator = FROM.trianon_goals
 		}
 		hidden_effect = {
 			set_variable = { global.foreign_support = 0 }
@@ -1112,6 +1113,18 @@ country_event = {
 				id = gamer_horthy.30
 				hours = 4
 			}
+			effect_tooltip = {
+				if = {
+					limit = {
+						has_country_flag = HUN_has_szent_gyorgi
+					}
+					set_politics = {
+						ruling_party = democratic
+						elections_allowed = yes
+						election_frequency = 48
+					}
+				}
+			}
 		}
 		hidden_effect = {
 			clr_country_flag = HUN_carpathia
@@ -1176,6 +1189,16 @@ country_event = {
 			}
 		}
 		add_stability = 0.1
+		if = {
+			limit = {
+				has_country_flag = HUN_has_szent_gyorgi
+			}
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+				election_frequency = 48
+			}
+		}
 		HUN_angry_leader_peace = yes
 	}
 
@@ -1206,6 +1229,16 @@ country_event = {
 				add_core_of = ROOT
 			}
 		}
+		if = {
+			limit = {
+				has_country_flag = HUN_has_szent_gyorgi
+			}
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+				election_frequency = 48
+			}
+		}
 		HUN_angry_leader_peace = yes
 	}
 
@@ -1213,6 +1246,16 @@ country_event = {
 		name = gamer_horthy.30.c # A high cost for peace
 		trigger = {
 			has_country_flag = HUN_return_everything
+		}
+		if = {
+			limit = {
+				has_country_flag = HUN_has_szent_gyorgi
+			}
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+				election_frequency = 48
+			}
 		}
 		HUN_angry_leader_peace = yes
 	}

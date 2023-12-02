@@ -371,36 +371,37 @@ focus_tree = {
 				add_claim_by = HUN
 			}
 
-			every_state = {
-				limit = {
-					OR = {
-						is_in_cisleithania = yes
-						is_in_greater_hungary = yes
-						is_in_historic_hungary = yes
-					}
-					is_controlled_by_ROOT_or_subject = no
-				}
-				owner = {
-					HUN = {
-						create_wargoal = {
-							type = annex_everything
-							target = PREV
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							is_in_cisleithania = yes
+							is_in_greater_hungary = yes
+							is_in_historic_hungary = yes
 						}
+					}
+					owner = {
+						add_to_array = { austria_hungary_goals = PREV }
 					}
 				}
 			}
 
-			every_country = {
+			every_other_country = {
 				limit = {
-					OR = {
-						tag = CZE
-						tag = ROM
-						tag = YUG
-						tag = POL
+					any_owned_state = {
+						OR = {
+							is_in_cisleithania = yes
+							is_in_greater_hungary = yes
+							is_in_historic_hungary = yes
+						}
 					}
-					NOT = {
-						has_war_with = HUN
-						is_ally_with = HUN
+					NOT = { is_subject_of = HUN }
+				}
+				HUN = {
+					create_wargoal = {
+						type = take_state_focus
+						target = PREV
+						generator = PREV.austria_hungary_goals
 					}
 				}
 				create_wargoal = {
@@ -439,6 +440,7 @@ focus_tree = {
 						state = 17 # Burgundy
 						state = 66 # Silesia
 						state = 67 # Oppeln
+						state = 104 # Bosnia
 						state = 159 # Lombardy
 						state = 160 # Venetia
 						state = 161 # Tuscany
@@ -446,6 +448,7 @@ focus_tree = {
 						state = 454 # Palestine
 						state = 455 # Jordan
 						state = 762 # Katowice
+						state = 804 # Herzegovina
 					}
 					NOT = { is_core_of = HUN }
 					NOT = { is_claimed_by = HUN }
@@ -702,6 +705,7 @@ focus_tree = {
 					}
 				}
 
+				# Turkey focus moment
 				every_country = {
 					limit = {
 						OR = {
@@ -726,7 +730,7 @@ focus_tree = {
 					}
 				}
 
-				unlock_national_focus = HUN_responsible_government # Turkey focus moment
+				unlock_national_focus = HUN_responsible_government
 			}
 		}
 	}
@@ -1326,7 +1330,7 @@ focus_tree = {
 			FOCUS_FILTER_RESEARCH
 		}
 		available = {
-			has_idea = HUN_istvan_horthy
+			HUN_istvan_horthy = { is_hired_as_advisor = yes }
 			controls_state = 43 # Northern Hungary
 			OR = {
 				has_government = neutrality
@@ -1397,8 +1401,8 @@ focus_tree = {
 			FOCUS_FILTER_STABILITY
 		}
 		available = {
-			has_idea = HUN_istvan_horthy
-			NOT = { has_idea = HUN_kalman_daranyi }
+			HUN_istvan_horthy = { is_hired_as_advisor = yes }
+			HUN_kalman_daranyi = { is_hired_as_advisor = no }
 			OR = {
 				threat > 0.5
 				has_war = yes
@@ -1634,10 +1638,10 @@ focus_tree = {
 
 			if = {
 				limit = {
-					has_idea = HUN_kalman_daranyi
+					HUN_kalman_daranyi = { is_hired_as_advisor = yes }
 				}
-				remove_ideas = HUN_kalman_daranyi
-				add_ideas = HUN_pal_teleki
+				deactivate_advisor = HUN_kalman_daranyi
+				activate_advisor = HUN_pal_teleki
 			}
 			else_if = {
 				limit = {
@@ -1652,7 +1656,7 @@ focus_tree = {
 						has_idea = HUN_geza_lakatos_pm
 					}
 				}
-				add_ideas = HUN_pal_teleki
+				activate_advisor = HUN_pal_teleki
 			}
 
 			HUN_add_crown_bop_small = yes
@@ -1969,6 +1973,22 @@ focus_tree = {
 				}
 				add_claim_by = HUN
 			}
+
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							state = 88
+							state = 89
+							state = 91
+						}
+					}
+					owner = {
+						add_to_array = { galicia_goals = PREV }
+					}
+				}
+			}
+
 			every_other_country = {
 				limit = {
 					OR = {
@@ -1980,8 +2000,9 @@ focus_tree = {
 				}
 				HUN = {
 					create_wargoal = {
-						type = annex_everything
+						type = take_state_focus
 						target = PREV
+						generator = PREV.galicia_goals
 					}
 				}
 			}
@@ -2069,6 +2090,23 @@ focus_tree = {
 					hours = 4
 				}
 				
+				hidden_effect = {
+					clear_array = trianon_goals
+					every_state = {
+						limit = {
+							OR = {
+								state = 103
+								state = 109
+								state = 163
+								state = 852
+							}
+						}
+						PREV = {
+							add_to_array = { trianon_goals = PREV }
+						}
+					}
+				}
+
 				effect_tooltip = {
 					custom_effect_tooltip = if_they_accept_tt
 					every_state = {
@@ -2090,7 +2128,7 @@ focus_tree = {
 					HUN = {
 						create_wargoal = {
 							target = PREV
-							type = annex_everything
+							type = take_state_focus
 						}
 					}
 				}
@@ -2171,8 +2209,26 @@ focus_tree = {
 					id = gamer_horthy.15
 					hours = 4
 				}
-				custom_effect_tooltip = if_they_accept_tt
+
+				hidden_effect = {
+					clear_array = trianon_goals
+					every_state = {
+						limit = {
+							OR = {
+								state = 70
+								state = 71
+								state = 73
+								state = 664
+							}
+						}
+						PREV = {
+							add_to_array = { trianon_goals = PREV }
+						}
+					}
+				}
+
 				effect_tooltip = {
+					custom_effect_tooltip = if_they_accept_tt
 					every_state = {
 						limit = {
 							OR = {
@@ -2193,7 +2249,7 @@ focus_tree = {
 					HUN = {
 						create_wargoal = {
 							target = PREV
-							type = annex_everything
+							type = take_state_focus
 						}
 					}
 				}
@@ -2277,6 +2333,25 @@ focus_tree = {
 					id = gamer_horthy.15
 					hours = 4
 				}
+
+				hidden_effect = {
+					clear_array = trianon_goals
+					every_state = {
+						limit = {
+							OR = {
+								state = 76
+								state = 82
+								state = 83
+								state = 84
+								state = 764
+							}
+						}
+						PREV = {
+							add_to_array = { trianon_goals = PREV }
+						}
+					}
+				}
+
 				custom_effect_tooltip = if_they_accept_tt
 				effect_tooltip = {
 					every_state = {
@@ -2300,7 +2375,7 @@ focus_tree = {
 					HUN = {
 						create_wargoal = {
 							target = PREV
-							type = annex_everything
+							type = take_state_focus
 						}
 					}
 				}
@@ -2648,7 +2723,7 @@ focus_tree = {
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = HUN_promote_hungarianism } prerequisite = { focus = HUN_elect_deputy_regent }
+		prerequisite = { focus = HUN_promote_hungarianism }
 		mutually_exclusive = { focus = HUN_the_small_regent }
 		available = {
 			has_completed_focus = HUN_proclaim_greater_hungary
@@ -4941,6 +5016,18 @@ focus_tree = {
 				}
 				add_claim_by = HUN
 			}
+
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_in_historic_hungary = yes
+					}
+					owner = {
+						add_to_array = { historic_hungary_goals = PREV }
+					}
+				}
+			}
+
 			every_state = {
 				limit = {
 					is_controlled_by_ROOT_or_subject = no
@@ -4949,8 +5036,9 @@ focus_tree = {
 				owner = {
 					HUN = {
 						create_wargoal = {
-							type = annex_everything
+							type = take_state_focus
 							target = PREV
+							generator = PREV.historic_hungary_goals
 						}
 					}
 				}
@@ -5243,11 +5331,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 50
-			if = {
-				limit = {
-					has_idea = HUN_gyula_gombos_de_jakfa
-				}
-				remove_ideas = HUN_gyula_gombos_de_jakfa
+			set_can_be_fired_in_advisor_role = {
+				character = HUN_gyula_gombos_de_jakfa
+				value = yes
 			}
 		}
 	}
@@ -5274,6 +5360,7 @@ focus_tree = {
 				has_completed_focus = HUN_elect_a_democratic_king
 				has_completed_focus = HUN_a_new_republic_of_councils
 			}
+			NOT = { has_idea = HUN_gyula_gombos_de_jakfa }
 		}
 		completion_reward = {
 			set_party_name = {
@@ -5300,7 +5387,7 @@ focus_tree = {
     			ideology = democratic
     			popularity = 0.05
 			}
-			add_ideas = HUN_tibor_eckhardt
+			activate_advisor = HUN_tibor_eckhardt
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -5318,7 +5405,7 @@ focus_tree = {
 		}
 		available = {
 			OR = {
-				has_idea = HUN_tibor_eckhardt
+				HUN_tibor_eckhardt = { is_hired_as_advisor = yes }
 				has_country_leader = { character = HUN_tibor_eckhardt }
 			}
 			NOT = { has_idea = HUN_german_trade3 }
@@ -5359,7 +5446,7 @@ focus_tree = {
 		}
 		available = {
 			OR = {
-				has_idea = HUN_tibor_eckhardt
+				HUN_tibor_eckhardt = { is_hired_as_advisor = yes }
 				has_country_leader = { character = HUN_tibor_eckhardt }
 			}
 			NOT = { has_idea = HUN_german_trade3 }
@@ -5743,6 +5830,7 @@ focus_tree = {
 		available = {
 			has_prime_minister_finished = yes
 			has_german_trade = no
+			is_faction_leader = no
 			OR = {
 				has_government = neutrality
 				has_government = democratic
@@ -6144,6 +6232,7 @@ focus_tree = {
 				has_completed_focus = HUN_elect_a_democratic_king
 				has_completed_focus = HUN_invite_the_habsburg_prince
 			}
+			NOT = { has_idea = HUN_gyula_gombos_de_jakfa }
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6154,7 +6243,7 @@ focus_tree = {
     			ideology = democratic
     			popularity = 0.02
 			}
-			add_ideas = HUN_istvan_bethlen
+			activate_advisor = HUN_istvan_bethlen
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -6173,7 +6262,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_restoreistvanbethlen }
 		available = {
-			has_idea = HUN_istvan_bethlen
+			HUN_istvan_bethlen = { is_hired_as_advisor = yes }
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6208,7 +6297,7 @@ focus_tree = {
 		prerequisite = { focus = HUN_british_industrial_aid }
 		mutually_exclusive = { focus = HUN_protect_the_trade_unions }
 		available = {
-			has_idea = HUN_istvan_bethlen
+			HUN_istvan_bethlen = { is_hired_as_advisor = yes }
 		}
 		completion_reward = {
 			if = {
@@ -6263,8 +6352,8 @@ focus_tree = {
 		prerequisite = { focus = HUN_restore_the_free_market focus = HUN_support_italian_interests }
 		available = {
 			OR = {
-				has_idea = HUN_istvan_bethlen
-				has_idea = HUN_kalman_daranyi
+				HUN_istvan_bethlen = { is_hired_as_advisor = yes }
+				HUN_kalman_daranyi = { is_hired_as_advisor = yes }
 			}
 			has_government = neutrality
 		}
@@ -6306,9 +6395,9 @@ focus_tree = {
 		prerequisite = { focus = HUN_appointzoltantildy  focus = HUN_restoreistvanbethlen }
 		available = {
 			OR = {
-				has_idea = HUN_tibor_eckhardt
+				HUN_tibor_eckhardt = { is_hired_as_advisor = yes }
 				has_country_leader = { character = HUN_tibor_eckhardt }
-				has_idea = HUN_istvan_bethlen
+				HUN_istvan_bethlen = { is_hired_as_advisor = yes }
 			}
 		}
 		bypass = {
@@ -6346,9 +6435,9 @@ focus_tree = {
 		mutually_exclusive = { focus = HUN_restore_the_free_market }
 		available = {
 			OR = {
-				has_idea = HUN_tibor_eckhardt
+				HUN_tibor_eckhardt = { is_hired_as_advisor = yes }
 				has_country_leader = { character = HUN_tibor_eckhardt }
-				has_idea = HUN_istvan_bethlen
+				HUN_istvan_bethlen = { is_hired_as_advisor = yes }
 			}
 		}
 		bypass = {
@@ -6390,6 +6479,7 @@ focus_tree = {
 				has_completed_focus = HUN_continue_the_regency
 				has_completed_focus = HUN_a_pure_hungary
 			}
+			NOT = { has_idea = HUN_gyula_gombos_de_jakfa }
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6400,7 +6490,7 @@ focus_tree = {
     			ideology = fascism
     			popularity = 0.05
 			}
-			add_ideas = HUN_kalman_daranyi
+			activate_advisor = HUN_kalman_daranyi
 			unlock_decision_tooltip = expand_FROM_trade
 		}
 	}
@@ -6421,7 +6511,7 @@ focus_tree = {
 			has_government = fascism
 		}
 		available = {
-			has_idea = HUN_kalman_daranyi
+			HUN_kalman_daranyi = { is_hired_as_advisor = yes }
 		}
 		completion_reward = {
 			add_popularity = {
@@ -6450,7 +6540,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HUN_marginalise_the_fascists  }
 		available = {
-			has_idea = HUN_kalman_daranyi
+			HUN_kalman_daranyi = { is_hired_as_advisor = yes }
 		}
 		bypass = {
 			ITA = {
@@ -6700,7 +6790,7 @@ focus_tree = {
 			OR = {
 				AND = {
 					has_government = neutrality
-					has_idea = HUN_kalman_daranyi
+					HUN_kalman_daranyi = { is_hired_as_advisor = yes }
 				}
 				has_government = fascism
 			}
@@ -6909,9 +6999,9 @@ focus_tree = {
 		mutually_exclusive = { focus = HUN_strengthen_the_aristocracy }
 		available = {
 			OR = {
-				has_idea = HUN_tibor_eckhardt
+				HUN_tibor_eckhardt = { is_hired_as_advisor = yes }
 				has_country_leader = { character = HUN_tibor_eckhardt }
-				has_idea = HUN_istvan_bethlen
+				HUN_istvan_bethlen = { is_hired_as_advisor = yes }
 			}
 		}
 		bypass = {
@@ -6948,8 +7038,8 @@ focus_tree = {
 		mutually_exclusive = { focus = HUN_the_march_front }
 		available = {
 			OR = {
-				has_idea = HUN_istvan_bethlen
-				has_idea = HUN_kalman_daranyi
+				HUN_istvan_bethlen = { is_hired_as_advisor = yes }
+				HUN_kalman_daranyi = { is_hired_as_advisor = yes }
 			}
 		}
 		bypass = {
@@ -7137,6 +7227,18 @@ focus_tree = {
 					hours = 4
 				}
 
+				hidden_effect = {
+					clear_array = trianon_goals
+					every_state = {
+						limit = {
+							state = 664
+						}
+						PREV = {
+							add_to_array = { trianon_goals = PREV }
+						}
+					}
+				}
+
 				effect_tooltip = {
 					custom_effect_tooltip = if_they_accept_tt
 					every_state = {
@@ -7153,7 +7255,7 @@ focus_tree = {
 					HUN = {
 						create_wargoal = {
 							target = PREV
-							type = annex_everything
+							type = take_state_focus
 						}
 					}
 				}
@@ -7225,6 +7327,21 @@ focus_tree = {
 					hours = 4
 				}
 
+				hidden_effect = {
+					clear_array = trianon_goals
+					every_state = {
+						limit = {
+							OR = {
+								state = 45
+								state = 764
+							}
+						}
+						PREV = {
+							add_to_array = { trianon_goals = PREV }
+						}
+					}
+				}
+
 				effect_tooltip = {
 					custom_effect_tooltip = if_they_accept_tt
 					every_state = {
@@ -7244,7 +7361,7 @@ focus_tree = {
 					HUN = {
 						create_wargoal = {
 							target = PREV
-							type = annex_everything
+							type = take_state_focus
 						}
 					}
 				}
@@ -7331,6 +7448,18 @@ focus_tree = {
 					hours = 4
 				}
 
+				hidden_effect = {
+					clear_array = trianon_goals
+					every_state = {
+						limit = {
+							state = 73
+						}
+						PREV = {
+							add_to_array = { trianon_goals = PREV }
+						}
+					}
+				}
+
 				effect_tooltip = {
 					custom_effect_tooltip = if_they_accept_tt
 					every_state = {
@@ -7353,7 +7482,7 @@ focus_tree = {
 					HUN = {
 						create_wargoal = {
 							target = PREV
-							type = annex_everything
+							type = take_state_focus
 						}
 					}
 				}
@@ -7432,6 +7561,23 @@ focus_tree = {
 					hours = 4
 				}
 
+				hidden_effect = {
+					clear_array = trianon_goals
+					every_state = {
+						limit = {
+							OR = {
+								state = 76
+								state = 82
+								state = 83
+								state = 84
+							}
+						}
+						PREV = {
+							add_to_array = { trianon_goals = PREV }
+						}
+					}
+				}
+
 				effect_tooltip = {
 					custom_effect_tooltip = if_they_accept_tt
 					every_state = {
@@ -7453,7 +7599,7 @@ focus_tree = {
 					HUN = {
 						create_wargoal = {
 							target = PREV
-							type = annex_everything
+							type = take_state_focus
 						}
 					}
 				}

@@ -405,7 +405,7 @@ ideas = {
 			modifier = {
 				stability_factor = -0.05
 				political_power_gain = 0.1
-				consumer_goods_factor = 0.02
+				consumer_goods_factor = 0.25
 				industrial_capacity_factory = -0.15
 				production_speed_buildings_factor = -0.1
 				democratic_drift = -0.02
@@ -430,7 +430,7 @@ ideas = {
 
 			modifier = {
 				political_power_gain = 0.05
-				consumer_goods_factor = 0.05
+				consumer_goods_factor = 0.1
 				industrial_capacity_factory = -0.05
 				production_speed_buildings_factor = -0.1
 				democratic_drift = 0.02
@@ -454,7 +454,7 @@ ideas = {
 
 			modifier = {
 				political_power_gain = 0.05
-				consumer_goods_factor = 0.05
+				consumer_goods_factor = 0.1
 				industrial_capacity_factory = 0.05
 				democratic_drift = 0.02
 				communism_drift = 0.03
@@ -520,7 +520,7 @@ ideas = {
 				neutrality_drift = 0.03
 				stability_factor = 0.05
 				drift_defence_factor = 0.05
-				consumer_goods_factor = -0.02
+				consumer_goods_factor = -0.05
 			}
 		}
 
@@ -636,7 +636,7 @@ ideas = {
 			modifier = {
 				production_factory_max_efficiency_factor = 0.05
 				line_change_production_efficiency_factor = 0.1
-				consumer_goods_factor = 0.03
+				consumer_goods_factor = 0.1
 			}
 		}
 
@@ -658,7 +658,7 @@ ideas = {
 			modifier = {
 				production_factory_max_efficiency_factor = 0.1
 				line_change_production_efficiency_factor = 0.1
-				consumer_goods_factor = 0.05
+				consumer_goods_factor = 0.2
 				production_speed_infrastructure_factor = 0.05
 				min_export = -0.1
 			}
@@ -682,7 +682,7 @@ ideas = {
 			modifier = {
 				production_factory_max_efficiency_factor = 0.1
 				line_change_production_efficiency_factor = 0.1
-				consumer_goods_factor = 0.05
+				consumer_goods_factor = 0.2
 				production_speed_buildings_factor = 0.05
 				min_export = -0.1
 				stability_factor = -0.05
@@ -871,7 +871,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.02
+				consumer_goods_factor = 0.1
 				political_power_gain = -0.05
 				production_factory_efficiency_gain_factor = 0.02
 			}
@@ -889,7 +889,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.05
+				consumer_goods_factor = 0.2
 				political_power_gain = -0.1
 				production_factory_efficiency_gain_factor = 0.05
 			}
@@ -907,7 +907,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.1
+				consumer_goods_factor = 0.4
 				political_power_gain = -0.2
 				production_factory_efficiency_gain_factor = 0.1
 				production_factory_max_efficiency_factor = -0.05
@@ -926,7 +926,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.15
+				consumer_goods_factor = 0.6
 				political_power_gain = -0.5
 				production_factory_efficiency_gain_factor = 0.15
 				production_factory_max_efficiency_factor = -0.1
@@ -945,7 +945,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.2
+				consumer_goods_factor = 0.8
 				political_power_gain = -1
 				production_factory_efficiency_gain_factor = 0.2
 				production_factory_max_efficiency_factor = -0.2
@@ -964,7 +964,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.02
+				consumer_goods_factor = 0.1
 				political_power_gain = -0.05
 				production_speed_arms_factory_factor = 0.05
 			}
@@ -982,7 +982,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.05
+				consumer_goods_factor = 0.2
 				political_power_gain = -0.1
 				production_speed_buildings_factor = -0.05
 				production_speed_arms_factory_factor = 0.1
@@ -1001,7 +1001,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.1
+				consumer_goods_factor = 0.3
 				political_power_gain = -0.15
 				production_speed_buildings_factor = -0.1
 				production_speed_arms_factory_factor = 0.2
@@ -1020,7 +1020,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.2
+				consumer_goods_factor = 0.4
 				political_power_gain = -0.2
 				production_speed_buildings_factor = -0.15
 				production_speed_arms_factory_factor = 0.3
@@ -1039,7 +1039,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.4
+				consumer_goods_factor = 0.5
 				political_power_gain = -0.25
 				production_speed_buildings_factor = -0.2
 				production_speed_arms_factory_factor = 0.4
@@ -1197,7 +1197,7 @@ ideas = {
 
 			modifier = {
 				democratic_drift = 0.03
-				consumer_goods_factor = -0.01
+				consumer_goods_factor = -0.05
 				production_factory_max_efficiency_factor = 0.05
 				production_factory_efficiency_gain_factor = 0.05
 			}
@@ -1220,7 +1220,7 @@ ideas = {
 
 			modifier = {
 				democratic_drift = 0.05
-				consumer_goods_factor = -0.02
+				consumer_goods_factor = -0.05
 				production_factory_max_efficiency_factor = 0.1
 				production_factory_efficiency_gain_factor = 0.1
 			}
@@ -1314,7 +1314,7 @@ ideas = {
 			modifier = {
 				stability_weekly_factor = 0.01
 				recruitable_population_factor = 0.02
-				consumer_goods_factor = 0.1
+				consumer_goods_factor = 0.25
 			}
 		}
 
@@ -1337,7 +1337,7 @@ ideas = {
 				communism_drift = 0.05
 				democratic_drift = 0.05
 				recruitable_population_factor = 0.03
-				consumer_goods_factor = -0.02
+				consumer_goods_factor = -0.05
 				production_factory_max_efficiency_factor = 0.1
 				production_factory_efficiency_gain_factor = 0.15
 			}
@@ -1701,7 +1701,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = 0.03
+				consumer_goods_factor = 0.05
 				communism_drift = -0.03
 				political_power_gain = -0.05
 				production_speed_infrastructure_factor = 0.05
@@ -1765,7 +1765,7 @@ ideas = {
 			}
 
 			modifier = {
-				consumer_goods_factor = -0.02
+				consumer_goods_factor = -0.1
 				production_factory_efficiency_gain_factor = 0.1
 				production_factory_max_efficiency_factor = -0.05
 				communism_drift = 0.02

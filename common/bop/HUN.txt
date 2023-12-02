@@ -329,6 +329,7 @@ HUN_power_balance = {
 				if = {
 					limit = {
 						NOT = { has_government = democratic }
+						has_completed_focus = HUN_the_small_regent
 					}
 					set_politics = {
 						ruling_party = democratic
