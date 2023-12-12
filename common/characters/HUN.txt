@@ -830,6 +830,7 @@ characters={
 					has_completed_focus = HUN_restoreistvanbethlen
 					has_prime_minister_finished = yes
 				}
+				NOT = { has_completed_focus = HUN_revoke_eckhardts_citizenship }
 				OR = {
 					has_government = neutrality
 					has_government = democratic

@@ -248,6 +248,26 @@ HUN_balance_of_power_category = {
 			has_completed_focus = HUN_continue_the_regency
 		}
 
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 2
+				has_war_support < 0.6
+			}
+			modifier = {
+				factor = 2
+				has_war_support < 0.5
+			}
+			modifier = {
+				factor = 0.5
+				has_war_support > 0.7
+			}
+			modifier = {
+				factor = 0.5
+				has_war_support > 0.8
+			}
+		}
+
 		cost = 40
 		days_remove = 30
 		days_re_enable = 5
@@ -333,8 +353,10 @@ HUN_balance_of_power_category = {
 
 		available = {
 			has_completed_focus = HUN_arrest_szalasi
-			has_war = yes
-			NOT = { has_government = democratic }
+			OR = {
+				has_government = neutrality
+				has_war = yes
+			}
 			has_elections = yes
 		}
 
@@ -342,6 +364,10 @@ HUN_balance_of_power_category = {
 			original_tag = HUN
 			has_completed_focus = HUN_continue_the_regency
 			NOT = { has_country_flag = no_more_elections }
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
 		}
 
 		cost = 30
@@ -360,7 +386,7 @@ HUN_balance_of_power_category = {
 	}
 
 	hun_allow_elections = {
-		icon = SWI_swiss_democratic_tradition_campaign
+		icon = SWI_elect_confederation_president
 		priority = 11
 
 		allowed = {
@@ -375,6 +401,10 @@ HUN_balance_of_power_category = {
 			original_tag = HUN
 			has_completed_focus = HUN_continue_the_regency
 			has_country_flag = no_more_elections
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
 		}
 
 		cost = 30
