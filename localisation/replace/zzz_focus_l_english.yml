@@ -240,7 +240,7 @@
  HUN_cooporate_ussr_desc:0 "Mihály Károlyi is openly a socialist, but there are many who suspect him of being a communist. This could work in our favour - despite the differences between our regimes, there are some points of agreement between our and [SOV.GetAdjective] interests. Cooperating with the [SOV.GetAdjective]s could help us win over any stragglers who remain opposed to our cause."
  HUN_prepare_shadow_government:0 "Prepare a Shadow Government"
  HUN_prepare_shadow_government_desc:0 "We have solidified ties with our foreign allies, so we are now prepared for a more radical action. Hungary's geographical position is unfortunate, to say the least, and we must be able to continue running our government from a place of safety if our homeland falls to invasion."
- HUN_offer_hungarian_citizenship:0 "[HUN.GetAdjective] Citizenship Act"
+ HUN_offer_hungarian_citizenship:0 "The Citizenship Act"
  HUN_offer_hungarian_citizenship_desc:0 "For diplomatic reasons, demanding our lands back would not be the best move right now. Instead, we should offer citizenship to [HUN.GetAdjective]s in other states, which would allow them to help build up our industry. Following this, we could either abandon our land claims or pursue them with our increased miitary strength."
  HUN_offer_land:0 "Offer Land to Migrants"
  HUN_offer_land_desc:0 "We lack the industry necessary to attract migrants with the promise of employment alone. Instead, we will buy lands from large landholders and sell them to migrants at a cheap cost. This would increase the flow of migrants greatly and could also lay the groundwork for further industrialisation."

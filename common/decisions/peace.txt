@@ -597,8 +597,8 @@ peace_hun = {
 	}
 
 	promote_szent_gyorgi = {
-		icon = generic_merge_plant_aircraft
-		priority = 4
+		icon = SWI_elect_confederation_president
+		priority = 6
 
 		allowed = {
 			original_tag = HUN
@@ -854,14 +854,16 @@ peace_hun = {
 						}
 						HUN_add_suspicion_max = yes
 					}
-					if = {
-						limit = {
-							has_country_flag = HUN_has_szent_gyorgi
-						}
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-							election_frequency = 48
+					HUN = {
+						if = {
+							limit = {
+								has_country_flag = HUN_has_szent_gyorgi
+							}
+							set_politics = {
+								ruling_party = democratic
+								elections_allowed = yes
+								election_frequency = 48
+							}
 						}
 					}
 
@@ -940,14 +942,16 @@ peace_hun = {
 						}
 						HUN_add_suspicion_max = yes
 					}
-					if = {
-						limit = {
-							has_country_flag = HUN_has_szent_gyorgi
-						}
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-							election_frequency = 48
+					HUN = {
+						if = {
+							limit = {
+								has_country_flag = HUN_has_szent_gyorgi
+							}
+							set_politics = {
+								ruling_party = democratic
+								elections_allowed = yes
+								election_frequency = 48
+							}
 						}
 					}
 
@@ -1033,14 +1037,16 @@ peace_hun = {
 						}
 						HUN_add_suspicion_max = yes
 					}
-					if = {
-						limit = {
-							has_country_flag = HUN_has_szent_gyorgi
-						}
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-							election_frequency = 48
+					HUN = {
+						if = {
+							limit = {
+								has_country_flag = HUN_has_szent_gyorgi
+							}
+							set_politics = {
+								ruling_party = democratic
+								elections_allowed = yes
+								election_frequency = 48
+							}
 						}
 					}
 

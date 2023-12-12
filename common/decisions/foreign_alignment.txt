@@ -671,27 +671,27 @@ foreign_alignment = {
 				ideology = fascism
 				popularity = 0.05
 			}
-			if = {
-				limit = {
-					has_completed_focus = HUN_impose_censorship
-				}
-				set_party_name = {
-					ideology = fascism
-					long_name = HUN_arrow_cross_party_long
-					name = HUN_arrow_cross_party
-				}
-				add_country_leader_role = {
-					character = HUN_ferenc_szalasi
-					promote_leader = yes
-					country_leader = {
-						ideology = fascism_ideology
-						expire = "1965.1.1"
-						traits = {
-							leader_of_the_nation
-						}
-					}
-				}
-			}
+#			if = {
+#				limit = {
+#					has_completed_focus = HUN_impose_censorship
+#				}
+#				set_party_name = {
+#					ideology = fascism
+#					long_name = HUN_arrow_cross_party_long
+#					name = HUN_arrow_cross_party
+#				}
+#				add_country_leader_role = {
+#					character = HUN_ferenc_szalasi
+#					promote_leader = yes
+#					country_leader = {
+#						ideology = fascism_ideology
+#						expire = "1965.1.1"
+#						traits = {
+#							leader_of_the_nation
+#						}
+#					}
+#				}
+#			}
 			FROM = {
 				add_opinion_modifier = {
 					target = HUN

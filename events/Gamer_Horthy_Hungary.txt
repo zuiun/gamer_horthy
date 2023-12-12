@@ -1044,7 +1044,7 @@ country_event = {
 
 	immediate = {
 		set_temp_variable = { favour_effect = peace_favour }
-		divide_temp_variable = { favour_effect = 4 }
+		divide_temp_variable = { favour_effect = 3 }
 	}
 
 	option = {
@@ -1062,7 +1062,6 @@ country_event = {
 			}
 			modifier = {
 				add = favour_effect
-				has_country_flag = HUN_return_everything
 			}
 			modifier = {
 				add = 2
