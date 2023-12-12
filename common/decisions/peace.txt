@@ -98,10 +98,18 @@ peace_hun = {
 							limit = {
 								is_suspicion_target = yes
 							}
+							HUN_add_suspicion_medium = yes
+						}
+					}
+					1 = {
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
 							HUN_add_suspicion_small = yes
 						}
 					}
-					2 = {
+					1 = {
 						# Do nothing
 					}
 					3 = {
@@ -127,10 +135,18 @@ peace_hun = {
 							limit = {
 								is_suspicion_target = yes
 							}
+							HUN_add_suspicion_medium = yes
+						}
+					}
+					2 = {
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
 							HUN_add_suspicion_small = yes
 						}
 					}
-					5 = {
+					3 = {
 						# Do nothing
 					}
 					2 = {
@@ -156,10 +172,18 @@ peace_hun = {
 							limit = {
 								is_suspicion_target = yes
 							}
+							HUN_add_suspicion_medium = yes
+						}
+					}
+					4 = {
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
 							HUN_add_suspicion_small = yes
 						}
 					}
-					8 = {
+					4 = {
 						# Do nothing
 					}
 					1 = {
@@ -179,10 +203,18 @@ peace_hun = {
 							limit = {
 								is_suspicion_target = yes
 							}
+							HUN_add_suspicion_medium = yes
+						}
+					}
+					2 = {
+						every_country = {
+							limit = {
+								is_suspicion_target = yes
+							}
 							HUN_add_suspicion_small = yes
 						}
 					}
-					4 = {
+					2 = {
 						# Do nothing
 					}
 				}
@@ -238,7 +270,7 @@ peace_hun = {
 				limit = {
 					is_favour_target = yes
 				}
-				HUN_add_favour_medium = yes
+				HUN_add_favour_small = yes
 			}
 			activate_mission = suspicion_mission
 		}
