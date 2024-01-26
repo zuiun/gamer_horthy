@@ -164,7 +164,7 @@ leader_traits = {
 		sprite = 13
 
 		autonomy_gain = 7.5
-		consumer_goods_factor = -0.03
+		consumer_goods_factor = -0.05
 		drift_defence_factor = 0.05
 		fascism_acceptance = -50
 		communism_acceptance = -50
@@ -216,7 +216,7 @@ leader_traits = {
 
 		communism_drift = 0.03
 		stability_factor = 0.05
-		consumer_goods_factor = -0.05
+		consumer_goods_factor = -0.1
 
 		ai_will_do = {
 			factor = 1
@@ -342,7 +342,7 @@ leader_traits = {
 		
 		communism_drift = -0.03
 		political_power_gain = 0.05
-		consumer_goods_factor = -0.02
+		consumer_goods_factor = -0.05
 		drift_defence_factor = 0.1
 		neutrality_acceptance = 100
 		

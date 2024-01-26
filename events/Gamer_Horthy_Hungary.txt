@@ -9,7 +9,7 @@ country_event = {
 	id = gamer_horthy.1
 	title = gamer_horthy.1.t
 	desc = gamer_horthy.1.desc
-	picture = report_event_generic_funeral
+	picture = GFX_report_event_generic_funeral
 
 	trigger = {
 		original_tag = HUN
@@ -42,6 +42,278 @@ country_event = {
 		name = gamer_horthy.1.a # Rest in peace
 		add_stability = -0.1
 		retire_character = HUN_gyula_gombos_de_jakfa
+	}
+}
+
+# The Elections of 1939
+country_event = {
+	id = gamer_horthy.2
+	title = gamer_horthy.2.t
+	desc = gamer_horthy.2.desc
+	picture = GFX_report_event_tur_political_rally
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.2.a # Radicalism will be the death of Hungary
+
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 2
+				is_historical_focus_on = yes
+			}
+		}
+
+		hidden_effect = { set_country_flag = HUN_chose_horthy }
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_the_march_front
+			}
+			add_political_power = 100
+		}
+		else = {
+			add_political_power = 50
+		}
+
+		if = {
+			limit = {
+				NOT = { has_government = neutrality }
+			}
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = yes
+				election_frequency = 48
+			}
+		}
+
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.1
+		}
+		add_country_leader_role = {
+			character = HUN_miklos_horthy
+			promote_leader = yes
+			country_leader = {
+				ideology = conservatism
+				expire = "1965.1.1"
+				traits = {
+					white_terror
+				}
+			}
+		}
+
+		every_other_country = {
+			limit = {
+				NOT = {
+					has_government = fascism
+					has_government = communism
+				}
+				is_major = yes
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					tag = USA
+				}
+			}
+			add_opinion_modifier = {
+				target = HUN
+				modifier = small_increase
+			}
+			add_ai_strategy = {
+				type = ignore
+				id = "HUN"
+				value = 100
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.2.b # We must manipulate the liberals into office
+
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0.5
+				is_historical_focus_on = yes
+			}
+		}
+
+		hidden_effect = { set_country_flag = HUN_chose_liberals }
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_the_march_front
+			}
+			add_political_power = 50
+		}
+		else = {
+			add_stability = -0.05
+			add_political_power = 30
+		}
+		
+
+		if = {
+			limit = {
+				NOT = { has_government = democratic }
+			}
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+				election_frequency = 48
+			}
+		}
+
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		add_country_leader_role = {
+			character = HUN_miklos_horthy
+			promote_leader = yes
+			country_leader = {
+				ideology = conservatism
+				expire = "1965.1.1"
+				traits = {
+					white_terror
+				}
+			}
+		}
+
+		every_other_country = {
+			limit = {
+				OR = {
+					has_government = neutrality
+					has_government = democratic
+				}
+				is_major = yes
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					tag = USA
+				}
+			}
+			add_opinion_modifier = {
+				target = HUN
+				modifier = medium_increase
+			}
+			add_ai_strategy = {
+				type = befriend
+				id = "HUN"
+				value = 100
+			}
+		}
+		every_other_country = {
+			limit = {
+				NOT = {
+					has_government = neutrality
+					has_government = democratic
+				}
+				is_major = yes
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					tag = USA
+				}
+			}
+			add_opinion_modifier = {
+				target = HUN
+				modifier = small_decrease
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.2.c # The establishment is too weak
+
+		ai_chance = {
+			base = 2
+		}
+
+		hidden_effect = { set_country_flag = HUN_chose_fascists }
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_impose_censorship }
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = HUN_hungarian_renewal_long
+				name = HUN_hungarian_renewal
+			}
+		}
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_strengthen_the_aristocracy
+			}
+			add_stability = 0.05
+			add_political_power = 30
+		}
+		else = {
+			add_stability = 0.05
+		}
+
+		if = {
+			limit = {
+				NOT = { has_government = fascism }
+			}
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+		}
+		
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.1
+		}
+		add_country_leader_role = {
+			character = HUN_miklos_horthy
+			promote_leader = yes
+			country_leader = {
+				ideology = rexism
+				expire = "1965.1.1"
+				traits = {
+					white_terror
+				}
+			}
+		}
+
+		every_other_country = {
+			limit = {
+				has_government = fascism
+				is_major = yes
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					tag = USA
+				}
+			}
+			add_opinion_modifier = {
+				target = HUN
+				modifier = medium_increase
+			}
+			add_ai_strategy = {
+				type = befriend
+				id = "HUN"
+				value = 100
+			}
+		}
+		every_other_country = {
+			limit = {
+				NOT = { has_government = fascism }
+				is_major = yes
+				OR = {
+					capital_scope = { is_on_continent = europe }
+					tag = USA
+				}
+			}
+			add_opinion_modifier = {
+				target = HUN
+				modifier = small_decrease
+			}
+		}
 	}
 }
 

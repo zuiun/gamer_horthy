@@ -215,10 +215,21 @@ HUN_power_balance = {
 					limit = {
 						NOT = { has_government = neutrality }
 					}
-					set_politics = {
-						ruling_party = neutrality
-						elections_allowed = yes
-						election_frequency = 48
+					if = {
+						limit = {
+							has_country_flag = no_more_elections
+						}
+						set_politics = {
+							ruling_party = neutrality
+							elections_allowed = no
+						}
+					}
+					else = {
+						set_politics = {
+							ruling_party = neutrality
+							elections_allowed = yes
+							election_frequency = 48
+						}
 					}
 				}
 			}
@@ -329,18 +340,22 @@ HUN_power_balance = {
 				if = {
 					limit = {
 						NOT = { has_government = democratic }
-						OR = {
-							NOT = { has_government = neutrality }
-							AND = {
-								has_completed_focus = HUN_look_outwards_real
-								has_elections = yes
-							}
+					}
+					if = {
+						limit = {
+							has_country_flag = no_more_elections
+						}
+						set_politics = {
+							ruling_party = democratic
+							elections_allowed = no
 						}
 					}
-					set_politics = {
-						ruling_party = democratic
-						elections_allowed = yes
-						election_frequency = 48
+					else = {
+						set_politics = {
+							ruling_party = democratic
+							elections_allowed = yes
+							election_frequency = 48
+						}
 					}
 				}
 			}

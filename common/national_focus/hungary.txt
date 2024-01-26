@@ -1699,19 +1699,24 @@ focus_tree = {
 				ideology = fascism
 				popularity = 0.05
 			}
-			set_party_name = {
-				ideology = fascism
-				long_name = HUN_hungarian_renewal_long
-				name = HUN_hungarian_renewal
-			}
-			add_country_leader_role = {
-				character = HUN_kalman_daranyi
-				promote_leader = yes
-				country_leader = {
-					ideology = rexism
-					expire = "1965.1.1"
-					traits = {
-						conservative_pm
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_look_outwards_real }
+				}
+				set_party_name = {
+					ideology = fascism
+					long_name = HUN_hungarian_renewal_long
+					name = HUN_hungarian_renewal
+				}
+				add_country_leader_role = {
+					character = HUN_kalman_daranyi
+					promote_leader = yes
+					country_leader = {
+						ideology = rexism
+						expire = "1965.1.1"
+						traits = {
+							conservative_pm
+						}
 					}
 				}
 			}
@@ -1914,6 +1919,10 @@ focus_tree = {
 		prerequisite = { focus = HUN_allow_german_military_access }
 		mutually_exclusive = { focus = HUN_demand_loyalty }
 		completion_reward = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
 			if = {
 				limit = {
 					has_idea = HUN_non_belligerent2
@@ -2589,7 +2598,7 @@ focus_tree = {
 		}
 	}
 
-	# Look Outwards
+	# The Elections of 1939
 	focus = {
 		id = HUN_look_outwards_real
 		icon = GFX_goal_anschluss
@@ -2598,6 +2607,8 @@ focus_tree = {
 		relative_position_id = HUN_maintain_nonbelligerence
 		cost = 10
 		search_filters = {
+			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_STABILITY
 			FOCUS_FILTER_WAR_SUPPORT
 		}
 		prerequisite = { focus = HUN_maintain_nonbelligerence } prerequisite = { focus = HUN_speak_out_fascism focus = HUN_movement_of_hungarian_life }
@@ -2606,6 +2617,7 @@ focus_tree = {
 			NOT = { has_government = communism }
 		}
 		completion_reward = {
+			set_cosmetic_tag = HUN_MONARCHY
 			if = {
 				limit = {
 					has_intelligence_agency = no
@@ -2615,6 +2627,7 @@ focus_tree = {
 					icon = GFX_intelligence_agency_logo_HUN
 				}
 			}
+			country_event = { id = gamer_horthy.2 }
 			swap_ideas = {
 				remove_idea = HUN_non_belligerent
 				add_idea = HUN_non_belligerent2
@@ -2936,7 +2949,7 @@ focus_tree = {
 				}
 				add_opinion_modifier = {
 					target = HUN
-					modifier = medium_decrease
+					modifier = small_decrease
 				}
 			}
 
@@ -3221,6 +3234,18 @@ focus_tree = {
 			if = {
 				limit = { has_completed_focus = HUN_cooporate_ussr }
 				SOV = { HUN_add_favour_small = yes }
+			}
+			if = {
+				limit = { has_country_flag = HUN_chose_horthy }
+				USA = { HUN_add_favour_small = yes }
+			}
+			else_if = {
+				limit = { has_country_flag = HUN_chose_liberals }
+				ENG = { HUN_add_favour_small = yes }
+			}
+			else_if = {
+				limit = { has_country_flag = HUN_chose_fascists }
+				GER = { HUN_add_favour_small = yes }
 			}
 			if = {
 				limit = {
