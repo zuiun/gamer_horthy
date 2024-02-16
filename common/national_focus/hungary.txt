@@ -1521,7 +1521,6 @@ focus_tree = {
 				ideology = fascism
 				popularity = 0.05
 			}
-			remove_ideas = HUN_march_front
 			custom_effect_tooltip = rename_daranyi_tt
 			if = {
 				limit = {
@@ -1614,9 +1613,6 @@ focus_tree = {
 					value < -0.2
 				}
 			}
-		}
-		bypass = {
-			GER = { has_government = democratic }
 		}
 		continue_if_invalid = yes
 		completion_reward = {
@@ -1720,6 +1716,7 @@ focus_tree = {
 					}
 				}
 			}
+			remove_ideas = HUN_march_front
 			if = {
 				limit = {
 					has_any_power_balance = yes
@@ -5381,7 +5378,7 @@ focus_tree = {
 		mutually_exclusive = { focus = HUN_restoreistvanbethlen } mutually_exclusive = { focus = HUN_appointkalmandaranyi }
 		available = {
 			OR = {
-				has_completed_focus = HUN_continue_the_regency
+				# has_completed_focus = HUN_continue_the_regency
 				has_completed_focus = HUN_elect_a_democratic_king
 				has_completed_focus = HUN_a_new_republic_of_councils
 			}
@@ -6181,7 +6178,12 @@ focus_tree = {
 		prerequisite = { focus = HUN_treaty_of_eternal_friendship }
 		available = {
 			has_war = yes
-			YUG = { has_capitulated = yes }
+			YUG = {
+				OR = {
+					exists = no
+					has_capitulated = yes
+				}
+			}
 		}
 		completion_reward = {
 			add_stability = -0.05
@@ -6372,45 +6374,6 @@ focus_tree = {
 				add_ideas = free_trade
 			}
 			add_ideas = HUN_strengthened_aristocracy
-		}
-	}
-
-	#Suffrage Reform
-	focus = {
-		id = HUN_suffrage_reform
-		icon = GFX_focus_usa_voter_registration_act
-		x = 1
-		y = 1
-		relative_position_id = HUN_restore_the_free_market
-		cost = 5
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = HUN_restore_the_free_market focus = HUN_support_italian_interests }
-		available = {
-			OR = {
-				HUN_istvan_bethlen = { is_hired_as_advisor = yes }
-				HUN_kalman_daranyi = { is_hired_as_advisor = yes }
-			}
-			has_government = neutrality
-		}
-		bypass = {
-			has_government = fascism
-		}
-		completion_reward = {
-			add_political_power = 50
-			add_popularity = {
-				ideology = neutrality
-				popularity = 0.03
-			}
-			add_popularity = {
-				ideology = fascism
-				popularity = -0.05
-			}
-			add_popularity = {
-				ideology = communism
-				popularity = -0.05
-			}
 		}
 	}
 
@@ -7018,6 +6981,7 @@ focus_tree = {
 
 		}
 		completion_reward = {
+			add_political_power = 50
 			change_parties_1939 = yes
 			unlock_decision_tooltip = exchange_rakosi
 		}
@@ -7073,7 +7037,7 @@ focus_tree = {
 			FOCUS_FILTER_INDUSTRY
 			FOCUS_FILTER_STABILITY
 		}
-		prerequisite = { focus = HUN_look_outwards } prerequisite = { focus = HUN_suffrage_reform }
+		prerequisite = { focus = HUN_look_outwards }
 		mutually_exclusive = { focus = HUN_the_march_front }
 		available = {
 			OR = {
@@ -7086,6 +7050,18 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 50
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = -0.05
+			}
 			swap_ideas = {
 				remove_idea = HUN_strengthened_aristocracy
 				add_idea = HUN_strengthened_aristocracy2
@@ -8970,7 +8946,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HUN_secret_rearmament
 
-		cost = 10
+		cost = 5
 
 		ai_will_do = {
 			factor = 70
@@ -8993,7 +8969,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = HUN_secret_rearmament
 
-		cost = 10
+		cost = 5
 
 		ai_will_do = {
 			factor = 70
@@ -9095,7 +9071,7 @@ focus_tree = {
 		}
 
 		available = {
-
+			NOT = { has_idea = HUN_treaty_of_triannon }
 		}
 
 		search_filters = { FOCUS_FILTER_RESEARCH }
@@ -9511,7 +9487,7 @@ focus_tree = {
 		}
 
 		available = {
-
+			has_idea = HUN_treaty_of_triannon
 		}
 
 		search_filters = { FOCUS_FILTER_RESEARCH }
@@ -9553,7 +9529,7 @@ focus_tree = {
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = HUN_mobile_focus
-				cost_reduction = 0.25
+				cost_reduction = 0.5
 				uses = 1
 				category = cat_mobile_warfare
 			}
@@ -9789,11 +9765,11 @@ focus_tree = {
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = HUN_home_defense
-				cost_reduction = 0.25
+				cost_reduction = 0.5
 				uses = 1
 				category = cat_grand_battle_plan
 			}
-		}
+		}	
 	}
 
 	focus = {
