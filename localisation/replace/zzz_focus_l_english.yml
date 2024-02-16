@@ -253,7 +253,7 @@
  HUN_demand_loyalty:0 "Demand Oaths of Loyalty"
  HUN_demand_loyalty_desc:0 "The $HUN_army_side$ has been acting increasingly independently of the $HUN_crown_side$, which is unacceptable. The army answers to Horthy, and Horthy alone. Taking orders from foreign overlords or otherwise is nothing less than treason."
  HUN_arrest_szalasi:0 "Arrest Szálasi"
- HUN_arrest_szalasi_desc:0 "$HUN_ferenc_szalasi$ is a major threat to our regime. Not only has his movement plotted against our regime, but also he is a traitor who would willingly betray his homeland for power. We must arrest him and force the $HUN_arrow_cross_party$ underground, hopefully forever."
+ HUN_arrest_szalasi_desc:0 "$HUN_ferenc_szalasi$ is a major threat to our regime. Not only has his movement plotted against our regime, but also he is a traitor who would willingly betray his homeland for power. We must arrest him and force the $HUN_arrow_cross_party_long$ underground, hopefully forever."
  HUN_impose_censorship:0 "Restrict Civic Freedoms"
  HUN_impose_censorship_desc:0 "There is no room for dissent in our politics. If we do not stand united, then we will never be able to defeat the numerically and materially superior benefactors of Trianon. Those who oppose us will have their freedoms curtailed or imprisoned, regardless of their intentions."
  HUN_pivot_towards_germany:0 "Draw Closer to [GER.GetNameDef]"

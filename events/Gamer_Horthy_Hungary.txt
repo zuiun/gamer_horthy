@@ -222,6 +222,56 @@ country_event = {
 				modifier = small_decrease
 			}
 		}
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_strengthen_the_aristocracy
+			}
+			uncomplete_national_focus = {
+				focus = HUN_strengthen_the_aristocracy
+				uncomplete_children = no
+				refund_political_power = no
+			}
+		}
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_appointzoltantildy }
+			}
+			complete_national_focus = HUN_secret_ballot
+			complete_national_focus = HUN_restrict_feudal_privileges
+
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_the_march_front }
+				}
+				complete_national_focus = HUN_the_march_front
+			}
+		}
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_movement_of_hungarian_life
+			}
+			uncomplete_national_focus = {
+				focus = HUN_movement_of_hungarian_life
+				uncomplete_children = no
+				refund_political_power = no
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_the_addams_family }
+				}
+				complete_national_focus = HUN_the_addams_family
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_speak_out_fascism }
+				}
+				complete_national_focus = HUN_speak_out_fascism
+			}
+			complete_national_focus = HUN_lift_restrictions_on_minorities
+		}
 	}
 
 	option = {
@@ -313,6 +363,63 @@ country_event = {
 				target = HUN
 				modifier = small_decrease
 			}
+		}
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_the_march_front
+			}
+			uncomplete_national_focus = {
+				focus = HUN_the_march_front
+				uncomplete_children = no
+				refund_political_power = no
+			}
+		}
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_appointkalmandaranyi }
+			}
+			complete_national_focus = HUN_marginalise_the_fascists
+			complete_national_focus = HUN_support_italian_interests
+
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_suffrage_reform }
+				}
+				complete_national_focus = HUN_suffrage_reform
+			}
+
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_strengthen_the_aristocracy }
+				}
+				complete_national_focus = HUN_strengthen_the_aristocracy
+			}
+		}
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_lift_restrictions_on_minorities
+			}
+			uncomplete_national_focus = {
+				focus = HUN_lift_restrictions_on_minorities
+				uncomplete_children = yes
+				refund_political_power = no
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_arrest_szalasi }
+				}
+				complete_national_focus = HUN_arrest_szalasi
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = HUN_support_move }
+				}
+				complete_national_focus = HUN_support_move
+			}
+			complete_national_focus = HUN_movement_of_hungarian_life
 		}
 	}
 }

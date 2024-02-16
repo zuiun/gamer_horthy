@@ -1,5 +1,5 @@
 ﻿l_english:
- HUN_bethlen_peyer_pact:0 "Bethlen-Peyer Agreement"
+ HUN_bethlen_peyer_pact:0 "Bethlen-Peyer Pact"
  HUN_bethlen_peyer_pact_desc:0 "The $HUN_bethlen_peyer_pact$ was signed by István Bethlen and Károly Peyer and greatly limited the influence of the $HUN_democratic_party_long$ in exchange for the government turning a blind eye to union activities. The pact is very unpopular among the left, but it has thus far kept the government and the trade unions from coming into open conflict."
  HUN_bethlen_peyer_pact2:0 "Revised $HUN_bethlen_peyer_pact$"
  HUN_bethlen_peyer_pact2_desc:0 "The $HUN_bethlen_peyer_pact$ was signed by István Bethlen and Károly Peyer and greatly limited the influence of the $HUN_democratic_party_long$ in exchange for the government turning a blind eye to union activities. It has been amended to allow greater participation of the $HUN_democratic_party$ in politics."
@@ -136,9 +136,9 @@
  HUN_treaty_of_triannon_3:0 "Bled Agreement"
  HUN_treaty_of_triannon_3_desc:0 "The $HUN_treaty_of_triannon_3$ supercedes the $HUN_treaty_of_triannon$, which was, in many ways, similar to the Treaty of Versailles, crippling our military and preventing rearmament. Our only remaining limitation is that we may not use force against our neighbours."
  HUN_march_front:0 "March Front"
- HUN_march_front_desc:0 "The $HUN_march_front$ is the foremost organisation of the Folk Writers movement, representing a loose organisation of socialists, nationalists, and liberals opposed to aristocratic rule; its supporters largely consist of peasants, who generally do not support our governance."
+ HUN_march_front_desc:0 "The $HUN_march_front$ is the foremost organisation of the Populist Writers movement, representing a loose organisation of socialists, nationalists, and liberals opposed to aristocratic rule; its supporters largely consist of peasants, who generally do not support our governance."
  HUN_march_front2:0 "$HUN_march_front$"
- HUN_march_front2_desc:0 "The $HUN_march_front$ is the foremost organisation of the Folk Writers movement, representing a loose organisation of socialists, nationalists, and liberals opposed to aristocratic rule; its supporters largely consist of peasants, who are gradually coming to support our governance."
+ HUN_march_front2_desc:0 "The $HUN_march_front$ is the foremost organisation of the Populist Writers movement, representing a loose organisation of socialists, nationalists, and liberals opposed to aristocratic rule; its supporters largely consist of peasants, who are gradually coming to support our governance."
  HUN_manfred_weiss:0 "Manfréd Weiss Works"
  HUN_manfred_weiss_improved:0 "$HUN_manfred_weiss$"
  HUN_mavag_improved:0 "$HUN_mavag$"
