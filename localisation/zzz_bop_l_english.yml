@@ -3,6 +3,8 @@
  HUN_army_side:0 "General Staff"
  HUN_crown_side:0 "Crown Council"
  HUN_liberals_side:0 "House of Representatives"
+ HUN_communists_side:0 "Communist Wing"
+ HUN_socialists_side:0 "Socialist Wing"
 
  HUN_balance_range:0 "Political Equilibrium"
 
@@ -21,8 +23,22 @@
  HUN_liberals_high_control_range:0 "Popular Dominance"
  HUN_liberals_total_control_range:0 "Popular Supremacy"
 
+ HUN_communists_low_control_range:0 "Communist Influence"
+ HUN_communists_medium_control_range:0 "Communist Predominance"
+ HUN_communists_high_control_range:0 "Communist Dominance"
+ HUN_communists_total_control_range:0 "Communist Supremacy"
+
+ HUN_socialists_low_control_range:0 "Socialist Influence"
+ HUN_socialists_medium_control_range:0 "Socialist Predominance"
+ HUN_socialists_high_control_range:0 "Socialist Dominance"
+ HUN_socialists_total_control_range:0 "Socialist Supremacy"
+
  HUN_fascism_bop:0 "$HUN_speak_out_fascism$"
  HUN_fascism_bop2:0 "$HUN_fascism_bop$"
  HUN_minorities_bop:0 "$HUN_lift_restrictions_on_minorities$"
  HUN_life_bop:0 "Movement of [HUN.GetAdjective] Life"
  HUN_life_bop2:0 "$HUN_life_bop$"
+ HUN_stalin_bop:0 "$HUN_struggle_fascism_reaction$"
+ HUN_foundations_stalin_bop:0 "$HUN_consolidation_of_socialism$"
+ HUN_goulash_bop:0 "$HUN_goulash_communism$"
+ HUN_foundations_goulash_bop:0 "$HUN_consolidation_of_socialism$"

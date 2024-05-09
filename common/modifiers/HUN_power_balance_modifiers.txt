@@ -17,3 +17,19 @@ HUN_life_bop = {
 HUN_life_bop2 = {
 	power_balance_daily = -0.002
 }
+
+HUN_stalin_bop = {
+	power_balance_daily = -0.001
+}
+
+HUN_foundations_stalin_bop = {
+	power_balance_daily = -0.002
+}
+
+HUN_goulash_bop = {
+	power_balance_daily = 0.001
+}
+
+HUN_foundations_goulash_bop = {
+	power_balance_daily = 0.002
+}

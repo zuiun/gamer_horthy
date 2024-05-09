@@ -758,6 +758,7 @@ foreign_alignment = {
 				set_country_flag = HUN_securing_loans
 			}
 			add_offsite_building = { type = industrial_complex level = 4 }
+			HUN_add_socialist_bop_small = yes
 		}
 
 		remove_effect = {
@@ -916,6 +917,7 @@ foreign_alignment = {
 
 		complete_effect = {
 			add_offsite_building = { type = industrial_complex level = 2 }
+			HUN_add_socialist_bop_small = yes
 		}
 
 		remove_effect = {

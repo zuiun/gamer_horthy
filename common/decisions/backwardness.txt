@@ -67,7 +67,7 @@ backwardness = {
 			add_stability = -0.05
 			add_popularity = {
 				ideology = democratic
-				popularity = 0.1
+				popularity = 0.05
 			}
 			add_shortages_HUN = yes
 			activate_mission = shortages_crisis
@@ -118,11 +118,12 @@ backwardness = {
 		}
 
 		complete_effect = {
-			add_stability = -0.05
+			add_stability = -0.02
 			add_days_mission_timeout = {
 				mission = shortages_crisis
 				days = 30
 			}
+			HUN_add_communist_bop_small = yes
 		}
 
 		remove_effect = {

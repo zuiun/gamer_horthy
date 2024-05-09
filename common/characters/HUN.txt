@@ -1216,10 +1216,7 @@ characters={
 			slot = political_advisor
 			idea_token = HUN_jeno_szollosi
 			available = {
-				OR = {
-					has_completed_focus = HUN_abolish_the_monarchy
-					has_completed_focus = HUN_movement_of_hungarian_life
-				}
+				has_completed_focus = HUN_movement_of_hungarian_life
 				has_government = fascism
 			}
 			traits = {
@@ -1485,7 +1482,8 @@ characters={
 				}
 			}
 			available = {
-				NOT = { has_completed_focus = HUN_oppose_the_regency }
+				NOT = { has_completed_focus = HUN_a_new_republic_of_councils }
+				NOT = { has_completed_focus = HUN_abolish_the_monarchy }
 				if = {
 					limit = {
 						has_dlc = "Man the Guns"
@@ -1562,7 +1560,7 @@ characters={
 				original_tag = HUN
 			}
 			available = {
-				NOT = { has_completed_focus = HUN_oppose_the_regency }
+				NOT = { has_completed_focus = HUN_abolish_the_monarchy }
 				if = {
 					limit = {
 						has_dlc = "Man the Guns"
@@ -1592,10 +1590,7 @@ characters={
 				original_tag = HUN
 			}
 			available = {
-				OR = {
-					has_completed_focus = HUN_movement_of_hungarian_life
-					has_completed_focus = HUN_a_pure_hungary
-				}
+				has_completed_focus = HUN_movement_of_hungarian_life
 				if = {
 					limit = {
 						has_dlc = "Man the Guns"

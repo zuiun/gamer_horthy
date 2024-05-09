@@ -30,7 +30,26 @@ ideas = {
 				production_speed_arms_factory_factor = -0.5
 			}
 		}
+		HUN_treaty_of_triannon_aat = {
+			name = HUN_treaty_of_triannon
+			picture = HUN_treaty_of_triannon
+			allowed = {
+				original_tag = HUN
+				always = no
+			}
+			available = {
+				has_war = no
+			}
 
+			rule = {
+  				can_access_market = no
+  			}
+
+			modifier = {
+				conscription = -0.005
+				production_speed_arms_factory_factor = -0.5
+			}
+		}
 		HUN_treaty_of_triannon_2 = {
 			allowed = {
 				original_tag = HUN
@@ -722,9 +741,6 @@ ideas = {
 		HUN_liberal_opposition = {
 			allowed = {
 				original_tag = HUN
-				NOT = {
-					has_completed_focus = HUN_oppose_the_regency
-				}
 			}
 
 			picture = generic_democratic_opposition
@@ -745,9 +761,6 @@ ideas = {
 		HUN_liberal_compromise = {
 			allowed = {
 				original_tag = HUN
-				NOT = {
-					has_completed_focus = HUN_oppose_the_regency
-				}
 			}
 
 			picture = generic_democratic_opposition
@@ -785,8 +798,7 @@ ideas = {
 			modifier = {
 				stability_factor = -0.3
 				neutrality_drift = -0.02
-				communism_drift = 0.03
-				fascism_drift = 0.03
+				communism_drift = 0.01
 				cic_to_overlord_factor = 0.2
 				mic_to_overlord_factor = 0.2
 			}
@@ -809,9 +821,8 @@ ideas = {
 			modifier = {
 				stability_factor = -0.2
 				neutrality_drift = -0.05
-				communism_drift = 0.05
-				fascism_drift = 0.05
-				democratic_drift = -0.05
+				communism_drift = 0.03
+				democratic_drift = -0.02
 				cic_to_overlord_factor = 0.2
 				mic_to_overlord_factor = 0.2
 			}
@@ -834,7 +845,8 @@ ideas = {
 			modifier = {
 				stability_factor = -0.1
 				neutrality_drift = -0.05
-				democratic_drift = -0.05
+				communism_drift = 0.05
+				democratic_drift = -0.03
 				cic_to_overlord_factor = 0.2
 				mic_to_overlord_factor = 0.2
 			}

@@ -385,13 +385,6 @@ country_event = {
 
 			if = {
 				limit = {
-					NOT = { has_completed_focus = HUN_suffrage_reform }
-				}
-				complete_national_focus = HUN_suffrage_reform
-			}
-
-			if = {
-				limit = {
 					NOT = { has_completed_focus = HUN_strengthen_the_aristocracy }
 				}
 				complete_national_focus = HUN_strengthen_the_aristocracy
@@ -1345,7 +1338,7 @@ country_event = {
 			has_country_flag = failed_occupation
 		}
 		ai_chance = {
-			base = 2
+			base = 5
 		}
 
 		remove_mission = occupy_hungary

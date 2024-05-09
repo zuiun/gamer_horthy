@@ -62,9 +62,16 @@ peace_hun = {
 							has_civil_war = yes
 						}
 					}
-					divisions_in_state = {
-						size > 7
-						state = capital
+					all_state = {
+						OR = {
+							is_core_of = HUN
+							HUN = {
+								divisions_in_state = {
+									size < 3
+									state = PREV
+								}
+							}
+						}
 					}
 				}
 			}
@@ -414,6 +421,7 @@ peace_hun = {
 				}
 				OR = {
 					has_war_with = ENG
+					has_war_with = FRA
 					has_war_with = GER
 					has_war_with = ITA
 				}
@@ -436,6 +444,15 @@ peace_hun = {
 					has_war_with = SOV
 				}
 			}
+			else_if = {
+				limit = {
+					FROM = { tag = SWE }
+				}
+				OR = {
+					has_war_with = ENG
+					has_war_with = FRA
+				}
+			}
 		}
 
 		visible = {
@@ -450,6 +467,7 @@ peace_hun = {
 					tag = SWI
 					tag = POR
 					tag = TUR
+					tag = SWE
 				}
 				NOT = { has_country_flag = HUN_feelers_already }
 			}
@@ -477,6 +495,7 @@ peace_hun = {
 					limit = {
 						OR = {
 							tag = ENG
+							tag = FRA
 							tag = GER
 							tag = ITA
 						}
@@ -509,6 +528,21 @@ peace_hun = {
 						OR = {
 							tag = ENG
 							tag = SOV
+						}
+						is_favour_target = yes
+					}
+					HUN_add_favour_small = yes
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = SWE }
+				}
+				every_country = {
+					limit = {
+						OR = {
+							tag = ENG
+							tag = FRA
 						}
 						is_favour_target = yes
 					}

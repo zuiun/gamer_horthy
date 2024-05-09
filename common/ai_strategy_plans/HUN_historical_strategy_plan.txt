@@ -41,9 +41,8 @@ HUN_historical = {
 		HUN_support_italian_interests
 		HUN_institute_for_industrial_techniques
 		HUN_look_outwards
-		HUN_suffrage_reform
-		# 1938
 		HUN_announce_the_gyor_program
+		# 1938
 		HUN_strengthen_the_aristocracy
 		HUN_bled_agreement
 		HUN_arrest_szalasi

@@ -608,6 +608,36 @@ HUN_add_crown_bop_small = {
 	}
 }
 
+HUN_add_communist_bop_small = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_communists_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.05
+		}
+	}
+}
+
+HUN_add_socialist_bop_small = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_socialists_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.05
+		}
+	}
+}
+
 HUN_add_liberal_bop_medium = {
 	if = {
 		limit = {
@@ -676,6 +706,36 @@ HUN_add_crown_bop_medium = {
 	}
 }
 
+HUN_add_communist_bop_medium = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_communists_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.1
+		}
+	}
+}
+
+HUN_add_socialist_bop_medium = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_socialists_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.1
+		}
+	}
+}
+
 HUN_add_liberal_bop_large = {
 	if = {
 		limit = {
@@ -735,6 +795,36 @@ HUN_add_crown_bop_large = {
 			is_power_balance_side_active = {
 				id = HUN_power_balance
 				side = HUN_army_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = 0.15
+		}
+	}
+}
+
+HUN_add_communist_bop_large = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_communists_side
+			}
+		}
+		add_power_balance_value = {
+			id = HUN_power_balance
+			value = -0.15
+		}
+	}
+}
+
+HUN_add_socialist_bop_large = {
+	if = {
+		limit = {
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_socialists_side
 			}
 		}
 		add_power_balance_value = {
@@ -1196,18 +1286,7 @@ HUN_allow_occupation = {
 
 			HUN = {
 				remove_mission = defend_hungary
-				if = {
-					limit = {
-						faction_leader = { has_government = fascism }
-					}
-					complete_national_focus = HUN_a_pure_hungary
-				}
-				else_if = {
-					limit = {
-						faction_leader = { has_government = communism }
-					}
-					complete_national_focus = HUN_a_new_republic_of_councils
-				}
+				complete_national_focus = HUN_abolish_the_monarchy
 			}
 		}
 	}
@@ -1235,22 +1314,8 @@ HUN_operation_margrethe = {
 HUN_uncomplete_puppet_focuses = {
 	popular_opposition_HUN = yes
 
-	if = {
-		limit = {
-			has_completed_focus = HUN_a_pure_hungary
-		}
-		uncomplete_national_focus = {
-			focus = HUN_a_pure_hungary
-			uncomplete_children = yes
-		  }
-	}
-	else_if = {
-		limit = {
-			has_completed_focus = HUN_a_new_republic_of_councils
-		}
-		uncomplete_national_focus = {
-			focus = HUN_a_new_republic_of_councils
-			uncomplete_children = yes
-		  }
+	uncomplete_national_focus = {
+		focus = HUN_abolish_the_monarchy
+		uncomplete_children = yes
 	}
 }

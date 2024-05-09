@@ -200,12 +200,13 @@ HUN_alternate_FAS = {
 #		HUN_allow_german_military_access # bypass
 		HUN_the_true_enemy
 		HUN_promote_hungarianism
-		HUN_oppose_the_regency
-		HUN_a_pure_hungary
-		HUN_expand_public_support
-		HUN_assassinate_horthy
-		HUN_demand_southern_slovakia
-		HUN_demand_transylvania
+		# This has changed
+		# HUN_oppose_the_regency
+		# HUN_a_pure_hungary
+		# HUN_expand_public_support
+		# HUN_assassinate_horthy
+		# HUN_demand_southern_slovakia
+		# HUN_demand_transylvania
 	}
 
 	research = {
@@ -265,7 +266,7 @@ HUN_alternate_COM = {
 	}
 
 	ai_national_focuses = {
-		HUN_oppose_the_regency
+		HUN_a_new_republic_of_councils
 		HUN_industrial_revitalization
 		HUN_reintegrate_the_railroads
 		HUN_thedeathofgyulagombos
@@ -276,7 +277,7 @@ HUN_alternate_COM = {
 		HUN_revise_the_bethlenpeyer_pact
 		HUN_protect_the_trade_unions
 		HUN_the_march_front
-		HUN_a_new_republic_of_councils
+		# This has changed
 		HUN_expand_public_support
 		HUN_the_peace_party
 		HUN_call_for_elections
