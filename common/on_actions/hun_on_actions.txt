@@ -6,14 +6,14 @@ on_actions = {
 				limit = {
 					ROOT = {
 						original_tag = HUN
-						NOT = {
-							has_government = neutrality
+						NOT = { has_government = neutrality }
+						OR = {
+							has_completed_focus = HUN_overthrow_horthy
+							has_completed_focus = HUN_a_new_republic_of_councils
 						}
-						has_completed_focus = HUN_overthrow_horthy
 					}
-					FROM = {
-						original_tag = HUN
-					}
+					FROM = { original_tag = HUN }
+					any_country = { has_country_flag = HUN_supporting_opposition }
 				}
 				random_country = {
 					limit = {
@@ -23,26 +23,29 @@ on_actions = {
 						id = gamer_horthy.25
 						hours = 4
 					}
+					clr_country_flag = HUN_supporting_opposition
 				}
 			}
 			# Second Austrian Civil War
 			if = {
 				limit = {
-					ROOT = {
-						original_tag = AUS
-					}
-					FROM = {
-						original_tag = AUS
+					ROOT = { original_tag = AUS }
+					FROM = { original_tag = AUS }
+					any_country = {
+						has_completed_focus = HUN_restore_ottos_throne
+						has_country_flag = HUN_overthrow_austria
 					}
 				}
 				random_country = {
 					limit = {
 						has_completed_focus = HUN_restore_ottos_throne
+						has_country_flag = HUN_overthrow_austria
 					}
 					country_event = {
 						id = gamer_horthy.39
 						hours = 4
 					}
+					clr_country_flag = HUN_overthrow_austria
 				}
 			}
 		}

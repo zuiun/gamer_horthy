@@ -270,6 +270,12 @@ country_event = {
 				}
 				complete_national_focus = HUN_speak_out_fascism
 			}
+		}
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_lift_restrictions_on_minorities }
+			}
 			complete_national_focus = HUN_lift_restrictions_on_minorities
 		}
 	}
@@ -412,7 +418,133 @@ country_event = {
 				}
 				complete_national_focus = HUN_support_move
 			}
+		}
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_movement_of_hungarian_life }
+			}
 			complete_national_focus = HUN_movement_of_hungarian_life
+		}
+	}
+}
+
+# Carpathia Demands Autonomy
+country_event = {
+	id = gamer_horthy.3
+	title = gamer_horthy.3.t
+	desc = gamer_horthy.3.desc
+	picture = GFX_report_event_czech_soldiers_01
+
+	trigger = {
+		original_tag = CZE
+		NOT = {
+			owns_state = 69
+			owns_state = 74
+		}
+		owns_state = 73
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	option = {
+		name = gamer_horthy.3.a # At least they remain loyal
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 10
+				is_historical_focus_on = yes
+			}
+		}
+
+		effect_tooltip = {
+			release_puppet = UKR
+			UKR = {
+				set_cosmetic_tag = CARPATHIA
+				add_ideas = ZAK_isolation
+				division_template = {
+					name = "Carpathian Sich"
+					priority = 2
+					division_names_group = UKR_INF_01
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 2 y = 0 }
+					}
+				}
+				73 = {
+					create_unit = {
+						division = "name = \"Carpathian Sich\" division_template = \"Carpathian Sich\" start_experience_factor = 0.3" 
+						owner = PREV
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			create_dynamic_country = {
+				original_tag = UKR
+				set_cosmetic_tag = CARPATHIA
+				73 = {
+					add_core_of = PREV
+					transfer_state_to = PREV
+				}
+				CZE = { puppet = PREV }
+				add_ideas = ZAK_isolation
+				division_template = {
+					name = "Carpathian Sich"
+					priority = 2
+					division_names_group = UKR_INF_01
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 2 y = 0 }
+					}
+				}
+				73 = {
+					create_unit = {
+						division = "name = \"Carpathian Sich\" division_template = \"Carpathian Sich\" start_experience_factor = 0.3" 
+						owner = PREV
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.3.b # We cannot entertain potential separatists
+
+		ai_chance = {
+			base = 1
+		}
+
+		73 = {
+			if = {
+				limit = {
+					is_core_of = CZE
+				}
+				remove_core_of = CZE
+			}
+			if = {
+				limit = {
+					is_core_of = SLO
+				}
+				remove_core_of = SLO
+			}
+			add_core_of = UKR
+			force_enable_resistance = {
+				clear = no
+				occupier = CZE
+				occupied = UKR
+			}
+			start_resistance = yes
+			set_resistance = 40
 		}
 	}
 }

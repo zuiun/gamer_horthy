@@ -1674,7 +1674,8 @@ ideas = {
 			modifier = {
 				political_power_gain = -0.05
 				army_attack_against_major_factor = 0.05
-				recruitable_population_factor = 0.03
+				recruitable_population_factor = 0.01
+				non_core_manpower = 0.2
 			}
 		}
 
@@ -1695,7 +1696,8 @@ ideas = {
 			modifier = {
 				political_power_gain = -0.05
 				army_attack_against_major_factor = 0.1
-				recruitable_population_factor = 0.03
+				recruitable_population_factor = 0.01
+				non_core_manpower = 0.3
 				resistance_target = -0.05
 				compliance_growth = 0.1
 			}
@@ -1855,6 +1857,27 @@ ideas = {
 				conscription = 0.01
 			}
 		}
+
+		HUN_mavag_plus_mio = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = generic_industrial_concern_2
+
+			available = {
+				has_character = HUN_istvan_horthy
+			}
+
+			research_bonus = {
+				light_air = 0.1
+			}
+
+			modifier = {
+				production_speed_rail_way_factor = 0.15
+				production_speed_supply_node_factor = 0.15
+			}
+		}
 	}
 
 	aircraft_manufacturer = {
@@ -1957,6 +1980,7 @@ ideas = {
 
 			allowed = {
 				original_tag = HUN
+				NOT = { has_dlc = "Arms Against Tyranny" }
 			}
 
 			visible = {
@@ -1978,6 +2002,7 @@ ideas = {
 
 			allowed = {
 				original_tag = HUN
+				NOT = { has_dlc = "Arms Against Tyranny" }
 			}
 
 			visible = {

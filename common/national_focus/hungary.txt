@@ -224,6 +224,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 
 		completion_reward = {
+			hidden_effect = { set_country_flag = HUN_overthrow_austria }
 			add_threat = 1
 			AUS = { country_event = { id = gamer_horthy.36 hours = 4 } }
 			custom_effect_tooltip = effects_tt
@@ -1359,16 +1360,30 @@ focus_tree = {
 				}
 			}
 
-			custom_effect_tooltip = mavag_effect_tt
+			if = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
 
-			hidden_effect = {
-				if = {
-					limit = {
-						has_idea = HUN_mavag
-					}
-					swap_ideas = {
-						remove_idea = HUN_mavag
-						add_idea = HUN_mavag_improved
+				mio:HUN_mavag_organisation = {
+					add_mio_size = 1
+					unlock_mio_trait_tooltip = HUN_istvan_horthy_mavag
+				}
+
+				add_ideas = HUN_mavag_plus_mio
+			}
+			else = {
+				custom_effect_tooltip = mavag_effect_tt
+
+				hidden_effect = {
+					if = {
+						limit = {
+							has_idea = HUN_mavag
+						}
+						swap_ideas = {
+							remove_idea = HUN_mavag
+							add_idea = HUN_mavag_improved
+						}
 					}
 				}
 			}

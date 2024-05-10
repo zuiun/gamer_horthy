@@ -142,6 +142,8 @@
  HUN_manfred_weiss:0 "Manfréd Weiss Works"
  HUN_manfred_weiss_improved:0 "$HUN_manfred_weiss$"
  HUN_mavag_improved:0 "$HUN_mavag$"
+ HUN_mavag_plus_mio:0 "Vitéz $HUN_istvan_horthy$ $HUN_mavag$"
+ HUN_mavag_plus_mio_desc:0 "The valiant $HUN_istvan_horthy$ is the director of one of our largest industrial organisations, $HUN_mavag$. As long as he remains in power, we can rely on his extensive expertise in engineering and management to improve our industrial capabilities."
  industrial_conglomerate:0 "Industrial Conglomerate"
  industrial_enterprise:0 "State Enterprise"
  ZAK_isolation:0 "Diplomatic Isolation"
