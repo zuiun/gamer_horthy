@@ -885,7 +885,6 @@ focus_tree = {
 		}
 	}
 
-	
 	# In Defence of Democracy
 	focus = {
 		id = HUN_in_defence_democracy
@@ -904,7 +903,6 @@ focus_tree = {
 		}
 
 		available = {
-			is_faction_leader = yes
 			has_government = democratic
 		}
 
@@ -926,24 +924,13 @@ focus_tree = {
 		cost = 10
 
 		available = {
-			is_faction_leader = yes
 			has_government = democratic
-			GER = {
-				has_added_tension_amount > 5
-			}
+			GER = { has_added_tension_amount > 5 }
 		}
 
 		search_filters = {
 			FOCUS_FILTER_ANNEXATION
 			FOCUS_FILTER_MANPOWER
-		}
-
-		bypass = {
-			OR = {
-				GER = { has_government = democratic }
-				GER = { exists = no }
-				has_war_with = GER
-			}
 		}
 
 		completion_reward = {
@@ -974,24 +961,9 @@ focus_tree = {
 		}
 
 		available = {
-			is_faction_leader = yes
 			has_government = democratic
 			SOV = {
-				any_owned_state = {
-					is_russian_separatist = yes
-				}
-			}
-		}
-
-		bypass = {
-			OR = {
-				SOV = {
-					all_owned_state = {
-						is_russian_separatist = no
-					}
-				}
-				SOV = { exists = no }
-				has_war_with = SOV
+				any_owned_state = { is_russian_separatist = yes }
 			}
 		}
 
@@ -1055,7 +1027,10 @@ focus_tree = {
 						has_government = neutrality
 						has_government = democratic
 					}
-					NOT = { is_guaranteed_by = HUN }
+					NOT = {
+						is_guaranteed_by = HUN
+						has_war_with = HUN
+					}
 				}
 				add_ideas = HUN_battleground_against_radicalism
 				HUN = { give_guarantee = PREV }
@@ -1101,6 +1076,8 @@ focus_tree = {
 						has_government = neutrality
 						has_government = democratic
 					}
+					is_in_faction = no
+					NOT = { has_war_with = HUN }
 				}
 				country_event = {
 					id = generic.5
@@ -1147,6 +1124,7 @@ focus_tree = {
 						is_in_gaulle_europe = yes
 					}
 					is_in_faction = no
+					NOT = { has_war_with = HUN }
 				}
 				country_event = {
 					id = generic.5
@@ -1556,6 +1534,23 @@ focus_tree = {
 				size = 0.3
 				capital = 43
 				states = { 43 }
+
+				if = {
+					limit = {
+						has_country_flag = no_more_elections
+					}
+					set_politics = {
+						ruling_party = neutrality
+						elections_allowed = no
+					}
+				}
+				else = {
+					set_politics = {
+						ruling_party = neutrality
+						elections_allowed = yes
+						election_frequency = 48
+					}
+				}
 			}
 		}
 	}
@@ -1790,7 +1785,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					NOT = { has_completed_focus = HUN_look_outwards_real }
+					NOT = { has_country_flag = HUN_chose_fascists }
 				}
 				set_party_name = {
 					ideology = fascism
@@ -2013,6 +2008,7 @@ focus_tree = {
 					modifier = small_increase
 				}
 			}
+			unlock_decision_tooltip = HUN_dissolve_paramilitaries
 		}
 	}
 
@@ -2508,14 +2504,17 @@ focus_tree = {
 
 			if = {
 				limit = {
-					has_idea = HUN_march_front
+					has_completed_focus = HUN_continue_the_regency
 				}
 				swap_ideas = {
 					remove_idea = HUN_march_front
 					add_idea = HUN_march_front2
 				}
 			}
-			else = {
+			else_if = {
+				limit = {
+					has_completed_focus = HUN_strengthen_the_monarchists
+				}
 				add_ideas = HUN_march_front2
 			}
 			if = {
@@ -2567,6 +2566,7 @@ focus_tree = {
 					modifier = HUN_minorities_bop
 				}
 			}
+			unlock_decision_tooltip = HUN_do_martial_law
 		}
 	}
 
@@ -4021,6 +4021,23 @@ focus_tree = {
 						size = 0.3
 						capital = 43
 						states = { 43 }
+
+						if = {
+							limit = {
+								has_country_flag = no_more_elections
+							}
+							set_politics = {
+								ruling_party = neutrality
+								elections_allowed = no
+							}
+						}
+						else = {
+							set_politics = {
+								ruling_party = neutrality
+								elections_allowed = yes
+								election_frequency = 48
+							}
+						}
 					}
 				}
 				HUN_add_communist_bop_medium = yes
@@ -4109,6 +4126,23 @@ focus_tree = {
 					size = 0.5
 					capital = 43
 					states = { 43 }
+
+					if = {
+						limit = {
+							has_country_flag = no_more_elections
+						}
+						set_politics = {
+							ruling_party = neutrality
+							elections_allowed = no
+						}
+					}
+					else = {
+						set_politics = {
+							ruling_party = neutrality
+							elections_allowed = yes
+							election_frequency = 48
+						}
+					}
 				}
 			}
 
@@ -6575,7 +6609,7 @@ focus_tree = {
 				OR = {
 					exists = no
 					NOT = {
-						has_government = fascism #historical AI should only pick this if Germany doesn't exist or isn't fascist
+						has_government = fascism
 					}
 				}
 			}
@@ -6671,7 +6705,10 @@ focus_tree = {
 			}
 			else_if = {
 				limit = {
-					ITA = { is_in_faction_with = FRA }
+					ITA = {
+						is_faction_leader = no
+						is_in_faction = yes
+					}
 				}
 				ITA = {
 					faction_leader = {

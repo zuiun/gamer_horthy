@@ -541,4 +541,69 @@ HUN_balance_of_power_category = {
 			HUN_add_socialist_bop_medium = yes
 		}
 	}
-}
+
+	HUN_do_martial_law = {
+		icon = generic_arrest
+		priority = 50
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_lift_restrictions_on_minorities
+			NOT = { has_government = democratic }
+		}
+
+		visible = {
+			original_tag = HUN
+			OR = {
+				has_completed_focus = HUN_elect_a_democratic_king
+				has_completed_focus = HUN_speak_out_fascism
+			}
+		}
+
+		cost = 50
+
+		complete_effect = {
+			add_war_support = -0.1
+			HUN_add_crown_bop_large = yes
+			HUN_add_conservative_bop_large = yes
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_minorities_bop
+			}
+		}
+	}
+
+	HUN_dissolve_paramilitaries = {
+		icon = generic_arrest
+		priority = 50
+
+		allowed = {
+			original_tag = HUN
+		}
+
+		available = {
+			has_completed_focus = HUN_commit_to_war
+			is_subject = no
+			NOT = { has_government = fascism }
+		}
+
+		visible = {
+			original_tag = HUN
+			has_completed_focus = HUN_impose_censorship
+		}
+
+		cost = 50
+
+		complete_effect = {
+			add_manpower = -2000
+			HUN_add_crown_bop_large = yes
+			HUN_add_conservative_bop_large = yes
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_life_bop2
+			}
+		}
+	}

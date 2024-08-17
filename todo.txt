@@ -1,3 +1,0 @@
-On BoP full control, events for changing ideology (coup, demand elections)
-Decisions to remove BoP modifiers
-Reset BoP and remove modifiers in Elections of 1939

@@ -239,7 +239,14 @@ add_shortages_HUN = {
 				start_civil_war = {
 					ideology = democratic
 					size = 0.7
+					capital = 43
 					states = { 43 }
+
+					set_politics = {
+						ruling_party = democratic
+						elections_allowed = yes
+						election_frequency = 48
+					}
 				}
 				hidden_effect = { set_country_flag = HUN_hungarian_revolution }
 			}

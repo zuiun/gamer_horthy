@@ -80,15 +80,10 @@ country_event = {
 			add_political_power = 50
 		}
 
-		if = {
-			limit = {
-				NOT = { has_government = neutrality }
-			}
-			set_politics = {
-				ruling_party = neutrality
-				elections_allowed = yes
-				election_frequency = 48
-			}
+		set_politics = {
+			ruling_party = neutrality
+			elections_allowed = yes
+			election_frequency = 48
 		}
 
 		add_popularity = {
@@ -143,17 +138,11 @@ country_event = {
 			add_stability = -0.05
 			add_political_power = 30
 		}
-		
 
-		if = {
-			limit = {
-				NOT = { has_government = democratic }
-			}
-			set_politics = {
-				ruling_party = democratic
-				elections_allowed = yes
-				election_frequency = 48
-			}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+			election_frequency = 48
 		}
 
 		add_popularity = {
@@ -272,6 +261,33 @@ country_event = {
 			}
 			complete_national_focus = HUN_lift_restrictions_on_minorities
 		}
+
+		if = {
+			limit = {
+				has_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_life_bop
+				}
+
+			}
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_life_bop
+			}
+		}
+		if = {
+			limit = {
+				has_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_life_bop2
+				}
+
+			}
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_life_bop2
+			}
+		}
 	}
 
 	option = {
@@ -305,16 +321,12 @@ country_event = {
 			add_stability = 0.05
 		}
 
-		if = {
-			limit = {
-				NOT = { has_government = fascism }
-			}
-			set_politics = {
-				ruling_party = fascism
-				elections_allowed = no
-			}
+		set_politics = {
+			ruling_party = fascism
+			elections_allowed = yes
+			election_frequency = 48
 		}
-		
+
 		add_popularity = {
 			ideology = fascism
 			popularity = 0.1
@@ -414,6 +426,63 @@ country_event = {
 				NOT = { has_completed_focus = HUN_movement_of_hungarian_life }
 			}
 			complete_national_focus = HUN_movement_of_hungarian_life
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
+				}
+			}
+			set_power_balance = {
+				id = HUN_power_balance
+				left_side = HUN_army_side
+				right_side = HUN_crown_side
+				set_value = 0.1
+			}
+		}
+
+		if = {
+			limit = {
+				has_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_fascism_bop
+				}
+
+			}
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_fascism_bop
+			}
+		}
+		if = {
+			limit = {
+				has_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_fascism_bop2
+				}
+
+			}
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_fascism_bop2
+			}
+		}
+		if = {
+			limit = {
+				has_power_balance_modifier = {
+					id = HUN_power_balance
+					modifier = HUN_minorities_bop
+				}
+
+			}
+			remove_power_balance_modifier = {
+				id = HUN_power_balance
+				modifier = HUN_minorities_bop
+			}
 		}
 	}
 }
@@ -2331,7 +2400,7 @@ country_event = {
 	option = {
 		name = gamer_horthy.36.a # Otto is the only one who can save Austria from Germany
 		start_civil_war = {
-			ideology = democratic
+			ideology = fascism
 			size = 0.4
 			states = {
 				152 # Upper Austria
@@ -2348,9 +2417,8 @@ country_event = {
 	option = {
 		name = gamer_horthy.36.b # How many times do we have to depose the Habsburgs
 		set_politics = {
-			ruling_party = democratic
-			elections_allowed = yes
-			election_frequency = 48
+			ruling_party = fascism
+			elections_allowed = no
 		}
 		start_civil_war = {
 			ideology = neutrality
@@ -3121,6 +3189,398 @@ country_event = {
 		add_timed_idea = {
 			idea = HUN_polish_betrayal
 			days = 180
+		}
+	}
+}
+
+# Radicals/Liberals-Conservatives Launch a Coup
+country_event = {
+	id = gamer_horthy.54
+	title = {
+		text = gamer_horthy.54.t1
+		trigger = {
+			power_balance_value = {
+				id = HUN_power_balance
+				value < 0
+			}
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_army_side
+			}
+		}
+	}
+	title = {
+		text = gamer_horthy.54.t2
+		trigger = {
+			power_balance_value = {
+				id = HUN_power_balance
+				value < 0
+			}
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_liberals_side
+			}
+		}
+	}
+	title = {
+		text = gamer_horthy.54.t3
+		trigger = {
+			power_balance_value = {
+				id = HUN_power_balance
+				value > 0
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.54.desc1
+		trigger = {
+			NOT = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value < 0
+				}
+				is_power_balance_side_active = {
+					id = HUN_power_balance
+					side = HUN_liberals_side
+				}
+			}
+		}
+	}
+	desc = {
+		text = gamer_horthy.54.desc2
+		trigger = {
+			power_balance_value = {
+				id = HUN_power_balance
+				value < 0
+			}
+			is_power_balance_side_active = {
+				id = HUN_power_balance
+				side = HUN_liberals_side
+			}
+		}
+	}
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.54.a # How did we miss this
+
+		ai_chance = {
+			base = 0
+		}
+
+		if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value < 0
+				}
+			}
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_liberals_side
+					}
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = yes
+					election_frequency = 48
+				}
+			}
+			else_if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
+				}
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = no_more_elections
+				}
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+				}
+			}
+			else = {
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = yes
+					election_frequency = 48
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.54.b # We must defend Hungary
+
+		add_stability = -0.1
+
+		if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value < 0
+				}
+			}
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_liberals_side
+					}
+				}
+				start_civil_war = {
+					ideology = democratic
+					size = 0.4
+					capital = 43
+					states = { 43 }
+
+					set_politics = {
+						ruling_party = democratic
+						elections_allowed = yes
+						election_frequency = 48
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
+				}
+				start_civil_war = {
+					ideology = fascism
+					size = 0.4
+					capital = 43
+					states = { 43 }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0
+				}
+			}
+			start_civil_war = {
+				ideology = neutrality
+				size = 0.4
+				capital = 43
+				states = { 43 }
+
+				if = {
+					limit = {
+						has_country_flag = no_more_elections
+					}
+					set_politics = {
+						ruling_party = neutrality
+						elections_allowed = no
+					}
+				}
+				else = {
+					set_politics = {
+						ruling_party = neutrality
+						elections_allowed = yes
+						election_frequency = 48
+					}
+				}
+			}
+		}
+
+		remove_all_power_balance_modifiers = {
+			id = HUN_power_balance
+		}
+
+		if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value < 0
+				}
+			}
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_liberals_side
+					}
+				}
+				set_power_balance = {
+					id = HUN_power_balance
+					left_side = HUN_liberals_side
+					right_side = HUN_crown_side
+					set_value = 1
+				}
+			}
+			else_if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = HUN_power_balance
+						side = HUN_army_side
+					}
+				}
+				set_power_balance = {
+					id = HUN_power_balance
+					left_side = HUN_army_side
+					right_side = HUN_crown_side
+					set_value = 1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0
+				}
+			}
+			set_power_balance = {
+				id = HUN_power_balance
+				left_side = HUN_army_side
+				right_side = HUN_crown_side
+				set_value = -1
+			}
+		}
+	}
+}
+
+# Liberals-Conservatives Demand Snap Elections
+country_event = {
+	id = gamer_horthy.55
+	title = {
+		text = gamer_horthy.55.t1
+		trigger = {
+			power_balance_value = {
+				id = HUN_power_balance
+				value < 0
+			}
+		}
+	}
+	title = {
+		text = gamer_horthy.55.t2
+		trigger = {
+			power_balance_value = {
+				id = HUN_power_balance
+				value > 0
+			}
+		}
+	}
+	desc = gamer_horthy.55.desc
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = HUN_yugoslavia_died
+	}
+
+	option = {
+		name = gamer_horthy.55.a # We must obey the people
+
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = 2
+				has_government = democratic
+			}
+		}
+
+		if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value < 0
+				}
+			}
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+				election_frequency = 48
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = no_more_elections
+				}
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+				}
+			}
+			else = {
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = yes
+					election_frequency = 48
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.55.b # The current system works fine
+
+		ai_chance = {
+			base = 5
+		}
+
+		add_stability = -0.05
+
+		if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value < 0
+				}
+			}
+			set_power_balance = {
+				id = HUN_power_balance
+				left_side = HUN_liberals_side
+				right_side = HUN_crown_side
+				set_value = 0.2
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = HUN_power_balance
+					value > 0
+				}
+			}
+			set_power_balance = {
+				id = HUN_power_balance
+				left_side = HUN_liberals_side
+				right_side = HUN_crown_side
+				set_value = -0.2
+			}
 		}
 	}
 }

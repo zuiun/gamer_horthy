@@ -82,6 +82,8 @@
  HUN_condemn_rightists:0 "Condemn Rightist Deviation"
  HUN_political_liberalisation:0 "Begin Political Liberalisation"
  HUN_free_prisoners:0 "Free Political Prisoners"
+ HUN_do_martial_law:0 "Declare Martial Law"
+ HUN_dissolve_paramilitaries:0 "Dissolve Paramilitaries"
  temporary_trading:0 "Currently offering resources"
  HUN_balance_of_power_category:0 "Politics of the Swing"
  retire_old_soldiers:0 "Retire $HUN_dezso_laszlo$"
