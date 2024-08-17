@@ -4,15 +4,15 @@ ideas = {
 			picture = generic_reserve_divisions
 
 			allowed = {
-				original_tag = ZAK
-				always = no
+				original_tag = UKR
+			}
+
+			rule = {
+				can_join_factions = no
 			}
 
 			modifier = {
-				ai_call_ally_desire_factor = -1000
 				ai_focus_defense_factor = 1
-				ai_get_ally_desire_factor = -1000
-				ai_join_ally_desire_factor = -1000
 			}
 		}
 
@@ -557,6 +557,10 @@ ideas = {
 				}
 			}
 
+			rule = {
+				can_decline_call_to_war = yes
+			}
+
 			modifier = {
 				war_support_factor = -0.5
 				ai_badass_factor = 0.1
@@ -577,6 +581,10 @@ ideas = {
 					has_government = neutrality
 					has_government = democratic
 				}
+			}
+
+			rule = {
+				can_decline_call_to_war = yes
 			}
 
 			modifier = {
@@ -1775,7 +1783,10 @@ ideas = {
 
 			available = {
 				has_government = communism
-				SOV = { has_government = communism }
+				any_other_country = {
+					is_major = yes
+					has_government = communism
+				}
 			}
 
 			modifier = {
@@ -1876,6 +1887,62 @@ ideas = {
 			modifier = {
 				production_speed_rail_way_factor = 0.15
 				production_speed_supply_node_factor = 0.15
+			}
+		}
+
+		HUN_polish_friendship = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = POL_april_constitution
+
+			available = {
+				has_war = no
+				POL = {
+					exists = yes
+					has_war = yes
+				}
+			}
+
+			rule = {
+				can_not_declare_war = yes
+				can_decline_call_to_war = yes
+			}
+
+			modifier = {
+				ai_join_ally_desire_factor = -1000
+			}
+		}
+
+		HUN_polish_betrayal = {
+			allowed = {
+				original_tag = HUN
+			}
+
+			picture = tur_disorganised_armed_forces
+
+			available = {
+				is_in_faction = yes
+				is_faction_leader = no
+				POL = {
+					exists = yes
+					has_war = yes
+				}
+			}
+
+			rule = {
+				can_not_declare_war = yes
+				can_decline_call_to_war = yes
+			}
+
+			modifier = {
+				ai_join_ally_desire_factor = -1000
+			}
+
+			targeted_modifier = {
+				tag = var:HUN.faction_leader
+				cic_to_target_factor = 0.2
 			}
 		}
 	}

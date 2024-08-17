@@ -16,3 +16,5 @@
  remove_suspicion_small_tt:0 "Loses §G1§! §YSuspicion§!."
  remove_suspicion_medium_tt:0 "Loses §G2§! §YSuspicion§!."
  remove_suspicion_large_tt:0 "Loses §G3§! §YSuspicion§!."
+
+ add_pivot_tt:0 "This is a §Yforeign pivot§! focus."

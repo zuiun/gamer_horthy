@@ -517,6 +517,132 @@ bookmarks = {
 				SWI_closer_ties_with_germany
 			}
 		}
+		FIN={
+			minor = yes
+			history = FIN_BLITZKRIEG_DESC
+			ideology = neutrality
+			ideas = {
+				FIN_sisu_3
+				FIN_fortification_effort
+				FIN_repurposed_small_industries
+			}
+			focuses = {
+				FIN_winter_warfare
+				FIN_the_lone_wolf
+				FIN_long_range_patrols
+			}
+		}
+		SWE={
+			minor = yes
+			history = "SWE_BLITZKRIEG_DESC"
+			ideology = democratic
+			available = { has_dlc = "Arms Against Tyranny" } 
+			ideas = {
+				SWE_radiotjanst_democratic
+				SWE_saltsjobaden_agreement
+				SWE_paid_holidays_idea
+			}
+			focuses = {
+				SWE_as_the_barometer_falls
+				SWE_the_old_enemy_stirs
+				SWE_coalition_war_cabinet
+			}
+		}
+		"NOR"={
+			minor = yes
+			history = "NOR_BLITZKRIEG_DESC"
+			ideology = democratic
+			ideas = {
+				NOR_defensive_rearmament_ns
+				NOR_crumbling_fortifications_ns
+				NOR_fake_independent_norway_ns
+			}
+			focuses = {
+				NOR_quislings_coup
+				NOR_norwegian_reichsprotectorate
+				NOR_the_kings_no
+			}
+		}
+		"DEN"={
+			minor = yes
+			history = DEN_BLITZKRIEG_DESC
+			ideology = democratic
+			available = { NOT = { has_dlc = "By Blood Alone" } }
+			ideas = {
+				DEN_fake_industrial_capability_2_ns
+				DEN_declaration_of_neutrality_no_BBA
+				DEN_danish_produce_improved 
+			}
+			focuses = {
+				DEN_full_employment
+				DEN_declare_independence
+				DEN_create_danforce
+			}
+		}
+		"DEN"={
+			minor = yes
+			history = DEN_BLITZKRIEG_DESC
+			ideology = democratic
+			available = { has_dlc = "By Blood Alone" }
+			ideas = {
+				DEN_fake_industrial_capability_2_ns
+				DEN_declaration_of_neutrality
+				DEN_danish_produce_improved 
+			}
+			focuses = {
+				DEN_full_employment
+				DEN_declare_independence
+				DEN_create_danforce
+			}
+		}
+		"BRA"={
+			minor = yes
+			history = BRA_BLITZKRIEG_DESC
+			ideology = neutrality
+			available = { has_dlc = "Trial of Allegiance" }
+			ideas = {
+				BRA_estado_novo_dummy_idea
+				BRA_radio_nacional_idea
+				BRA_army_dummy_idea
+			}
+			focuses = {
+				BRA_cooperation_in_the_americas
+				BRA_smoking_cobras
+				BRA_senta_a_pua
+			}
+		}
+		"CHL"={
+			minor = yes
+			history = CHL_BLITZKRIEG_DESC
+			ideology = democratic
+			available = { has_dlc = "Trial of Allegiance" }
+			ideas = {
+				idea_CHL_the_Hacienda_inquilinaje_system
+				CHL_the_mapuche_conflict
+				SMB_MTG_naval_arms_race_legacy
+			}
+			focuses = {
+				CHL_development_inwards
+				CHL_kickstart_the_arsenal_of_democracy
+				CHL_protect_the_easter_island
+			}
+		}
+		"ARG"={
+			minor = yes
+			history = ARG_BLITZKRIEG_DESC
+			ideology = neutrality
+			available = { has_dlc = "Trial of Allegiance" }
+			ideas = {
+				SMB_MTG_naval_arms_race_legacy
+				ARG_raf_cooperation_idea
+				ARG_argentine_metropole_idea
+			}
+			focuses = {
+				ARG_towards_a_greater_argentina
+				ARG_end_operation_bolivar
+				ARG_the_american_push
+			}
+		}
 		effect = {
 			randomize_weather = 12345 # <- Obligatory in every bookmark !
 			#123 = { rain_light = yes }

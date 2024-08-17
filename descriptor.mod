@@ -1,4 +1,4 @@
-version="1.13.x"
+version="1.0"
 tags={
 	"Historical"
 	"Fixes"

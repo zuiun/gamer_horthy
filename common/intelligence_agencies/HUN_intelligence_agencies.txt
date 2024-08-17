@@ -4,7 +4,7 @@
 
 intelligence_agency = {
 	picture = GFX_intelligence_agency_logo_HUN
-	names = { "VKF-2" }
+	names = { vkf2 }
 
 	default = {
 		tag = HUN
@@ -18,7 +18,7 @@ intelligence_agency = {
 
 intelligence_agency = {
 	picture = GFX_intelligence_agency_logo_HUN2
-	names = { "ÁVH" }
+	names = { avh }
 
 	default = {
 		tag = HUN

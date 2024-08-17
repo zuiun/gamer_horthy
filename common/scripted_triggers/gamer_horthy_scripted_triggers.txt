@@ -187,3 +187,24 @@ has_begun_peace_branch = {
 		has_completed_focus = HUN_preserve_greater_hungary
 	}
 }
+
+# Trigger for taking pivot focuses
+limit_pivot_focuses = {
+	OR = {
+		custom_trigger_tooltip = {
+			tooltip = number_of_pivots_2_tt
+			check_variable = {
+				total_pivots < 3
+			}
+		}
+		AND = {
+			has_completed_focus = HUN_look_outwards_real
+			custom_trigger_tooltip = {
+				tooltip = number_of_pivots_3_tt
+				check_variable = {
+					total_pivots < 4
+				}
+			}
+		}
+	}
+}

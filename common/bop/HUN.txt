@@ -337,27 +337,6 @@ HUN_power_balance = {
 						size = 0.4
 					}
 				}
-				if = {
-					limit = {
-						NOT = { has_government = democratic }
-					}
-					if = {
-						limit = {
-							has_country_flag = no_more_elections
-						}
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = no
-						}
-					}
-					else = {
-						set_politics = {
-							ruling_party = democratic
-							elections_allowed = yes
-							election_frequency = 48
-						}
-					}
-				}
 			}
 			on_deactivate = {
 				set_power_balance_gfx = {

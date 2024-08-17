@@ -5,3 +5,5 @@
  peace_favour_tt:0 "Has [?FROM.peace_favour|+0] §HFavour§!\n"
  peace_suspicion_tt:0 "Has [?FROM.peace_suspicion|-0] §HSuspicion§!\n"
  max_suspicion_tt:0 "Has §R10§! §HSuspicion§!\n"
+ number_of_pivots_2_tt:0 "Has taken at most §Y2§! (currently [?HUN.total_pivots|Y0]) §Yforeign pivot§! focuses."
+ number_of_pivots_3_tt:0 "Has taken at most §Y3§! (currently [?HUN.total_pivots|Y0]) §Yforeign pivot§! focuses."

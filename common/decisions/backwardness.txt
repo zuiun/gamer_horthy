@@ -19,6 +19,13 @@ backwardness = {
 			always = no
 		}
 
+		cancel_trigger = {
+			any_other_country = {
+				is_major = yes
+				has_war_with = HUN
+			}
+		}
+
 		available = {
 			num_of_civilian_factories > 25
 			all_owned_state = {

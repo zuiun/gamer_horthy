@@ -45,7 +45,6 @@ HUN_historical = {
 		# 1938
 		HUN_strengthen_the_aristocracy
 		HUN_bled_agreement
-		HUN_arrest_szalasi
 		HUN_the_trianon_trauma
 		HUN_establish_the_air_force
 		HUN_renounce_the_treaty_of_trianon

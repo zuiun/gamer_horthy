@@ -360,3 +360,4 @@ add_ideas = HUN_jeno_ratz
 }
 
 set_variable = { HUN_charity_cost = 20 }
+set_variable = { total_pivots = 0 }

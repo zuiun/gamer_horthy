@@ -358,7 +358,7 @@ HUN_balance_of_power_category = {
 		}
 
 		available = {
-			has_completed_focus = HUN_arrest_szalasi
+			has_completed_focus = HUN_the_addams_family
 			OR = {
 				has_government = neutrality
 				has_war = yes
@@ -400,7 +400,7 @@ HUN_balance_of_power_category = {
 		}
 
 		available = {
-			has_completed_focus = HUN_arrest_szalasi
+			has_completed_focus = HUN_the_addams_family
 		}
 
 		visible = {

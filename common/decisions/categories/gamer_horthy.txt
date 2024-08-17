@@ -17,6 +17,7 @@ backwardness = {
 
 	on_map_area = {
 		state = 43
+		zoom = 500
 		name = dismantle_build_tt
 	}
 }
@@ -74,6 +75,7 @@ peace_hun = {
 
 	on_map_area = {
 		state = 43
+		zoom = 500
 		name = dismantle_build_tt
 	}
 }

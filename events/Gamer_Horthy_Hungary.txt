@@ -53,6 +53,10 @@ country_event = {
 	picture = GFX_report_event_tur_political_rally
 	is_triggered_only = yes
 
+	immediate = {
+		hidden_effect = { set_country_flag = hun_1939_elections }
+	}
+
 	option = {
 		name = gamer_horthy.2.a # Radicalism will be the death of Hungary
 
@@ -90,17 +94,6 @@ country_event = {
 		add_popularity = {
 			ideology = neutrality
 			popularity = 0.1
-		}
-		add_country_leader_role = {
-			character = HUN_miklos_horthy
-			promote_leader = yes
-			country_leader = {
-				ideology = conservatism
-				expire = "1965.1.1"
-				traits = {
-					white_terror
-				}
-			}
 		}
 
 		every_other_country = {
@@ -240,13 +233,13 @@ country_event = {
 			}
 			complete_national_focus = HUN_secret_ballot
 			complete_national_focus = HUN_restrict_feudal_privileges
+		}
 
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HUN_the_march_front }
-				}
-				complete_national_focus = HUN_the_march_front
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_the_march_front }
 			}
+			complete_national_focus = HUN_the_march_front
 		}
 
 		if = {
@@ -258,18 +251,19 @@ country_event = {
 				uncomplete_children = no
 				refund_political_power = no
 			}
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HUN_the_addams_family }
-				}
-				complete_national_focus = HUN_the_addams_family
+		}
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_the_addams_family }
 			}
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HUN_speak_out_fascism }
-				}
-				complete_national_focus = HUN_speak_out_fascism
+			complete_national_focus = HUN_the_addams_family
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_speak_out_fascism }
 			}
+			complete_national_focus = HUN_speak_out_fascism
 		}
 
 		if = {
@@ -388,13 +382,13 @@ country_event = {
 			}
 			complete_national_focus = HUN_marginalise_the_fascists
 			complete_national_focus = HUN_support_italian_interests
+		}
 
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HUN_strengthen_the_aristocracy }
-				}
-				complete_national_focus = HUN_strengthen_the_aristocracy
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_strengthen_the_aristocracy }
 			}
+			complete_national_focus = HUN_strengthen_the_aristocracy
 		}
 
 		if = {
@@ -406,18 +400,13 @@ country_event = {
 				uncomplete_children = yes
 				refund_political_power = no
 			}
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HUN_arrest_szalasi }
-				}
-				complete_national_focus = HUN_arrest_szalasi
+		}
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_support_move }
 			}
-			if = {
-				limit = {
-					NOT = { has_completed_focus = HUN_support_move }
-				}
-				complete_national_focus = HUN_support_move
-			}
+			complete_national_focus = HUN_support_move
 		}
 
 		if = {
@@ -549,6 +538,316 @@ country_event = {
 	}
 }
 
+# Visit to Germany
+country_event = {
+	id = gamer_horthy.4
+	title = gamer_horthy.4.t
+	desc = gamer_horthy.4.desc
+	picture = GFX_report_event_generic_train
+
+	trigger = {
+		tag = HUN
+		NOT = { has_government = democratic }
+		any_other_country = {
+			is_major = yes
+			capital_scope = { is_on_continent = europe }
+			OR = {
+				HUN = { has_government = neutrality }
+				has_government = HUN
+			}
+		}
+		has_war = no
+		has_completed_focus = HUN_renounce_the_treaty_of_trianon
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 365
+		modifier = {
+			factor = 0.5
+			date > 1937.6.1
+		}
+		modifier = {
+			factor = 0.5
+			date > 1938.1.1
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					GER = { has_government = fascism }
+					HUN = {
+						OR = {
+							has_government = neutrality
+							has_government = fascism
+						}
+					}
+				}
+				GER = { set_country_flag = hungary_visitor_target }
+			}
+			else = {
+				random_other_country = {
+					limit = {
+						is_major = yes
+						capital_scope = { is_on_continent = europe }
+						OR = {
+							HUN = { has_government = neutrality }
+							has_government = HUN
+						}
+					}
+					set_country_flag = hungary_visitor_target
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.4.a # We need allies
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 10
+				is_historical_focus_on = yes
+			}
+		}
+
+		if = {
+			limit = {
+				GER = { has_government = fascism }
+				any_country = {
+					has_government = fascism
+					has_country_flag = hungary_visitor_target
+				}
+			}
+			add_german_trade_HUN = yes
+		}
+
+		random_other_country = {
+			limit = {
+				has_country_flag = hungary_visitor_target
+			}
+			HUN = {
+				add_popularity = {
+					ideology = PREV
+					popularity = 0.05
+				}
+			}
+		}
+
+		HUN_add_conservative_bop_small = yes
+		HUN_add_army_bop_small = yes
+
+		random_other_country = {
+			limit = {
+				has_country_flag = hungary_visitor_target
+			}
+			add_opinion_modifier = {
+				target = HUN
+				modifier = small_increase
+			}
+			hidden_effect = { set_country_flag = HUN_did_visit }
+		}
+	}
+
+	option = {
+		name = gamer_horthy.4.b # This is dangerous
+
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# Opera House Riot
+country_event = {
+	id = gamer_horthy.5
+	title = gamer_horthy.5.t
+	desc = gamer_horthy.5.desc
+	picture = GFX_report_event_generic_riot
+
+	trigger = {
+		tag = HUN
+		NOT = { has_government = fascism }
+		fascism > 0.3
+		date > 1938.1.1
+		has_country_flag = HUN_arrested_szalasi
+		NOT = {
+			has_country_flag = HUN_released_szalasi
+			has_country_leader = { character = HUN_ferenc_szalasi }
+		}
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 365
+		modifier = {
+			factor = 0.1
+			date > 1939.1.1
+		}
+	}
+
+	option = {
+		name = gamer_horthy.5.a # They need to be taught a lesson
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 10
+				is_historical_focus_on = yes
+			}
+		}
+
+		add_stability = 0.05
+		custom_effect_tooltip = beat_the_guy_tt
+	}
+
+	option = {
+		name = gamer_horthy.5.b # Let him out
+
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+			}
+		}
+
+		hidden_effect = {
+			set_country_flag = HUN_released_szalasi
+		}
+
+		add_stability = -0.1
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+	}
+}
+
+# Bajcsy-Zsilinsky Killed
+country_event = {
+	id = gamer_horthy.6
+	title = gamer_horthy.6.t
+	desc = gamer_horthy.6.desc
+	picture = GFX_report_event_generic_funeral
+
+	trigger = {
+		tag = HUN
+		is_subject = yes
+		NOT = { has_completed_focus = HUN_prepare_shadow_government }
+		OVERLORD = {
+			NOT = { has_government = democratic }
+		}
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 180
+	}
+
+	option = {
+		name = gamer_horthy.6.a # How will this affect the trout population
+
+		add_war_support = 0.1
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+
+		if = {
+			limit = {
+				has_completed_focus = HUN_mission_to_the_us
+				NOT = { has_country_flag = HUN_has_szent_gyorgi }
+			}
+			hidden_effect = {
+				set_character_name = {
+					character = HUN_tibor_eckhardt
+					name = HUN_tibor_eckhardt_new3
+				}
+			}
+			custom_effect_tooltip = rename_eckhardt3_tt
+		}
+	}
+}
+
+# Eckhardt in Exile
+country_event = {
+	id = gamer_horthy.7
+	title = gamer_horthy.7.t
+	desc = gamer_horthy.7.desc
+	picture = GFX_report_event_us_panay_demands
+
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.7.a # This may be a problem
+
+		hidden_effect = {
+			set_character_name = {
+				character = HUN_tibor_eckhardt
+				name = HUN_tibor_eckhardt_new
+			}
+		}
+		reverse_add_opinion_modifier = {
+			target = USA
+			modifier = small_decrease
+		}
+		custom_effect_tooltip = rename_eckhardt_tt
+	}
+}
+
+# Rise of the Hungarian Nazis
+country_event = {
+	id = gamer_horthy.8
+	title = gamer_horthy.8.t
+	desc = gamer_horthy.8.desc
+	picture = GFX_report_event_fascists_posing
+
+	trigger = {
+		has_country_flag = HUN_scythe_cross
+		NOT = { has_government = fascism }
+	}
+
+	mean_time_to_happen = {
+		days = 180
+		modifier = {
+			factor = 0.5
+			date > 1937.1.1
+		}
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = gamer_horthy.8.a # Their experiment will fail
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = HUN_look_outwards }
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = HUN_nazi_party_long
+				name = HUN_nazi_party
+			}
+		}
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+	}
+}
+
 # Hungary Offers Military Access
 country_event = {
 	id = gamer_horthy.9
@@ -587,7 +886,7 @@ country_event = {
 				declare_war_on = {
 					target = YUG
 					type = take_state_focus
-					generator = { 45 }
+					generator = { 45 764 }
 				}
 			}
 		}
@@ -708,6 +1007,10 @@ country_event = {
 				factor = 0
 				tag = FRA
 				has_completed_focus = FRA_strengthen_the_little_entente # bruh
+			}
+			modifier = {
+				has_country_flag = HUN_did_visit
+				factor = 2
 			}
 		}
 
@@ -1932,7 +2235,7 @@ country_event = {
 			limit = {
 				FROM = { has_government = fascism }
 			}
-			complete_national_focus = HUN_a_pure_hungary
+			unlock_national_focus = HUN_overthrow_horthy
 		}
 		else_if = {
 			limit = {
@@ -1955,6 +2258,64 @@ country_event = {
 		name = gamer_horthy.34.a # We have no choice
 		effect_tooltip = {
 			FROM = { puppet = HUN }
+		}
+	}
+}
+
+# The Scythe Cross Coup
+country_event = {
+	id = gamer_horthy.35
+	title = gamer_horthy.35.t
+	desc = gamer_horthy.35.desc
+	picture = GFX_report_event_fascist_militia
+
+	trigger = {
+		NOT = { has_government = fascism }
+	}
+
+	mean_time_to_happen = {
+		days = 150
+		modifier = {
+			factor = 0.5
+			date > 1936.4.1
+		}
+		modifier = {
+			factor = 0.1
+			date > 1936.5.1
+		}
+	}
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = HUN_scythe_cross
+		}
+	}
+
+	option = {
+		name = gamer_horthy.35.a # A pathetic attempt
+
+		trigger = {
+			has_completed_focus = HUN_marginalise_the_fascists
+		}
+
+		add_popularity = {
+			ideology = fascism
+			popularity = -0.05
+		}
+	}
+
+	option = {
+		name = gamer_horthy.35.b # This may embolden other fascists
+
+		trigger = {
+			NOT = { has_completed_focus = HUN_marginalise_the_fascists }
+		}
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.03
 		}
 	}
 }
@@ -2123,26 +2484,14 @@ country_event = {
 	desc = gamer_horthy.42.desc
 	picture = GFX_report_event_polish_army
 
-	trigger = {
-		OR = {
-			tag = HUN
-			tag = POL
-		}
+	is_triggered_only = yes
 
-		HUN = {
-			has_war_with = POL
-			NOT = { has_completed_focus = HUN_promote_hungarianism }
-		}
-		NOT = { has_country_flag = not_brothers }
-	}
-
-	mean_time_to_happen = {
-		days = 10
+	immediate = {
+		hidden_effect = { set_country_flag = not_brothers }
 	}
 
 	option = {
 		name = gamer_horthy.42.a # So be it
-		hidden_effect = { set_country_flag = not_brothers }
 		if = {
 			limit = {
 				tag = HUN
@@ -2160,6 +2509,618 @@ country_event = {
 				target = HUN
 				modifier = HUN_POL_friendship
 			}
+		}
+	}
+}
+
+# Friction in Slovakia
+country_event = {
+	id = gamer_horthy.43
+	title = gamer_horthy.43.t
+	desc = gamer_horthy.43.desc
+	picture = GFX_report_event_crowd_in_prague
+
+	trigger = {
+		tag = HUN
+		CZE = {
+			NOT = {
+				owns_state = 69
+				owns_state = 74
+			}
+		}
+		664 = {
+			owner = {
+				OR = {
+					tag = CZE
+					is_subject_of = CZE
+					tag = SLO
+				}
+			}
+		}
+		has_completed_focus = HUN_renounce_the_treaty_of_trianon
+		has_war = no
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 7
+	}
+
+	immediate = {
+		hidden_effect = {
+			664 = { set_state_flag = HUN_border_target_state }
+		}
+	}
+
+	option = {
+		name = gamer_horthy.43.a # We must press the advantage
+
+		ai_chance = {
+			base = 2
+		}
+
+		add_war_support = 0.1
+		HUN_add_army_bop_medium = yes
+		HUN_add_conservative_bop_medium = yes
+
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 43 # Northern Hungary
+				num_provinces = 4
+				on_win = gamer_horthy.44
+				on_lose = gamer_horthy.47
+				on_cancel = gamer_horthy.46
+			}
+			defender = {
+				state = 664 # Kosice
+				num_provinces = 5
+				on_win = gamer_horthy.45
+				on_lose = gamer_horthy.47
+				on_cancel = gamer_horthy.46
+			}
+		}
+
+		custom_effect_tooltip = border_conflict_14_tt
+
+		hidden_effect = {
+			country_event = { id = gamer_horthy.48 days = 14 }
+		}
+	}
+
+	option = {
+		name = gamer_horthy.43.b # There will be other opportunities
+
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 2
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+# Victory in Target (Hungary)
+country_event = {
+	id = gamer_horthy.44
+	title = gamer_horthy.44.t
+	desc = gamer_horthy.44.desc
+	picture = GFX_report_event_hungary_southern_slovakia
+
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.44.a # Target returns to Hungary
+
+		add_war_support = 0.05
+		army_experience = 10
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+
+		random_state = {
+			limit = {
+				has_state_flag = HUN_border_target_state
+			}
+			transfer_state_to = HUN
+		}
+	}
+}
+
+# Victory in Target (Other)
+country_event = {
+	id = gamer_horthy.45
+	title = gamer_horthy.45.t
+	desc = gamer_horthy.45.desc
+	picture = GFX_report_event_hungarian_soldiers
+
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.45.a # Peace is restored
+
+		add_stability = 0.05
+		army_experience = 10
+
+		add_popularity = {
+			ideology = HUN
+			popularity = 0.05
+		}
+	}
+}
+
+# Stalemate in Target
+country_event = {
+	id = gamer_horthy.46
+	title = gamer_horthy.46.t
+	desc = gamer_horthy.46.desc
+	picture = GFX_report_event_military_planning
+
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.46.a # This conflict could flare up again
+
+		army_experience = 5
+
+		add_popularity = {
+			ideology = HUN
+			popularity = 0.05
+		}
+	}
+}
+
+# Defeat in Target
+country_event = {
+	id = gamer_horthy.47
+	title = gamer_horthy.47.t
+	desc = {
+		text = gamer_horthy.47.desc1
+		trigger = {
+			tag = HUN
+		}
+	}
+	desc = {
+		text = gamer_horthy.47.desc2
+		trigger = {
+			NOT = { tag = HUN }
+		}
+	}
+	picture = GFX_report_event_dead_soldiers
+
+	is_triggered_only = yes
+
+	option = {
+		name = gamer_horthy.47.a # How could this be
+
+		add_stability = -0.1
+		add_war_support = -0.1
+		army_experience = 5
+
+		add_popularity = {
+			ideology = ROOT
+			popularity = -0.1
+		}
+
+		if = {
+			limit = {
+				NOT = { tag = HUN }
+			}
+			effect_tooltip = {
+				random_state = {
+					limit = {
+						has_state_flag = HUN_border_target_state
+					}
+					transfer_state_to = HUN
+				}
+			}
+		}
+	}
+}
+
+# Stalemate in Southern Slovakia (Trigger)
+country_event = {
+	id = gamer_horthy.48
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		cancel_border_war = {
+			dont_fire_events = no
+			attacker = 43
+			defender = 664
+		}
+		HUN = { set_country_flag = finished_kosice }
+		664 = { clr_state_flag = HUN_border_target_state }
+	}
+}
+
+# Carpathian Pretensions
+country_event = {
+	id = gamer_horthy.49
+	title = gamer_horthy.49.t
+	desc = gamer_horthy.49.desc
+	picture = GFX_report_event_czech_soldiers_01
+
+	trigger = {
+		tag = HUN
+		73 = {
+			owner = { has_cosmetic_tag = CARPATHIA }
+		}
+		has_completed_focus = HUN_renounce_the_treaty_of_trianon
+		has_country_flag = finished_kosice
+		has_war = no
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 60
+	}
+
+	immediate = {
+		hidden_effect = {
+			73 = { set_state_flag = HUN_border_target_state }
+			random_other_country = {
+				limit = {
+					owns_state = 73
+					has_cosmetic_tag = CARPATHIA
+				}
+				HUN = {
+					set_variable = { HUN_ZAK = PREV }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.49.a # A joke of a state
+
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 3
+				is_historical_focus_on = yes
+			}
+		}
+
+		HUN_add_army_bop_medium = yes
+		HUN_add_conservative_bop_medium = yes
+
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 154 # Alfold
+				num_provinces = 1
+				on_win = gamer_horthy.44
+				on_lose = gamer_horthy.47
+				on_cancel = gamer_horthy.46
+			}
+			defender = {
+				state = 73 # Carpathia
+				num_provinces = 2
+				on_win = gamer_horthy.45
+				on_lose = gamer_horthy.47
+				on_cancel = gamer_horthy.46
+			}
+		}
+
+		custom_effect_tooltip = border_conflict_14_tt
+		hidden_effect = {
+			country_event = { id = gamer_horthy.51 days = 14 }
+		}
+	}
+
+	option = {
+		name = gamer_horthy.49.b # There will be other opportunities
+
+		ai_chance = {
+			base = 3
+		}
+	}
+}
+
+# Bombing of Kosice
+country_event = {
+	id = gamer_horthy.50
+	title = gamer_horthy.50.t
+	desc = gamer_horthy.50.desc
+	picture = GFX_report_event_gre_city_devastated
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			HUN = { set_country_flag = HUN_bombed_kosice }
+			if = {
+				limit = {
+					664 = {
+						is_owned_by = HUN
+						any_neighbor_state = {
+							owner = {
+								is_in_faction_with = HUN
+								any_neighbor_country = {
+									is_major = yes
+									has_war_with = PREV
+								}
+							}
+						}
+					}
+				}
+				random_other_country = {
+					limit = {
+						is_major = yes
+						any_neighbor_country = {
+							has_war_with = PREV
+							any_neighbor_country = { owns_state = 664 }
+						}
+					}
+					set_country_flag = HUN_war_target
+					664 = { set_state_flag = HUN_bombed_state }
+					HUN = {
+						set_variable = { HUN_bombed_state_target = 664 }
+					}
+				}
+			}
+			else = {
+				random_other_country = {
+					limit = {
+						is_major = yes
+						is_neighbor_of = HUN
+						NOT = { has_war_with = HUN }
+		
+						any_other_country = {
+							has_war_with = PREV
+							is_in_faction_with = HUN
+							is_neighbor_of = HUN
+						}
+					}
+					set_country_flag = HUN_war_target
+					random_other_country = {
+						limit = {
+							has_war_with = PREV
+							is_in_faction_with = HUN
+							is_neighbor_of = HUN
+						}
+						HUN = {
+							random_owned_state = {
+								limit = {
+									any_neighbor_state = {
+										is_owned_by = PREV.PREV.PREV
+									}
+								}
+								prioritize = {
+									664
+								}
+								set_state_flag = HUN_bombed_state
+								HUN = {
+									set_variable = { HUN_bombed_state_target = PREV }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		random_state = {
+			limit = {
+				has_state_flag = HUN_bombed_state
+			}
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+	}
+
+	option = {
+		name = gamer_horthy.50.a # This cannot go unanswered
+
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 3
+				is_historical_focus_on = yes
+			}
+		}
+
+		add_war_support = 0.1
+
+		random_other_country = {
+			limit = {
+				has_country_flag = HUN_war_target
+			}
+			HUN = {
+				add_popularity = {
+					ideology = PREV
+					popularity = -0.1
+				}
+				declare_war_on = {
+					target = PREV
+					type = topple_government
+				}
+			}
+		}
+
+		HUN_add_conservative_bop_large = yes
+		HUN_add_army_bop_large = yes
+	}
+
+	option = {
+		name = gamer_horthy.50.b # Cooler heads must prevail
+
+		ai_chance = {
+			base = 3
+		}
+
+		add_war_support = 0.05
+	}
+}
+
+# Stalemate in Carpathia (Trigger)
+country_event = {
+	id = gamer_horthy.51
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		cancel_border_war = {
+			dont_fire_events = no
+			attacker = 154
+			defender = 73
+		}
+		73 = { clr_state_flag = HUN_border_target_state }
+	}
+}
+
+# Poland in Flames
+country_event = {
+	id = gamer_horthy.52
+	title = gamer_horthy.52.t
+	desc = gamer_horthy.52.desc
+	picture = GFX_report_event_polish_army
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = HUN_poland_flames
+	}
+
+	option = {
+		name = gamer_horthy.52.a # We must obey our obligations
+
+		ai_chance = {
+			base = 1
+		}
+
+		add_stability = -0.1
+		add_war_support = -0.2
+
+		declare_war_on = {
+			target = POL
+			type = topple_government
+		}
+
+		add_german_trade_HUN = yes
+		HUN_add_conservative_bop_large = yes
+		HUN_add_army_bop_large = yes
+	}
+
+	option = {
+		name = gamer_horthy.52.b # We can offer token support
+
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 2
+				is_historical_focus_on = yes
+			}
+		}
+
+		add_stability = -0.05
+		add_war_support = -0.1
+
+		add_offsite_building = {
+			type = arms_factory
+			level = 4
+		}
+		
+		add_timed_idea = {
+			idea = HUN_polish_betrayal
+			days = 365
+		}
+
+		HUN_add_conservative_bop_small = yes
+		HUN_add_army_bop_small = yes
+	}
+
+	option = {
+		name = gamer_horthy.52.c # We will never betray our Polish brothers
+
+		ai_chance = {
+			base = 4
+		}
+
+		add_stability = 0.05
+
+		add_popularity = {
+			ideology = HUN
+			popularity = 0.05
+		}
+
+		add_timed_idea = {
+			idea = HUN_polish_friendship
+			days = 365
+		}
+
+		POL = {
+			add_opinion_modifier = {
+				target = HUN
+				modifier = large_increase
+			}
+		}
+
+		HUN_add_liberal_bop_large = yes
+		HUN_add_crown_bop_large = yes
+	}
+}
+
+# Yugoslavia Collapses
+country_event = {
+	id = gamer_horthy.53
+	title = gamer_horthy.53.t
+	desc = gamer_horthy.53.desc
+	picture = GFX_report_event_yugoslavia_partisans
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = HUN_yugoslavia_died
+	}
+
+	option = {
+		name = gamer_horthy.53.a # We must protect the Hungarians of Backa
+
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 3
+				is_historical_focus_on = yes
+			}
+		}
+
+		add_war_support = 0.1
+
+		add_popularity = {
+			ideology = var:faction_leader
+			popularity = 0.05
+		}
+
+		declare_war_on = {
+			target = YUG
+			type = take_state_focus
+			generator = { 764 }
+		}
+		set_state_owner = 45
+
+		HUN_add_conservative_bop_large = yes
+		HUN_add_army_bop_large = yes
+	}
+
+	option = {
+		name = gamer_horthy.53.b # This is unjustified
+
+		ai_chance = {
+			base = 3
+		}
+
+		add_timed_idea = {
+			idea = HUN_polish_betrayal
+			days = 180
 		}
 	}
 }

@@ -50,4 +50,363 @@ on_actions = {
 			}
 		}
 	}
+
+	on_war_relation_added = {
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = { tag = HUN }
+							FROM = { tag = POL }
+						}
+						AND = {
+							ROOT = { tag = POL }
+							FROM = { tag = HUN }
+						}
+					}
+					NOT = {
+						HUN = { has_completed_focus = HUN_promote_hungarianism }
+						has_country_flag = not_brothers
+					}
+				}
+				every_country = {
+					limit = {
+						OR = {
+							tag = HUN
+							tag = POL
+						}
+					}
+					country_event = { id = gamer_horthy.42 }
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = {
+								NOT = { tag = HUN }
+								is_in_faction_with = HUN
+								is_neighbor_of = HUN
+							}
+							FROM = {
+								NOT = { tag = HUN }
+								is_major = yes
+								is_neighbor_of = HUN
+							}
+						}
+						AND = {
+							ROOT = {
+								NOT = { tag = HUN }
+								is_major = yes
+								is_neighbor_of = HUN
+							}
+							FROM = {
+								NOT = { tag = HUN }
+								is_in_faction_with = HUN
+								is_neighbor_of = HUN
+							}
+						}
+					}
+					NOT = {
+						HUN = { has_country_flag = HUN_bombed_kosice }
+					}
+				}
+				HUN = {
+					country_event = { id = gamer_horthy.50 }
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = { tag = POL }
+							FROM = {
+								NOT = { tag = HUN }
+								is_in_faction_with = HUN
+							}
+						}
+						AND = {
+							ROOT = {
+								NOT = { tag = HUN }
+								is_in_faction_with = HUN
+							}
+							FROM = { tag = POL }
+						}
+					}
+					HUN = {
+						NOT = { has_war_with = POL }
+						NOT = { has_country_flag = HUN_poland_flames }
+					}
+				}
+				HUN = {
+					country_event = { id = gamer_horthy.52 }
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = { tag = YUG }
+							FROM = {
+								NOT = { tag = HUN }
+								is_in_faction_with = HUN
+							}
+						}
+						AND = {
+							ROOT = {
+								NOT = { tag = HUN }
+								is_in_faction_with = HUN
+							}
+							FROM = { tag = YUG }
+						}
+					}
+					HUN = {
+						NOT = { has_war_with = YUG }
+						NOT = { has_country_flag = HUN_yugoslavia_died }
+					}
+				}
+				HUN = {
+					country_event = { id = gamer_horthy.53 }
+				}
+			}
+		}
+	}
+
+	on_new_term_election = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = { tag = HUN }
+					has_completed_focus = HUN_continue_the_regency
+					NOT = { has_country_flag = hun_1939_elections }
+					date > 1938.12.31
+					date < 1940.01.01
+				}
+				country_event = { id = gamer_horthy.2 }
+			}
+		}
+	}
+
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 45 } # Backa
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 619
+							name = VICTORY_POINTS_619_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 619
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 70 } # Western Slovakia
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 9692
+							name = VICTORY_POINTS_9692_HUN
+						}
+						set_province_name = {
+							id = 11539
+							name = VICTORY_POINTS_11539_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 9692
+						reset_province_name = 11539
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 71 } # Eastern Slovakia
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 3581
+							name = VICTORY_POINTS_3581_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 3581
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 73 } # Carpathia
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 3548
+							name = VICTORY_POINTS_3548_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 3548
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 76 } # Szekelyland
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 6711
+							name = VICTORY_POINTS_6711_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 6711
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 82 } # Banat
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 9606
+							name = VICTORY_POINTS_9606_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 9606
+					}
+				}
+			}
+		}
+		# Crisana - Arad is the same
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 84 } # Transylvania
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 690
+							name = VICTORY_POINTS_690_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 690
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 664 } # Kosice
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 6573
+							name = VICTORY_POINTS_6573_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 6573
+					}
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					FROM.FROM = { state = 764 } # West Banat
+				}
+				if =  {
+					limit = {
+						tag = HUN
+					}
+					FROM.FROM = {
+						set_province_name = {
+							id = 3614
+							name = VICTORY_POINTS_3614_HUN
+						}
+					}
+				}
+				else = {
+					FROM.FROM = {
+						reset_province_name = 3614
+					}
+				}
+			}
+		}
+	}
 }
